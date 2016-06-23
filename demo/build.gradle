@@ -1,0 +1,46 @@
+plugins {
+  id "fi.jasoft.plugin.vaadin" version "0.11"
+  id "org.akhikhl.gretty" version "1.2.4"
+}
+
+apply plugin: 'war'
+
+eclipse {
+  project {
+    name = 'vaadin-chartjs-demo'
+  }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+vaadin {
+  widgetset = 'MediumEditorWidgetset'
+  vaadin.version = "${vaadinVersion}"
+  vaadin.debug = false
+  vaadin.manageWidgetset = true
+  vaadin.manageDependencies = true
+
+  vaadin.plugin.logToConsole = true
+  vaadin.plugin.eclipseOutputDir = "bin/"
+  vaadin.gwt.gwtSdkFirstInClasspath = true
+}
+
+dependencies {
+  compile project(":addon")
+  compile "com.thedeanda:lorem:1.2"
+  compile "com.vaadin:vaadin-server:${vaadinVersion}"
+  compile "com.vaadin:vaadin-client-compiled:${vaadinVersion}"
+  compile "com.vaadin:vaadin-themes:${vaadinVersion}"
+  
+  providedCompile "javax.servlet:javax.servlet-api:3.1.0"
+}
+
+war {
+  archiveName = 'ChartJsDemo.war'
+}
+
+gretty {
+  servletContainer = 'tomcat8'
+  contextPath = ""
+}

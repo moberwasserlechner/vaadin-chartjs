@@ -1,0 +1,9 @@
+.gradle/
+.settings/
+build/
+bin/
+.classpath
+.project
+src/main/webapp/VAADIN/gwt-unitCache
+src/main/webapp/VAADIN/themes/mediumeditor/styles.css
+src/main/webapp/VAADIN/widgetsets/MediumEditorWidgetset/compilation-mappings.txt

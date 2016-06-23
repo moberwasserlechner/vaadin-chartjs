@@ -1,0 +1,135 @@
+plugins {
+    id "fi.jasoft.plugin.vaadin" version "0.11"
+    id "com.jfrog.bintray" version "1.5"
+}
+apply plugin: 'maven-publish'
+apply plugin: 'osgi'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+eclipse {
+    project {
+        name = 'vaadin-chartjs-addon'
+    }
+}
+
+vaadin {
+    //widgetset = 'com.byteowls.vaadin.medium.editor.WidgetSet'
+    vaadin.version = "${vaadinVersion}"
+    vaadin.debug = false
+    vaadin.manageWidgetset = true
+
+    vaadin.plugin.logToConsole = true
+    vaadin.plugin.eclipseOutputDir = "bin/"
+    vaadin.gwt.gwtSdkFirstInClasspath = true
+
+    addon {
+        author 'Michael Oberwasserlechner'
+        license 'MIT'
+        title 'Chartjs wrapper'
+    }
+}
+
+dependencies {
+    testCompile "junit:junit:4.12"
+}
+
+jar {
+    baseName = project.artifactId
+    // Include sources
+    sourceSets.main.java.srcDirs.each {
+        from it
+    }
+
+    manifest {
+        // the manifest of the default jar is of type OsgiManifest
+        name = 'vaadin-chartjs'
+        instruction 'Import-Package', '!com.google.gwt.*', '!com.vaadin.client.*', '*'
+        instruction 'Bundle-Vendor', 'Michael Oberwasserlechner'
+        instruction 'Bundle-Description', 'Chart.js wrapper'
+        instruction 'Bundle-DocURL', 'https://github.com/moberwasserlechner/vaadin-chartjs'
+    }
+}
+
+vaadinAddonZip {
+    baseName = project.artifactId
+}
+
+vaadinJavadocJar {
+    baseName = project.artifactId
+}
+
+vaadinSourcesJar {
+    baseName = project.artifactId
+}
+
+// custom tasks for creating source/javadoc jars
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+// add javadoc/source jar tasks as artifacts
+artifacts {
+    archives sourcesJar, javadocJar
+}
+
+// ###################################
+// ### Publish to local maven repo ###
+// ###################################
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId project.artifactId
+
+            from components.java
+
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+}
+
+// ##########################
+// ### Publish to bintray ###
+// ##########################
+
+bintray {
+    user = BINTRAY_USER //this usually comes from gradle.properties file in ~/.gradle
+    key = BINTRAY_API_KEY //this usually comes from gradle.properties file in ~/.gradle
+
+    // configurations = ['archives'] //When uploading configuration files
+    // - OR -
+    publications = ['mavenJava'] //When uploading Maven-based publication files
+
+    dryRun = false //Whether to run this as dry-run, without deploying
+    publish = false //If version should be auto published after an upload
+
+    // Package configuration. The plugin will use the repo and name properties to check if the package already exists.
+    // In that case, there's no need to configure the other package properties (like userOrg, desc, etc).
+    pkg {
+        repo = 'maven'
+        name = 'vaadin-chartjs'
+        //userOrg = 'byteowls' //An optional organization name when the repo belongs to one of the user's orgs
+        desc = 'Vaadin Wrapper for Chart.js Javascript library'
+        websiteUrl = 'https://github.com/moberwasserlechner/vaadin-chartjs'
+        issueTrackerUrl = 'https://github.com/moberwasserlechner/vaadin-chartjs/issues'
+        vcsUrl = 'https://github.com/moberwasserlechner/vaadin-chartjs.git'
+        licenses = ['MIT']
+        labels = ['vaadin', 'addon', 'chartjs', 'charting']
+        publicDownloadNumbers = true
+
+        version {
+            name = project.version //Bintray logical version name
+            // desc = 'optional'
+            vcsTag = project.version
+        }
+    }
+}
