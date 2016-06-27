@@ -1,3 +1,5 @@
 /.idea/
 /out/
 /.gradle/
+/.DS_Store
+vaadin-chartjs.iml
