@@ -15,14 +15,13 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 vaadin {
-  widgetset = 'MediumEditorWidgetset'
+  widgetset = 'ChartJsWidgetset'
   vaadin.version = "${vaadinVersion}"
   vaadin.debug = false
   vaadin.manageWidgetset = true
   vaadin.manageDependencies = true
 
   vaadin.plugin.logToConsole = true
-  vaadin.plugin.eclipseOutputDir = "bin/"
   vaadin.gwt.gwtSdkFirstInClasspath = true
 }
 
