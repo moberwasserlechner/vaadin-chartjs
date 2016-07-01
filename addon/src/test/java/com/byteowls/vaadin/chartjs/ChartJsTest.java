@@ -6,6 +6,10 @@ import com.byteowls.vaadin.chartjs.options.AnimationOptions;
 import com.byteowls.vaadin.chartjs.options.HoverOptions;
 import com.byteowls.vaadin.chartjs.options.TitleOptions;
 import com.byteowls.vaadin.chartjs.options.TooltipsOptions;
+import com.byteowls.vaadin.chartjs.options.scale.Axes;
+import com.byteowls.vaadin.chartjs.options.scale.Axis;
+import com.byteowls.vaadin.chartjs.options.scale.BaseScale;
+import com.byteowls.vaadin.chartjs.options.scale.BaseScaleOptions;
 import elemental.json.JsonValue;
 import org.junit.Assert;
 import org.junit.Test;
@@ -38,7 +42,14 @@ public class ChartJsTest {
               .mode(TooltipsOptions.Mode.LABEL)
               .done()
             .scales()
-              .addXAxes()
+              .linear(Axis.X)
+                .position(BaseScale.Position.RIGHT)
+                .gridLines()
+                  .offsetGridLines(false)
+                  .done()
+                .done()
+              .linear(Axis.Y)
+                .done()
               .done()
             .done();
 
