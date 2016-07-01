@@ -12,10 +12,12 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
     this.onStateChange = function() {
         var state = this.getState();
         loggingEnabled = state.loggingEnabled;
-        if (loggingEnabled) {
-            console.log("chartjs: create canvas");
+        if (typeof canvas === 'undefined') {
+            if (loggingEnabled) {
+                console.log("chartjs: create canvas");
+            }
+            canvas = e.createElement('canvas');
         }
-        canvas = e.createElement('canvas');
         if (state.width > 0) {
             canvas.setAttribute('width', state.width);
         }
@@ -32,9 +34,12 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
             if (loggingEnabled) {
                 console.log("chartjs: configuration is\n", JSON.stringify(state.configurationJson, null, 2));
             }
-            chartjs = new Chart(canvas, state.optionsJson);
+            chartjs = new Chart(canvas, state.configurationJson);
         }
 
     };
+
+
+    // TODO get data from server push and pull
 
 };

@@ -1,17 +1,21 @@
 package com.byteowls.vaadin.chartjs;
 
-import com.byteowls.vaadin.chartjs.types.ChartConfig;
+import com.byteowls.vaadin.chartjs.config.ChartConfig;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 
 @JavaScript({ "vaadin://chartjs/Chart.min.js", "vaadin://chartjs/chartjs-connector.js" })
 public class ChartJs extends AbstractJavaScriptComponent {
 
+    public ChartJs(ChartConfig chartConfig) {
+        configure(chartConfig);
+    }
+
     /**
      * Configure a ChartJs chart.
      * @param chartConfig a chart configuration implementation
      */
-    public void configure(ChartConfig chartConfig) {
+    private void configure(ChartConfig chartConfig) {
         if (chartConfig != null) {
             getState().configurationJson = chartConfig.buildJson();
         }

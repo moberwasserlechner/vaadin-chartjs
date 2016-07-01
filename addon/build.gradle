@@ -15,13 +15,11 @@ eclipse {
 }
 
 vaadin {
-    //widgetset = 'com.byteowls.vaadin.medium.editor.WidgetSet'
     vaadin.version = "${vaadinVersion}"
     vaadin.debug = false
     vaadin.manageWidgetset = true
 
     vaadin.plugin.logToConsole = true
-    vaadin.plugin.eclipseOutputDir = "bin/"
     vaadin.gwt.gwtSdkFirstInClasspath = true
 
     addon {

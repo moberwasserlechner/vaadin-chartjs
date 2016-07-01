@@ -1,42 +1,37 @@
-package com.byteowls.vaadin.chartjs.config;
+package com.byteowls.vaadin.chartjs.options;
 
-import com.byteowls.vaadin.chartjs.json.JUtils;
-import com.byteowls.vaadin.chartjs.json.JsonBuilder;
+import com.byteowls.vaadin.chartjs.utils.JUtils;
+import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
+import com.byteowls.vaadin.chartjs.utils.SubDone;
 import elemental.json.Json;
 import elemental.json.JsonObject;
-import elemental.json.JsonValue;
 
-public class HoverBuilder implements JsonBuilder {
+public class HoverOptions<T> extends SubDone<T> implements JsonBuilder {
 
     public enum Mode {
         SINGLE, LABEL, DATASET
     }
 
-    private CommonOptionBuilder commonOptionBuilder;
     private Mode mode;
     private Integer animationDuration;
     // TODO Callback onhover
 
-    HoverBuilder(CommonOptionBuilder commonOptionBuilder) {
-        this.commonOptionBuilder = commonOptionBuilder;
+    public HoverOptions(T parent) {
+        super(parent);
     }
 
-    public HoverBuilder mode(Mode mode) {
+    public HoverOptions<T> mode(Mode mode) {
         this.mode = mode;
         return this;
     }
 
-    public HoverBuilder animationDuration(int animationDuration) {
+    public HoverOptions<T> animationDuration(int animationDuration) {
         this.animationDuration = animationDuration;
         return this;
     }
 
-    public CommonOptionBuilder done() {
-        return commonOptionBuilder;
-    }
-
     @Override
-    public JsonValue buildJson() {
+    public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         if (mode != null) {
             JUtils.putNotNull(map, "mode", mode.name().toLowerCase());

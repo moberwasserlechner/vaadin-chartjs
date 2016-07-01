@@ -1,4 +1,4 @@
-package com.byteowls.vaadin.chartjs.json;
+package com.byteowls.vaadin.chartjs.utils;
 
 import elemental.json.Json;
 import elemental.json.JsonArray;
@@ -54,5 +54,20 @@ public abstract class JUtils {
             obj.put(key, (JsonValue) value);
         }
     }
-    
+
+    public static void putNotNull(JsonObject obj, String key, JsonBuilder builder) {
+        if (builder != null) {
+            obj.put(key, builder.buildJson());
+        }
+    }
+
+    public static void putNotNullBuilders(JsonObject obj, String key, List<? extends JsonBuilder> listOfBuilder) {
+        if (listOfBuilder != null) {
+            JsonArray arr = Json.createArray();
+            for (JsonBuilder tbb : listOfBuilder) {
+                arr.set(arr.length(), tbb.buildJson());
+            }
+            obj.put(key, arr);
+        }
+    }
 }
