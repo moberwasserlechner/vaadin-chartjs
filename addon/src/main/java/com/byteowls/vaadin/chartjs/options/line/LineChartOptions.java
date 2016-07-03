@@ -1,18 +1,16 @@
 package com.byteowls.vaadin.chartjs.options.line;
 
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
-import com.byteowls.vaadin.chartjs.config.LineChartConfig;
-import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.options.AbstractScalableOptions;
+import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.JsonObject;
 
 public class LineChartOptions extends AbstractScalableOptions<LineChartOptions> {
 
     private Boolean showLines;
-    private LineChartConfig chartConfig;
 
-    public LineChartOptions(LineChartConfig chartConfig) {
-        this.chartConfig = chartConfig;
+    public LineChartOptions(ChartConfig chartConfig) {
+        super(chartConfig);
     }
 
     public LineChartOptions showLines(boolean showLines) {
@@ -32,7 +30,4 @@ public class LineChartOptions extends AbstractScalableOptions<LineChartOptions> 
         return this;
     }
 
-    public ChartConfig done() {
-        return chartConfig;
-    }
 }

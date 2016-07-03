@@ -4,7 +4,7 @@ import com.byteowls.vaadin.chartjs.config.ChartConfig;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 
-@JavaScript({ "vaadin://chartjs/Chart.min.js", "vaadin://chartjs/chartjs-connector.js" })
+@JavaScript({"vaadin://chartjs/Chart.min.js", "vaadin://chartjs/chartjs-connector.js"})
 public class ChartJs extends AbstractJavaScriptComponent {
 
     public ChartJs(ChartConfig chartConfig) {
@@ -13,6 +13,7 @@ public class ChartJs extends AbstractJavaScriptComponent {
 
     /**
      * Configure a ChartJs chart.
+     *
      * @param chartConfig a chart configuration implementation
      */
     private void configure(ChartConfig chartConfig) {

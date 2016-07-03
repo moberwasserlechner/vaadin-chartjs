@@ -1,5 +1,6 @@
 package com.byteowls.vaadin.chartjs.options;
 
+import com.byteowls.vaadin.chartjs.config.ChartConfig;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
@@ -10,6 +11,8 @@ import java.util.List;
 
 public abstract class AbstractOptions<T> implements JsonBuilder {
 
+    private ChartConfig chartConfig;
+
     protected Boolean responsive;
     private Integer responsiveAnimationDuration;
     private Boolean maintainAspectRatio;
@@ -19,26 +22,45 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
     private HoverOptions<T> hover;
     private AnimationOptions<T> animation;
 
+    public AbstractOptions(ChartConfig chartConfig) {
+        this.chartConfig = chartConfig;
+    }
+
+    /**
+     * Resizes when the canvas container does.
+     */
     public T responsive(boolean responsive) {
         this.responsive = responsive;
         return getThis();
     }
 
+    /**
+     * Maintain the original canvas aspect ratio (width / height) when resizing
+     */
     public T maintainAspectRatio(boolean maintainAspectRatio) {
         this.maintainAspectRatio = maintainAspectRatio;
         return getThis();
     }
 
+    /**
+     * Duration in milliseconds it takes to animate to new size after a resize event.
+     */
     public T responsiveAnimationDuration(int responsiveAnimationDurationMs) {
         this.responsiveAnimationDuration = responsiveAnimationDurationMs;
         return getThis();
     }
 
+    /**
+     * Events that the chart should listen to for tooltips and hovering
+     */
     public T events(String... events) {
         this.events = Arrays.asList(events);
         return getThis();
     }
 
+    /**
+     * Step into the charts title configuration
+     */
     public TitleOptions<T> title() {
         if (title == null) {
             title = new TitleOptions<>(getThis());
@@ -46,6 +68,9 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
         return title;
     }
 
+    /**
+     * Step into the charts animation configuration
+     */
     public AnimationOptions<T> animation() {
         if (animation == null) {
             animation = new AnimationOptions<>(getThis());
@@ -53,6 +78,9 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
         return animation;
     }
 
+    /**
+     * Step into the charts hover configuration
+     */
     public HoverOptions<T> hover() {
         if (hover == null) {
             hover = new HoverOptions(getThis());
@@ -60,12 +88,17 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
         return hover;
     }
 
+    /**
+     * Step into the charts tooltips configuration
+     */
     public TooltipsOptions<T> tooltips() {
         if (tooltips == null) {
             tooltips = new TooltipsOptions<>(getThis());
         }
         return tooltips;
     }
+
+    // TODO legend config
 
     public abstract T getThis();
 
@@ -81,6 +114,10 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
         JUtils.putNotNull(map, "tooltips", tooltips);
         JUtils.putNotNull(map, "animation", animation);
         return map;
+    }
+
+    public ChartConfig done() {
+        return chartConfig;
     }
 
 }

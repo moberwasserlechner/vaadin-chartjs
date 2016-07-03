@@ -7,28 +7,28 @@ import elemental.json.JsonObject;
 /**
  * @author michael@team-conductor.com
  */
-public class LogarithmicTicks<T> extends Ticks<T> implements JsonBuilder {
+public class CategoryTicks<T> extends Ticks<T> implements JsonBuilder {
 
-    private Integer min;
-    private Integer max;
+    private String min;
+    private String max;
 
-    public LogarithmicTicks(T parent) {
+    public CategoryTicks(T parent) {
         super(parent);
     }
 
 
     /**
-     * User defined minimum number for the scale, overrides minimum value from data.
+     * The minimum item to display. Must be a value in the data.labels array
      */
-    public LogarithmicTicks<T> min(int min) {
+    public CategoryTicks<T> min(String min) {
         this.min = min;
         return this;
     }
 
     /**
-     * User defined maximum number for the scale, overrides maximum value from data.
+     * The maximum item to display. Must be a value in the data.labels array
      */
-    public LogarithmicTicks<T> max(int max) {
+    public CategoryTicks<T> max(String max) {
         this.max = max;
         return this;
     }

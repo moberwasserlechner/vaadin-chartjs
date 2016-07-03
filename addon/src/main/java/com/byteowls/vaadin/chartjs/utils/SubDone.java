@@ -5,14 +5,14 @@ package com.byteowls.vaadin.chartjs.utils;
  */
 public abstract class SubDone<T> {
 
-  private T parent;
+    private T parent;
 
-  public SubDone(T parent) {
-    this.parent = parent;
-  }
+    public SubDone(T parent) {
+        this.parent = parent;
+    }
 
-  public T done() {
-    return parent;
-  }
+    public T done() {
+        return parent;
+    }
 
 }

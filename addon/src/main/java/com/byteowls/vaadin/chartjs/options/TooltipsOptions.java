@@ -13,19 +13,52 @@ public class TooltipsOptions<T> extends SubDone<T> implements JsonBuilder {
     }
 
     private Boolean enabled;
-    // TODO Callback onhover
+    // TODO custom call
+    private Mode mode;
+    private String backgroundColor;
+    private String titleFontFamily;
+    private Integer titleFontSize;
+    private String titleFontStyle;
+    private String titleFontColor;
+    private Integer titleSpacing;
+    private Integer titleMarginBottom;
+    private String bodyFontFamily;
+    private Integer bodyFontSize;
+    private String bodyFontStyle;
+    private String bodyFontColor;
+    private Integer bodySpacing;
+    private String footerFontFamily;
+    private Integer footerFontSize;
+    private String footerFontStyle;
+    private String footerFontColor;
+    private Integer footerSpacing;
+    private Integer footerMarginTop;
+    private Integer xPadding;
+    private Integer yPadding;
+    private Integer caretSize;
+    private Integer cornerRadius;
+    private String multiKeyBackground;
+    // TODO private String callbacks;
+
 
     public TooltipsOptions(T parent) {
         super(parent);
     }
 
-    private Mode mode;
-
+    /**
+     * Are tooltips enabled
+     */
     public TooltipsOptions<T> enabled(boolean enabled) {
         this.enabled = enabled;
         return this;
     }
 
+    /**
+     * Sets which elements appear in the tooltip.
+     * single highlights the closest element.
+     * label highlights elements in all datasets at the same X value.
+     * defaults to {@link Mode#SINGLE}
+     */
     public TooltipsOptions<T> mode(Mode mode) {
         this.mode = mode;
         return this;

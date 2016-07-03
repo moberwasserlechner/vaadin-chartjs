@@ -14,17 +14,26 @@ public class HoverOptions<T> extends SubDone<T> implements JsonBuilder {
 
     private Mode mode;
     private Integer animationDuration;
-    // TODO Callback onhover
+    // TODO Callback onhover Called when any of the events fire. Called in the context of the chart and passed an array of active elements (bars, points, etc)
 
     public HoverOptions(T parent) {
         super(parent);
     }
 
+    /**
+     * Sets which elements hover.
+     * <li>single highlights the closest element
+     * <li>label highlights elements in all datasets at the same X value.
+     * <li>dataset highlights the closest dataset
+     */
     public HoverOptions<T> mode(Mode mode) {
         this.mode = mode;
         return this;
     }
 
+    /**
+     * Duration in milliseconds it takes to animate hover style changes
+     */
     public HoverOptions<T> animationDuration(int animationDuration) {
         this.animationDuration = animationDuration;
         return this;
