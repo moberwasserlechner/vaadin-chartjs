@@ -1,15 +1,15 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
+import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
-import com.byteowls.vaadin.chartjs.utils.SubDone;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
 /**
  * @author michael@team-conductor.com
  */
-public abstract class BaseScale<P, B extends BaseScale> extends SubDone<P> implements JsonBuilder {
+public abstract class BaseScale<S, B extends BaseScale> extends And<S> implements JsonBuilder {
 
     public enum Position {
         TOP, RIGHT, BOTTOM, LEFT
@@ -24,48 +24,48 @@ public abstract class BaseScale<P, B extends BaseScale> extends SubDone<P> imple
     protected Ticks<B> ticks;
     protected ScaleLabel<B> scaleLabel;
 
-    public BaseScale(P parent) {
+    public BaseScale(S parent) {
         super(parent);
     }
 
     /**
      * "category", "linear", "logarithmic", "time", "radialLinear"
      */
-    public BaseScale<P, B> type(String type) {
+    public BaseScale<S, B> type(String type) {
         this.type = type;
-        return this;
+        return getThis();
     }
 
     /**
      * If true, show the scale including gridlines, ticks, and labels. Overrides gridLines.display, scaleLabel.display, and ticks.display.
      */
-    public BaseScale<P, B> display(boolean display) {
+    public BaseScale<S, B> display(boolean display) {
         this.display = display;
-        return this;
+        return getThis();
     }
 
     /**
      * The ID is used to link datasets and scale axes together. The properties `datasets.xAxisID` or `datasets.yAxisID` have to match the scale properties `scales.xAxes.id` or `scales.yAxes.id`. This is especially needed if multi-axes charts are used.
      */
-    public BaseScale<P, B> id(String id) {
+    public BaseScale<S, B> id(String id) {
         this.id = id;
-        return this;
+        return getThis();
     }
 
     /**
      * If true, bars are stacked on the x-axis
      */
-    public BaseScale<P, B> stacked(boolean stacked) {
+    public BaseScale<S, B> stacked(boolean stacked) {
         this.stacked = stacked;
-        return this;
+        return getThis();
     }
 
     /**
      * Position of the scale.
      */
-    public BaseScale<P, B> position(Position position) {
+    public BaseScale<S, B> position(Position position) {
         this.position = position;
-        return this;
+        return getThis();
     }
 
     /**

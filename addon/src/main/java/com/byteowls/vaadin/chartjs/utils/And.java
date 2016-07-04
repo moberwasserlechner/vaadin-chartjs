@@ -3,15 +3,15 @@ package com.byteowls.vaadin.chartjs.utils;
 /**
  * @author michael@team-conductor.com
  */
-public abstract class SubDone<T> {
+public abstract class And<T> {
 
-    private T parent;
+    protected T parent;
 
-    public SubDone(T parent) {
+    public And(T parent) {
         this.parent = parent;
     }
 
-    public T done() {
+    public T and() {
         return parent;
     }
 

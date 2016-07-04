@@ -7,7 +7,7 @@ import com.byteowls.vaadin.chartjs.options.line.ScalesOptions;
  */
 public class LogarithmicScale extends BaseScale<ScalesOptions, LogarithmicScale> {
 
-    private LogarithmicTicks logarithmicTicks;
+    private LogarithmicTicks<LogarithmicScale> logarithmicTicks;
 
     public LogarithmicScale(ScalesOptions parent) {
         super(parent);

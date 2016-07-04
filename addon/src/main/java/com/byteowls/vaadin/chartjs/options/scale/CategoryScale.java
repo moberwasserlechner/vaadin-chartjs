@@ -9,7 +9,7 @@ import com.byteowls.vaadin.chartjs.options.line.ScalesOptions;
  */
 public class CategoryScale extends BaseScale<ScalesOptions, CategoryScale> {
 
-    private CategoryTicks categoryTicks;
+    private CategoryTicks<CategoryScale> categoryTicks;
 
     public CategoryScale(ScalesOptions parent) {
         super(parent);

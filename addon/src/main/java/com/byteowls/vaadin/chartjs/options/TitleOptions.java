@@ -1,12 +1,12 @@
 package com.byteowls.vaadin.chartjs.options;
 
+import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
-import com.byteowls.vaadin.chartjs.utils.SubDone;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
-public class TitleOptions<T> extends SubDone<T> implements JsonBuilder {
+public class TitleOptions<T> extends And<T> implements JsonBuilder {
 
     public enum Position {
         TOP, BOTTOM

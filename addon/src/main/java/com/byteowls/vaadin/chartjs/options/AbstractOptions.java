@@ -83,7 +83,7 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
      */
     public HoverOptions<T> hover() {
         if (hover == null) {
-            hover = new HoverOptions(getThis());
+            hover = new HoverOptions<>(getThis());
         }
         return hover;
     }

@@ -1,15 +1,15 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
+import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
-import com.byteowls.vaadin.chartjs.utils.SubDone;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
 /**
  * @author michael@team-conductor.com
  */
-public class ScaleLabel<T> extends SubDone<T> implements JsonBuilder {
+public class ScaleLabel<T extends BaseScale> extends And<T> implements JsonBuilder {
 
     private Boolean display;
     private String labelString;

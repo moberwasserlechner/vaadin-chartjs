@@ -7,7 +7,7 @@ import com.byteowls.vaadin.chartjs.options.line.ScalesOptions;
  */
 public class LinearScale extends BaseScale<ScalesOptions, LinearScale> {
 
-    private LinearTicks linearTicks;
+    private LinearTicks<LinearScale> linearTicks;
 
     public LinearScale(ScalesOptions parent) {
         super(parent);
