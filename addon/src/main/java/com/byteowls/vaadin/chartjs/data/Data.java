@@ -1,6 +1,5 @@
 package com.byteowls.vaadin.chartjs.data;
 
-import com.byteowls.vaadin.chartjs.config.ChartConfig;
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;

@@ -23,40 +23,14 @@ public class ScalesOptions<P> extends And<P> implements JsonBuilder {
     }
 
     /**
-     * The category scale will be familiar to those who have used v1.0.
-     * Labels are drawn in from the labels array included in the chart data.
      *
      * @param axis on which axis should the scale be placed
+     * @param scale a scale
+     * @return this for chaining.
      */
-    public CategoryScale category(Axis axis) {
-        CategoryScale categoryScale = new CategoryScale(this);
-        addToAxes(axis, categoryScale);
-        return categoryScale;
-    }
-
-    /**
-     * The linear scale is use to chart numerical data. It can be placed on either the x or y axis.
-     * The scatter chart type automatically configures a line chart to use one of these scales for the x axis.
-     * As the name suggests, linear interpolation is used to determine where a value lies on the axis.
-     *
-     * @param axis on which axis should the scale be placed
-     */
-    public LinearScale linear(Axis axis) {
-        LinearScale linearScale = new LinearScale(this);
-        addToAxes(axis, linearScale);
-        return linearScale;
-    }
-
-    /**
-     * The logarithmic scale is use to chart numerical data. It can be placed on either the x or y axis.
-     * As the name suggests, logarithmic interpolation is used to determine where a value lies on the axis.
-     *
-     * @param axis on which axis should the scale be placed
-     */
-    public LogarithmicScale logarithmic(Axis axis) {
-        LogarithmicScale logarithmicScale = new LogarithmicScale(this);
-        addToAxes(axis, logarithmicScale);
-        return logarithmicScale;
+    public ScalesOptions<P> add(Axis axis, BaseScale scale) {
+        addToAxes(axis, scale);
+        return this;
     }
 
     private void addToAxes(Axis axis, BaseScale scale) {

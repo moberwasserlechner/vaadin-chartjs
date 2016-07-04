@@ -1,18 +1,16 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
-import com.byteowls.vaadin.chartjs.options.line.ScalesOptions;
-
 /**
- * The category scale will be familiar to those who have used v1.0. Labels are drawn in from the labels array included in the chart data.
+ * The category scale will be familiar to those who have used v1.0.
+ * Labels are drawn in from the labels array included in the chart data.
  *
  * @author michael@team-conductor.com
  */
-public class CategoryScale extends BaseScale<ScalesOptions, CategoryScale> {
+public class CategoryScale extends BaseScale<CategoryScale> {
 
     private CategoryTicks<CategoryScale> categoryTicks;
 
-    public CategoryScale(ScalesOptions parent) {
-        super(parent);
+    public CategoryScale() {
         type("category");
     }
 

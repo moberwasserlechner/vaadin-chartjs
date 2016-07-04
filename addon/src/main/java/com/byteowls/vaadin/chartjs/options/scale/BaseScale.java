@@ -1,6 +1,5 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
-import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
@@ -9,7 +8,7 @@ import elemental.json.JsonObject;
 /**
  * @author michael@team-conductor.com
  */
-public abstract class BaseScale<S, B extends BaseScale> extends And<S> implements JsonBuilder {
+public abstract class BaseScale<B extends BaseScale> implements JsonBuilder {
 
     public enum Position {
         TOP, RIGHT, BOTTOM, LEFT
@@ -24,14 +23,10 @@ public abstract class BaseScale<S, B extends BaseScale> extends And<S> implement
     protected Ticks<B> ticks;
     protected ScaleLabel<B> scaleLabel;
 
-    public BaseScale(S parent) {
-        super(parent);
-    }
-
     /**
      * "category", "linear", "logarithmic", "time", "radialLinear"
      */
-    public BaseScale<S, B> type(String type) {
+    public BaseScale<B> type(String type) {
         this.type = type;
         return getThis();
     }
@@ -39,7 +34,7 @@ public abstract class BaseScale<S, B extends BaseScale> extends And<S> implement
     /**
      * If true, show the scale including gridlines, ticks, and labels. Overrides gridLines.display, scaleLabel.display, and ticks.display.
      */
-    public BaseScale<S, B> display(boolean display) {
+    public BaseScale<B> display(boolean display) {
         this.display = display;
         return getThis();
     }
@@ -47,7 +42,7 @@ public abstract class BaseScale<S, B extends BaseScale> extends And<S> implement
     /**
      * The ID is used to link datasets and scale axes together. The properties `datasets.xAxisID` or `datasets.yAxisID` have to match the scale properties `scales.xAxes.id` or `scales.yAxes.id`. This is especially needed if multi-axes charts are used.
      */
-    public BaseScale<S, B> id(String id) {
+    public BaseScale<B> id(String id) {
         this.id = id;
         return getThis();
     }
@@ -55,7 +50,7 @@ public abstract class BaseScale<S, B extends BaseScale> extends And<S> implement
     /**
      * If true, bars are stacked on the x-axis
      */
-    public BaseScale<S, B> stacked(boolean stacked) {
+    public BaseScale<B> stacked(boolean stacked) {
         this.stacked = stacked;
         return getThis();
     }
@@ -63,7 +58,7 @@ public abstract class BaseScale<S, B extends BaseScale> extends And<S> implement
     /**
      * Position of the scale.
      */
-    public BaseScale<S, B> position(Position position) {
+    public BaseScale<B> position(Position position) {
         this.position = position;
         return getThis();
     }

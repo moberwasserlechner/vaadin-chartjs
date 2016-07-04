@@ -1,16 +1,16 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
-import com.byteowls.vaadin.chartjs.options.line.ScalesOptions;
-
 /**
+ * The logarithmic scale is use to chart numerical data. It can be placed on either the x or y axis.
+ * As the name suggests, logarithmic interpolation is used to determine where a value lies on the axis.
+ *
  * @author michael@team-conductor.com
  */
-public class LogarithmicScale extends BaseScale<ScalesOptions, LogarithmicScale> {
+public class LogarithmicScale extends BaseScale<LogarithmicScale> {
 
     private LogarithmicTicks<LogarithmicScale> logarithmicTicks;
 
-    public LogarithmicScale(ScalesOptions parent) {
-        super(parent);
+    public LogarithmicScale() {
         type("logarithmic");
     }
 

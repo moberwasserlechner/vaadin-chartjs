@@ -7,8 +7,7 @@ import com.byteowls.vaadin.chartjs.options.AnimationOptions;
 import com.byteowls.vaadin.chartjs.options.HoverOptions;
 import com.byteowls.vaadin.chartjs.options.TitleOptions;
 import com.byteowls.vaadin.chartjs.options.TooltipsOptions;
-import com.byteowls.vaadin.chartjs.options.scale.Axis;
-import com.byteowls.vaadin.chartjs.options.scale.BaseScale;
+import com.byteowls.vaadin.chartjs.options.scale.*;
 import elemental.json.JsonValue;
 import org.junit.Assert;
 import org.junit.Test;
@@ -46,18 +45,13 @@ public class ChartJsTest {
             .tooltips()
                 .mode(TooltipsOptions.Mode.LABEL)
                 .and()
-            // scales must be the last configured, which is not really great
             .scales()
-                .linear(Axis.X)
-                    .position(BaseScale.Position.TOP)
-                    .and()
-                .logarithmic(Axis.Y)
-                    .position(BaseScale.Position.LEFT)
-                    .and()
+                .add(Axis.X, new LinearScale().position(BaseScale.Position.TOP))
+                .add(Axis.Y, new LogarithmicScale().position(BaseScale.Position.LEFT))
                 .and()
-
-//            .animation()
-//            .done()
+            .tooltips()
+                .mode(TooltipsOptions.Mode.LABEL)
+                .and()
             .done();
 
         JsonValue jsonValue = config.buildJson();

@@ -1,16 +1,17 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
-import com.byteowls.vaadin.chartjs.options.line.ScalesOptions;
-
 /**
+ * The linear scale is use to chart numerical data. It can be placed on either the x or y axis.
+ * The scatter chart type automatically configures a line chart to use one of these scales for the x axis.
+ * As the name suggests, linear interpolation is used to determine where a value lies on the axis.
+ *
  * @author michael@team-conductor.com
  */
-public class LinearScale extends BaseScale<ScalesOptions, LinearScale> {
+public class LinearScale extends BaseScale<LinearScale> {
 
     private LinearTicks<LinearScale> linearTicks;
 
-    public LinearScale(ScalesOptions parent) {
-        super(parent);
+    public LinearScale() {
         type("linear");
     }
 
