@@ -70,4 +70,14 @@ public abstract class JUtils {
             obj.put(key, arr);
         }
     }
+
+    public static void putNotNullNumbers(JsonObject obj, String key, List<Double> listOfNumbers) {
+        if (listOfNumbers != null) {
+            JsonArray arr = Json.createArray();
+            for (Double n : listOfNumbers) {
+                arr.set(arr.length(), n);
+            }
+            obj.put(key, arr);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.byteowls.vaadin.chartjs.config;
 
+import com.byteowls.vaadin.chartjs.data.Data;
 import com.byteowls.vaadin.chartjs.options.line.LineChartOptions;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.Json;
@@ -14,22 +15,14 @@ import elemental.json.JsonObject;
  */
 public class LineChartConfig implements ChartConfig {
 
+    private Data<LineChartConfig> data;
     private LineChartOptions options;
 
-    @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
-        JUtils.putNotNull(map, "type", "line");
-        // data
-        // options
-        if (options != null) {
-            JUtils.putNotNull(map, "options", options.buildJson());
+    public Data<LineChartConfig> data() {
+        if (this.data != null) {
+            this.data = new Data<>(this);
         }
-        return map;
-    }
-
-    public void data() {
-
+        return this.data;
     }
 
     public LineChartOptions options() {
@@ -37,5 +30,20 @@ public class LineChartConfig implements ChartConfig {
             options = new LineChartOptions(this);
         }
         return options;
+    }
+
+    @Override
+    public JsonObject buildJson() {
+        JsonObject map = Json.createObject();
+        JUtils.putNotNull(map, "type", "line");
+        // data
+        if (data != null) {
+            JUtils.putNotNull(map, "data", data.buildJson());
+        }
+        // options
+        if (options != null) {
+            JUtils.putNotNull(map, "options", options.buildJson());
+        }
+        return map;
     }
 }
