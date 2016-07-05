@@ -16,11 +16,10 @@ eclipse {
 
 vaadin {
     vaadin.version = "${vaadinVersion}"
-    vaadin.debug = false
-    vaadin.manageWidgetset = true
+    vaadin.logToConsole = true
 
-    vaadin.plugin.logToConsole = true
-    vaadin.gwt.gwtSdkFirstInClasspath = true
+    vaadinCompile.manageWidgetset = true
+    vaadinCompile.gwtSdkFirstInClasspath = true
 
     addon {
         author 'Michael Oberwasserlechner'
