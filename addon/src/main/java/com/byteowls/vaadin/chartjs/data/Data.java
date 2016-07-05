@@ -34,6 +34,14 @@ public class Data<T> extends And<T> implements JsonBuilder {
         this.datasets.add(dataset);
         return this;
     }
+    
+    public List<Dataset> getDatasets() {
+        return datasets;
+    }
+    
+    public List<String> getLabels() {
+        return labels;
+    }
 
     @Override
     public JsonObject buildJson() {

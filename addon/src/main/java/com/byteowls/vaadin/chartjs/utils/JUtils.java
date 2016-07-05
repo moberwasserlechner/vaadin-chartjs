@@ -49,9 +49,15 @@ public abstract class JUtils {
         }
     }
 
-    public static void putNotNull(JsonObject obj, String key, Number value) {
+    public static void putNotNull(JsonObject obj, String key, Double value) {
         if (value != null) {
-            obj.put(key, (JsonValue) value);
+            obj.put(key, value);
+        }
+    }
+    
+    public static void putNotNull(JsonObject obj, String key, Integer value) {
+        if (value != null) {
+            obj.put(key, value.doubleValue());
         }
     }
 

@@ -1,12 +1,12 @@
 package com.byteowls.vaadin.chartjs.data;
 
-import com.byteowls.vaadin.chartjs.utils.JUtils;
-import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
-import elemental.json.Json;
-import elemental.json.JsonObject;
-
 import java.util.Arrays;
 import java.util.List;
+
+import com.byteowls.vaadin.chartjs.utils.JUtils;
+
+import elemental.json.Json;
+import elemental.json.JsonObject;
 
 /**
  * @author michael@team-conductor.com
@@ -14,17 +14,19 @@ import java.util.List;
 public class LineDataset implements Dataset {
 
     private List<Double> data;
+    private Boolean hidden;
     private String label;
     private String xAxisID;
     private String yAxisID;
     private Boolean fill;
-    private Float lineTension;
+    private Double lineTension;
     private String backgroundColor;
     private Integer borderWidth;
     private String borderColor;
     private String borderCapStyle;
-    private Float borderDashOffset;
+    private Double borderDashOffset;
     private String borderJoinStyle;
+    // TODO point settings
 
     public LineDataset data(Double... data) {
         this.data = Arrays.asList(data);
@@ -67,11 +69,19 @@ public class LineDataset implements Dataset {
         this.fill = fill;
         return this;
     }
+    
+    /**
+     * If true, the dataset is hidden
+     */
+    public LineDataset hidden(boolean hidden) {
+        this.hidden = hidden;
+        return this;
+    }
 
     /**
      * Bezier curve tension of the line. Set to 0 to draw straightlines.
      */
-    public LineDataset lineTension(float lineTension) {
+    public LineDataset lineTension(double lineTension) {
         this.lineTension = lineTension;
         return this;
     }
@@ -111,7 +121,7 @@ public class LineDataset implements Dataset {
     /**
      * Offset for line dashes.
      */
-    public LineDataset borderDashOffset(float borderDashOffset) {
+    public LineDataset borderDashOffset(double borderDashOffset) {
         this.borderDashOffset = borderDashOffset;
         return this;
     }
@@ -132,6 +142,7 @@ public class LineDataset implements Dataset {
         JUtils.putNotNull(map, "xAxisID", xAxisID);
         JUtils.putNotNull(map, "yAxisID", yAxisID);
         JUtils.putNotNull(map, "fill", fill);
+        JUtils.putNotNull(map, "hidden", hidden);
         JUtils.putNotNull(map, "lineTension", lineTension);
         JUtils.putNotNull(map, "backgroundColor", backgroundColor);
         JUtils.putNotNull(map, "borderWidth", borderWidth);

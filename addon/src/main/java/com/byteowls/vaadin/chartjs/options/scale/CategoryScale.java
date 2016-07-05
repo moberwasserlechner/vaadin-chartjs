@@ -1,5 +1,9 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
+import com.byteowls.vaadin.chartjs.utils.JUtils;
+
+import elemental.json.JsonObject;
+
 /**
  * The category scale will be familiar to those who have used v1.0.
  * Labels are drawn in from the labels array included in the chart data.
@@ -28,5 +32,12 @@ public class CategoryScale extends BaseScale<CategoryScale> {
     @Override
     public CategoryScale getThis() {
         return this;
+    }
+    
+    @Override
+    public JsonObject buildJson() {
+        JsonObject map = super.buildJson();
+        JUtils.putNotNull(map, "ticks", categoryTicks);
+        return map;
     }
 }

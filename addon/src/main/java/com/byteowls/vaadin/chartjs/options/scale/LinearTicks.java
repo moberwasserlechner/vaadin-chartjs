@@ -13,8 +13,8 @@ public class LinearTicks<T> extends Ticks<T> implements JsonBuilder {
     private Integer min;
     private Integer max;
     private Integer maxTicksLimit;
-    private Float fixedStepSize;
-    private Float stepSize;
+    private Double fixedStepSize;
+    private Double stepSize;
     private Integer suggestedMax;
     private Integer suggestedMin;
 
@@ -23,7 +23,7 @@ public class LinearTicks<T> extends Ticks<T> implements JsonBuilder {
     }
 
     /**
-     * if true, scale will inclulde 0 if it is not already included.
+     * if true, scale will include 0 if it is not already included.
      */
     public LinearTicks<T> beginAtZero(Boolean beginAtZero) {
         this.beginAtZero = beginAtZero;
@@ -58,7 +58,7 @@ public class LinearTicks<T> extends Ticks<T> implements JsonBuilder {
      * User defined fixed step size for the scale. If set, the scale ticks will be enumerated by multiple of stepSize, having one tick per increment.
      * If not set, the ticks are labeled automatically using the nice numbers algorithm.
      */
-    public LinearTicks<T> fixedStepSize(float fixedStepSize) {
+    public LinearTicks<T> fixedStepSize(double fixedStepSize) {
         this.fixedStepSize = fixedStepSize;
         return this;
     }
@@ -66,7 +66,7 @@ public class LinearTicks<T> extends Ticks<T> implements JsonBuilder {
     /**
      * if defined, it can be used along with the min and the max to give a custom number of steps. See the example below.
      */
-    public LinearTicks<T> stepSize(float stepSize) {
+    public LinearTicks<T> stepSize(double stepSize) {
         this.stepSize = stepSize;
         return this;
     }
@@ -97,8 +97,8 @@ public class LinearTicks<T> extends Ticks<T> implements JsonBuilder {
         JUtils.putNotNull(map, "maxTicksLimit", maxTicksLimit);
         JUtils.putNotNull(map, "fixedStepSize", fixedStepSize);
         JUtils.putNotNull(map, "stepSize", stepSize);
-        JUtils.putNotNull(map, "suggestedMax", suggestedMax);
         JUtils.putNotNull(map, "suggestedMin", suggestedMin);
+        JUtils.putNotNull(map, "suggestedMax", suggestedMax);
         return map;
     }
 }

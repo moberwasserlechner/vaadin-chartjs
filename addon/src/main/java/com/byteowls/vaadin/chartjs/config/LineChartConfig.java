@@ -19,7 +19,7 @@ public class LineChartConfig implements ChartConfig {
     private LineChartOptions options;
 
     public Data<LineChartConfig> data() {
-        if (this.data != null) {
+        if (this.data == null) {
             this.data = new Data<>(this);
         }
         return this.data;

@@ -1,5 +1,9 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
+import com.byteowls.vaadin.chartjs.utils.JUtils;
+
+import elemental.json.JsonObject;
+
 /**
  * The linear scale is use to chart numerical data. It can be placed on either the x or y axis.
  * The scatter chart type automatically configures a line chart to use one of these scales for the x axis.
@@ -29,5 +33,12 @@ public class LinearScale extends BaseScale<LinearScale> {
     @Override
     public LinearScale getThis() {
         return this;
+    }
+    
+    @Override
+    public JsonObject buildJson() {
+        JsonObject map = super.buildJson();
+        JUtils.putNotNull(map, "ticks", linearTicks);
+        return map;
     }
 }
