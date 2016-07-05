@@ -15,14 +15,14 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 vaadin {
-  widgetset = 'ChartJsWidgetset'
   vaadin.version = "${vaadinVersion}"
-  vaadin.debug = false
-  vaadin.manageWidgetset = true
-  vaadin.manageDependencies = true
+  vaadin.logToConsole = true
+  
+  vaadinCompile.widgetset = 'ChartJsWidgetset'
+  vaadinCompile.manageWidgetset = true
+  vaadinCompile.gwtSdkFirstInClasspath = true
 
-  vaadin.plugin.logToConsole = true
-  vaadin.gwt.gwtSdkFirstInClasspath = true
+  vaadin.manageDependencies = true
 }
 
 dependencies {
@@ -41,5 +41,5 @@ war {
 
 gretty {
   servletContainer = 'tomcat8'
-  contextPath = ""
+  contextPath = "/"
 }

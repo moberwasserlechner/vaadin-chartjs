@@ -1,0 +1,8 @@
+@import "../valo/valo.scss";
+
+@mixin chartjs {
+  @include valo;
+
+  /* Add your theme selectors here */
+
+}
