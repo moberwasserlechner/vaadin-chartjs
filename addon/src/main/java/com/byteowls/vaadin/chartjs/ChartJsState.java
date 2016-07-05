@@ -5,8 +5,8 @@ import elemental.json.JsonValue;
 
 public class ChartJsState extends JavaScriptComponentState {
 
-    public float width;
-    public float height;
+    private static final long serialVersionUID = 542472889885500321L;
+    
     public boolean loggingEnabled;
     public JsonValue configurationJson;
 
