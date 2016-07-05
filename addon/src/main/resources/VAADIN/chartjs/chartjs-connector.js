@@ -16,7 +16,8 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
             if (loggingEnabled) {
                 console.log("chartjs: create canvas");
             }
-            canvas = e.createElement('canvas');
+            canvas = document.createElement('canvas');
+            e.appendChild(canvas)
         }
         if (state.width > 0) {
             canvas.setAttribute('width', state.width);
