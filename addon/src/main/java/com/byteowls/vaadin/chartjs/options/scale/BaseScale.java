@@ -8,7 +8,7 @@ import elemental.json.JsonObject;
 /**
  * @author michael@team-conductor.com
  */
-public abstract class BaseScale<B extends BaseScale> implements JsonBuilder {
+public abstract class BaseScale<B extends BaseScale<?>> implements JsonBuilder {
 
     public enum Position {
         TOP, RIGHT, BOTTOM, LEFT
@@ -28,7 +28,7 @@ public abstract class BaseScale<B extends BaseScale> implements JsonBuilder {
      */
     public BaseScale<B> type(String type) {
         this.type = type;
-        return getThis();
+        return this;
     }
 
     /**
@@ -36,7 +36,7 @@ public abstract class BaseScale<B extends BaseScale> implements JsonBuilder {
      */
     public BaseScale<B> display(boolean display) {
         this.display = display;
-        return getThis();
+        return this;
     }
 
     /**
@@ -44,7 +44,7 @@ public abstract class BaseScale<B extends BaseScale> implements JsonBuilder {
      */
     public BaseScale<B> id(String id) {
         this.id = id;
-        return getThis();
+        return this;
     }
 
     /**
@@ -52,7 +52,7 @@ public abstract class BaseScale<B extends BaseScale> implements JsonBuilder {
      */
     public BaseScale<B> stacked(boolean stacked) {
         this.stacked = stacked;
-        return getThis();
+        return this;
     }
 
     /**
@@ -60,7 +60,7 @@ public abstract class BaseScale<B extends BaseScale> implements JsonBuilder {
      */
     public BaseScale<B> position(Position position) {
         this.position = position;
-        return getThis();
+        return this;
     }
 
     /**

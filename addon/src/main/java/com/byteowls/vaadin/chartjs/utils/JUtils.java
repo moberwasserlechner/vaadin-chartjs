@@ -76,6 +76,16 @@ public abstract class JUtils {
             obj.put(key, arr);
         }
     }
+    
+    public static void putNotNullList(JsonObject obj, String key, List<String> list) {
+        if (list != null) {
+            JsonArray arr = Json.createArray();
+            for (String entry : list) {
+                arr.set(arr.length(), entry);
+            }
+            obj.put(key, arr);
+        }
+    }
 
     public static void putNotNullNumbers(JsonObject obj, String key, List<Double> listOfNumbers) {
         if (listOfNumbers != null) {
@@ -84,6 +94,34 @@ public abstract class JUtils {
                 arr.set(arr.length(), n);
             }
             obj.put(key, arr);
+        }
+    }
+    
+    public static void putNotNullStringListOrSingle(JsonObject obj, String key, List<String> list) {
+        if (list != null) {
+            if (list.size() == 1) {
+                putNotNull(obj, key, list.get(0));
+            } else {
+                JsonArray arr = Json.createArray();
+                for (String entry : list) {
+                    arr.set(arr.length(), entry);
+                }
+                obj.put(key, arr);
+            }
+        }
+    }
+
+    public static void putNotNullNumberListOrSingle(JsonObject obj, String key, List<Double> listOfNumbers) {
+        if (listOfNumbers != null) {
+            if (listOfNumbers.size() == 1) {
+                putNotNull(obj, key, listOfNumbers.get(0));
+            } else {
+                JsonArray arr = Json.createArray();
+                for (Double n : listOfNumbers) {
+                    arr.set(arr.length(), n);
+                }
+                obj.put(key, arr);
+            }
         }
     }
 }

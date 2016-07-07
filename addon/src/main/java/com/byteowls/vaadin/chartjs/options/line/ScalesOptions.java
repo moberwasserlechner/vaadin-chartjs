@@ -15,8 +15,8 @@ import java.util.List;
  */
 public class ScalesOptions<P> extends And<P> implements JsonBuilder {
 
-    private List<BaseScale> xAxes;
-    private List<BaseScale> yAxes;
+    private List<BaseScale<?>> xAxes;
+    private List<BaseScale<?>> yAxes;
 
     public ScalesOptions(P parent) {
         super(parent);
@@ -28,12 +28,12 @@ public class ScalesOptions<P> extends And<P> implements JsonBuilder {
      * @param scale a scale
      * @return this for chaining.
      */
-    public ScalesOptions<P> add(Axis axis, BaseScale scale) {
+    public ScalesOptions<P> add(Axis axis, BaseScale<?> scale) {
         addToAxes(axis, scale);
         return this;
     }
 
-    private void addToAxes(Axis axis, BaseScale scale) {
+    private void addToAxes(Axis axis, BaseScale<?> scale) {
         if (axis == Axis.X) {
             if (xAxes == null) {
                 xAxes = new ArrayList<>();

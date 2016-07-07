@@ -9,9 +9,14 @@ import elemental.json.Json;
 import elemental.json.JsonObject;
 
 /**
- * @author michael@team-conductor.com
+ * @author mowl-private
+ *
  */
 public class LineDataset implements Dataset {
+    
+    public enum PointStyle {
+        circle, triangle, rect, rectRot, cross, crossRot, star, line, dash
+    }
 
     private List<Double> data;
     private Boolean hidden;
@@ -26,8 +31,17 @@ public class LineDataset implements Dataset {
     private String borderCapStyle;
     private Double borderDashOffset;
     private String borderJoinStyle;
-    // TODO point settings
-
+    private List<String> pointBorderColor;
+    private List<String> pointBackgroundColor;
+    private List<Double> pointBorderWidth;
+    private List<Double> pointRadius;
+    private List<Double> pointHoverRadius;
+    private List<Double> pointHitRadius;
+    private List<String> pointHoverBackgroundColor;
+    private List<String> pointHoverBorderColor;
+    private List<Double> pointHoverBorderWidth;
+    private PointStyle pointStyle;
+    
     public LineDataset data(Double... data) {
         this.data = Arrays.asList(data);
         return this;
@@ -134,6 +148,88 @@ public class LineDataset implements Dataset {
         return this;
     }
 
+    /**
+     * The border color for points.
+     */
+    public LineDataset pointBorderColor(String... pointBorderColor) {
+        this.pointBorderColor = Arrays.asList(pointBorderColor);
+        return this;
+    }
+    
+    /**
+     * The fill color for points
+     */
+    public LineDataset pointBackgroundColor(String... pointBackgroundColor) {
+        this.pointBackgroundColor = Arrays.asList(pointBackgroundColor);
+        return this;
+    }
+    
+    
+    /**
+     * The width of the point border in pixels
+     */
+    public LineDataset pointBorderWidth(Double... pointBorderWidth) {
+        this.pointBorderWidth = Arrays.asList(pointBorderWidth);
+        return this;
+    }
+    
+    /**
+     * The radius of the point shape. If set to 0, nothing is rendered.
+     */
+    public LineDataset pointRadius(Double... pointRadius) {
+        this.pointRadius = Arrays.asList(pointRadius);
+        return this;
+    }
+    
+    /**
+     * The radius of the point when hovered
+     */
+    public LineDataset pointHoverRadius(Double... pointHoverRadius) {
+        this.pointHoverRadius = Arrays.asList(pointHoverRadius);
+        return this;
+    }
+    
+    /**
+     * The pixel size of the non-displayed point that reacts to mouse events
+     */
+    public LineDataset pointHitRadius(Double... pointHitRadius) {
+        this.pointHitRadius = Arrays.asList(pointHitRadius);
+        return this;
+    }
+    
+    /**
+     * Point background color when hovered
+     */
+    public LineDataset pointHoverBackgroundColor(String... pointHoverBackgroundColor) {
+        this.pointHoverBackgroundColor = Arrays.asList(pointHoverBackgroundColor);
+        return this;
+    }
+    
+    /**
+     * Point border color when hovered
+     */
+    public LineDataset pointHoverBorderColor(String... pointHoverBorderColor) {
+        this.pointHoverBorderColor = Arrays.asList(pointHoverBorderColor);
+        return this;
+    }
+    
+    /**
+     * Border width of point when hovered
+     */
+    public LineDataset pointHoverBorderWidth(Double... pointHoverBorderWidth) {
+        this.pointHoverBorderWidth = Arrays.asList(pointHoverBorderWidth);
+        return this;
+    }
+    
+    
+    /**
+     * The style of point. Options are 'circle', 'triangle', 'rect', 'rectRot', 'cross', 'crossRot', 'star', 'line', and 'dash'. 
+     */
+    public LineDataset pointStyle(PointStyle pointStyle) {
+        this.pointStyle = pointStyle;
+        return this;
+    }
+
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
@@ -150,6 +246,18 @@ public class LineDataset implements Dataset {
         JUtils.putNotNull(map, "borderCapStyle", borderCapStyle);
         JUtils.putNotNull(map, "borderDashOffset", borderDashOffset);
         JUtils.putNotNull(map, "borderJoinStyle", borderJoinStyle);
+        JUtils.putNotNullStringListOrSingle(map, "pointBorderColor", pointBorderColor);
+        JUtils.putNotNullStringListOrSingle(map, "pointBackgroundColor", pointBackgroundColor);
+        JUtils.putNotNullNumberListOrSingle(map, "pointBorderWidth", pointBorderWidth);
+        JUtils.putNotNullNumberListOrSingle(map, "pointRadius", pointRadius);
+        JUtils.putNotNullNumberListOrSingle(map, "pointHoverRadius", pointHoverRadius);
+        JUtils.putNotNullNumberListOrSingle(map, "pointHitRadius", pointHitRadius);
+        JUtils.putNotNullStringListOrSingle(map, "pointHoverBackgroundColor", pointHoverBackgroundColor);
+        JUtils.putNotNullStringListOrSingle(map, "pointHoverBorderColor", pointHoverBorderColor);
+        JUtils.putNotNullNumberListOrSingle(map, "pointHoverBorderWidth", pointHoverBorderWidth);
+        if (pointStyle != null) {
+            JUtils.putNotNull(map, "pointStyle", pointStyle.name());
+        }
         return map;
     }
 }
