@@ -8,9 +8,9 @@ import elemental.json.Json;
 import elemental.json.JsonObject;
 
 /**
- * A line chart is a way of plotting data points on a line.
- *
- * Often, it is used to show trend data, and the comparison of two data sets.
+ * A bar chart is a way of showing data as bars.
+ * 
+ * It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
  *
  * @author michael@team-conductor.com
  */

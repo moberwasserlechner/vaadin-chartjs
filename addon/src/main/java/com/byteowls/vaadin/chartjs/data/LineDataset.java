@@ -9,15 +9,16 @@ import elemental.json.Json;
 import elemental.json.JsonObject;
 
 /**
- * @author mowl-private
+ * @author michael@team-conductor.com
  *
  */
-public class LineDataset implements Dataset {
+public class LineDataset implements Dataset<LineDataset> {
     
     public enum PointStyle {
         circle, triangle, rect, rectRot, cross, crossRot, star, line, dash
     }
-
+    
+    private String type;
     private List<Double> data;
     private Boolean hidden;
     private String label;
@@ -42,11 +43,18 @@ public class LineDataset implements Dataset {
     private List<Double> pointHoverBorderWidth;
     private PointStyle pointStyle;
     
+    public LineDataset type() {
+        this.type = "line";
+        return this;
+    }
+    
+    @Override
     public LineDataset data(Double... data) {
         this.data = Arrays.asList(data);
         return this;
     }
 
+    @Override
     public LineDataset dataAsList(List<Double> data) {
         this.data = data;
         return this;
@@ -233,6 +241,7 @@ public class LineDataset implements Dataset {
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
+        JUtils.putNotNull(map, "type", type);
         JUtils.putNotNullNumbers(map, "data", data);
         JUtils.putNotNull(map, "label", label);
         JUtils.putNotNull(map, "xAxisID", xAxisID);

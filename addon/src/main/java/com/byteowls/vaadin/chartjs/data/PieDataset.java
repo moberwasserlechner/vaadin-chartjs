@@ -1,6 +1,5 @@
 package com.byteowls.vaadin.chartjs.data;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,32 +9,33 @@ import elemental.json.Json;
 import elemental.json.JsonObject;
 
 /**
- * @author mowl-private
+ * For a pie chart, datasets need to contain an array of data points. 
+ * 
+ * The data points should be a number, Chart.js will total all of the numbers and calculate the relative proportion of each. 
+ * 
+ * You can also add an array of background colors. 
+ * 
+ * The color attributes should be a string. Similar to CSS, for this string you can use HEX notation, RGB, RGBA or HSL.
+ * 
+ * @author michael@team-conductor.com
  *
  */
-public class BarDataset implements Dataset<BarDataset> {
-    
-    public enum Edge {
-        bottom, left, top, right
-    }
+public class PieDataset implements Dataset<PieDataset> {
     
     private String type;
     private List<Double> data;
     private Boolean hidden;
     private String label;
-    private String xAxisID;
-    private String yAxisID;
     private Boolean fill;
     private List<String> backgroundColor;
     private List<String> borderColor;
     private List<Integer> borderWidth;
-    private List<Edge> borderSkipped;
     private List<String> hoverBackgroundColor;
     private List<String> hoverBorderColor;
     private List<Integer> hoverBorderWidth;
     
-    public BarDataset type() {
-        this.type = "bar";
+    public PieDataset type(boolean doughnut) {
+        this.type = doughnut ? "doughnut" : "pie";
         return this;
     }
     
@@ -43,7 +43,7 @@ public class BarDataset implements Dataset<BarDataset> {
      * The data to plot as bars
      */
     @Override
-    public BarDataset data(Double... data) {
+    public PieDataset data(Double... data) {
         this.data = Arrays.asList(data);
         return this;
     }
@@ -52,7 +52,7 @@ public class BarDataset implements Dataset<BarDataset> {
      * The data to plot as bars
      */
     @Override
-    public BarDataset dataAsList(List<Double> data) {
+    public PieDataset dataAsList(List<Double> data) {
         this.data = data;
         return this;
     }
@@ -60,31 +60,15 @@ public class BarDataset implements Dataset<BarDataset> {
     /**
      * The label for the dataset which appears in the legend and tooltips
      */
-    public BarDataset label(String label) {
+    public PieDataset label(String label) {
         this.label = label;
-        return this;
-    }
-
-    /**
-     * The ID of the x axis to plot this dataset on
-     */
-    public BarDataset xAxisID(String xAxisID) {
-        this.xAxisID = xAxisID;
-        return this;
-    }
-
-    /**
-     * The ID of the y axis to plot this dataset on
-     */
-    public BarDataset yAxisID(String yAxisID) {
-        this.yAxisID = yAxisID;
         return this;
     }
 
     /**
      * If true, fill the area under the line
      */
-    public BarDataset fill(boolean fill) {
+    public PieDataset fill(boolean fill) {
         this.fill = fill;
         return this;
     }
@@ -92,63 +76,55 @@ public class BarDataset implements Dataset<BarDataset> {
     /**
      * If true, the dataset is hidden
      */
-    public BarDataset hidden(boolean hidden) {
+    public PieDataset hidden(boolean hidden) {
         this.hidden = hidden;
         return this;
     }
 
     /**
-     * The fill color of the bars.
+     * The fill color of the arcs.
      */
-    public BarDataset backgroundColor(String...  backgroundColor) {
+    public PieDataset backgroundColor(String...  backgroundColor) {
         this.backgroundColor = Arrays.asList(backgroundColor);
         return this;
     }
     
     /**
-     * Bar border color.
+     * Arc border color.
      */
-    public BarDataset borderColor(String... borderColor) {
+    public PieDataset borderColor(String... borderColor) {
         this.borderColor = Arrays.asList(borderColor);
         return this;
     }
 
     /**
-     * Border width of bar in pixels
+     * Border width of arcs in pixels
      */
-    public BarDataset borderWidth(Integer... borderWidth) {
+    public PieDataset borderWidth(Integer... borderWidth) {
         this.borderWidth = Arrays.asList(borderWidth);
         return this;
     }
 
     /**
-     * Which edge to skip drawing the border for. Options are 'bottom', 'left', 'top', and 'right'
+     * Arc background color when hovered
      */
-    public BarDataset borderSkipped(Edge... borderSkipped) {
-        this.borderSkipped = Arrays.asList(borderSkipped);
-        return this;
-    }
-
-    /**
-     * Bar background color when hovered
-     */
-    public BarDataset hoverBackgroundColor(String...  hoverBackgroundColor) {
+    public PieDataset hoverBackgroundColor(String...  hoverBackgroundColor) {
         this.hoverBackgroundColor = Arrays.asList(hoverBackgroundColor);
         return this;
     }
     
     /**
-     * Bar border color when hovered
+     * Arc border color when hovered
      */
-    public BarDataset hoverBorderColor(String... hoverBorderColor) {
+    public PieDataset hoverBorderColor(String... hoverBorderColor) {
         this.hoverBorderColor = Arrays.asList(hoverBorderColor);
         return this;
     }
 
     /**
-     * Border width of bar when hovered
+     * Border width of arc when hovered
      */
-    public BarDataset hoverBorderWidth(Integer... hoverBorderWidth) {
+    public PieDataset hoverBorderWidth(Integer... hoverBorderWidth) {
         this.hoverBorderWidth = Arrays.asList(hoverBorderWidth);
         return this;
     }
@@ -159,20 +135,11 @@ public class BarDataset implements Dataset<BarDataset> {
         JUtils.putNotNull(map, "type", type);
         JUtils.putNotNullNumbers(map, "data", data);
         JUtils.putNotNull(map, "label", label);
-        JUtils.putNotNull(map, "xAxisID", xAxisID);
-        JUtils.putNotNull(map, "yAxisID", yAxisID);
         JUtils.putNotNull(map, "fill", fill);
         JUtils.putNotNull(map, "hidden", hidden);
         JUtils.putNotNullStringListOrSingle(map, "backgroundColor", backgroundColor);
         JUtils.putNotNullStringListOrSingle(map, "borderColor", borderColor);
         JUtils.putNotNullIntListOrSingle(map, "borderWidth", borderWidth);
-        if (borderSkipped != null) {
-            List<String> list = new ArrayList<>();
-            for (Edge e : borderSkipped) {
-                list.add(e.name());
-            }
-            JUtils.putNotNull(map, "borderSkipped", list);
-        }
         JUtils.putNotNullStringListOrSingle(map, "hoverBackgroundColor", hoverBackgroundColor);
         JUtils.putNotNullStringListOrSingle(map, "hoverBorderColor", hoverBorderColor);
         JUtils.putNotNullIntListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);

@@ -6,9 +6,11 @@ import java.util.List;
 import com.byteowls.vaadin.chartjs.ChartJs;
 import com.byteowls.vaadin.chartjs.config.BarChartConfig;
 import com.byteowls.vaadin.chartjs.config.LineChartConfig;
+import com.byteowls.vaadin.chartjs.config.PieChartConfig;
 import com.byteowls.vaadin.chartjs.data.BarDataset;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
+import com.byteowls.vaadin.chartjs.data.PieDataset;
 import com.byteowls.vaadin.chartjs.options.HoverOptions;
 import com.byteowls.vaadin.chartjs.options.HoverOptions.Mode;
 import com.byteowls.vaadin.chartjs.options.TooltipsOptions;
@@ -32,15 +34,15 @@ public class ChartJsDemoUI extends UI {
     @Override
     protected void init(VaadinRequest request) {
         Panel panel = new Panel();
-        panel.setSizeFull();
         
         CssLayout vl = new CssLayout();
         vl.setSizeFull();
 
         vl.addComponent(simpleLineChart());
         vl.addComponent(stackedLineChart());
-        vl.addComponent(barLineChart());
-        
+        vl.addComponent(barChart());
+        vl.addComponent(doughnutChart());
+        vl.addComponent(comboBarLineChart());
         panel.setContent(vl);
         setContent(panel);
     }
@@ -89,7 +91,7 @@ public class ChartJsDemoUI extends UI {
         
         // add random data for demo
         List<String> labels = lineConfig.data().getLabels();
-        for (Dataset ds : lineConfig.data().getDatasets()) {
+        for (Dataset<?> ds : lineConfig.data().getDatasets()) {
             LineDataset lds = (LineDataset) ds;
             List<Double> data = new ArrayList<>();
             for (int i = 0; i < labels.size(); i++) {
@@ -144,7 +146,7 @@ public class ChartJsDemoUI extends UI {
         
         // add random data for demo
         List<String> labels = lineConfig.data().getLabels();
-        for (Dataset ds : lineConfig.data().getDatasets()) {
+        for (Dataset<?> ds : lineConfig.data().getDatasets()) {
             LineDataset lds = (LineDataset) ds;
             List<Double> data = new ArrayList<>();
             for (int i = 0; i < labels.size(); i++) {
@@ -165,7 +167,7 @@ public class ChartJsDemoUI extends UI {
         return lineChart;
     }
     
-    private ChartJs barLineChart() {
+    private ChartJs barChart() {
         
         BarChartConfig barConfig = new BarChartConfig();
         barConfig.
@@ -194,7 +196,7 @@ public class ChartJsDemoUI extends UI {
                .done();
         
         List<String> labels = barConfig.data().getLabels();
-        for (Dataset ds : barConfig.data().getDatasets()) {
+        for (Dataset<?> ds : barConfig.data().getDatasets()) {
             BarDataset lds = (BarDataset) ds;
             List<Double> data = new ArrayList<>();
             for (int i = 0; i < labels.size(); i++) {
@@ -204,6 +206,85 @@ public class ChartJsDemoUI extends UI {
         }
         
         ChartJs lineChart = new ChartJs(barConfig);
+        lineChart.setJsLoggingEnabled(true);
+        lineChart.setWidth(50, Unit.PERCENTAGE);
+        return lineChart; 
+    }
+    
+    private ChartJs doughnutChart() {
+        
+        PieChartConfig config = new PieChartConfig();
+        config
+            .doughnut()
+            .data()
+                .labels("Red", "Green", "Yellow", "Grey", "Dark Grey")
+                .addDataset(new PieDataset().label("Dataset 1"))
+                .addDataset(new PieDataset().label("Dataset 2"))
+                .addDataset(new PieDataset().label("Dataset 3"))
+                .and();
+        
+        config.
+            options()
+                .responsive(true)
+                .title()
+                    .display(true)
+                    .text("Chart.js Doughnut Chart")
+                    .and()
+                .animation()
+                    .animateScale(true)
+                    .animateRotate(true)
+                    .and()
+               .done();
+        
+        String[] colors = new String[] {"#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"};
+        
+        List<String> labels = config.data().getLabels();
+        for (Dataset<?> ds : config.data().getDatasets()) {
+            PieDataset lds = (PieDataset) ds;
+            lds.backgroundColor(colors);
+            List<Double> data = new ArrayList<>();
+            for (int i = 0; i < labels.size(); i++) {
+                data.add((double) (Math.round(Math.random() * 100)));
+            }
+            lds.dataAsList(data);
+        }
+        
+        ChartJs lineChart = new ChartJs(config);
+        lineChart.setJsLoggingEnabled(true);
+        lineChart.setWidth(50, Unit.PERCENTAGE);
+        return lineChart; 
+    }
+    
+    private ChartJs comboBarLineChart() {
+        
+        BarChartConfig config = new BarChartConfig();
+        config
+            .data()
+                .labels("January", "February", "March", "April", "May", "June", "July")
+                .addDataset(new BarDataset().type().label("Dataset 1").backgroundColor("rgba(151,187,205,0.5)").borderColor("white").borderWidth(2))
+                .addDataset(new LineDataset().type().label("Dataset 2").backgroundColor("rgba(151,187,205,0.5)").borderColor("white").borderWidth(2))
+                .addDataset(new BarDataset().type().label("Dataset 3").backgroundColor("rgba(220,220,220,0.5)"))
+                .and();
+        
+        config.
+            options()
+                .responsive(true)
+                .title()
+                    .display(true)
+                    .text("Chart.js Combo Bar Line Chart")
+                    .and()
+               .done();
+        
+        List<String> labels = config.data().getLabels();
+        for (Dataset<?> ds : config.data().getDatasets()) {
+            List<Double> data = new ArrayList<>();
+            for (int i = 0; i < labels.size(); i++) {
+                data.add((double) (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100));
+            }
+            ds.dataAsList(data);
+        }
+        
+        ChartJs lineChart = new ChartJs(config);
         lineChart.setJsLoggingEnabled(true);
         lineChart.setWidth(50, Unit.PERCENTAGE);
         return lineChart; 

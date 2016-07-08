@@ -45,7 +45,7 @@ public class AnimationOptions<T> extends And<T> implements JsonBuilder {
         this.easing = easing;
         return this;
     }
-
+    
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
