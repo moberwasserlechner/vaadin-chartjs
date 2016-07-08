@@ -1,7 +1,7 @@
 package com.byteowls.vaadin.chartjs.config;
 
 import com.byteowls.vaadin.chartjs.data.Data;
-import com.byteowls.vaadin.chartjs.options.line.LineChartOptions;
+import com.byteowls.vaadin.chartjs.options.types.LineChartOptions;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.Json;
 import elemental.json.JsonObject;

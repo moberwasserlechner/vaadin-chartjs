@@ -9,7 +9,7 @@ import elemental.json.JsonObject;
 /**
  * @author michael@team-conductor.com
  */
-public class ScaleLabel<T extends BaseScale> extends And<T> implements JsonBuilder {
+public class ScaleLabel<T extends BaseScale<?>> extends And<T> implements JsonBuilder {
 
     private Boolean display;
     private String labelString;
@@ -22,6 +22,9 @@ public class ScaleLabel<T extends BaseScale> extends And<T> implements JsonBuild
         super(parent);
     }
 
+    /**
+     * If true the scale label is shown.
+     */
     public ScaleLabel<T> display(boolean display) {
         this.display = display;
         return this;

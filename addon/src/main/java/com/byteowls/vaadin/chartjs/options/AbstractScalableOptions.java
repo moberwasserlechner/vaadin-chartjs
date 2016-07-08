@@ -1,14 +1,14 @@
 package com.byteowls.vaadin.chartjs.options;
 
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
-import com.byteowls.vaadin.chartjs.options.line.ScalesOptions;
+import com.byteowls.vaadin.chartjs.options.scale.ScalesOptions;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.JsonObject;
 
 /**
  * @author michael@team-conductor.com
  */
-public abstract class AbstractScalableOptions<T extends AbstractScalableOptions> extends AbstractOptions<T> {
+public abstract class AbstractScalableOptions<T extends AbstractScalableOptions<?>> extends AbstractOptions<T> {
 
     private ScalesOptions<T> scales;
 
@@ -25,9 +25,6 @@ public abstract class AbstractScalableOptions<T extends AbstractScalableOptions>
         }
         return scales;
     }
-
-//    @Override
-//    public abstract T getThis();
 
     @Override
     public JsonObject buildJson() {

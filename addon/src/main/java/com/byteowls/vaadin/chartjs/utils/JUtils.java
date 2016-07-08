@@ -124,4 +124,18 @@ public abstract class JUtils {
             }
         }
     }
+    
+    public static void putNotNullIntListOrSingle(JsonObject obj, String key, List<Integer> listOfNumbers) {
+        if (listOfNumbers != null) {
+            if (listOfNumbers.size() == 1) {
+                putNotNull(obj, key, listOfNumbers.get(0));
+            } else {
+                JsonArray arr = Json.createArray();
+                for (Integer n : listOfNumbers) {
+                    arr.set(arr.length(), n.doubleValue());
+                }
+                obj.put(key, arr);
+            }
+        }
+    }
 }

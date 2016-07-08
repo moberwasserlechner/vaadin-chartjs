@@ -73,6 +73,9 @@ public abstract class BaseScale<B extends BaseScale<?>> implements JsonBuilder {
         return gridLines;
     }
 
+    /**
+     * Define options for the scale title.
+     */
     public ScaleLabel<B> scaleLabel() {
         if (scaleLabel == null) {
             scaleLabel = new ScaleLabel<>(getThis());

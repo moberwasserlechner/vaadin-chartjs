@@ -63,6 +63,24 @@ public class TooltipsOptions<T> extends And<T> implements JsonBuilder {
         this.mode = mode;
         return this;
     }
+    
+    /**
+     * Background color of the tooltip. Defaults to 'rgba(0,0,0,0.8)'
+     */
+    public TooltipsOptions<T> backgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+        return this;
+    }
+    
+    /**
+     * Font family for tooltip title inherited from global font family.
+     */
+    public TooltipsOptions<T> titleFontFamily(String titleFontFamily) {
+        this.titleFontFamily = titleFontFamily;
+        return this;
+    }
+    
+    
 
     @Override
     public JsonObject buildJson() {
@@ -71,6 +89,8 @@ public class TooltipsOptions<T> extends And<T> implements JsonBuilder {
         if (mode != null) {
             JUtils.putNotNull(map, "mode", mode.name().toLowerCase());
         }
+        JUtils.putNotNull(map, "backgroundColor", backgroundColor);
+        JUtils.putNotNull(map, "titleFontFamily", titleFontFamily);
         return map;
     }
 }

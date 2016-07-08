@@ -1,4 +1,4 @@
-package com.byteowls.vaadin.chartjs.options.line;
+package com.byteowls.vaadin.chartjs.options.types;
 
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
 import com.byteowls.vaadin.chartjs.options.AbstractScalableOptions;

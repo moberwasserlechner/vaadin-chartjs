@@ -1,14 +1,14 @@
-package com.byteowls.vaadin.chartjs.options.line;
-
-import com.byteowls.vaadin.chartjs.options.scale.*;
-import com.byteowls.vaadin.chartjs.utils.And;
-import com.byteowls.vaadin.chartjs.utils.JUtils;
-import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
-import elemental.json.Json;
-import elemental.json.JsonObject;
+package com.byteowls.vaadin.chartjs.options.scale;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.byteowls.vaadin.chartjs.utils.And;
+import com.byteowls.vaadin.chartjs.utils.JUtils;
+import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
+
+import elemental.json.Json;
+import elemental.json.JsonObject;
 
 /**
  * @author michael@team-conductor.com
