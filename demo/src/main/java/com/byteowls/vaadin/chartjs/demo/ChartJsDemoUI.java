@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.byteowls.vaadin.chartjs.ChartJs;
+import com.byteowls.vaadin.chartjs.config.BarChartConfig;
 import com.byteowls.vaadin.chartjs.config.LineChartConfig;
+import com.byteowls.vaadin.chartjs.data.BarDataset;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.options.HoverOptions;
+import com.byteowls.vaadin.chartjs.options.HoverOptions.Mode;
 import com.byteowls.vaadin.chartjs.options.TooltipsOptions;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.BaseScale.Position;
@@ -16,7 +19,8 @@ import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 
 @Theme("chartjs")
@@ -27,15 +31,18 @@ public class ChartJsDemoUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        HorizontalLayout vl = new HorizontalLayout();
-        vl.setMargin(true);
-        vl.setSpacing(true);
+        Panel panel = new Panel();
+        panel.setSizeFull();
+        
+        CssLayout vl = new CssLayout();
         vl.setSizeFull();
 
         vl.addComponent(simpleLineChart());
         vl.addComponent(stackedLineChart());
-
-        setContent(vl);
+        vl.addComponent(barLineChart());
+        
+        panel.setContent(vl);
+        setContent(panel);
     }
     
     private ChartJs simpleLineChart() {
@@ -95,7 +102,7 @@ public class ChartJsDemoUI extends UI {
 
         ChartJs lineChart = new ChartJs(lineConfig);
         lineChart.setJsLoggingEnabled(true);
-        lineChart.setWidth(100, Unit.PERCENTAGE);
+        lineChart.setWidth(50, Unit.PERCENTAGE);
         return lineChart;
     }
     
@@ -154,8 +161,52 @@ public class ChartJsDemoUI extends UI {
 
         ChartJs lineChart = new ChartJs(lineConfig);
         lineChart.setJsLoggingEnabled(true);
-        lineChart.setWidth(100, Unit.PERCENTAGE);
+        lineChart.setWidth(50, Unit.PERCENTAGE);
         return lineChart;
+    }
+    
+    private ChartJs barLineChart() {
+        
+        BarChartConfig barConfig = new BarChartConfig();
+        barConfig.
+            data()
+                .labels("January", "February", "March", "April", "May", "June", "July")
+                .addDataset(new BarDataset().backgroundColor("rgba(220,220,220,0.5)").label("Dataset 1").yAxisID("y-axis-1"))
+                .addDataset(new BarDataset().backgroundColor("rgba(151,187,205,0.5)").label("Dataset 2").yAxisID("y-axis-2"))
+                .addDataset(new BarDataset().backgroundColor(randomColor(0.7), randomColor(0.7), randomColor(0.7),randomColor(0.7),randomColor(0.7),randomColor(0.7),randomColor(0.7)).label("Dataset 3").yAxisID("y-axis-1").hidden(true))
+                .and();
+        
+        barConfig.
+            options()
+                .responsive(true)
+                .hover()
+                    .mode(Mode.LABEL)
+                    .animationDuration(400)
+                    .and()
+                .title()
+                    .display(true)
+                    .text("Chart.js Bar Chart - Multi Axis")
+                    .and()
+                .scales()
+                    .add(Axis.Y, new LinearScale().display(true).position(Position.LEFT).id("y-axis-1"))
+                    .add(Axis.Y, new LinearScale().display(true).position(Position.RIGHT).id("y-axis-2").gridLines().drawOnChartArea(false).and())
+                    .and()
+               .done();
+        
+        List<String> labels = barConfig.data().getLabels();
+        for (Dataset ds : barConfig.data().getDatasets()) {
+            BarDataset lds = (BarDataset) ds;
+            List<Double> data = new ArrayList<>();
+            for (int i = 0; i < labels.size(); i++) {
+                data.add((double) (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100));
+            }
+            lds.dataAsList(data);
+        }
+        
+        ChartJs lineChart = new ChartJs(barConfig);
+        lineChart.setJsLoggingEnabled(true);
+        lineChart.setWidth(50, Unit.PERCENTAGE);
+        return lineChart; 
     }
     
     private long randomColorFactor() {
