@@ -22,6 +22,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 
@@ -103,6 +104,10 @@ public class ChartJsDemoUI extends UI {
         }
 
         ChartJs lineChart = new ChartJs(lineConfig);
+        lineChart.addClickListener((a,b) -> {
+            LineDataset dataset = (LineDataset) lineConfig.data().getDatasets().get(a);
+            Notification.show("Dataset: " + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b));
+        });
         lineChart.setJsLoggingEnabled(true);
         lineChart.setWidth(50, Unit.PERCENTAGE);
         return lineChart;

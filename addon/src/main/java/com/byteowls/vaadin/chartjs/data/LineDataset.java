@@ -59,6 +59,11 @@ public class LineDataset implements Dataset<LineDataset> {
         this.data = data;
         return this;
     }
+    
+    @Override
+    public List<Double> getData() {
+        return data;
+    }
 
     /**
      * The label for the dataset which appears in the legend and tooltips
@@ -269,4 +274,5 @@ public class LineDataset implements Dataset<LineDataset> {
         }
         return map;
     }
+
 }

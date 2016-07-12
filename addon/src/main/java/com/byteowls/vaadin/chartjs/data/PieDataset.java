@@ -56,6 +56,11 @@ public class PieDataset implements Dataset<PieDataset> {
         this.data = data;
         return this;
     }
+    
+    @Override
+    public List<Double> getData() {
+        return data;
+    }
 
     /**
      * The label for the dataset which appears in the legend and tooltips

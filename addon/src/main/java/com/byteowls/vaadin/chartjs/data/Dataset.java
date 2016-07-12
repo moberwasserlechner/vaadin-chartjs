@@ -13,4 +13,6 @@ public interface Dataset<T> extends JsonBuilder {
 
     T dataAsList(List<Double> data);
     
+    List<Double> getData();
+    
 }
