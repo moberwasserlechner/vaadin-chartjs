@@ -22,7 +22,7 @@ import elemental.json.JsonObject;
  */
 public class PieDataset implements Dataset<PieDataset> {
     
-    private String type;
+    private String type = "pie";
     private List<Double> data;
     private Boolean hidden;
     private String label;
@@ -34,8 +34,13 @@ public class PieDataset implements Dataset<PieDataset> {
     private List<String> hoverBorderColor;
     private List<Integer> hoverBorderWidth;
     
-    public PieDataset type(boolean doughnut) {
-        this.type = doughnut ? "doughnut" : "pie";
+    public PieDataset dougnut() {
+        this.type = "doughnut";
+        return this;
+    }
+    
+    public PieDataset pie() {
+        this.type = "pie";
         return this;
     }
     

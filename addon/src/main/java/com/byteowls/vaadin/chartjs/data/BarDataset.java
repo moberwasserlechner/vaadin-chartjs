@@ -19,7 +19,7 @@ public class BarDataset implements Dataset<BarDataset> {
         bottom, left, top, right
     }
     
-    private String type;
+    private String type = "bar";
     private List<Double> data;
     private Boolean hidden;
     private String label;
@@ -33,11 +33,6 @@ public class BarDataset implements Dataset<BarDataset> {
     private List<String> hoverBackgroundColor;
     private List<String> hoverBorderColor;
     private List<Integer> hoverBorderWidth;
-    
-    public BarDataset type() {
-        this.type = "bar";
-        return this;
-    }
     
     /**
      * The data to plot as bars
