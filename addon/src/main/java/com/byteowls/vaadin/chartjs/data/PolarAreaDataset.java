@@ -9,24 +9,19 @@ import elemental.json.Json;
 import elemental.json.JsonObject;
 
 /**
- * For a pie chart, datasets need to contain an array of data points. 
+ * Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.
  * 
- * The data points should be a number, Chart.js will total all of the numbers and calculate the relative proportion of each. 
- * 
- * You can also add an array of background colors. 
- * 
- * The color attributes should be a string. Similar to CSS, for this string you can use HEX notation, RGB, RGBA or HSL.
+ * This type of chart is often useful when we want to show a comparison data similar to a pie chart, but also show a scale of values for context.
  * 
  * @author michael@team-conductor.com
  *
  */
-public class PieDataset implements Dataset<PieDataset> {
+public class PolarAreaDataset implements Dataset<PolarAreaDataset> {
     
-    private String type = "pie";
+    private String type = "polarArea";
     private List<Double> data;
     private Boolean hidden;
     private String label;
-    private Boolean fill;
     private List<String> backgroundColor;
     private List<String> borderColor;
     private List<Integer> borderWidth;
@@ -34,30 +29,20 @@ public class PieDataset implements Dataset<PieDataset> {
     private List<String> hoverBorderColor;
     private List<Integer> hoverBorderWidth;
     
-    public PieDataset dougnut() {
-        this.type = "doughnut";
-        return this;
-    }
-    
-    public PieDataset pie() {
-        this.type = "pie";
-        return this;
-    }
-    
     /**
      * The data to plot as arcs
      */
     @Override
-    public PieDataset data(Double... data) {
+    public PolarAreaDataset data(Double... data) {
         this.data = Arrays.asList(data);
         return this;
     }
 
     /**
-     * The data to plot as bars
+     * The data to plot as arcs
      */
     @Override
-    public PieDataset dataAsList(List<Double> data) {
+    public PolarAreaDataset dataAsList(List<Double> data) {
         this.data = data;
         return this;
     }
@@ -70,23 +55,15 @@ public class PieDataset implements Dataset<PieDataset> {
     /**
      * The label for the dataset which appears in the legend and tooltips
      */
-    public PieDataset label(String label) {
+    public PolarAreaDataset label(String label) {
         this.label = label;
         return this;
     }
 
     /**
-     * If true, fill the area under the line
-     */
-    public PieDataset fill(boolean fill) {
-        this.fill = fill;
-        return this;
-    }
-    
-    /**
      * If true, the dataset is hidden
      */
-    public PieDataset hidden(boolean hidden) {
+    public PolarAreaDataset hidden(boolean hidden) {
         this.hidden = hidden;
         return this;
     }
@@ -94,7 +71,7 @@ public class PieDataset implements Dataset<PieDataset> {
     /**
      * The fill color of the arcs.
      */
-    public PieDataset backgroundColor(String...  backgroundColor) {
+    public PolarAreaDataset backgroundColor(String...  backgroundColor) {
         this.backgroundColor = Arrays.asList(backgroundColor);
         return this;
     }
@@ -102,7 +79,7 @@ public class PieDataset implements Dataset<PieDataset> {
     /**
      * Arc border color.
      */
-    public PieDataset borderColor(String... borderColor) {
+    public PolarAreaDataset borderColor(String... borderColor) {
         this.borderColor = Arrays.asList(borderColor);
         return this;
     }
@@ -110,7 +87,7 @@ public class PieDataset implements Dataset<PieDataset> {
     /**
      * Border width of arcs in pixels
      */
-    public PieDataset borderWidth(Integer... borderWidth) {
+    public PolarAreaDataset borderWidth(Integer... borderWidth) {
         this.borderWidth = Arrays.asList(borderWidth);
         return this;
     }
@@ -118,7 +95,7 @@ public class PieDataset implements Dataset<PieDataset> {
     /**
      * Arc background color when hovered
      */
-    public PieDataset hoverBackgroundColor(String...  hoverBackgroundColor) {
+    public PolarAreaDataset hoverBackgroundColor(String...  hoverBackgroundColor) {
         this.hoverBackgroundColor = Arrays.asList(hoverBackgroundColor);
         return this;
     }
@@ -126,7 +103,7 @@ public class PieDataset implements Dataset<PieDataset> {
     /**
      * Arc border color when hovered
      */
-    public PieDataset hoverBorderColor(String... hoverBorderColor) {
+    public PolarAreaDataset hoverBorderColor(String... hoverBorderColor) {
         this.hoverBorderColor = Arrays.asList(hoverBorderColor);
         return this;
     }
@@ -134,7 +111,7 @@ public class PieDataset implements Dataset<PieDataset> {
     /**
      * Border width of arc when hovered
      */
-    public PieDataset hoverBorderWidth(Integer... hoverBorderWidth) {
+    public PolarAreaDataset hoverBorderWidth(Integer... hoverBorderWidth) {
         this.hoverBorderWidth = Arrays.asList(hoverBorderWidth);
         return this;
     }
@@ -145,7 +122,6 @@ public class PieDataset implements Dataset<PieDataset> {
         JUtils.putNotNull(map, "type", type);
         JUtils.putNotNullNumbers(map, "data", data);
         JUtils.putNotNull(map, "label", label);
-        JUtils.putNotNull(map, "fill", fill);
         JUtils.putNotNull(map, "hidden", hidden);
         JUtils.putNotNullStringListOrSingle(map, "backgroundColor", backgroundColor);
         JUtils.putNotNullStringListOrSingle(map, "borderColor", borderColor);

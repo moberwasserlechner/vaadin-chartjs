@@ -15,17 +15,8 @@ public class AnimationOptions<T> extends And<T> implements JsonBuilder {
         super(parent);
     }
 
-    public enum Easing {
-        linear, easeInQuad, easeOutQuad, easeInOutQuad, easeInCubic, easeOutCubic,
-        easeInOutCubic, easeInQuart, easeOutQuart, easeInOutQuart, easeInQuint,
-        easeOutQuint, easeInOutQuint, easeInSine, easeOutSine, easeInOutSine,
-        easeInExpo, easeOutExpo, easeInOutExpo, easeInCirc, easeOutCirc, easeInOutCirc,
-        easeInElastic, easeOutElastic, easeInOutElastic, easeInBack, easeOutBack,
-        easeInOutBack, easeInBounce, easeOutBounce, easeInOutBounce
-    }
-
     private Integer duration;
-    private Easing easing;
+    private AnimationEasing easing;
     // TODO callback functions http://www.chartjs.org/docs/#chart-configuration-animation-configuration
     // onProgress Callback called on each step of an animation. Passed a single argument, an object, containing the chart instance and an object with details of the animation.
     // onComplete Callback called at the end of an animation. Passed the same arguments as onProgress
@@ -41,7 +32,7 @@ public class AnimationOptions<T> extends And<T> implements JsonBuilder {
     /**
      * Easing function to use.
      */
-    public AnimationOptions<T> easing(Easing easing) {
+    public AnimationOptions<T> easing(AnimationEasing easing) {
         this.easing = easing;
         return this;
     }

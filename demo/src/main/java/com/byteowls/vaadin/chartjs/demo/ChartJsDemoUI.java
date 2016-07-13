@@ -7,10 +7,12 @@ import com.byteowls.vaadin.chartjs.ChartJs;
 import com.byteowls.vaadin.chartjs.config.BarChartConfig;
 import com.byteowls.vaadin.chartjs.config.LineChartConfig;
 import com.byteowls.vaadin.chartjs.config.PieChartConfig;
+import com.byteowls.vaadin.chartjs.config.PolarAreaChartConfig;
 import com.byteowls.vaadin.chartjs.data.BarDataset;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.data.PieDataset;
+import com.byteowls.vaadin.chartjs.data.PolarAreaDataset;
 import com.byteowls.vaadin.chartjs.options.HoverOptions;
 import com.byteowls.vaadin.chartjs.options.HoverOptions.Mode;
 import com.byteowls.vaadin.chartjs.options.TooltipsOptions;
@@ -18,11 +20,13 @@ import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.BaseScale.Position;
 import com.byteowls.vaadin.chartjs.options.scale.CategoryScale;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
+import com.byteowls.vaadin.chartjs.options.scale.RadialLinearScale;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 
@@ -44,6 +48,7 @@ public class ChartJsDemoUI extends UI {
         vl.addComponent(barChart());
         vl.addComponent(doughnutChart());
         vl.addComponent(comboBarLineChart());
+        vl.addComponent(polarAreaChart());
         panel.setContent(vl);
         setContent(panel);
     }
@@ -260,6 +265,51 @@ public class ChartJsDemoUI extends UI {
         return lineChart; 
     }
     
+    
+    private ChartJs polarAreaChart() {
+        
+        PolarAreaChartConfig config = new PolarAreaChartConfig();
+        config
+            .data()
+                .labels("Red", "Green", "Yellow", "Grey", "Dark Grey")
+                .addDataset(new PolarAreaDataset().label("My dataset").backgroundColor("#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"))
+                .and();
+        
+        config.
+            options()
+                .responsive(true)
+                .title()
+                    .display(true)
+                    .text("Chart.js Polar Area Chart")
+                    .and()
+                .scale(new RadialLinearScale().ticks().beginAtZero(true).and().reverse(false))
+                .animation()
+                    .animateScale(true)
+                    .animateRotate(false)
+                    .and()
+               .done();
+        
+        List<String> labels = config.data().getLabels();
+        for (Dataset<?> ds : config.data().getDatasets()) {
+            PolarAreaDataset lds = (PolarAreaDataset) ds;
+            List<Double> data = new ArrayList<>();
+            for (int i = 0; i < labels.size(); i++) {
+                data.add((double) (Math.round(Math.random() * 100)));
+            }
+            lds.dataAsList(data);
+        }
+        
+        ChartJs lineChart = new ChartJs(config);
+        lineChart.setJsLoggingEnabled(true);
+        lineChart.setWidth(50, Unit.PERCENTAGE);
+        
+        lineChart.addClickListener((a,b) -> {
+            PolarAreaDataset dataset = (PolarAreaDataset) config.data().getDatasets().get(a);
+            Notification.show("PolarAreaDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
+        });
+        return lineChart; 
+    }
+    
     private ChartJs comboBarLineChart() {
         
         BarChartConfig config = new BarChartConfig();
@@ -292,6 +342,7 @@ public class ChartJsDemoUI extends UI {
         ChartJs lineChart = new ChartJs(config);
         lineChart.setJsLoggingEnabled(true);
         lineChart.setWidth(50, Unit.PERCENTAGE);
+        
         return lineChart; 
     }
     

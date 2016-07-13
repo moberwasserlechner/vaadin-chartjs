@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import com.byteowls.vaadin.chartjs.config.LineChartConfig;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
-import com.byteowls.vaadin.chartjs.options.AnimationOptions;
+import com.byteowls.vaadin.chartjs.options.AnimationEasing;
 import com.byteowls.vaadin.chartjs.options.HoverOptions;
 import com.byteowls.vaadin.chartjs.options.TitleOptions;
 import com.byteowls.vaadin.chartjs.options.TooltipsOptions;
@@ -44,7 +44,7 @@ public class ChartJsTest {
                 .text("Hello World")
                 .and()
             .animation()
-                .easing(AnimationOptions.Easing.easeOutQuart)
+                .easing(AnimationEasing.easeOutQuart)
                 .and()
             .tooltips()
                 .mode(TooltipsOptions.Mode.LABEL)
