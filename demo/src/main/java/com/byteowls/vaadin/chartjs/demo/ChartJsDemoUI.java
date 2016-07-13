@@ -49,6 +49,7 @@ public class ChartJsDemoUI extends UI {
         vl.addComponent(doughnutChart());
         vl.addComponent(comboBarLineChart());
         vl.addComponent(polarAreaChart());
+        vl.addComponent(horizonalBarChart());
         panel.setContent(vl);
         setContent(panel);
     }
@@ -316,9 +317,9 @@ public class ChartJsDemoUI extends UI {
         config
             .data()
                 .labels("January", "February", "March", "April", "May", "June", "July")
-                .addDataset(new BarDataset().label("Dataset 1").backgroundColor("rgba(151,187,205,0.5)").borderColor("white").borderWidth(2))
-                .addDataset(new LineDataset().label("Dataset 2").backgroundColor("rgba(151,187,205,0.5)").borderColor("white").borderWidth(2))
-                .addDataset(new BarDataset().label("Dataset 3").backgroundColor("rgba(220,220,220,0.5)"))
+                .addDataset(new BarDataset().type().label("Dataset 1").backgroundColor("rgba(151,187,205,0.5)").borderColor("white").borderWidth(2))
+                .addDataset(new LineDataset().type().label("Dataset 2").backgroundColor("rgba(151,187,205,0.5)").borderColor("white").borderWidth(2))
+                .addDataset(new BarDataset().type().label("Dataset 3").backgroundColor("rgba(220,220,220,0.5)"))
                 .and();
         
         config.
@@ -343,6 +344,47 @@ public class ChartJsDemoUI extends UI {
         lineChart.setJsLoggingEnabled(true);
         lineChart.setWidth(50, Unit.PERCENTAGE);
         
+        return lineChart; 
+    }
+    
+    private ChartJs horizonalBarChart() {
+        
+        BarChartConfig barConfig = new BarChartConfig();
+        barConfig.horizontal();
+        barConfig.
+            data()
+                .labels("January", "February", "March", "April", "May", "June", "July")
+                .addDataset(new BarDataset().backgroundColor("rgba(220,220,220,0.5)").label("Dataset 1"))
+                .addDataset(new BarDataset().backgroundColor("rgba(151,187,205,0.5)").label("Dataset 2").hidden(true))
+                .addDataset(new BarDataset().backgroundColor("rgba(151,187,205,0.5)").label("Dataset 3"))
+                .and();
+        
+        barConfig.
+            options()
+                .responsive(true)
+                .title()
+                    .display(true)
+                    .text("Chart.js Horizontal Bar Chart")
+                    .and()
+               .done();
+        
+        List<String> labels = barConfig.data().getLabels();
+        for (Dataset<?> ds : barConfig.data().getDatasets()) {
+            BarDataset lds = (BarDataset) ds;
+            List<Double> data = new ArrayList<>();
+            for (int i = 0; i < labels.size(); i++) {
+                data.add((double) (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100));
+            }
+            lds.dataAsList(data);
+        }
+        
+        ChartJs lineChart = new ChartJs(barConfig);
+        lineChart.setJsLoggingEnabled(true);
+        lineChart.setWidth(50, Unit.PERCENTAGE);
+        lineChart.addClickListener((a,b) -> {
+            BarDataset dataset = (BarDataset) barConfig.data().getDatasets().get(a);
+            Notification.show("BarDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.WARNING_MESSAGE);
+        });
         return lineChart; 
     }
     

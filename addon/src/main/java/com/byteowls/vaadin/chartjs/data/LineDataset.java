@@ -18,7 +18,7 @@ public class LineDataset implements Dataset<LineDataset> {
         circle, triangle, rect, rectRot, cross, crossRot, star, line, dash
     }
     
-    private String type = "line";
+    private String type;
     private List<Double> data;
     private Boolean hidden;
     private String label;
@@ -42,6 +42,14 @@ public class LineDataset implements Dataset<LineDataset> {
     private List<String> pointHoverBorderColor;
     private List<Double> pointHoverBorderWidth;
     private PointStyle pointStyle;
+    
+    /**
+     * Used if the type of a dataset is needed. e.g. combo chart type charts
+     */
+    public LineDataset type() {
+        type = "line";
+        return this;
+    }
     
     @Override
     public LineDataset data(Double... data) {

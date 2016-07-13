@@ -30,6 +30,14 @@ public class PolarAreaDataset implements Dataset<PolarAreaDataset> {
     private List<Integer> hoverBorderWidth;
     
     /**
+     * Used if the type of a dataset is needed. e.g. combo chart type charts
+     */
+    public PolarAreaDataset type() {
+        this.type = "polarArea";
+        return this;
+    }
+    
+    /**
      * The data to plot as arcs
      */
     @Override

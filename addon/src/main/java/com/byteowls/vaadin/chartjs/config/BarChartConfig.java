@@ -16,14 +16,24 @@ import elemental.json.JsonObject;
  */
 public class BarChartConfig implements ChartConfig {
 
+    private String type = "bar";
     private Data<BarChartConfig> data;
     private BarChartOptions options;
-
+    
     public Data<BarChartConfig> data() {
         if (this.data == null) {
             this.data = new Data<>(this);
         }
         return this.data;
+    }
+    
+    /**
+     * Switch to horizonal bar chart
+     * @return
+     */
+    public BarChartConfig horizontal() {
+        type = "horizontalBar";
+        return this;
     }
 
     public BarChartOptions options() {
@@ -36,7 +46,7 @@ public class BarChartConfig implements ChartConfig {
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
-        JUtils.putNotNull(map, "type", "bar");
+        JUtils.putNotNull(map, "type", type);
         // data
         if (data != null) {
             JUtils.putNotNull(map, "data", data.buildJson());
