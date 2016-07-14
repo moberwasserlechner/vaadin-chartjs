@@ -43,6 +43,9 @@ public class LineDataset implements Dataset<LineDataset> {
     private List<String> pointHoverBorderColor;
     private List<Double> pointHoverBorderWidth;
     private PointStyle pointStyle;
+    private Boolean showLine;
+    private Boolean spanGaps;
+    private Boolean steppedLine;
     
     /**
      * Used if the type of a dataset is needed. e.g. combo chart type charts
@@ -254,6 +257,30 @@ public class LineDataset implements Dataset<LineDataset> {
         this.pointStyle = pointStyle;
         return this;
     }
+    
+    /**
+     * If false, the line is not drawn for this dataset
+     */
+    public LineDataset showLine(boolean showLine) {
+        this.showLine = showLine;
+        return this;
+    }
+    
+    /**
+     * If true, lines will be drawn between points with no or null data
+     */
+    public LineDataset spanGaps(boolean spanGaps) {
+        this.spanGaps = spanGaps;
+        return this;
+    }
+    
+    /**
+     * If true, the line is shown as a steeped line and 'lineTension' will be ignored
+     */
+    public LineDataset steppedLine(boolean steppedLine) {
+        this.steppedLine = steppedLine;
+        return this;
+    }
 
     @Override
     public JsonObject buildJson() {
@@ -285,6 +312,9 @@ public class LineDataset implements Dataset<LineDataset> {
         if (pointStyle != null) {
             JUtils.putNotNull(map, "pointStyle", pointStyle.name());
         }
+        JUtils.putNotNull(map, "showLine", showLine);
+        JUtils.putNotNull(map, "spanGaps", spanGaps);
+        JUtils.putNotNull(map, "steppedLine", steppedLine);
         return map;
     }
 
