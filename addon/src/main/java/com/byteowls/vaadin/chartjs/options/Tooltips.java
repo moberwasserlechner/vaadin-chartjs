@@ -80,8 +80,174 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         return this;
     }
     
+    /**
+     * Font size for tooltip title inherited from global font size. Default: 12
+     */
+    public Tooltips<T> titleFontSize(int titleFontSize) {
+        this.titleFontSize = titleFontSize;
+        return this;
+    }
     
-
+    /**
+     * Default: bold
+     */
+    public Tooltips<T> titleFontStyle(String titleFontStyle) {
+        this.titleFontStyle = titleFontStyle;
+        return this;
+    }
+    
+    /**
+     * Font color for tooltip title. Default: #fff
+     */
+    public Tooltips<T> titleFontColor(String titleFontColor) {
+        this.titleFontColor = titleFontColor;
+        return this;
+    }
+    
+    /**
+     * Spacing to add to top and bottom of each title line. Default: 2
+     */
+    public Tooltips<T> titleSpacing(int titleSpacing) {
+        this.titleSpacing = titleSpacing;
+        return this;
+    }
+    
+    /**
+     * Margin to add on bottom of title section. Default: 12
+     */
+    public Tooltips<T> titleMarginBottom(int titleMarginBottom) {
+        this.titleMarginBottom = titleMarginBottom;
+        return this;
+    }
+    
+    /**
+     * Font family for tooltip items inherited from global font family
+     */
+    public Tooltips<T> bodyFontFamily(String bodyFontFamily) {
+        this.bodyFontFamily = bodyFontFamily;
+        return this;
+    }
+    
+    /**
+     * Font size for tooltip items inherited from global font size. Default: 12
+     */
+    public Tooltips<T> bodyFontSize(int bodyFontSize) {
+        this.bodyFontSize = bodyFontSize;
+        return this;
+    }
+    
+    /**
+     * Default: normal 
+     */
+    public Tooltips<T> bodyFontStyle(String bodyFontStyle) {
+        this.bodyFontStyle = bodyFontStyle;
+        return this;
+    }
+    
+    /**
+     * Font color for tooltip items. Default: #fff
+     */
+    public Tooltips<T> bodyFontColor(String bodyFontColor) {
+        this.bodyFontColor = bodyFontColor;
+        return this;
+    }
+    
+    /**
+     * Spacing to add to top and bottom of each tooltip item. Default: 2
+     */
+    public Tooltips<T> bodySpacing(int bodySpacing) {
+        this.bodySpacing = bodySpacing;
+        return this;
+    }
+    
+    /**
+     * Font family for tooltip footer inherited from global font family.
+     */
+    public Tooltips<T> footerFontFamily(String footerFontFamily) {
+        this.footerFontFamily = footerFontFamily;
+        return this;
+    }
+    
+    /**
+     * Font size for tooltip footer inherited from global font size.
+     */
+    public Tooltips<T> footerFontSize(int footerFontSize) {
+        this.footerFontSize = footerFontSize;
+        return this;
+    }
+    
+    /**
+     * Font style for tooltip footer. Default: bold
+     */
+    public Tooltips<T> footerFontStyle(String footerFontStyle) {
+        this.footerFontStyle = footerFontStyle;
+        return this;
+    }
+    
+    /**
+     * Font color for tooltip footer. Default: #fff
+     */
+    public Tooltips<T> footerFontColor(String footerFontColor) {
+        this.footerFontColor = footerFontColor;
+        return this;
+    }
+    
+    /**
+     * Spacing to add to top and bottom of each footer line. Default: 2
+     */
+    public Tooltips<T> footerSpacing(int footerSpacing) {
+        this.footerSpacing = footerSpacing;
+        return this;
+    }
+    
+    /**
+     * Margin to add before drawing the footer. Default: 6
+     */
+    public Tooltips<T> footerMarginTop(int footerMarginTop) {
+        this.footerMarginTop = footerMarginTop;
+        return this;
+    }
+    
+    /**
+     * Padding to add on left and right of tooltip. Default: 6
+     */
+    public Tooltips<T> xPadding(int xPadding) {
+        this.xPadding = xPadding;
+        return this;
+    }    
+    
+    /**
+     * Padding to add on top and bottom of tooltip. Default: 6
+     */
+    public Tooltips<T> yPadding(int yPadding) {
+        this.yPadding = yPadding;
+        return this;
+    }
+    
+    /**
+     * Size, in px, of the tooltip arrow. Default: 5
+     */
+    public Tooltips<T> caretSize(int caretSize) {
+        this.caretSize = caretSize;
+        return this;
+    }
+    
+    /**
+     * Radius of tooltip corner curves. Default: 6
+     */
+    public Tooltips<T> cornerRadius(int cornerRadius) {
+        this.cornerRadius = cornerRadius;
+        return this;
+    }
+    
+    /**
+     * Color to draw behind the colored boxes when multiple items are in the tooltip. Default: #fff
+     */
+    public Tooltips<T> multiKeyBackground(String multiKeyBackground) {
+        this.multiKeyBackground = multiKeyBackground;
+        return this;
+    }
+    
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
@@ -91,6 +257,27 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         }
         JUtils.putNotNull(map, "backgroundColor", backgroundColor);
         JUtils.putNotNull(map, "titleFontFamily", titleFontFamily);
+        JUtils.putNotNull(map, "titleFontSize", titleFontSize);
+        JUtils.putNotNull(map, "titleFontStyle", titleFontStyle);
+        JUtils.putNotNull(map, "titleFontColor", titleFontColor);
+        JUtils.putNotNull(map, "titleSpacing", titleSpacing);
+        JUtils.putNotNull(map, "titleMarginBottom", titleMarginBottom);
+        JUtils.putNotNull(map, "bodyFontFamily", bodyFontFamily);
+        JUtils.putNotNull(map, "bodyFontSize", bodyFontSize);
+        JUtils.putNotNull(map, "bodyFontStyle", bodyFontStyle);
+        JUtils.putNotNull(map, "bodyFontColor", bodyFontColor);
+        JUtils.putNotNull(map, "bodySpacing", bodySpacing);
+        JUtils.putNotNull(map, "footerFontFamily", footerFontFamily);
+        JUtils.putNotNull(map, "footerFontSize", footerFontSize);
+        JUtils.putNotNull(map, "footerFontStyle", footerFontStyle);
+        JUtils.putNotNull(map, "footerFontColor", footerFontColor);
+        JUtils.putNotNull(map, "footerSpacing", footerSpacing);
+        JUtils.putNotNull(map, "footerMarginTop", footerMarginTop);
+        JUtils.putNotNull(map, "xPadding", xPadding);
+        JUtils.putNotNull(map, "yPadding", yPadding);
+        JUtils.putNotNull(map, "caretSize", caretSize);
+        JUtils.putNotNull(map, "cornerRadius", cornerRadius);
+        JUtils.putNotNull(map, "multiKeyBackground", multiKeyBackground);
         return map;
     }
 }

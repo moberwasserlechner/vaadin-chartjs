@@ -70,7 +70,7 @@ public class ChartJsTest {
            .legend()
                 .fullWidth(false)
                 .labels()
-                    .boxWidth(20.4)
+                    .boxWidth(20)
                     .and()
                 .position(Position.BOTTOM)
                 .and()
