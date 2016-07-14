@@ -16,6 +16,7 @@ import com.byteowls.vaadin.chartjs.data.PolarAreaDataset;
 import com.byteowls.vaadin.chartjs.options.Hover;
 import com.byteowls.vaadin.chartjs.options.Hover.Mode;
 import com.byteowls.vaadin.chartjs.options.Tooltips;
+import com.byteowls.vaadin.chartjs.options.Legend;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.BaseScale.Position;
 import com.byteowls.vaadin.chartjs.options.scale.CategoryScale;
@@ -366,6 +367,10 @@ public class ChartJsDemoUI extends UI {
                     .display(true)
                     .text("Chart.js Horizontal Bar Chart")
                     .and()
+                 .legend()
+                     .fullWidth(false)
+                     .position(Legend.Position.BOTTOM)
+                     .and()
                .done();
         
         List<String> labels = barConfig.data().getLabels();

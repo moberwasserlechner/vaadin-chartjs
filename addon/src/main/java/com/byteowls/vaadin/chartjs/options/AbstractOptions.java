@@ -21,6 +21,7 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
     private Tooltips<T> tooltips;
     private Hover<T> hover;
     private Animation<T> animation;
+    private Legend<T> legend;
 
     public AbstractOptions(ChartConfig chartConfig) {
         this.chartConfig = chartConfig;
@@ -89,7 +90,7 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
     }
 
     /**
-     * Step into the charts tooltips configuration
+     * Step into the charts tooltip configuration
      */
     public Tooltips<T> tooltips() {
         if (tooltips == null) {
@@ -98,7 +99,15 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
         return tooltips;
     }
 
-    // TODO legend config
+    /**
+     * Step into the charts legend configuration
+     */
+    public Legend<T> legend() {
+        if (legend == null) {
+            legend = new Legend<>(getThis());
+        }
+        return legend;
+    }
 
     public abstract T getThis();
 
@@ -113,6 +122,7 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
         JUtils.putNotNull(map, "hover", hover);
         JUtils.putNotNull(map, "tooltips", tooltips);
         JUtils.putNotNull(map, "animation", animation);
+        JUtils.putNotNull(map, "legend", legend);
         return map;
     }
 
