@@ -2,7 +2,7 @@ package com.byteowls.vaadin.chartjs.options.types;
 
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
 import com.byteowls.vaadin.chartjs.options.AbstractOptions;
-import com.byteowls.vaadin.chartjs.options.PieAnimationOptions;
+import com.byteowls.vaadin.chartjs.options.PieAnimation;
 import com.byteowls.vaadin.chartjs.options.scale.RadialLinearScale;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
@@ -10,7 +10,7 @@ import elemental.json.JsonObject;
 
 public class PolarAreaChartOptions extends AbstractOptions<PolarAreaChartOptions> {
     
-    private PieAnimationOptions<PolarAreaChartOptions> pieAnimation;
+    private PieAnimation<PolarAreaChartOptions> pieAnimation;
     private RadialLinearScale scale;
 
     public PolarAreaChartOptions(ChartConfig chartConfig) {
@@ -25,9 +25,9 @@ public class PolarAreaChartOptions extends AbstractOptions<PolarAreaChartOptions
     /**
      * Step into the charts animation configuration
      */
-    public PieAnimationOptions<PolarAreaChartOptions> animation() {
+    public PieAnimation<PolarAreaChartOptions> animation() {
         if (pieAnimation == null) {
-            pieAnimation = new PieAnimationOptions<>(getThis());
+            pieAnimation = new PieAnimation<>(getThis());
         }
         return pieAnimation;
     }

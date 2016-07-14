@@ -9,9 +9,9 @@ import elemental.json.JsonObject;
 /**
  * @author michael@team-conductor.com
  */
-public class AnimationOptions<T> extends And<T> implements JsonBuilder {
+public class Animation<T> extends And<T> implements JsonBuilder {
 
-    public AnimationOptions(T parent) {
+    public Animation(T parent) {
         super(parent);
     }
 
@@ -24,7 +24,7 @@ public class AnimationOptions<T> extends And<T> implements JsonBuilder {
     /**
      * The number of milliseconds an animation takes.
      */
-    public AnimationOptions<T> duration(int duration) {
+    public Animation<T> duration(int duration) {
         this.duration = duration;
         return this;
     }
@@ -32,7 +32,7 @@ public class AnimationOptions<T> extends And<T> implements JsonBuilder {
     /**
      * Easing function to use.
      */
-    public AnimationOptions<T> easing(AnimationEasing easing) {
+    public Animation<T> easing(AnimationEasing easing) {
         this.easing = easing;
         return this;
     }

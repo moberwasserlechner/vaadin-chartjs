@@ -13,12 +13,12 @@ import elemental.json.JsonObject;
 /**
  * @author michael@team-conductor.com
  */
-public class ScalesOptions<P> extends And<P> implements JsonBuilder {
+public class Scales<P> extends And<P> implements JsonBuilder {
 
     private List<BaseScale<?>> xAxes;
     private List<BaseScale<?>> yAxes;
 
-    public ScalesOptions(P parent) {
+    public Scales(P parent) {
         super(parent);
     }
 
@@ -28,7 +28,7 @@ public class ScalesOptions<P> extends And<P> implements JsonBuilder {
      * @param scale a scale
      * @return this for chaining.
      */
-    public ScalesOptions<P> add(Axis axis, BaseScale<?> scale) {
+    public Scales<P> add(Axis axis, BaseScale<?> scale) {
         addToAxes(axis, scale);
         return this;
     }

@@ -2,7 +2,7 @@ package com.byteowls.vaadin.chartjs.options.types;
 
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
 import com.byteowls.vaadin.chartjs.options.AbstractOptions;
-import com.byteowls.vaadin.chartjs.options.PieAnimationOptions;
+import com.byteowls.vaadin.chartjs.options.PieAnimation;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
 import elemental.json.JsonObject;
@@ -12,7 +12,7 @@ public class PieChartOptions extends AbstractOptions<PieChartOptions> {
     private Double cutoutPercentage;
     private Double rotation;
     private Double circumference;
-    private PieAnimationOptions<PieChartOptions> pieAnimation;
+    private PieAnimation<PieChartOptions> pieAnimation;
 
     public PieChartOptions(ChartConfig chartConfig) {
         super(chartConfig);
@@ -37,9 +37,9 @@ public class PieChartOptions extends AbstractOptions<PieChartOptions> {
     /**
      * Step into the charts animation configuration
      */
-    public PieAnimationOptions<PieChartOptions> animation() {
+    public PieAnimation<PieChartOptions> animation() {
         if (pieAnimation == null) {
-            pieAnimation = new PieAnimationOptions<>(getThis());
+            pieAnimation = new PieAnimation<>(getThis());
         }
         return pieAnimation;
     }

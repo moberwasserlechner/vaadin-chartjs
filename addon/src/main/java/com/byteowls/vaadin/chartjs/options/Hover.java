@@ -6,7 +6,7 @@ import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
-public class HoverOptions<T> extends And<T> implements JsonBuilder {
+public class Hover<T> extends And<T> implements JsonBuilder {
 
     public enum Mode {
         SINGLE, LABEL, DATASET
@@ -16,7 +16,7 @@ public class HoverOptions<T> extends And<T> implements JsonBuilder {
     private Integer animationDuration;
     // TODO Callback onhover Called when any of the events fire. Called in the context of the chart and passed an array of active elements (bars, points, etc)
 
-    public HoverOptions(T parent) {
+    public Hover(T parent) {
         super(parent);
     }
 
@@ -26,7 +26,7 @@ public class HoverOptions<T> extends And<T> implements JsonBuilder {
      * <li>label highlights elements in all datasets at the same X value.
      * <li>dataset highlights the closest dataset
      */
-    public HoverOptions<T> mode(Mode mode) {
+    public Hover<T> mode(Mode mode) {
         this.mode = mode;
         return this;
     }
@@ -34,7 +34,7 @@ public class HoverOptions<T> extends And<T> implements JsonBuilder {
     /**
      * Duration in milliseconds it takes to animate hover style changes
      */
-    public HoverOptions<T> animationDuration(int animationDuration) {
+    public Hover<T> animationDuration(int animationDuration) {
         this.animationDuration = animationDuration;
         return this;
     }

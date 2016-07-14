@@ -17,10 +17,10 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
     private Integer responsiveAnimationDuration;
     private Boolean maintainAspectRatio;
     private List<String> events;
-    private TitleOptions<T> title;
-    private TooltipsOptions<T> tooltips;
-    private HoverOptions<T> hover;
-    private AnimationOptions<T> animation;
+    private Title<T> title;
+    private Tooltips<T> tooltips;
+    private Hover<T> hover;
+    private Animation<T> animation;
 
     public AbstractOptions(ChartConfig chartConfig) {
         this.chartConfig = chartConfig;
@@ -61,9 +61,9 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
     /**
      * Step into the charts title configuration
      */
-    public TitleOptions<T> title() {
+    public Title<T> title() {
         if (title == null) {
-            title = new TitleOptions<>(getThis());
+            title = new Title<>(getThis());
         }
         return title;
     }
@@ -71,9 +71,9 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
     /**
      * Step into the charts animation configuration
      */
-    public AnimationOptions<T> animation() {
+    public Animation<T> animation() {
         if (animation == null) {
-            animation = new AnimationOptions<>(getThis());
+            animation = new Animation<>(getThis());
         }
         return animation;
     }
@@ -81,9 +81,9 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
     /**
      * Step into the charts hover configuration
      */
-    public HoverOptions<T> hover() {
+    public Hover<T> hover() {
         if (hover == null) {
-            hover = new HoverOptions<>(getThis());
+            hover = new Hover<>(getThis());
         }
         return hover;
     }
@@ -91,9 +91,9 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
     /**
      * Step into the charts tooltips configuration
      */
-    public TooltipsOptions<T> tooltips() {
+    public Tooltips<T> tooltips() {
         if (tooltips == null) {
-            tooltips = new TooltipsOptions<>(getThis());
+            tooltips = new Tooltips<>(getThis());
         }
         return tooltips;
     }

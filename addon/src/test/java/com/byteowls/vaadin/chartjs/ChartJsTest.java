@@ -6,9 +6,9 @@ import org.junit.Test;
 import com.byteowls.vaadin.chartjs.config.LineChartConfig;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.options.AnimationEasing;
-import com.byteowls.vaadin.chartjs.options.HoverOptions;
-import com.byteowls.vaadin.chartjs.options.TitleOptions;
-import com.byteowls.vaadin.chartjs.options.TooltipsOptions;
+import com.byteowls.vaadin.chartjs.options.Hover;
+import com.byteowls.vaadin.chartjs.options.Title;
+import com.byteowls.vaadin.chartjs.options.Tooltips;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.BaseScale;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
@@ -36,25 +36,25 @@ public class ChartJsTest {
                 .showLines(true)
                 .responsive(true)
                 .hover()
-                .mode(HoverOptions.Mode.SINGLE)
+                .mode(Hover.Mode.SINGLE)
                 .and()
             .title()
                 .display(true)
-                .position(TitleOptions.Position.TOP)
+                .position(Title.Position.TOP)
                 .text("Hello World")
                 .and()
             .animation()
                 .easing(AnimationEasing.easeOutQuart)
                 .and()
             .tooltips()
-                .mode(TooltipsOptions.Mode.LABEL)
+                .mode(Tooltips.Mode.LABEL)
                 .and()
             .scales()
                 .add(Axis.X, new LinearScale().position(BaseScale.Position.TOP))
                 .add(Axis.Y, new LogarithmicScale().position(BaseScale.Position.LEFT))
                 .and()
             .tooltips()
-                .mode(TooltipsOptions.Mode.LABEL)
+                .mode(Tooltips.Mode.LABEL)
                 .and()
             .done();
 

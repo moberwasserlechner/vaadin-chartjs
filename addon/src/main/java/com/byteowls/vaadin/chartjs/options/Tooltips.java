@@ -6,7 +6,7 @@ import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
-public class TooltipsOptions<T> extends And<T> implements JsonBuilder {
+public class Tooltips<T> extends And<T> implements JsonBuilder {
 
     public enum Mode {
         SINGLE, LABEL
@@ -41,14 +41,14 @@ public class TooltipsOptions<T> extends And<T> implements JsonBuilder {
     // TODO private String callbacks;
 
 
-    public TooltipsOptions(T parent) {
+    public Tooltips(T parent) {
         super(parent);
     }
 
     /**
      * Are tooltips enabled
      */
-    public TooltipsOptions<T> enabled(boolean enabled) {
+    public Tooltips<T> enabled(boolean enabled) {
         this.enabled = enabled;
         return this;
     }
@@ -59,7 +59,7 @@ public class TooltipsOptions<T> extends And<T> implements JsonBuilder {
      * label highlights elements in all datasets at the same X value.
      * defaults to {@link Mode#SINGLE}
      */
-    public TooltipsOptions<T> mode(Mode mode) {
+    public Tooltips<T> mode(Mode mode) {
         this.mode = mode;
         return this;
     }
@@ -67,7 +67,7 @@ public class TooltipsOptions<T> extends And<T> implements JsonBuilder {
     /**
      * Background color of the tooltip. Defaults to 'rgba(0,0,0,0.8)'
      */
-    public TooltipsOptions<T> backgroundColor(String backgroundColor) {
+    public Tooltips<T> backgroundColor(String backgroundColor) {
         this.backgroundColor = backgroundColor;
         return this;
     }
@@ -75,7 +75,7 @@ public class TooltipsOptions<T> extends And<T> implements JsonBuilder {
     /**
      * Font family for tooltip title inherited from global font family.
      */
-    public TooltipsOptions<T> titleFontFamily(String titleFontFamily) {
+    public Tooltips<T> titleFontFamily(String titleFontFamily) {
         this.titleFontFamily = titleFontFamily;
         return this;
     }

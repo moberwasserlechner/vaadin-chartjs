@@ -5,7 +5,7 @@ import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
-public class PieAnimationOptions<T> extends AnimationOptions<T> {
+public class PieAnimation<T> extends Animation<T> {
     
     private Integer duration;
     private AnimationEasing easing;
@@ -15,14 +15,14 @@ public class PieAnimationOptions<T> extends AnimationOptions<T> {
     private Boolean animateRotate;
     private Boolean animateScale;
 
-    public PieAnimationOptions(T parent) {
+    public PieAnimation(T parent) {
         super(parent);
     }
     
     /**
      * If true, will animate the rotation of the chart.
      */
-    public PieAnimationOptions<T> animateRotate(boolean animateRotate) {
+    public PieAnimation<T> animateRotate(boolean animateRotate) {
         this.animateRotate = animateRotate;
         return this;
     }
@@ -30,7 +30,7 @@ public class PieAnimationOptions<T> extends AnimationOptions<T> {
     /**
      * If true, will animate scaling the Doughnut from the centre.
      */
-    public PieAnimationOptions<T> animateScale(boolean animateScale) {
+    public PieAnimation<T> animateScale(boolean animateScale) {
         this.animateScale = animateScale;
         return this;
     }
@@ -38,7 +38,7 @@ public class PieAnimationOptions<T> extends AnimationOptions<T> {
     /**
      * The number of milliseconds an animation takes.
      */
-    public PieAnimationOptions<T> duration(int duration) {
+    public PieAnimation<T> duration(int duration) {
         this.duration = duration;
         return this;
     }
@@ -46,7 +46,7 @@ public class PieAnimationOptions<T> extends AnimationOptions<T> {
     /**
      * Easing function to use.
      */
-    public PieAnimationOptions<T> easing(AnimationEasing easing) {
+    public PieAnimation<T> easing(AnimationEasing easing) {
         this.easing = easing;
         return this;
     }

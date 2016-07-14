@@ -1,7 +1,7 @@
 package com.byteowls.vaadin.chartjs.options;
 
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
-import com.byteowls.vaadin.chartjs.options.scale.ScalesOptions;
+import com.byteowls.vaadin.chartjs.options.scale.Scales;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.JsonObject;
 
@@ -10,7 +10,7 @@ import elemental.json.JsonObject;
  */
 public abstract class AbstractScalableOptions<T extends AbstractScalableOptions<?>> extends AbstractOptions<T> {
 
-    private ScalesOptions<T> scales;
+    private Scales<T> scales;
 
     public AbstractScalableOptions(ChartConfig chartConfig) {
         super(chartConfig);
@@ -19,9 +19,9 @@ public abstract class AbstractScalableOptions<T extends AbstractScalableOptions<
     /**
      * Step into the scale configuration
      */
-    public ScalesOptions<T> scales() {
+    public Scales<T> scales() {
         if (scales == null) {
-            scales = new ScalesOptions<>(getThis());
+            scales = new Scales<>(getThis());
         }
         return scales;
     }

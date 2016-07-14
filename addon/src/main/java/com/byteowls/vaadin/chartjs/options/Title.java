@@ -6,7 +6,7 @@ import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
-public class TitleOptions<T> extends And<T> implements JsonBuilder {
+public class Title<T> extends And<T> implements JsonBuilder {
 
     public enum Position {
         TOP, BOTTOM
@@ -23,14 +23,14 @@ public class TitleOptions<T> extends And<T> implements JsonBuilder {
     private Integer padding;
 
 
-    public TitleOptions(T parent) {
+    public Title(T parent) {
         super(parent);
     }
 
     /**
      * Display the title block
      */
-    public TitleOptions<T> display(boolean display) {
+    public Title<T> display(boolean display) {
         this.display = display;
         return this;
     }
@@ -38,7 +38,7 @@ public class TitleOptions<T> extends And<T> implements JsonBuilder {
     /**
      * Position of the title. Only 'top' or 'bottom' are currently allowed
      */
-    public TitleOptions<T> position(Position position) {
+    public Title<T> position(Position position) {
         this.position = position;
         return this;
     }
@@ -46,7 +46,7 @@ public class TitleOptions<T> extends And<T> implements JsonBuilder {
     /**
      * Title text
      */
-    public TitleOptions<T> text(String text) {
+    public Title<T> text(String text) {
         this.text = text;
         return this;
     }
@@ -54,7 +54,7 @@ public class TitleOptions<T> extends And<T> implements JsonBuilder {
     /**
      * Marks that this box should take the full width of the canvas (pushing down other boxes)
      */
-    public TitleOptions<T> fullWidth(boolean fullWidth) {
+    public Title<T> fullWidth(boolean fullWidth) {
         this.fullWidth = fullWidth;
         return this;
     }
@@ -62,7 +62,7 @@ public class TitleOptions<T> extends And<T> implements JsonBuilder {
     /**
      * Font size inherited from global configuration
      */
-    public TitleOptions<T> fontSize(int fontSize) {
+    public Title<T> fontSize(int fontSize) {
         this.fontSize = fontSize;
         return this;
     }
@@ -70,7 +70,7 @@ public class TitleOptions<T> extends And<T> implements JsonBuilder {
     /**
      * Font family inherited from global configuration
      */
-    public TitleOptions<T> fontFamily(String fontFamily) {
+    public Title<T> fontFamily(String fontFamily) {
         this.fontFamily = fontFamily;
         return this;
     }
@@ -78,7 +78,7 @@ public class TitleOptions<T> extends And<T> implements JsonBuilder {
     /**
      * Font color inherited from global configuration
      */
-    public TitleOptions<T> fontColor(String fontColor) {
+    public Title<T> fontColor(String fontColor) {
         this.fontColor = fontColor;
         return this;
     }
@@ -86,7 +86,7 @@ public class TitleOptions<T> extends And<T> implements JsonBuilder {
     /**
      * Font styling of the title.
      */
-    public TitleOptions<T> fontStyle(String fontStyle) {
+    public Title<T> fontStyle(String fontStyle) {
         this.fontStyle = fontStyle;
         return this;
     }
@@ -94,7 +94,7 @@ public class TitleOptions<T> extends And<T> implements JsonBuilder {
     /**
      * Number of pixels to add above and below the title text
      */
-    public TitleOptions<T> padding(int padding) {
+    public Title<T> padding(int padding) {
         this.padding = padding;
         return this;
     }

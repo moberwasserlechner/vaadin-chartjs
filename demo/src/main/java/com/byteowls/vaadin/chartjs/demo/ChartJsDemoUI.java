@@ -13,9 +13,9 @@ import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.data.PieDataset;
 import com.byteowls.vaadin.chartjs.data.PolarAreaDataset;
-import com.byteowls.vaadin.chartjs.options.HoverOptions;
-import com.byteowls.vaadin.chartjs.options.HoverOptions.Mode;
-import com.byteowls.vaadin.chartjs.options.TooltipsOptions;
+import com.byteowls.vaadin.chartjs.options.Hover;
+import com.byteowls.vaadin.chartjs.options.Hover.Mode;
+import com.byteowls.vaadin.chartjs.options.Tooltips;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.BaseScale.Position;
 import com.byteowls.vaadin.chartjs.options.scale.CategoryScale;
@@ -69,10 +69,10 @@ public class ChartJsDemoUI extends UI {
             .text("Chart.js Line Chart")
             .and()
         .tooltips()
-            .mode(TooltipsOptions.Mode.LABEL)
+            .mode(Tooltips.Mode.LABEL)
             .and()
         .hover()
-            .mode(HoverOptions.Mode.DATASET)
+            .mode(Hover.Mode.DATASET)
             .and()
         .scales()
         .add(Axis.X, new CategoryScale()
@@ -135,10 +135,10 @@ public class ChartJsDemoUI extends UI {
                 .text("Chart.js Line Chart - Stacked Area")
                 .and()
             .tooltips()
-                .mode(TooltipsOptions.Mode.LABEL)
+                .mode(Tooltips.Mode.LABEL)
                 .and()
             .hover()
-                .mode(HoverOptions.Mode.LABEL)
+                .mode(Hover.Mode.LABEL)
                 .and()
             .scales()
             .add(Axis.X, new CategoryScale()
