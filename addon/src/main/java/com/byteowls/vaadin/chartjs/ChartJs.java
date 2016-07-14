@@ -15,11 +15,11 @@ public class ChartJs extends AbstractJavaScriptComponent {
 
     private static final long serialVersionUID = 2999562112373836140L;
 
-    public interface ClickListener {
+    public interface DataPointClickListener {
         void onDataPointClick(int datasetIndex, int dataIndex);
     }
-
-    private List<ChartJs.ClickListener> clickListeners = new ArrayList<>();
+    
+    private List<ChartJs.DataPointClickListener> dataPointClickListeners = new ArrayList<>();
 
     public ChartJs(ChartConfig chartConfig) {
         configure(chartConfig);
@@ -56,18 +56,18 @@ public class ChartJs extends AbstractJavaScriptComponent {
      * Adds a listener handling clicks on charts data points. 
      * @param listener the click listener.
      */
-    public void addClickListener(ChartJs.ClickListener listener) {
-        clickListeners.add(listener);
+    public void addClickListener(ChartJs.DataPointClickListener listener) {
+        dataPointClickListeners.add(listener);
         checkListenerState();
     }
 
-    public void removeClickListener(ChartJs.ClickListener listener) {
-        clickListeners.remove(listener);
+    public void removeClickListener(ChartJs.DataPointClickListener listener) {
+        dataPointClickListeners.remove(listener);
         checkListenerState();
     }
 
     private void checkListenerState() {
-        getState().clickListenerFound = !this.clickListeners.isEmpty();
+        getState().dataPointClickListenerFound = !this.dataPointClickListeners.isEmpty();
     }
 
     private void addJsFunctions() {
@@ -79,7 +79,7 @@ public class ChartJs extends AbstractJavaScriptComponent {
             public void call(JsonArray arguments) {
                 int datasetIndex = (int) arguments.getNumber(0);
                 int dataIndex = (int) arguments.getNumber(1);
-                for (ClickListener l : clickListeners) {
+                for (DataPointClickListener l : dataPointClickListeners) {
                     l.onDataPointClick(datasetIndex, dataIndex);
                 }                
             }

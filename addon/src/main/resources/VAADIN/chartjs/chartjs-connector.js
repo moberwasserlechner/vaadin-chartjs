@@ -38,8 +38,10 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 			chartjs = new Chart(canvas, state.configurationJson);
 
 			// only enable if there is a listener
-			if (state.clickListenerFound) {
-				console.log("chartjs: add onclick callback");
+			if (state.dataPointClickListenerFound) {
+				if (loggingEnabled) {
+					console.log("chartjs: add data point click callback");
+				}
 				canvas.onclick = function(e) {
 					var elementArr = chartjs.getElementAtEvent(e);
 					if (elementArr != null && elementArr.length > 0) {
