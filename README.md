@@ -73,6 +73,78 @@ Dependency
     dependencies {
       compile ("com.byteowls:vaadin-chartjs:0.1.0")
     }
+## Usage
+
+The basic usage is always the same. You need to create a new ChartJs() and configure it with a chart type specific config.
+
+```
+        ChartJs myChart = new ChartJs(barConfig);
+        // enable logging to the javascript console. You can see some interessenting things there ;). Please do not use this in production because it's only needed for debugging.
+        myChart.setJsLoggingEnabled(true);
+        myChart.setWidth(50, Unit.PERCENTAGE);
+        // add a data point clicklistener
+        myChart.addClickListener((datasetIdx, dataIdx) -> {
+            BarDataset dataset = (BarDataset) barConfig.data().getDatasets().get(datasetIdx);
+            Notification.show("BarDataset at idx:" + datasetIdx + "; Data: idx=" + dataIdx + "; Value=" + dataset.getData().get(dataIdx), Type.WARNING_MESSAGE);
+        });
+```
+
+Right now there these chart configuration types:
+
+* BarChartConfig ... Vertical and horizontal
+* LineChartConfig
+* PieChartConfig ... Pie and donut
+* PolarAreaChartConfig
+
+### Bar chart configuration
+
+In this example we would like to configure a horizontal bar chart with 3 dataset and add some random numbers to each of them.
+
+```java
+        
+        BarChartConfig barConfig = new BarChartConfig();
+        barConfig.horizontal();
+        barConfig.
+            data()
+                .labels("January", "February", "March", "April", "May", "June", "July")
+                .addDataset(new BarDataset().backgroundColor("rgba(220,220,220,0.5)").label("Dataset 1"))
+                .addDataset(new BarDataset().backgroundColor("rgba(151,187,205,0.5)").label("Dataset 2").hidden(true))
+                .addDataset(new BarDataset().backgroundColor("rgba(151,187,205,0.5)").label("Dataset 3"))
+                .and()
+            .options()
+                .responsive(true)
+                .title()
+                    .display(true)
+                    .text("Chart.js Horizontal Bar Chart")
+                    .and()
+                 .elements()
+                     .rectangle()
+                         .borderWidth(2)
+                         .borderColor("rgb(0, 255, 0)")
+                         .borderSkipped(RectangleEdge.LEFT)
+                         .and()
+                     .and()
+                 .legend()
+                     .fullWidth(false)
+                     .position(Position.LEFT)
+                     .and()
+               .done();
+            
+            // add random data
+            List<String> labels = barConfig.data().getLabels();
+            for (Dataset<?> ds : barConfig.data().getDatasets()) {
+                BarDataset lds = (BarDataset) ds;
+                List<Double> data = new ArrayList<>();
+                for (int i = 0; i < labels.size(); i++) {
+                    data.add((double) (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100));
+                }
+                lds.dataAsList(data);
+            }
+```
+
+For the options please see the great documentation at ChartJs. (http://www.chartjs.org/) 
+
+http://www.chartjs.org/docs/#chart-configuration-creating-a-chart-with-options
 
 ## Prerequisite
 

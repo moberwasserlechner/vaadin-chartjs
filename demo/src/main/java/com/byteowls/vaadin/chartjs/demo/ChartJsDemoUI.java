@@ -170,7 +170,7 @@ public class ChartJsDemoUI extends UI {
             lds.backgroundColor(color);
             lds.pointBorderColor(color);
             lds.pointBackgroundColor(color);
-            lds.pointBorderWidth(1d);
+            lds.pointBorderWidth(1);
         }
 
         ChartJs lineChart = new ChartJs(lineConfig);
@@ -359,10 +359,8 @@ public class ChartJsDemoUI extends UI {
                 .addDataset(new BarDataset().backgroundColor("rgba(220,220,220,0.5)").label("Dataset 1"))
                 .addDataset(new BarDataset().backgroundColor("rgba(151,187,205,0.5)").label("Dataset 2").hidden(true))
                 .addDataset(new BarDataset().backgroundColor("rgba(151,187,205,0.5)").label("Dataset 3"))
-                .and();
-        
-        barConfig.
-            options()
+                .and()
+            .options()
                 .responsive(true)
                 .title()
                     .display(true)
