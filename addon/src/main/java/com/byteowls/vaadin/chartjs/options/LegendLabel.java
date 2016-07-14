@@ -9,7 +9,7 @@ import elemental.json.JsonObject;
 
 public class LegendLabel<T> extends And<Legend<T>> implements JsonBuilder {
     
-    private Double boxWidth;
+    private Integer boxWidth;
     private Integer fontSize;
     private String fontStyle;
     private String fontColor;
@@ -21,7 +21,7 @@ public class LegendLabel<T> extends And<Legend<T>> implements JsonBuilder {
     /**
      * Width of coloured box. Default: 40
      */
-    public LegendLabel<T> boxWidth(double boxWidth) {
+    public LegendLabel<T> boxWidth(int boxWidth) {
         this.boxWidth = boxWidth;
         return this;
     }

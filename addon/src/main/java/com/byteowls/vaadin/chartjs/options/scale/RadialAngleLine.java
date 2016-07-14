@@ -16,7 +16,7 @@ public class RadialAngleLine<T> extends And<T> implements JsonBuilder {
     
     private Boolean display;
     private String color;
-    private Double lineWidth;
+    private Integer lineWidth;
 
     /**
      * If true, angle lines are shown. Default: true
@@ -37,7 +37,7 @@ public class RadialAngleLine<T> extends And<T> implements JsonBuilder {
     /**
      * Width of angled lines. Default: 1
      */
-    public RadialAngleLine<T> lineWidth(double lineWidth) {
+    public RadialAngleLine<T> lineWidth(int lineWidth) {
         this.lineWidth = lineWidth;
         return this;
     }

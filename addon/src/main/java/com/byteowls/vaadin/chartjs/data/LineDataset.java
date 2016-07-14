@@ -29,19 +29,19 @@ public class LineDataset implements Dataset<LineDataset> {
     private String backgroundColor;
     private Integer borderWidth;
     private String borderColor;
-    private List<Integer> borderDash;
     private String borderCapStyle;
+    private List<Integer> borderDash;
     private Double borderDashOffset;
     private String borderJoinStyle;
     private List<String> pointBorderColor;
     private List<String> pointBackgroundColor;
-    private List<Double> pointBorderWidth;
-    private List<Double> pointRadius;
-    private List<Double> pointHoverRadius;
-    private List<Double> pointHitRadius;
+    private List<Integer> pointBorderWidth;
+    private List<Integer> pointRadius;
+    private List<Integer> pointHoverRadius;
+    private List<Integer> pointHitRadius;
     private List<String> pointHoverBackgroundColor;
     private List<String> pointHoverBorderColor;
-    private List<Double> pointHoverBorderWidth;
+    private List<Integer> pointHoverBorderWidth;
     private PointStyle pointStyle;
     private Boolean showLine;
     private Boolean spanGaps;
@@ -196,7 +196,7 @@ public class LineDataset implements Dataset<LineDataset> {
     /**
      * The width of the point border in pixels
      */
-    public LineDataset pointBorderWidth(Double... pointBorderWidth) {
+    public LineDataset pointBorderWidth(Integer... pointBorderWidth) {
         this.pointBorderWidth = Arrays.asList(pointBorderWidth);
         return this;
     }
@@ -204,7 +204,7 @@ public class LineDataset implements Dataset<LineDataset> {
     /**
      * The radius of the point shape. If set to 0, nothing is rendered.
      */
-    public LineDataset pointRadius(Double... pointRadius) {
+    public LineDataset pointRadius(Integer... pointRadius) {
         this.pointRadius = Arrays.asList(pointRadius);
         return this;
     }
@@ -212,7 +212,7 @@ public class LineDataset implements Dataset<LineDataset> {
     /**
      * The radius of the point when hovered
      */
-    public LineDataset pointHoverRadius(Double... pointHoverRadius) {
+    public LineDataset pointHoverRadius(Integer... pointHoverRadius) {
         this.pointHoverRadius = Arrays.asList(pointHoverRadius);
         return this;
     }
@@ -220,7 +220,7 @@ public class LineDataset implements Dataset<LineDataset> {
     /**
      * The pixel size of the non-displayed point that reacts to mouse events
      */
-    public LineDataset pointHitRadius(Double... pointHitRadius) {
+    public LineDataset pointHitRadius(Integer... pointHitRadius) {
         this.pointHitRadius = Arrays.asList(pointHitRadius);
         return this;
     }
@@ -244,7 +244,7 @@ public class LineDataset implements Dataset<LineDataset> {
     /**
      * Border width of point when hovered
      */
-    public LineDataset pointHoverBorderWidth(Double... pointHoverBorderWidth) {
+    public LineDataset pointHoverBorderWidth(Integer... pointHoverBorderWidth) {
         this.pointHoverBorderWidth = Arrays.asList(pointHoverBorderWidth);
         return this;
     }
@@ -302,13 +302,13 @@ public class LineDataset implements Dataset<LineDataset> {
         JUtils.putNotNull(map, "borderJoinStyle", borderJoinStyle);
         JUtils.putNotNullStringListOrSingle(map, "pointBorderColor", pointBorderColor);
         JUtils.putNotNullStringListOrSingle(map, "pointBackgroundColor", pointBackgroundColor);
-        JUtils.putNotNullNumberListOrSingle(map, "pointBorderWidth", pointBorderWidth);
-        JUtils.putNotNullNumberListOrSingle(map, "pointRadius", pointRadius);
-        JUtils.putNotNullNumberListOrSingle(map, "pointHoverRadius", pointHoverRadius);
-        JUtils.putNotNullNumberListOrSingle(map, "pointHitRadius", pointHitRadius);
+        JUtils.putNotNullIntListOrSingle(map, "pointBorderWidth", pointBorderWidth);
+        JUtils.putNotNullIntListOrSingle(map, "pointRadius", pointRadius);
+        JUtils.putNotNullIntListOrSingle(map, "pointHoverRadius", pointHoverRadius);
+        JUtils.putNotNullIntListOrSingle(map, "pointHitRadius", pointHitRadius);
         JUtils.putNotNullStringListOrSingle(map, "pointHoverBackgroundColor", pointHoverBackgroundColor);
         JUtils.putNotNullStringListOrSingle(map, "pointHoverBorderColor", pointHoverBorderColor);
-        JUtils.putNotNullNumberListOrSingle(map, "pointHoverBorderWidth", pointHoverBorderWidth);
+        JUtils.putNotNullIntListOrSingle(map, "pointHoverBorderWidth", pointHoverBorderWidth);
         if (pointStyle != null) {
             JUtils.putNotNull(map, "pointStyle", pointStyle.name());
         }
