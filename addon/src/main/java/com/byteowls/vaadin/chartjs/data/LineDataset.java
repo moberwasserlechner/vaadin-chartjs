@@ -29,6 +29,7 @@ public class LineDataset implements Dataset<LineDataset> {
     private String backgroundColor;
     private Integer borderWidth;
     private String borderColor;
+    private List<Integer> borderDash;
     private String borderCapStyle;
     private Double borderDashOffset;
     private String borderJoinStyle;
@@ -147,6 +148,14 @@ public class LineDataset implements Dataset<LineDataset> {
         this.borderCapStyle = borderCapStyle;
         return this;
     }
+    
+    /**
+     * Length and spacing of dashes.
+     */
+    public LineDataset borderDash(Integer... borderDash) {
+        this.borderDash = Arrays.asList(borderDash);
+        return this;
+    }
 
     /**
      * Offset for line dashes.
@@ -261,6 +270,7 @@ public class LineDataset implements Dataset<LineDataset> {
         JUtils.putNotNull(map, "borderWidth", borderWidth);
         JUtils.putNotNull(map, "borderColor", borderColor);
         JUtils.putNotNull(map, "borderCapStyle", borderCapStyle);
+        JUtils.putNotNullIntList(map, "borderDash", borderDash);
         JUtils.putNotNull(map, "borderDashOffset", borderDashOffset);
         JUtils.putNotNull(map, "borderJoinStyle", borderJoinStyle);
         JUtils.putNotNullStringListOrSingle(map, "pointBorderColor", pointBorderColor);

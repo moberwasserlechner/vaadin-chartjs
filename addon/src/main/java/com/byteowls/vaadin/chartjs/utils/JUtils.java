@@ -97,6 +97,16 @@ public abstract class JUtils {
         }
     }
     
+    public static void putNotNullIntList(JsonObject obj, String key, List<Integer> listOfNumbers) {
+        if (listOfNumbers != null) {
+            JsonArray arr = Json.createArray();
+            for (Integer n : listOfNumbers) {
+                arr.set(arr.length(), n.doubleValue());
+            }
+            obj.put(key, arr);
+        }
+    }
+    
     public static void putNotNullStringListOrSingle(JsonObject obj, String key, List<String> list) {
         if (list != null) {
             if (list.size() == 1) {

@@ -9,10 +9,6 @@ import elemental.json.JsonObject;
 
 public class Legend<T> extends And<T> implements JsonBuilder {
     
-    public enum Position {
-        TOP, BOTTOM
-    }
-    
     private Boolean display;
     private Position position;
     private Boolean fullWidth;

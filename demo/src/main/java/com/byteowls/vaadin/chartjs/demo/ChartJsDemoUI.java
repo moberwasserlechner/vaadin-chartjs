@@ -15,10 +15,10 @@ import com.byteowls.vaadin.chartjs.data.PieDataset;
 import com.byteowls.vaadin.chartjs.data.PolarAreaDataset;
 import com.byteowls.vaadin.chartjs.options.Hover;
 import com.byteowls.vaadin.chartjs.options.Hover.Mode;
+import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.options.Tooltips;
-import com.byteowls.vaadin.chartjs.options.Legend;
+import com.byteowls.vaadin.chartjs.options.elements.Rectangle.RectangleEdge;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
-import com.byteowls.vaadin.chartjs.options.scale.BaseScale.Position;
 import com.byteowls.vaadin.chartjs.options.scale.CategoryScale;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
 import com.byteowls.vaadin.chartjs.options.scale.RadialLinearScale;
@@ -328,6 +328,7 @@ public class ChartJsDemoUI extends UI {
                 .responsive(true)
                 .title()
                     .display(true)
+                    .position(Position.LEFT)
                     .text("Chart.js Combo Bar Line Chart")
                     .and()
                .done();
@@ -367,9 +368,16 @@ public class ChartJsDemoUI extends UI {
                     .display(true)
                     .text("Chart.js Horizontal Bar Chart")
                     .and()
+                 .elements()
+                     .rectangle()
+                         .borderWidth(2)
+                         .borderColor("rgb(0, 255, 0)")
+                         .borderSkipped(RectangleEdge.LEFT)
+                         .and()
+                     .and()
                  .legend()
                      .fullWidth(false)
-                     .position(Legend.Position.BOTTOM)
+                     .position(Position.LEFT)
                      .and()
                .done();
         

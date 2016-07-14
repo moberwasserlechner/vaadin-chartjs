@@ -1,6 +1,7 @@
 package com.byteowls.vaadin.chartjs.options;
 
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
+import com.byteowls.vaadin.chartjs.options.elements.Element;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
@@ -22,6 +23,7 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
     private Hover<T> hover;
     private Animation<T> animation;
     private Legend<T> legend;
+    private Element<T> elements;
 
     public AbstractOptions(ChartConfig chartConfig) {
         this.chartConfig = chartConfig;
@@ -108,6 +110,16 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
         }
         return legend;
     }
+    
+    /**
+     * Step into the charts elements configuration
+     */
+    public Element<T> elements() {
+        if (elements == null) {
+            elements = new Element<>(getThis());
+        }
+        return elements;
+    }
 
     public abstract T getThis();
 
@@ -123,6 +135,7 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
         JUtils.putNotNull(map, "tooltips", tooltips);
         JUtils.putNotNull(map, "animation", animation);
         JUtils.putNotNull(map, "legend", legend);
+        JUtils.putNotNull(map, "elements", elements);
         return map;
     }
 

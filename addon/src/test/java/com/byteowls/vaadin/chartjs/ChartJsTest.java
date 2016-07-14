@@ -7,11 +7,10 @@ import com.byteowls.vaadin.chartjs.config.LineChartConfig;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.options.AnimationEasing;
 import com.byteowls.vaadin.chartjs.options.Hover;
-import com.byteowls.vaadin.chartjs.options.Title;
+import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.options.Tooltips;
-import com.byteowls.vaadin.chartjs.options.Legend.Position;
+import com.byteowls.vaadin.chartjs.options.elements.Rectangle.RectangleEdge;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
-import com.byteowls.vaadin.chartjs.options.scale.BaseScale;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
 import com.byteowls.vaadin.chartjs.options.scale.LogarithmicScale;
 
@@ -41,7 +40,7 @@ public class ChartJsTest {
                 .and()
             .title()
                 .display(true)
-                .position(Title.Position.TOP)
+                .position(Position.LEFT)
                 .text("Hello World")
                 .and()
             .animation()
@@ -50,9 +49,23 @@ public class ChartJsTest {
             .tooltips()
                 .mode(Tooltips.Mode.LABEL)
                 .and()
+            .elements()
+                .arc()
+                    .borderWidth(2)
+                    .and()
+                .rectangle()
+                    .borderSkipped(RectangleEdge.BOTTOM)
+                    .and()
+                .line()
+                    .fill(false)
+                    .and()
+                .point()
+                    .radius(32)
+                    .and()
+                .and()
             .scales()
-                .add(Axis.X, new LinearScale().position(BaseScale.Position.TOP))
-                .add(Axis.Y, new LogarithmicScale().position(BaseScale.Position.LEFT))
+                .add(Axis.X, new LinearScale().position(Position.TOP))
+                .add(Axis.Y, new LogarithmicScale().position(Position.LEFT))
                 .and()
            .legend()
                 .fullWidth(false)

@@ -8,10 +8,6 @@ import elemental.json.JsonObject;
 
 public class Title<T> extends And<T> implements JsonBuilder {
 
-    public enum Position {
-        TOP, BOTTOM
-    }
-
     private Boolean display;
     private Position position;
     private String text;

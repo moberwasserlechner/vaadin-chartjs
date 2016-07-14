@@ -1,5 +1,6 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
+import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
@@ -9,10 +10,6 @@ import elemental.json.JsonObject;
  * @author michael@team-conductor.com
  */
 public abstract class BaseScale<B extends BaseScale<?>> implements JsonBuilder {
-
-    public enum Position {
-        TOP, RIGHT, BOTTOM, LEFT
-    }
 
     private String id;
     protected String type;

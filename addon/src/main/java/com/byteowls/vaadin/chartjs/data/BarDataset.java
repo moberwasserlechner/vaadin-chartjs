@@ -16,7 +16,7 @@ import elemental.json.JsonObject;
 public class BarDataset implements Dataset<BarDataset> {
     
     public enum Edge {
-        bottom, left, top, right
+        BOTTOM, LEFT, TOP, RIGHT
     }
     
     private String type;
@@ -185,7 +185,7 @@ public class BarDataset implements Dataset<BarDataset> {
         if (borderSkipped != null) {
             List<String> list = new ArrayList<>();
             for (Edge e : borderSkipped) {
-                list.add(e.name());
+                list.add(e.name().toLowerCase());
             }
             JUtils.putNotNull(map, "borderSkipped", list);
         }
