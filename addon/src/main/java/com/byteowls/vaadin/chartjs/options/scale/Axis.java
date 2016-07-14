@@ -1,7 +1,7 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
 /**
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  */
 public enum Axis {
     X, Y

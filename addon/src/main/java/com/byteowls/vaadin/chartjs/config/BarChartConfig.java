@@ -12,7 +12,7 @@ import elemental.json.JsonObject;
  * 
  * It is sometimes used to show trend data, and the comparison of multiple data sets side by side.
  *
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  */
 public class BarChartConfig implements ChartConfig {
 

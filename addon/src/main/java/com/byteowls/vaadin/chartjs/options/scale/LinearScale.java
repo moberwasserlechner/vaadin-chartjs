@@ -9,7 +9,7 @@ import elemental.json.JsonObject;
  * The scatter chart type automatically configures a line chart to use one of these scales for the x axis.
  * As the name suggests, linear interpolation is used to determine where a value lies on the axis.
  *
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  */
 public class LinearScale extends BaseScale<LinearScale> {
 

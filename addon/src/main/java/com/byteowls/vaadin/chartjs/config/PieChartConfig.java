@@ -19,7 +19,7 @@ import elemental.json.JsonObject;
  *
  * Often, it is used to show trend data, and the comparison of two data sets.
  *
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  */
 public class PieChartConfig implements ChartConfig {
 

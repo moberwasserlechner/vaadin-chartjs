@@ -8,7 +8,7 @@ import elemental.json.JsonObject;
  * The logarithmic scale is use to chart numerical data. It can be placed on either the x or y axis.
  * As the name suggests, logarithmic interpolation is used to determine where a value lies on the axis.
  *
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  */
 public class LogarithmicScale extends BaseScale<LogarithmicScale> {
 

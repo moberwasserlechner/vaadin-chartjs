@@ -17,7 +17,7 @@ import com.byteowls.vaadin.chartjs.options.scale.LogarithmicScale;
 import elemental.json.JsonValue;
 
 /**
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  */
 public class ChartJsTest {
 

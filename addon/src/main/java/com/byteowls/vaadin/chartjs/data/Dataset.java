@@ -5,7 +5,7 @@ import java.util.List;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 
 /**
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  */
 public interface Dataset<T> extends JsonBuilder {
     

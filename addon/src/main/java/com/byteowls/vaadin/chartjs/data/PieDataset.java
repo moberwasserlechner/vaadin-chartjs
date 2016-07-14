@@ -17,7 +17,7 @@ import elemental.json.JsonObject;
  * 
  * The color attributes should be a string. Similar to CSS, for this string you can use HEX notation, RGB, RGBA or HSL.
  * 
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  *
  */
 public class PieDataset implements Dataset<PieDataset> {

@@ -6,7 +6,7 @@ import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.JsonObject;
 
 /**
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  */
 public abstract class AbstractScalableOptions<T extends AbstractScalableOptions<?>> extends AbstractOptions<T> {
 

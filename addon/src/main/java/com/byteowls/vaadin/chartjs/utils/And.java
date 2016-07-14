@@ -1,7 +1,7 @@
 package com.byteowls.vaadin.chartjs.utils;
 
 /**
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  */
 public abstract class And<T> {
 

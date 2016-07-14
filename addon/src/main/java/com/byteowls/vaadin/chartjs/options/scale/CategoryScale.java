@@ -8,7 +8,7 @@ import elemental.json.JsonObject;
  * The category scale will be familiar to those who have used v1.0.
  * Labels are drawn in from the labels array included in the chart data.
  *
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  */
 public class CategoryScale extends BaseScale<CategoryScale> {
 

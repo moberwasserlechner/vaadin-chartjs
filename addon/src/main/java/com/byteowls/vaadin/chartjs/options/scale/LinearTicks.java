@@ -5,7 +5,7 @@ import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.JsonObject;
 
 /**
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  */
 public class LinearTicks<T> extends Ticks<T> implements JsonBuilder {
 

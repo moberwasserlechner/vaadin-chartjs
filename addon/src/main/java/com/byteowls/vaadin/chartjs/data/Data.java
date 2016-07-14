@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  */
 public class Data<T> extends And<T> implements JsonBuilder {
 

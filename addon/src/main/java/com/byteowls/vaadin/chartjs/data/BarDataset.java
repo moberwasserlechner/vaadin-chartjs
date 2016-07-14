@@ -10,8 +10,7 @@ import elemental.json.Json;
 import elemental.json.JsonObject;
 
 /**
- * @author mowl-private
- *
+ * @author michael@byteowls.com
  */
 public class BarDataset implements Dataset<BarDataset> {
     

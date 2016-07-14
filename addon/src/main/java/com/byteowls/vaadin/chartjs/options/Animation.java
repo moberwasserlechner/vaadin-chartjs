@@ -7,7 +7,7 @@ import elemental.json.Json;
 import elemental.json.JsonObject;
 
 /**
- * @author michael@team-conductor.com
+ * @author michael@byteowls.com
  */
 public class Animation<T> extends And<T> implements JsonBuilder {
 
