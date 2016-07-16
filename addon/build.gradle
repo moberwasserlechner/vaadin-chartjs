@@ -24,7 +24,7 @@ vaadin {
     addon {
         author 'Michael Oberwasserlechner'
         license 'MIT'
-        title 'Chartjs wrapper'
+        title 'Chart.js Add-on'
     }
 }
 
@@ -44,7 +44,7 @@ jar {
         name = 'vaadin-chartjs'
         instruction 'Import-Package', '!com.google.gwt.*', '!com.vaadin.client.*', '*'
         instruction 'Bundle-Vendor', 'Michael Oberwasserlechner'
-        instruction 'Bundle-Description', 'Chart.js wrapper'
+        instruction 'Bundle-Description', 'Chart.js Add-on'
         instruction 'Bundle-DocURL', 'https://github.com/moberwasserlechner/vaadin-chartjs'
     }
 }
@@ -115,7 +115,7 @@ bintray {
         repo = 'maven'
         name = 'vaadin-chartjs'
         //userOrg = 'byteowls' //An optional organization name when the repo belongs to one of the user's orgs
-        desc = 'Vaadin Wrapper for Chart.js Javascript library'
+        desc = 'Vaadin Add-on for Chart.js chart library'
         websiteUrl = 'https://github.com/moberwasserlechner/vaadin-chartjs'
         issueTrackerUrl = 'https://github.com/moberwasserlechner/vaadin-chartjs/issues'
         vcsUrl = 'https://github.com/moberwasserlechner/vaadin-chartjs.git'
