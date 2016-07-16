@@ -20,7 +20,7 @@ import elemental.json.JsonObject;
  * @author michael@byteowls.com
  *
  */
-public class PieDataset implements Dataset<PieDataset> {
+public class PieDataset implements Dataset<PieDataset, Double> {
     
     private String type;
     private List<Double> data;

@@ -5,10 +5,12 @@ import java.util.List;
 
 import com.byteowls.vaadin.chartjs.ChartJs;
 import com.byteowls.vaadin.chartjs.config.BarChartConfig;
+import com.byteowls.vaadin.chartjs.config.BubbleChartConfig;
 import com.byteowls.vaadin.chartjs.config.LineChartConfig;
 import com.byteowls.vaadin.chartjs.config.PieChartConfig;
 import com.byteowls.vaadin.chartjs.config.PolarAreaChartConfig;
 import com.byteowls.vaadin.chartjs.data.BarDataset;
+import com.byteowls.vaadin.chartjs.data.BubbleDataset;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.data.PieDataset;
@@ -51,6 +53,7 @@ public class ChartJsDemoUI extends UI {
         vl.addComponent(comboBarLineChart());
         vl.addComponent(polarAreaChart());
         vl.addComponent(horizonalBarChart());
+        vl.addComponent(bubbleChart());
         panel.setContent(vl);
         setContent(panel);
     }
@@ -99,7 +102,7 @@ public class ChartJsDemoUI extends UI {
         
         // add random data for demo
         List<String> labels = lineConfig.data().getLabels();
-        for (Dataset<?> ds : lineConfig.data().getDatasets()) {
+        for (Dataset<?, ?> ds : lineConfig.data().getDatasets()) {
             LineDataset lds = (LineDataset) ds;
             List<Double> data = new ArrayList<>();
             for (int i = 0; i < labels.size(); i++) {
@@ -158,7 +161,7 @@ public class ChartJsDemoUI extends UI {
         
         // add random data for demo
         List<String> labels = lineConfig.data().getLabels();
-        for (Dataset<?> ds : lineConfig.data().getDatasets()) {
+        for (Dataset<?, ?> ds : lineConfig.data().getDatasets()) {
             LineDataset lds = (LineDataset) ds;
             List<Double> data = new ArrayList<>();
             for (int i = 0; i < labels.size(); i++) {
@@ -208,7 +211,7 @@ public class ChartJsDemoUI extends UI {
                .done();
         
         List<String> labels = barConfig.data().getLabels();
-        for (Dataset<?> ds : barConfig.data().getDatasets()) {
+        for (Dataset<?, ?> ds : barConfig.data().getDatasets()) {
             BarDataset lds = (BarDataset) ds;
             List<Double> data = new ArrayList<>();
             for (int i = 0; i < labels.size(); i++) {
@@ -251,7 +254,7 @@ public class ChartJsDemoUI extends UI {
         String[] colors = new String[] {"#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"};
         
         List<String> labels = config.data().getLabels();
-        for (Dataset<?> ds : config.data().getDatasets()) {
+        for (Dataset<?, ?> ds : config.data().getDatasets()) {
             PieDataset lds = (PieDataset) ds;
             lds.backgroundColor(colors);
             List<Double> data = new ArrayList<>();
@@ -292,7 +295,7 @@ public class ChartJsDemoUI extends UI {
                .done();
         
         List<String> labels = config.data().getLabels();
-        for (Dataset<?> ds : config.data().getDatasets()) {
+        for (Dataset<?, ?> ds : config.data().getDatasets()) {
             PolarAreaDataset lds = (PolarAreaDataset) ds;
             List<Double> data = new ArrayList<>();
             for (int i = 0; i < labels.size(); i++) {
@@ -334,12 +337,21 @@ public class ChartJsDemoUI extends UI {
                .done();
         
         List<String> labels = config.data().getLabels();
-        for (Dataset<?> ds : config.data().getDatasets()) {
+        for (Dataset<?, ?> ds : config.data().getDatasets()) {
             List<Double> data = new ArrayList<>();
             for (int i = 0; i < labels.size(); i++) {
                 data.add((double) (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100));
             }
-            ds.dataAsList(data);
+            
+            if (ds instanceof BarDataset) {
+                BarDataset bds = (BarDataset) ds;
+                bds.dataAsList(data);    
+            }
+                
+            if (ds instanceof LineDataset) {
+                LineDataset lds = (LineDataset) ds;
+                lds.dataAsList(data);    
+            }
         }
         
         ChartJs lineChart = new ChartJs(config);
@@ -380,7 +392,7 @@ public class ChartJsDemoUI extends UI {
                .done();
         
         List<String> labels = barConfig.data().getLabels();
-        for (Dataset<?> ds : barConfig.data().getDatasets()) {
+        for (Dataset<?, ?> ds : barConfig.data().getDatasets()) {
             BarDataset lds = (BarDataset) ds;
             List<Double> data = new ArrayList<>();
             for (int i = 0; i < labels.size(); i++) {
@@ -397,6 +409,45 @@ public class ChartJsDemoUI extends UI {
             Notification.show("BarDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.WARNING_MESSAGE);
         });
         return lineChart; 
+    }
+    
+    
+    private ChartJs bubbleChart() {
+        
+        BubbleChartConfig config = new BubbleChartConfig();
+        config.
+            data()
+                .addDataset(new BubbleDataset().label("My First dataset"))
+                .addDataset(new BubbleDataset().label("My Second dataset"))
+                .and()
+            .options()
+                .responsive(true)
+                .title()
+                    .display(true)
+                    .text("Chart.js Bubble Chart")
+                    .and()
+               .done();
+        
+        for (Dataset<?, ?> ds : config.data().getDatasets()) {
+            BubbleDataset lds = (BubbleDataset) ds;
+            lds.backgroundColor(randomColor(.7));
+            for (int i = 0; i < 7; i++) {
+                lds.addData(randomScalingFactor(), randomScalingFactor(), Math.abs(randomScalingFactor()) / 5);
+            }
+        }
+        
+        ChartJs lineChart = new ChartJs(config);
+        lineChart.setJsLoggingEnabled(true);
+        lineChart.setWidth(50, Unit.PERCENTAGE);
+        lineChart.addClickListener((a,b) -> {
+            BubbleDataset dataset = (BubbleDataset) config.data().getDatasets().get(a);
+            Notification.show("BubbleDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
+        });
+        return lineChart; 
+    }
+    
+    private double randomScalingFactor() {
+        return (double) (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
     }
     
     private long randomColorFactor() {

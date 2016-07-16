@@ -16,7 +16,7 @@ import java.util.List;
 public class Data<T> extends And<T> implements JsonBuilder {
 
     private List<String> labels;
-    private List<Dataset<?>> datasets;
+    private List<Dataset<?, ?>> datasets;
 
     public Data(T chartConfig) {
         super(chartConfig);
@@ -27,7 +27,7 @@ public class Data<T> extends And<T> implements JsonBuilder {
         return this;
     }
 
-    public Data<T> addDataset(Dataset<?> dataset) {
+    public Data<T> addDataset(Dataset<?, ?> dataset) {
         if (this.datasets == null) {
             this.datasets = new ArrayList<>();
         }
@@ -35,7 +35,7 @@ public class Data<T> extends And<T> implements JsonBuilder {
         return this;
     }
     
-    public List<Dataset<?>> getDatasets() {
+    public List<Dataset<?, ?>> getDatasets() {
         return datasets;
     }
     

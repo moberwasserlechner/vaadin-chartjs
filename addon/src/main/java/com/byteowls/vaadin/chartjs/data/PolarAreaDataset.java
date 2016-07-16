@@ -16,7 +16,7 @@ import elemental.json.JsonObject;
  * @author michael@byteowls.com
  *
  */
-public class PolarAreaDataset implements Dataset<PolarAreaDataset> {
+public class PolarAreaDataset implements Dataset<PolarAreaDataset, Double> {
     
     private String type = "polarArea";
     private List<Double> data;

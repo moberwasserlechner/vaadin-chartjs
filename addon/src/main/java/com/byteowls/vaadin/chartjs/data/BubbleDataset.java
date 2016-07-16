@@ -10,161 +10,142 @@ import elemental.json.Json;
 import elemental.json.JsonObject;
 
 /**
+ * A bubble chart is used to display three dimensions of data at the same time. 
+ * 
+ * The location of the bubble is determined by the first two dimensions and the corresponding horizontal and vertical axes. 
+ * 
+ * The third dimension is represented by the size of the individual bubbles.
+ *
  * @author michael@byteowls.com
  */
-public class BarDataset implements Dataset<BarDataset, Double> {
-    
-    public enum Edge {
-        BOTTOM, LEFT, TOP, RIGHT
-    }
+public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
     
     private String type;
-    private List<Double> data;
+    private List<BubbleData> data;
     private Boolean hidden;
     private String label;
-    private String xAxisID;
-    private String yAxisID;
-    private Boolean fill;
     private List<String> backgroundColor;
     private List<String> borderColor;
     private List<Integer> borderWidth;
-    private List<Edge> borderSkipped;
     private List<String> hoverBackgroundColor;
     private List<String> hoverBorderColor;
     private List<Integer> hoverBorderWidth;
+    private List<Integer> hoverRadius;
     
     /**
      * Used if the type of a dataset is needed. e.g. combo chart type charts
      */
-    public BarDataset type() {
-        type = "bar";
+    public BubbleDataset type() {
+        this.type = "bubble";
         return this;
     }
     
     /**
-     * Used if the type of a dataset is needed. e.g. combo chart type charts
+     * A single data object to plot as bubbles
+     * @param x X Value
+     * @param y Y Value
+     * @param r Radius of bubble. This is not scaled.
      */
-    public BarDataset horizontalType() {
-        type = "horizontalBar";
+    public BubbleDataset addData(Double x, Double y, Double r) {
+        if (data == null) {
+            data = new ArrayList<>();
+        }
+        data.add(new BubbleData().x(x).y(y).r(r));
         return this;
     }
-    
+
     /**
-     * The data to plot as bars
+     * The data to plot as bubbles
      */
     @Override
-    public BarDataset data(Double... data) {
+    public BubbleDataset data(BubbleData... data) {
         this.data = Arrays.asList(data);
         return this;
     }
 
     /**
-     * The data to plot as bars
+     * The data to plot as bubbles
      */
     @Override
-    public BarDataset dataAsList(List<Double> data) {
+    public BubbleDataset dataAsList(List<BubbleData> data) {
         this.data = data;
         return this;
     }
     
     @Override
-    public List<Double> getData() {
+    public List<BubbleData> getData() {
         return data;
     }
 
     /**
      * The label for the dataset which appears in the legend and tooltips
      */
-    public BarDataset label(String label) {
+    public BubbleDataset label(String label) {
         this.label = label;
         return this;
     }
 
     /**
-     * The ID of the x axis to plot this dataset on
-     */
-    public BarDataset xAxisID(String xAxisID) {
-        this.xAxisID = xAxisID;
-        return this;
-    }
-
-    /**
-     * The ID of the y axis to plot this dataset on
-     */
-    public BarDataset yAxisID(String yAxisID) {
-        this.yAxisID = yAxisID;
-        return this;
-    }
-
-    /**
-     * If true, fill the area under the line
-     */
-    public BarDataset fill(boolean fill) {
-        this.fill = fill;
-        return this;
-    }
-    
-    /**
      * If true, the dataset is hidden
      */
-    public BarDataset hidden(boolean hidden) {
+    public BubbleDataset hidden(boolean hidden) {
         this.hidden = hidden;
         return this;
     }
 
     /**
-     * The fill color of the bars.
+     * The fill color of the bubbles.
      */
-    public BarDataset backgroundColor(String...  backgroundColor) {
+    public BubbleDataset backgroundColor(String...  backgroundColor) {
         this.backgroundColor = Arrays.asList(backgroundColor);
         return this;
     }
     
     /**
-     * Bar border color.
+     * The stroke color of the bubbles.
      */
-    public BarDataset borderColor(String... borderColor) {
+    public BubbleDataset borderColor(String... borderColor) {
         this.borderColor = Arrays.asList(borderColor);
         return this;
     }
 
     /**
-     * Border width of bar in pixels
+     * The stroke width of bubble in pixels.
      */
-    public BarDataset borderWidth(Integer... borderWidth) {
+    public BubbleDataset borderWidth(Integer... borderWidth) {
         this.borderWidth = Arrays.asList(borderWidth);
         return this;
     }
 
     /**
-     * Which edge to skip drawing the border for. Options are 'bottom', 'left', 'top', and 'right'
+     * The fill color of the bubbles when hovered.
      */
-    public BarDataset borderSkipped(Edge... borderSkipped) {
-        this.borderSkipped = Arrays.asList(borderSkipped);
-        return this;
-    }
-
-    /**
-     * Bar background color when hovered
-     */
-    public BarDataset hoverBackgroundColor(String...  hoverBackgroundColor) {
+    public BubbleDataset hoverBackgroundColor(String...  hoverBackgroundColor) {
         this.hoverBackgroundColor = Arrays.asList(hoverBackgroundColor);
         return this;
     }
     
     /**
-     * Bar border color when hovered
+     * The stroke color of the bubbles when hovered.
      */
-    public BarDataset hoverBorderColor(String... hoverBorderColor) {
+    public BubbleDataset hoverBorderColor(String... hoverBorderColor) {
         this.hoverBorderColor = Arrays.asList(hoverBorderColor);
         return this;
     }
 
     /**
-     * Border width of bar when hovered
+     * The stroke width of the bubbles when hovered.
      */
-    public BarDataset hoverBorderWidth(Integer... hoverBorderWidth) {
+    public BubbleDataset hoverBorderWidth(Integer... hoverBorderWidth) {
         this.hoverBorderWidth = Arrays.asList(hoverBorderWidth);
+        return this;
+    }
+    
+    /**
+     * Additional radius to add to data radius on hover.
+     */
+    public BubbleDataset hoverRadius(Integer... hoverRadius) {
+        this.hoverRadius = Arrays.asList(hoverRadius);
         return this;
     }
 
@@ -172,25 +153,16 @@ public class BarDataset implements Dataset<BarDataset, Double> {
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "type", type);
-        JUtils.putNotNullNumbers(map, "data", data);
+        JUtils.putNotNullBuilders(map, "data", data);
         JUtils.putNotNull(map, "label", label);
-        JUtils.putNotNull(map, "xAxisID", xAxisID);
-        JUtils.putNotNull(map, "yAxisID", yAxisID);
-        JUtils.putNotNull(map, "fill", fill);
         JUtils.putNotNull(map, "hidden", hidden);
         JUtils.putNotNullStringListOrSingle(map, "backgroundColor", backgroundColor);
         JUtils.putNotNullStringListOrSingle(map, "borderColor", borderColor);
         JUtils.putNotNullIntListOrSingle(map, "borderWidth", borderWidth);
-        if (borderSkipped != null) {
-            List<String> list = new ArrayList<>();
-            for (Edge e : borderSkipped) {
-                list.add(e.name().toLowerCase());
-            }
-            JUtils.putNotNull(map, "borderSkipped", list);
-        }
         JUtils.putNotNullStringListOrSingle(map, "hoverBackgroundColor", hoverBackgroundColor);
         JUtils.putNotNullStringListOrSingle(map, "hoverBorderColor", hoverBorderColor);
         JUtils.putNotNullIntListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);
+        JUtils.putNotNullIntListOrSingle(map, "hoverRadius", hoverRadius);
         return map;
     }
 }

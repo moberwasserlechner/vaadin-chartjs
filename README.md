@@ -11,6 +11,9 @@ Vaadin 7 wrapper for the Chart.js charting library. https://github.com/chartjs/C
  * Donut chart
  * Pie chart
  * Polar area chart
+ * Bubble chart
+ * *Radar chart* ... planed for 0.2.0
+ * *Scatter line chart* ... planed for 0.2.0
 * Data point click listener
 
 ## Installation

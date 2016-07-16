@@ -12,7 +12,7 @@ import elemental.json.JsonObject;
  * @author michael@byteowls.com
  *
  */
-public class LineDataset implements Dataset<LineDataset> {
+public class LineDataset implements Dataset<LineDataset, Double> {
     
     public enum PointStyle {
         circle, triangle, rect, rectRot, cross, crossRot, star, line, dash

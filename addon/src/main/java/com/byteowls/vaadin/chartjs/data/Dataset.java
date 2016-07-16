@@ -7,12 +7,12 @@ import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 /**
  * @author michael@byteowls.com
  */
-public interface Dataset<T> extends JsonBuilder {
+public interface Dataset<T, D> extends JsonBuilder {
     
-    T data(Double... data);
+    T data(D... data);
 
-    T dataAsList(List<Double> data);
+    T dataAsList(List<D> data);
     
-    List<Double> getData();
+    List<D> getData();
     
 }
