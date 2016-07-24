@@ -6,10 +6,11 @@ import java.util.List;
 import com.byteowls.vaadin.chartjs.ChartJs;
 import com.byteowls.vaadin.chartjs.config.BarChartConfig;
 import com.byteowls.vaadin.chartjs.config.BubbleChartConfig;
+import com.byteowls.vaadin.chartjs.config.DonutChartConfig;
 import com.byteowls.vaadin.chartjs.config.LineChartConfig;
-import com.byteowls.vaadin.chartjs.config.PieChartConfig;
 import com.byteowls.vaadin.chartjs.config.PolarAreaChartConfig;
 import com.byteowls.vaadin.chartjs.config.RadarChartConfig;
+import com.byteowls.vaadin.chartjs.config.ScatterChartConfig;
 import com.byteowls.vaadin.chartjs.data.BarDataset;
 import com.byteowls.vaadin.chartjs.data.BubbleDataset;
 import com.byteowls.vaadin.chartjs.data.Dataset;
@@ -17,6 +18,7 @@ import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.data.PieDataset;
 import com.byteowls.vaadin.chartjs.data.PolarAreaDataset;
 import com.byteowls.vaadin.chartjs.data.RadarDataset;
+import com.byteowls.vaadin.chartjs.data.ScatterDataset;
 import com.byteowls.vaadin.chartjs.options.Hover;
 import com.byteowls.vaadin.chartjs.options.Hover.Mode;
 import com.byteowls.vaadin.chartjs.options.Position;
@@ -58,6 +60,7 @@ public class ChartJsDemoUI extends UI {
         vl.addComponent(bubbleChart());
         vl.addComponent(radarChart());
         vl.addComponent(radarSkipChart());
+        vl.addComponent(multiAxisScatterChart());
         panel.setContent(vl);
         setContent(panel);
     }
@@ -232,9 +235,8 @@ public class ChartJsDemoUI extends UI {
     
     private ChartJs doughnutChart() {
         
-        PieChartConfig config = new PieChartConfig();
+        DonutChartConfig config = new DonutChartConfig();
         config
-            .doughnut()
             .data()
                 .labels("Red", "Green", "Yellow", "Grey", "Dark Grey")
                 .addDataset(new PieDataset().label("Dataset 1"))
@@ -488,7 +490,7 @@ public class ChartJsDemoUI extends UI {
         
         lineChart.addClickListener((a,b) -> {
             RadarDataset dataset = (RadarDataset) config.data().getDatasets().get(a);
-            Notification.show("PolarAreaDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
+            Notification.show("RadarDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
         });
         return lineChart; 
     }
@@ -539,7 +541,54 @@ public class ChartJsDemoUI extends UI {
         
         lineChart.addClickListener((a,b) -> {
             RadarDataset dataset = (RadarDataset) config.data().getDatasets().get(a);
-            Notification.show("PolarAreaDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
+            Notification.show("RadarDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
+        });
+        return lineChart; 
+    }
+    
+    private ChartJs multiAxisScatterChart() {
+        ScatterChartConfig config = new ScatterChartConfig();
+        config
+            .data()
+                .addDataset(new ScatterDataset().label("My First dataset").xAxisID("x-axis-1").yAxisID("y-axis-1"))
+                .addDataset(new ScatterDataset().label("My Second  dataset").xAxisID("x-axis-1").yAxisID("y-axis-2"))
+                .and();
+        config.
+            options()
+                .responsive(true)
+                .hover()
+                    .mode(Mode.SINGLE)
+                    .and()
+                .title()
+                    .display(true)
+                    .text("Chart.js Scatter Chart - Multi Axis")
+                    .and()
+                .scales()
+                    .add(Axis.X, new LinearScale().position(Position.BOTTOM).gridLines().zeroLineColor("rgba(0,0,0,1)").and())
+                    .add(Axis.Y, new LinearScale().display(true).position(Position.LEFT).id("y-axis-1"))
+                    .add(Axis.Y, new LinearScale().display(true).position(Position.RIGHT).id("y-axis-2").ticks().reverse(true).and().gridLines().drawOnChartArea(false).and())
+                    .and()
+               .done();
+        
+        for (Dataset<?, ?> ds : config.data().getDatasets()) {
+            ScatterDataset lds = (ScatterDataset) ds;
+            lds.borderColor(randomColor(.4));
+            lds.backgroundColor(randomColor(.1));
+            lds.pointBorderColor(randomColor(.7));
+            lds.pointBackgroundColor(randomColor(.5));
+            lds.pointBorderWidth(1);
+            for (int i = 0; i < 7; i++) {
+                lds.addData(randomScalingFactor(), randomScalingFactor());
+            }
+        }
+        
+        ChartJs lineChart = new ChartJs(config);
+        lineChart.setJsLoggingEnabled(true);
+        lineChart.setWidth(50, Unit.PERCENTAGE);
+        
+        lineChart.addClickListener((a,b) -> {
+            ScatterDataset dataset = (ScatterDataset) config.data().getDatasets().get(a);
+            Notification.show("ScatterDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
         });
         return lineChart; 
     }
