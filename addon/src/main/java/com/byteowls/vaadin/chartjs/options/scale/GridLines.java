@@ -1,5 +1,8 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
@@ -12,7 +15,7 @@ import elemental.json.JsonObject;
 public class GridLines<T> extends And<T> implements JsonBuilder {
 
     private Boolean display;
-    private String color;
+    private List<String> color;
     private Integer lineWidth;
     private Boolean drawBorder;
     private Boolean drawOnChartArea;
@@ -34,8 +37,8 @@ public class GridLines<T> extends And<T> implements JsonBuilder {
     /**
      * Color of the grid lines.
      */
-    public GridLines<T> color(String color) {
-        this.color = color;
+    public GridLines<T> color(String... color) {
+        this.color = Arrays.asList(color);
         return this;
     }
 
@@ -108,7 +111,7 @@ public class GridLines<T> extends And<T> implements JsonBuilder {
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "display", display);
-        JUtils.putNotNull(map, "color", color);
+        JUtils.putNotNullStringListOrSingle(map, "color", color);
         JUtils.putNotNull(map, "lineWidth", lineWidth);
         JUtils.putNotNull(map, "drawBorder", drawBorder);
         JUtils.putNotNull(map, "drawOnChartArea", drawOnChartArea);

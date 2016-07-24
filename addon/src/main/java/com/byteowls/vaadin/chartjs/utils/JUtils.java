@@ -4,6 +4,7 @@ import elemental.json.Json;
 import elemental.json.JsonArray;
 import elemental.json.JsonObject;
 import elemental.json.JsonValue;
+import elemental.json.impl.JreJsonNull;
 
 import java.util.List;
 import java.util.Map;
@@ -91,7 +92,11 @@ public abstract class JUtils {
         if (listOfNumbers != null) {
             JsonArray arr = Json.createArray();
             for (Double n : listOfNumbers) {
-                arr.set(arr.length(), n);
+                if (n == null) {
+                    arr.set(arr.length(), new JreJsonNull());
+                } else {
+                    arr.set(arr.length(), n);
+                }
             }
             obj.put(key, arr);
         }

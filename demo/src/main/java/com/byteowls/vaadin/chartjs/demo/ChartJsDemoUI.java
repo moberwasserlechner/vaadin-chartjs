@@ -9,12 +9,14 @@ import com.byteowls.vaadin.chartjs.config.BubbleChartConfig;
 import com.byteowls.vaadin.chartjs.config.LineChartConfig;
 import com.byteowls.vaadin.chartjs.config.PieChartConfig;
 import com.byteowls.vaadin.chartjs.config.PolarAreaChartConfig;
+import com.byteowls.vaadin.chartjs.config.RadarChartConfig;
 import com.byteowls.vaadin.chartjs.data.BarDataset;
 import com.byteowls.vaadin.chartjs.data.BubbleDataset;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.data.PieDataset;
 import com.byteowls.vaadin.chartjs.data.PolarAreaDataset;
+import com.byteowls.vaadin.chartjs.data.RadarDataset;
 import com.byteowls.vaadin.chartjs.options.Hover;
 import com.byteowls.vaadin.chartjs.options.Hover.Mode;
 import com.byteowls.vaadin.chartjs.options.Position;
@@ -54,6 +56,8 @@ public class ChartJsDemoUI extends UI {
         vl.addComponent(polarAreaChart());
         vl.addComponent(horizonalBarChart());
         vl.addComponent(bubbleChart());
+        vl.addComponent(radarChart());
+        vl.addComponent(radarSkipChart());
         panel.setContent(vl);
         setContent(panel);
     }
@@ -442,6 +446,100 @@ public class ChartJsDemoUI extends UI {
         lineChart.addClickListener((a,b) -> {
             BubbleDataset dataset = (BubbleDataset) config.data().getDatasets().get(a);
             Notification.show("BubbleDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
+        });
+        return lineChart; 
+    }
+    
+    private ChartJs radarChart() {
+        RadarChartConfig config = new RadarChartConfig();
+        config
+            .data()
+                .labels("Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running")
+                .addDataset(new RadarDataset().label("My First dataset").backgroundColor("rgba(220,220,220,0.2)").pointBackgroundColor("rgba(220,220,220,1)"))
+                .addDataset(new RadarDataset().label("Hidden dataset").hidden(true))
+                .addDataset(new RadarDataset().label("My Second  dataset").backgroundColor("rgba(151,187,205,0.2)").pointBackgroundColor("rgba(151,187,205,1)").pointHoverBackgroundColor("#fff"))
+                .and();
+        
+        config.
+            options()
+                .legend()
+                    .position(Position.TOP)
+                    .and()
+                .title()
+                    .display(true)
+                    .text("Chart.js Radar Chart")
+                    .and()
+                .scale(new RadialLinearScale().ticks().beginAtZero(true).and().reverse(false).gridLines().color("black", "red", "orange", "yellow", "green", "blue", "indigo", "violet").and())
+               .done();
+        
+        List<String> labels = config.data().getLabels();
+        for (Dataset<?, ?> ds : config.data().getDatasets()) {
+            RadarDataset lds = (RadarDataset) ds;
+            List<Double> data = new ArrayList<>();
+            for (int i = 0; i < labels.size(); i++) {
+                data.add((double) (Math.round(Math.random() * 100)));
+            }
+            lds.dataAsList(data);
+        }
+        
+        ChartJs lineChart = new ChartJs(config);
+        lineChart.setJsLoggingEnabled(true);
+        lineChart.setWidth(50, Unit.PERCENTAGE);
+        
+        lineChart.addClickListener((a,b) -> {
+            RadarDataset dataset = (RadarDataset) config.data().getDatasets().get(a);
+            Notification.show("PolarAreaDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
+        });
+        return lineChart; 
+    }
+    
+    private ChartJs radarSkipChart() {
+        RadarChartConfig config = new RadarChartConfig();
+        config
+            .data()
+                .labels("Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running")
+                .addDataset(new RadarDataset().label("Skip first dataset").borderColor("rgb(255, 0, 0)").backgroundColor("rgba(255,255,0,0.5)").pointBackgroundColor("rgba(220,220,220,1)"))
+                .addDataset(new RadarDataset().label("Skip mid dataset").borderColor("rgb(255, 0, 255)").backgroundColor("rgba(0, 255, 0, 0.5)").pointBackgroundColor("rgba(151,187,205,1)").pointHoverBackgroundColor("#fff"))
+                .addDataset(new RadarDataset().label("Skip last dataset").borderColor("rgb(0, 255, 255)").backgroundColor("rgba(0, 0, 255, 0.5)").pointBackgroundColor("rgba(151,187,205,1)").pointHoverBackgroundColor("#fff"))
+                .and();
+        
+        config.
+            options()
+                .title()
+                    .display(true)
+                    .text("Chart.js Radar Chart - Skip Points")
+                    .and()
+                 .elements()
+                     .line()
+                         .tension(0.0)
+                         .and()
+                     .and()
+                .scale(new RadialLinearScale().ticks().beginAtZero(true).and().reverse(false))
+               .done();
+        
+        List<String> labels = config.data().getLabels();
+        int cnt = 0;
+        for (Dataset<?, ?> ds : config.data().getDatasets()) {
+            RadarDataset lds = (RadarDataset) ds;
+            List<Double> data = new ArrayList<>();
+            for (int i = 0; i < labels.size(); i++) {
+                if ((cnt == 0 && i == 0) || (cnt == 1 && i == 3) || (cnt == 2 && i == 6)) {
+                    data.add(Double.NaN);
+                } else {
+                    data.add((double) (Math.round(Math.random() * 100)));
+                }
+            }
+            lds.dataAsList(data);
+            cnt++;
+        }
+        
+        ChartJs lineChart = new ChartJs(config);
+        lineChart.setJsLoggingEnabled(true);
+        lineChart.setWidth(50, Unit.PERCENTAGE);
+        
+        lineChart.addClickListener((a,b) -> {
+            RadarDataset dataset = (RadarDataset) config.data().getDatasets().get(a);
+            Notification.show("PolarAreaDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
         });
         return lineChart; 
     }
