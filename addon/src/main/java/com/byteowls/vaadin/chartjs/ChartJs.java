@@ -20,7 +20,19 @@ public class ChartJs extends AbstractJavaScriptComponent {
     }
     
     private List<ChartJs.DataPointClickListener> dataPointClickListeners = new ArrayList<>();
+    private ChartConfig chartConfig;
+    
+    /**
+     * Construct a ChartJs. Be aware that you have to set a {@link ChartConfig} as well. Use {@link #configure(ChartConfig)} to do so.
+     */
+    public ChartJs() {
+        addJsFunctions();
+    }
 
+    /**
+     * Constructs a chart with a {@link ChartConfig}
+     * @param chartConfig a chart configuration implementation
+     */
     public ChartJs(ChartConfig chartConfig) {
         configure(chartConfig);
         addJsFunctions();
@@ -28,13 +40,18 @@ public class ChartJs extends AbstractJavaScriptComponent {
 
     /**
      * Configure a ChartJs chart.
-     *
      * @param chartConfig a chart configuration implementation
      */
-    private void configure(ChartConfig chartConfig) {
+    public void configure(ChartConfig chartConfig) {
         if (chartConfig != null) {
-            getState().configurationJson = chartConfig.buildJson();
+            this.chartConfig = chartConfig;
         }
+    }
+    
+    @Override
+    public void attach() {
+        getState().configurationJson = chartConfig.buildJson();
+        super.attach();
     }
 
     /**
