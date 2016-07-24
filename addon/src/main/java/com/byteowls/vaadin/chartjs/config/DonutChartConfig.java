@@ -21,12 +21,12 @@ import elemental.json.JsonObject;
  *
  * @author michael@byteowls.com
  */
-public class PieChartConfig implements ChartConfig {
+public class DonutChartConfig implements ChartConfig {
 
-    private Data<PieChartConfig> data;
+    private Data<DonutChartConfig> data;
     private PieChartOptions options;
 
-    public Data<PieChartConfig> data() {
+    public Data<DonutChartConfig> data() {
         if (this.data == null) {
             this.data = new Data<>(this);
         }
@@ -40,11 +40,10 @@ public class PieChartConfig implements ChartConfig {
         return options;
     }
     
-
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
-        JUtils.putNotNull(map, "type", "pie");
+        JUtils.putNotNull(map, "type", "doughnut");
         // data
         if (data != null) {
             JUtils.putNotNull(map, "data", data.buildJson());
