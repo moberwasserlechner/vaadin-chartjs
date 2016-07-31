@@ -10,6 +10,7 @@ import elemental.json.JsonObject;
 public class RadarChartOptions extends AbstractOptions<RadarChartOptions> {
 
     private RadialLinearScale scale;
+    private Double offsetAngle;
 
     public RadarChartOptions(ChartConfig chartConfig) {
         super(chartConfig);
@@ -19,11 +20,17 @@ public class RadarChartOptions extends AbstractOptions<RadarChartOptions> {
         this.scale = scale;
         return this;
     }
+    
+    public RadarChartOptions offsetAngle(double offsetAngle) {
+        this.offsetAngle = offsetAngle;
+        return this;
+    }
 
     @Override
     public JsonObject buildJson() {
         JsonObject map = super.buildJson();
         JUtils.putNotNull(map, "scale", scale);
+        JUtils.putNotNull(map, "offsetAngle", offsetAngle);
         return map;
     }
 

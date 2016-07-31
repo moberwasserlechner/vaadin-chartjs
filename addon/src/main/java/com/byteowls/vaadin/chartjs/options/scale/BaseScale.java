@@ -16,6 +16,9 @@ public abstract class BaseScale<B extends BaseScale<?>> implements JsonBuilder {
     protected Boolean display;
     protected Position position;
     protected Boolean stacked;
+    protected Integer barThickness;
+    protected Double categoryPercentage;
+    protected Double barPercentage;
     protected GridLines<B> gridLines;
     protected Ticks<B> ticks;
     protected ScaleLabel<B> scaleLabel;
@@ -51,6 +54,31 @@ public abstract class BaseScale<B extends BaseScale<?>> implements JsonBuilder {
         this.stacked = stacked;
         return this;
     }
+
+    /**
+     * Manually set width of each bar in pixels. If not set, the bars are sized automatically.
+     */
+    public BaseScale<B> barThickness(int barThickness) {
+        this.barThickness = barThickness;
+        return this;
+    }
+
+    /**
+     * Percent (0-1) of the available width (the space between the gridlines for small datasets) for each data-point to use for the bars.
+     */
+    public BaseScale<B> categoryPercentage(double categoryPercentage) {
+        this.categoryPercentage = categoryPercentage;
+        return this;
+    }
+
+    /**
+     * Percent (0-1) of the available width each bar should be within the category percentage. 1.0 will take the whole category width and put the bars right next to each other. 
+     */
+    public BaseScale<B> barPercentage(double barPercentage) {
+        this.barPercentage = barPercentage;
+        return this;
+    }
+
 
     /**
      * Position of the scale.
@@ -100,6 +128,9 @@ public abstract class BaseScale<B extends BaseScale<?>> implements JsonBuilder {
         JUtils.putNotNull(map, "display", display);
         JUtils.putNotNull(map, "id", id);
         JUtils.putNotNull(map, "stacked", stacked);
+        JUtils.putNotNull(map, "barThickness", barThickness);
+        JUtils.putNotNull(map, "categoryPercentage", categoryPercentage);
+        JUtils.putNotNull(map, "barPercentage", barPercentage);
         if (position != null) {
             JUtils.putNotNull(map, "position", position.name().toLowerCase());
         }
