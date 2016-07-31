@@ -1,8 +1,22 @@
-plugins {
-  id "fi.jasoft.plugin.vaadin" version "0.11"
-  id "org.akhikhl.gretty" version "1.2.4"
+buildscript {
+    ext {
+        springBootVersion = '1.4.0.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
+plugins {
+  id "fi.jasoft.plugin.vaadin" version "0.11.1"
+}
+
+
+apply plugin: 'eclipse-wtp'
+apply plugin: 'spring-boot'
 apply plugin: 'war'
 
 eclipse {
@@ -21,25 +35,27 @@ vaadin {
   vaadinCompile.widgetset = 'ChartJsWidgetset'
   vaadinCompile.manageWidgetset = true
   vaadinCompile.gwtSdkFirstInClasspath = true
+  vaadinCompile.style = 'PRETTY'
 
   vaadin.manageDependencies = true
 }
 
 dependencies {
   compile project(":addon")
-  compile "com.thedeanda:lorem:1.2"
-  compile "com.vaadin:vaadin-server:${vaadinVersion}"
-  compile "com.vaadin:vaadin-client-compiled:${vaadinVersion}"
-  compile "com.vaadin:vaadin-themes:${vaadinVersion}"
-  
-  providedCompile "javax.servlet:javax.servlet-api:3.1.0"
+  compile('com.vaadin:vaadin-spring-boot-starter:1.0.0')
+  providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+  testCompile('org.springframework.boot:spring-boot-starter-test')
+  runtime("javax.servlet:jsp-api:2.0"){
+    transitive = false;
+  }
+}
+
+dependencyManagement {
+  imports {
+    mavenBom "com.vaadin:vaadin-bom:7.6.8"
+  }
 }
 
 war {
-  archiveName = 'ChartJsDemo.war'
-}
-
-gretty {
-  servletContainer = 'tomcat8'
-  contextPath = "/"
+  baseName = project.ext.artifactId
 }

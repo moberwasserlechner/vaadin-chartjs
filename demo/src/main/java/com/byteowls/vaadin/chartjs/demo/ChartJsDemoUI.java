@@ -31,6 +31,7 @@ import com.byteowls.vaadin.chartjs.options.scale.RadialLinearScale;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
@@ -38,6 +39,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 
 @Theme("chartjs")
+@SpringUI
 @Widgetset("ChartJsWidgetset")
 public class ChartJsDemoUI extends UI {
 
