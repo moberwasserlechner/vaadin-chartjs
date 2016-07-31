@@ -1,5 +1,5 @@
 plugins {
-    id "fi.jasoft.plugin.vaadin" version "0.11"
+    id "fi.jasoft.plugin.vaadin" version "0.11.1"
     id "com.jfrog.bintray" version "1.5"
 }
 apply plugin: 'maven-publish'

@@ -18,10 +18,10 @@ public class ChartJs extends AbstractJavaScriptComponent {
     public interface DataPointClickListener {
         void onDataPointClick(int datasetIndex, int dataIndex);
     }
-    
+
     private List<ChartJs.DataPointClickListener> dataPointClickListeners = new ArrayList<>();
     private ChartConfig chartConfig;
-    
+
     /**
      * Construct a ChartJs. Be aware that you have to set a {@link ChartConfig} as well. Use {@link #configure(ChartConfig)} to do so.
      */
@@ -47,7 +47,7 @@ public class ChartJs extends AbstractJavaScriptComponent {
             this.chartConfig = chartConfig;
         }
     }
-    
+
     @Override
     public void attach() {
         if (chartConfig != null) {
@@ -100,7 +100,7 @@ public class ChartJs extends AbstractJavaScriptComponent {
                 int dataIndex = (int) arguments.getNumber(1);
                 for (DataPointClickListener l : dataPointClickListeners) {
                     l.onDataPointClick(datasetIndex, dataIndex);
-                }                
+                }
             }
         });
     }

@@ -12,11 +12,11 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 	// called every time the state is changed
 	this.onStateChange = function() {
 		stateChangedCnt++;
+		var state = this.getState();
+		loggingEnabled = state.loggingEnabled;
 		if (loggingEnabled) {
 			console.log("chartjs: accessing onStateChange the "+stateChangedCnt+". time");
 		}
-		var state = this.getState();
-		loggingEnabled = state.loggingEnabled;
 		if (typeof canvas === 'undefined') {
 			if (loggingEnabled) {
 				console.log("chartjs: create canvas");
