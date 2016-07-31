@@ -20,10 +20,9 @@ import elemental.json.JsonObject;
  * @author michael@byteowls.com
  *
  */
-public class PieDataset implements Dataset<PieDataset, Double> {
-    
+public class PieDataset extends DoubleDataset<PieDataset> {
+
     private String type;
-    private List<Double> data;
     private Boolean hidden;
     private String label;
     private Boolean fill;
@@ -33,7 +32,7 @@ public class PieDataset implements Dataset<PieDataset, Double> {
     private List<String> hoverBackgroundColor;
     private List<String> hoverBorderColor;
     private List<Integer> hoverBorderWidth;
-    
+
     /**
      * Used if the type of a dataset is needed. e.g. combo chart type charts
      */
@@ -57,29 +56,6 @@ public class PieDataset implements Dataset<PieDataset, Double> {
         this.type = "pie";
         return this;
     }
-    
-    /**
-     * The data to plot as arcs
-     */
-    @Override
-    public PieDataset data(Double... data) {
-        this.data = Arrays.asList(data);
-        return this;
-    }
-
-    /**
-     * The data to plot as bars
-     */
-    @Override
-    public PieDataset dataAsList(List<Double> data) {
-        this.data = data;
-        return this;
-    }
-    
-    @Override
-    public List<Double> getData() {
-        return data;
-    }
 
     /**
      * The label for the dataset which appears in the legend and tooltips
@@ -96,7 +72,7 @@ public class PieDataset implements Dataset<PieDataset, Double> {
         this.fill = fill;
         return this;
     }
-    
+
     /**
      * If true, the dataset is hidden
      */
@@ -112,7 +88,7 @@ public class PieDataset implements Dataset<PieDataset, Double> {
         this.backgroundColor = Arrays.asList(backgroundColor);
         return this;
     }
-    
+
     /**
      * Arc border color.
      */
@@ -136,7 +112,7 @@ public class PieDataset implements Dataset<PieDataset, Double> {
         this.hoverBackgroundColor = Arrays.asList(hoverBackgroundColor);
         return this;
     }
-    
+
     /**
      * Arc border color when hovered
      */
@@ -168,5 +144,10 @@ public class PieDataset implements Dataset<PieDataset, Double> {
         JUtils.putNotNullStringListOrSingle(map, "hoverBorderColor", hoverBorderColor);
         JUtils.putNotNullIntListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);
         return map;
+    }
+
+    @Override
+    public PieDataset getThis() {
+        return this;
     }
 }

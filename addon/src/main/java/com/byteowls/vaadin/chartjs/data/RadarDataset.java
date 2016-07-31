@@ -12,10 +12,9 @@ import elemental.json.JsonObject;
  * @author michael@byteowls.com
  *
  */
-public class RadarDataset implements Dataset<RadarDataset, Double> {
+public class RadarDataset extends DoubleDataset<RadarDataset> {
 
     private String type;
-    private List<Double> data;
     private Boolean hidden;
     private String label;
     private Boolean fill;
@@ -44,23 +43,6 @@ public class RadarDataset implements Dataset<RadarDataset, Double> {
     public RadarDataset type() {
         type = "radar";
         return this;
-    }
-
-    @Override
-    public RadarDataset data(Double... data) {
-        this.data = Arrays.asList(data);
-        return this;
-    }
-
-    @Override
-    public RadarDataset dataAsList(List<Double> data) {
-        this.data = data;
-        return this;
-    }
-
-    @Override
-    public List<Double> getData() {
-        return data;
     }
 
     /**
@@ -262,6 +244,11 @@ public class RadarDataset implements Dataset<RadarDataset, Double> {
             JUtils.putNotNull(map, "pointStyle", pointStyle.name());
         }
         return map;
+    }
+
+    @Override
+    public RadarDataset getThis() {
+        return this;
     }
 
 }

@@ -16,10 +16,9 @@ import elemental.json.JsonObject;
  * @author michael@byteowls.com
  *
  */
-public class PolarAreaDataset implements Dataset<PolarAreaDataset, Double> {
-    
+public class PolarAreaDataset extends DoubleDataset<PolarAreaDataset> {
+
     private String type = "polarArea";
-    private List<Double> data;
     private Boolean hidden;
     private String label;
     private List<String> backgroundColor;
@@ -28,36 +27,13 @@ public class PolarAreaDataset implements Dataset<PolarAreaDataset, Double> {
     private List<String> hoverBackgroundColor;
     private List<String> hoverBorderColor;
     private List<Integer> hoverBorderWidth;
-    
+
     /**
      * Used if the type of a dataset is needed. e.g. combo chart type charts
      */
     public PolarAreaDataset type() {
         this.type = "polarArea";
         return this;
-    }
-    
-    /**
-     * The data to plot as arcs
-     */
-    @Override
-    public PolarAreaDataset data(Double... data) {
-        this.data = Arrays.asList(data);
-        return this;
-    }
-
-    /**
-     * The data to plot as arcs
-     */
-    @Override
-    public PolarAreaDataset dataAsList(List<Double> data) {
-        this.data = data;
-        return this;
-    }
-    
-    @Override
-    public List<Double> getData() {
-        return data;
     }
 
     /**
@@ -83,7 +59,7 @@ public class PolarAreaDataset implements Dataset<PolarAreaDataset, Double> {
         this.backgroundColor = Arrays.asList(backgroundColor);
         return this;
     }
-    
+
     /**
      * Arc border color.
      */
@@ -107,7 +83,7 @@ public class PolarAreaDataset implements Dataset<PolarAreaDataset, Double> {
         this.hoverBackgroundColor = Arrays.asList(hoverBackgroundColor);
         return this;
     }
-    
+
     /**
      * Arc border color when hovered
      */
@@ -138,5 +114,10 @@ public class PolarAreaDataset implements Dataset<PolarAreaDataset, Double> {
         JUtils.putNotNullStringListOrSingle(map, "hoverBorderColor", hoverBorderColor);
         JUtils.putNotNullIntListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);
         return map;
+    }
+
+    @Override
+    public PolarAreaDataset getThis() {
+        return this;
     }
 }

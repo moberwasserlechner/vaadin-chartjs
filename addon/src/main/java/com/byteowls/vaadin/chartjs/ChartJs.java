@@ -50,7 +50,9 @@ public class ChartJs extends AbstractJavaScriptComponent {
     
     @Override
     public void attach() {
-        getState().configurationJson = chartConfig.buildJson();
+        if (chartConfig != null) {
+            getState().configurationJson = chartConfig.buildJson();
+        }
         super.attach();
     }
 

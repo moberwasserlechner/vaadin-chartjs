@@ -12,14 +12,13 @@ import elemental.json.JsonObject;
 /**
  * @author michael@byteowls.com
  */
-public class BarDataset implements Dataset<BarDataset, Double> {
-    
+public class BarDataset extends DoubleDataset<BarDataset> {
+
     public enum Edge {
         BOTTOM, LEFT, TOP, RIGHT
     }
-    
+
     private String type;
-    private List<Double> data;
     private Boolean hidden;
     private String label;
     private String xAxisID;
@@ -32,7 +31,7 @@ public class BarDataset implements Dataset<BarDataset, Double> {
     private List<String> hoverBackgroundColor;
     private List<String> hoverBorderColor;
     private List<Integer> hoverBorderWidth;
-    
+
     /**
      * Used if the type of a dataset is needed. e.g. combo chart type charts
      */
@@ -40,36 +39,13 @@ public class BarDataset implements Dataset<BarDataset, Double> {
         type = "bar";
         return this;
     }
-    
+
     /**
      * Used if the type of a dataset is needed. e.g. combo chart type charts
      */
     public BarDataset horizontalType() {
         type = "horizontalBar";
         return this;
-    }
-    
-    /**
-     * The data to plot as bars
-     */
-    @Override
-    public BarDataset data(Double... data) {
-        this.data = Arrays.asList(data);
-        return this;
-    }
-
-    /**
-     * The data to plot as bars
-     */
-    @Override
-    public BarDataset dataAsList(List<Double> data) {
-        this.data = data;
-        return this;
-    }
-    
-    @Override
-    public List<Double> getData() {
-        return data;
     }
 
     /**
@@ -103,7 +79,7 @@ public class BarDataset implements Dataset<BarDataset, Double> {
         this.fill = fill;
         return this;
     }
-    
+
     /**
      * If true, the dataset is hidden
      */
@@ -119,7 +95,7 @@ public class BarDataset implements Dataset<BarDataset, Double> {
         this.backgroundColor = Arrays.asList(backgroundColor);
         return this;
     }
-    
+
     /**
      * Bar border color.
      */
@@ -151,7 +127,7 @@ public class BarDataset implements Dataset<BarDataset, Double> {
         this.hoverBackgroundColor = Arrays.asList(hoverBackgroundColor);
         return this;
     }
-    
+
     /**
      * Bar border color when hovered
      */
@@ -192,5 +168,10 @@ public class BarDataset implements Dataset<BarDataset, Double> {
         JUtils.putNotNullStringListOrSingle(map, "hoverBorderColor", hoverBorderColor);
         JUtils.putNotNullIntListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);
         return map;
+    }
+
+    @Override
+    public BarDataset getThis() {
+        return this;
     }
 }

@@ -7,9 +7,14 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 	var loggingEnabled = false;
 	var canvas;
 	var chartjs;
+	var stateChangedCnt = 0;
 
 	// called every time the state is changed
 	this.onStateChange = function() {
+		stateChangedCnt++;
+		if (loggingEnabled) {
+			console.log("chartjs: accessing onStateChange the "+stateChangedCnt+". time");
+		}
 		var state = this.getState();
 		loggingEnabled = state.loggingEnabled;
 		if (typeof canvas === 'undefined') {
@@ -18,16 +23,22 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 			}
 			canvas = document.createElement('canvas');
 			e.appendChild(canvas)
+		} else {
+			if (loggingEnabled) {
+				console.log("chartjs: canvas already exists");
+			}
 		}
-		if (state.width > 0) {
-			canvas.setAttribute('width', state.width);
-		}
-		if (state.height > 0) {
-			canvas.setAttribute('height', state.height);
-		}
+//		if (state.width > 0) {
+//			canvas.setAttribute('width', state.width);
+//		}
+//		if (state.height > 0) {
+//			canvas.setAttribute('height', state.height);
+//		}
+		
+		canvas.setAttribute('width', "100%");
+		canvas.setAttribute('height', "100%");
 
-
-		if (typeof chartjs === 'undefined') {
+		if (typeof chartjs === 'undefined' && state.configurationJson !== 'undefined') {
 			if (loggingEnabled) {
 				console.log("chartjs: init");
 			}

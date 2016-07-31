@@ -12,10 +12,9 @@ import elemental.json.JsonObject;
  * @author michael@byteowls.com
  *
  */
-public class LineDataset implements Dataset<LineDataset, Double> {
-    
+public class LineDataset extends DoubleDataset<LineDataset> {
+
     private String type;
-    private List<Double> data;
     private Boolean hidden;
     private String label;
     private String xAxisID;
@@ -42,30 +41,13 @@ public class LineDataset implements Dataset<LineDataset, Double> {
     private Boolean showLine;
     private Boolean spanGaps;
     private Boolean steppedLine;
-    
+
     /**
      * Used if the type of a dataset is needed. e.g. combo chart type charts
      */
     public LineDataset type() {
         type = "line";
         return this;
-    }
-    
-    @Override
-    public LineDataset data(Double... data) {
-        this.data = Arrays.asList(data);
-        return this;
-    }
-
-    @Override
-    public LineDataset dataAsList(List<Double> data) {
-        this.data = data;
-        return this;
-    }
-    
-    @Override
-    public List<Double> getData() {
-        return data;
     }
 
     /**
@@ -99,7 +81,7 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.fill = fill;
         return this;
     }
-    
+
     /**
      * If true, the dataset is hidden
      */
@@ -147,7 +129,7 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.borderCapStyle = borderCapStyle;
         return this;
     }
-    
+
     /**
      * Length and spacing of dashes.
      */
@@ -179,7 +161,7 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.pointBorderColor = Arrays.asList(pointBorderColor);
         return this;
     }
-    
+
     /**
      * The fill color for points
      */
@@ -187,8 +169,8 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.pointBackgroundColor = Arrays.asList(pointBackgroundColor);
         return this;
     }
-    
-    
+
+
     /**
      * The width of the point border in pixels
      */
@@ -196,7 +178,7 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.pointBorderWidth = Arrays.asList(pointBorderWidth);
         return this;
     }
-    
+
     /**
      * The radius of the point shape. If set to 0, nothing is rendered.
      */
@@ -204,7 +186,7 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.pointRadius = Arrays.asList(pointRadius);
         return this;
     }
-    
+
     /**
      * The radius of the point when hovered
      */
@@ -212,7 +194,7 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.pointHoverRadius = Arrays.asList(pointHoverRadius);
         return this;
     }
-    
+
     /**
      * The pixel size of the non-displayed point that reacts to mouse events
      */
@@ -220,7 +202,7 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.pointHitRadius = Arrays.asList(pointHitRadius);
         return this;
     }
-    
+
     /**
      * Point background color when hovered
      */
@@ -228,7 +210,7 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.pointHoverBackgroundColor = Arrays.asList(pointHoverBackgroundColor);
         return this;
     }
-    
+
     /**
      * Point border color when hovered
      */
@@ -236,7 +218,7 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.pointHoverBorderColor = Arrays.asList(pointHoverBorderColor);
         return this;
     }
-    
+
     /**
      * Border width of point when hovered
      */
@@ -244,8 +226,8 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.pointHoverBorderWidth = Arrays.asList(pointHoverBorderWidth);
         return this;
     }
-    
-    
+
+
     /**
      * The style of point. Options are 'circle', 'triangle', 'rect', 'rectRot', 'cross', 'crossRot', 'star', 'line', and 'dash'. 
      */
@@ -253,7 +235,7 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.pointStyle = pointStyle;
         return this;
     }
-    
+
     /**
      * If false, the line is not drawn for this dataset
      */
@@ -261,7 +243,7 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.showLine = showLine;
         return this;
     }
-    
+
     /**
      * If true, lines will be drawn between points with no or null data
      */
@@ -269,7 +251,7 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         this.spanGaps = spanGaps;
         return this;
     }
-    
+
     /**
      * If true, the line is shown as a steeped line and 'lineTension' will be ignored
      */
@@ -312,6 +294,11 @@ public class LineDataset implements Dataset<LineDataset, Double> {
         JUtils.putNotNull(map, "spanGaps", spanGaps);
         JUtils.putNotNull(map, "steppedLine", steppedLine);
         return map;
+    }
+
+    @Override
+    public LineDataset getThis() {
+        return this;
     }
 
 }
