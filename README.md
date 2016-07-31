@@ -12,8 +12,8 @@ Vaadin 7 wrapper for the Chart.js charting library. https://github.com/chartjs/C
  * Pie chart
  * Polar area chart
  * Bubble chart
- * *Radar chart* ... planed for 0.2.0
- * *Scatter line chart* ... planed for 0.2.0
+ * Radar chart
+ * Scatter line chart
 * Data point click listener
 
 ## Installation
@@ -95,9 +95,14 @@ The basic usage is always the same. You need to create a new ChartJs() and confi
 Right now there these chart configuration types:
 
 * BarChartConfig ... Vertical and horizontal
+* BubbleChartConfig
+* ChartConfig
+* DonutChartConfig
 * LineChartConfig
-* PieChartConfig ... Pie and donut
+* PieChartConfig
 * PolarAreaChartConfig
+* RadarChartConfig
+* ScatterChartConfig
 
 ### Bar chart configuration
 
@@ -157,7 +162,7 @@ http://www.chartjs.org/docs/#chart-configuration-creating-a-chart-with-options
 
 ### Demo
 * JDK 8 (because of Lambdas)
-* Vaadin 7.4 or higher
+* Vaadin 7.6.8
 
 ## Usage
 
@@ -185,7 +190,7 @@ In all other cases please create a issue at https://github.com/moberwasserlechne
 
 ### Code Style
 
-Please use the sun coding convention with **4 spaces** instead of tabs for indention. Please do not use tabs at all!
+Please use the sun coding convention. Please do not use tabs at all!
 
 ## Demo
 
@@ -200,8 +205,10 @@ Afaik there are no online examples yet but you can download them along with the 
 **Run it yourself**
 
 1. Clone the repository
-2. Run the embedded Tomcat by `./gradlew :demo:run`
-3. It starts at `http://localhost:8080`
+2. Build eclipse project configs for addon and demo with `./gradlew cleanEclipse eclipse`
+3. In Eclipse open File->Import... and choose General->Existing Projects into Workspace for the root folder
+4. Create a run or debug configuration as a Java Application and use this "com.byteowls.vaadin.chartjs.demo.ChartJsDemoApplication" main class
+3. It starts at `http://localhost:8080/chartjs/`
 
 **Live Demo**
 

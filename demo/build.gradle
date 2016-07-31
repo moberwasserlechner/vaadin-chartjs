@@ -10,9 +10,11 @@ buildscript {
     }
 }
 
+/*
 plugins {
   id "fi.jasoft.plugin.vaadin" version "0.11.1"
 }
+*/
 
 
 apply plugin: 'eclipse-wtp'
@@ -28,6 +30,7 @@ eclipse {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+/*
 vaadin {
   vaadin.version = "${vaadinVersion}"
   vaadin.logToConsole = true
@@ -39,6 +42,7 @@ vaadin {
 
   vaadin.manageDependencies = true
 }
+*/
 
 dependencies {
   compile project(":addon")
