@@ -12,5 +12,22 @@
   .cjs-menu {
     background-color: white;
   }
+  
+  .valo-menu-part.large-icons {
+    max-width: 100% !important;
+  }
+  
+  .valo-menu-item [class*="caption"] {
+    font-size: 15px !important;
+  }
+  
+  .cjs-menu-parent {
+    font-weight: bold !important;
+  }
+  
+  .cjs-menu-child {
+    text-align: left !important;
+  }
+  
 
 }

@@ -29,12 +29,16 @@ public class MultiAxisBarChartView extends AbstractChartView {
         barConfig.
             data()
                 .labels("January", "February", "March", "April", "May", "June", "July")
-                .addDataset(new BarDataset().backgroundColor("rgba(220,220,220,0.5)").label("Dataset 1").yAxisID("y-axis-1"))
-                .addDataset(new BarDataset().backgroundColor("rgba(151,187,205,0.5)").label("Dataset 2").yAxisID("y-axis-2"))
-                .addDataset(new BarDataset().backgroundColor(ChartUtils.randomColor(0.7), ChartUtils.randomColor(0.7), ChartUtils.randomColor(0.7), 
-                        ChartUtils.randomColor(0.7), ChartUtils.randomColor(0.7), ChartUtils.randomColor(0.7), ChartUtils.randomColor(0.7)).label("Dataset 3").yAxisID("y-axis-1").hidden(true))
+                .addDataset(
+                        new BarDataset().backgroundColor("rgba(220,220,220,0.5)").label("Dataset 1").yAxisID("y-axis-1"))
+                .addDataset(
+                        new BarDataset().backgroundColor("rgba(151,187,205,0.5)").label("Dataset 2").yAxisID("y-axis-2").hidden(true))
+                .addDataset(
+                        new BarDataset().backgroundColor(
+                        ChartUtils.randomColor(0.7), ChartUtils.randomColor(0.7), ChartUtils.randomColor(0.7), 
+                        ChartUtils.randomColor(0.7), ChartUtils.randomColor(0.7), ChartUtils.randomColor(0.7), 
+                        ChartUtils.randomColor(0.7)).label("Dataset 3").yAxisID("y-axis-1"))
                 .and();
-        
         barConfig.
             options()
                 .responsive(true)

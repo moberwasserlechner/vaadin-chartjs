@@ -74,11 +74,11 @@ war {
     baseName = project.ext.artifactId
 
     // Include widgetset
-    dependsOn 'vaadinCompile'
-    dependsOn 'test' 
+    //dependsOn 'vaadinCompile'
+    //dependsOn 'test' 
     
     // Add sources
-    webInf{
+    webInf {
       into('classes'){
         from sourceSets.main.allJava
        }

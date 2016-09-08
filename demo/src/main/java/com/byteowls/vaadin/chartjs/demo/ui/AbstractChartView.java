@@ -1,6 +1,8 @@
 package com.byteowls.vaadin.chartjs.demo.ui;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -16,14 +18,13 @@ import com.vaadin.ui.VerticalLayout;
 public abstract class AbstractChartView extends VerticalLayout implements ChartView {
 
     private static final long serialVersionUID = -1280497201872048972L;
-    
+
     @PostConstruct
     public void postConstruct() {
         setSizeFull();
         setMargin(true);
         Component layout = getChart();
-        layout.setHeight(100, Unit.PERCENTAGE);
-        layout.setWidth(90, Unit.PERCENTAGE);
+        layout.setWidth(100, Unit.PERCENTAGE);
         addComponent(layout);
         setComponentAlignment(layout, Alignment.MIDDLE_CENTER);
     }
@@ -32,8 +33,15 @@ public abstract class AbstractChartView extends VerticalLayout implements ChartV
     public String getSource() {
         // thanks to https://github.com/johndevs/dragdroplayouts/blob/master/demo/src/main/java/fi/jasoft/dragdroplayouts/demo/DemoView.java#L41
         String path = getClass().getCanonicalName().replaceAll("\\.", "/") + ".java";
+        InputStream in = null;
+        try {
+            if ("dev".equals(System.getProperty("profile"))) {
+                File f = new File(System.getProperty("user.dir") + "/src/main/java/"+path);
+                in = new FileInputStream(f);
+            } else {
+                in = getClass().getClassLoader().getResourceAsStream(path);
+            }
 
-        try (InputStream in = getClass().getClassLoader().getResourceAsStream("../src/main/java/"+ path)) {
             if (in != null) {
 
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
@@ -55,14 +63,21 @@ public abstract class AbstractChartView extends VerticalLayout implements ChartV
                     return codelines.toString();
                 } catch (Exception ignore) {}
             }
-        } catch (Exception ignore) {}
+        } catch (Exception ignore) {
 
+        } finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (Exception e) { }
+        }
         return null;
     }
-    
+
     @Override
     public void enter(ViewChangeEvent event) {
-        
+
     }
 
     @Override
@@ -70,7 +85,7 @@ public abstract class AbstractChartView extends VerticalLayout implements ChartV
         Class<?> realBeanClass = ClassUtils.getUserClass(getClass());
         return realBeanClass.getSimpleName();
     }
-    
-    
+
+
 
 }

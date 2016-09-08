@@ -28,7 +28,6 @@ public class SimpleLineChartView extends AbstractChartView {
 
     @Override
     public Component getChart() {
-        // start-source
         LineChartConfig lineConfig = new LineChartConfig();
         lineConfig.data()
             .labels("January", "February", "March", "April", "May", "June", "July")
@@ -89,7 +88,6 @@ public class SimpleLineChartView extends AbstractChartView {
             Notification.show("Dataset: " + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b));
         });
         chart.setJsLoggingEnabled(true);
-        // end-source
         return chart;
     }
 
