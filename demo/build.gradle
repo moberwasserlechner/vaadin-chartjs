@@ -33,14 +33,13 @@ targetCompatibility = 1.8
 /*
 vaadin {
   vaadin.version = "${vaadinVersion}"
-  vaadin.logToConsole = true
+  // vaadin.logToConsole = true
   
   vaadinCompile.widgetset = 'ChartJsWidgetset'
   vaadinCompile.manageWidgetset = true
   vaadinCompile.gwtSdkFirstInClasspath = true
-  vaadinCompile.style = 'PRETTY'
 
-  vaadin.manageDependencies = true
+  //vaadin.manageDependencies = true
 }
 */
 
