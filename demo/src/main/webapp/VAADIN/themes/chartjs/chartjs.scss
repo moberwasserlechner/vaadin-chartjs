@@ -4,5 +4,13 @@
   @include valo;
 
   /* Add your theme selectors here */
+  .v-app-loading:before {
+    background: none !important;
+    @include valo-spinner(30);
+  }
+  
+  .cjs-menu {
+    background-color: white;
+  }
 
 }

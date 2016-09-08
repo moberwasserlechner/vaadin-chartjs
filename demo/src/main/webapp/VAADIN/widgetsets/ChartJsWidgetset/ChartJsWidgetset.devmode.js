@@ -2,7 +2,7 @@ var $wnd = $wnd || window.parent;
 var __gwtModuleFunction = $wnd.ChartJsWidgetset;
 var $sendStats = __gwtModuleFunction.__sendStats;
 $sendStats('moduleStartup', 'moduleEvalStart');
-var $gwt_version = "7.6.8";
+var $gwt_version = "7.7.0";
 var $strongName = '';
 var $gwt = {};
 var $doc = $wnd.document;

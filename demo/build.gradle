@@ -4,6 +4,7 @@ buildscript {
     }
     repositories {
         mavenCentral()
+        maven { url = "http://maven.vaadin.com/vaadin-addons"}
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -15,7 +16,6 @@ plugins {
   id "fi.jasoft.plugin.vaadin" version "0.11.1"
 }
 */
-
 
 apply plugin: 'eclipse-wtp'
 apply plugin: 'spring-boot'
@@ -44,9 +44,19 @@ vaadin {
 }
 */
 
+repositories {
+    mavenCentral()
+    maven { url = "http://maven.vaadin.com/vaadin-addons"}
+}
+
 dependencies {
   compile project(":addon")
-  compile('com.vaadin:vaadin-spring-boot-starter:1.0.0')
+  //compile ("de.fatalix:codmirror-addon:1.2.2")
+  compile ("com.vaadin:vaadin-spring-boot:${vaadinSpringVersion}")
+  compile ("com.vaadin:vaadin-spring:${vaadinSpringVersion}")
+  //compile ("org.vaadin.spring.addons:vaadin-spring-addon-eventbus:${vaadin4SpringVersion}")
+  compile ("org.vaadin.spring.extensions:vaadin-spring-ext-boot:${vaadin4SpringVersion}")
+  compile ("de.java2html:java2html:5.0")
   providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
   testCompile('org.springframework.boot:spring-boot-starter-test')
   runtime("javax.servlet:jsp-api:2.0"){
@@ -56,10 +66,21 @@ dependencies {
 
 dependencyManagement {
   imports {
-    mavenBom "com.vaadin:vaadin-bom:7.6.8"
+    mavenBom "com.vaadin:vaadin-bom:7.7.0"
   }
 }
 
 war {
-  baseName = project.ext.artifactId
+    baseName = project.ext.artifactId
+
+    // Include widgetset
+    dependsOn 'vaadinCompile'
+    dependsOn 'test' 
+    
+    // Add sources
+    webInf{
+      into('classes'){
+        from sourceSets.main.allJava
+       }
+    }
 }
