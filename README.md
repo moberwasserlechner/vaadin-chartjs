@@ -25,9 +25,9 @@ Vaadin 7 wrapper for the Chart.js charting library. https://github.com/chartjs/C
 ### Vaadin Directory
 
 Get the addon from 
-https://vaadin.com/directory#!addon/chartjs-wrapper.
+https://vaadin.com/directory#!addon/chartjs-add-on.
 
-Vaadin runs its own Maven repository and you can download the addon there as well, but you will need to create a free vaadin account first.
+You can download the addon there as well, but you will need to create a free vaadin account first. For Maven style dependencies please use below settings.
 
 ### Maven
 
