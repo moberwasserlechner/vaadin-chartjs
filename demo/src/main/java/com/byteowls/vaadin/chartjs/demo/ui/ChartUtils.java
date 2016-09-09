@@ -1,5 +1,9 @@
 package com.byteowls.vaadin.chartjs.demo.ui;
 
+import com.byteowls.vaadin.chartjs.data.Dataset;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
+
 public abstract class ChartUtils {
     
     public static double randomScalingFactor() {
@@ -12,6 +16,10 @@ public abstract class ChartUtils {
     
     public static String randomColor(double d) {
         return "rgba(" + randomColorFactor() + "," + randomColorFactor() + "," + randomColorFactor() + "," + d + ")";
+    }
+    
+    public static void notification(int dataSetIdx, int dataIdx, Dataset<?, ?> dataset) {
+        Notification.show("Dataset at Idx:" + dataSetIdx + "; Data at Idx: " + dataIdx + "; Value: " + dataset.getData().get(dataIdx), Type.TRAY_NOTIFICATION);
     }
 
 }

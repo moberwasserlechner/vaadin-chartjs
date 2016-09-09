@@ -68,6 +68,10 @@ public class MultiAxisBarChartView extends AbstractChartView {
         
         ChartJs chart = new ChartJs(barConfig);
         chart.setJsLoggingEnabled(true);
+        chart.addClickListener((a,b) -> {
+            BarDataset dataset = (BarDataset) barConfig.data().getDatasets().get(a);
+            ChartUtils.notification(a, b, dataset);
+        });
         return chart; 
     }
 

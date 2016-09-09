@@ -18,7 +18,6 @@ import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.Notification;
 
 @UIScope
 @SpringView
@@ -85,7 +84,7 @@ public class SimpleLineChartView extends AbstractChartView {
         ChartJs chart = new ChartJs(lineConfig);
         chart.addClickListener((a,b) -> {
             LineDataset dataset = (LineDataset) lineConfig.data().getDatasets().get(a);
-            Notification.show("Dataset: " + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b));
+            ChartUtils.notification(a, b, dataset);
         });
         chart.setJsLoggingEnabled(true);
         return chart;

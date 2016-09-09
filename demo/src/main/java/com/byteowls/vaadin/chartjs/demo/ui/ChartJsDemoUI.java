@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 import com.byteowls.vaadin.chartjs.demo.ui.charts.BarLineComboChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.HorizontalBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiAxisBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiDonutChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.PointSizeLineChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.PolarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.ScatterLineChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.SimpleBubbleChartView;
@@ -37,6 +39,7 @@ import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 import de.java2html.converter.JavaSource2HTMLConverter;
@@ -55,29 +58,33 @@ public class ChartJsDemoUI extends UI {
     private static List<MenuItem> menuItems;
     static {
         menuItems = new ArrayList<>();
-        menuItems.add(new MenuItem(ChartType.BAR, "Multi Axis", MultiAxisBarChartView.class));
+        menuItems.add(new MenuItem(ChartType.BAR, "Vertical", MultiAxisBarChartView.class));
         menuItems.add(new MenuItem(ChartType.BAR, "Horizontal", HorizontalBarChartView.class));
-        menuItems.add(new MenuItem(ChartType.BAR, "Combo Bar/Line", BarLineComboChartView.class));
+        menuItems.add(new MenuItem(ChartType.BAR, "Combo", BarLineComboChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Simple", SimpleLineChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Stacked", StackedLineChartView.class));
-        menuItems.add(new MenuItem(ChartType.LINE, "Combo Bar/Line", BarLineComboChartView.class));
+        menuItems.add(new MenuItem(ChartType.LINE, "Combo", BarLineComboChartView.class));
+        menuItems.add(new MenuItem(ChartType.LINE, "PointSize", PointSizeLineChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Scatter", ScatterLineChartView.class));
-        menuItems.add(new MenuItem(ChartType.PIE, "Multi dataset Donut", MultiDonutChartView.class));
-        menuItems.add(new MenuItem(ChartType.BUBBLE, "Bubble", SimpleBubbleChartView.class));
+        menuItems.add(new MenuItem(ChartType.PIE, "Donut", MultiDonutChartView.class));
+        menuItems.add(new MenuItem(ChartType.BUBBLE, "Simple", SimpleBubbleChartView.class));
         menuItems.add(new MenuItem(ChartType.POLAR, "Simple", PolarChartView.class));
         menuItems.add(new MenuItem(ChartType.RADAR, "Simple", SimpleRadarChartView.class));
-        menuItems.add(new MenuItem(ChartType.RADAR, "Skip data point", SkipDataRadarChartView.class));
+        menuItems.add(new MenuItem(ChartType.RADAR, "Skipping", SkipDataRadarChartView.class));
     }
 
     @Autowired
     private SpringViewProvider viewProvider;
+    @Autowired
+    private Environment env;
 
     private Label codeLabel = new Label("", ContentMode.HTML);
 
     @SuppressWarnings("serial")
     @Override
     protected void init(VaadinRequest request) {
-        getPage().setTitle("Vaadin ChartJs addon Demo");
+        String title = "Vaadin ChartJs Addon";
+        getPage().setTitle(title);
         Responsive.makeResponsive(this);
 
         Panel content = buildContent();
@@ -85,6 +92,21 @@ public class ChartJsDemoUI extends UI {
         Navigator navigator = new Navigator(this, content);
         navigator.addProvider(viewProvider);
         navigator.setErrorProvider(viewProvider);
+        
+        VerticalLayout vl = new VerticalLayout();
+        vl.setSizeFull();
+        
+        Label info = new Label("<strong>" + title + "</strong> "
+                + "| Version: <strong>" + env.getProperty("versions.vaadin-chartjs-addon") + "</strong> "
+                + "| Chart.js: <strong>" + env.getProperty("versions.chartjs") + "</strong> "
+                + "| Vaadin: <strong>" + env.getProperty("versions.vaadin") + "</strong> "
+                + "| Created by: <strong>Michael Oberwasserlechner (https://github.com/moberwasserlechner)</strong>");
+        info.setContentMode(ContentMode.HTML);
+        
+        CssLayout infoBar = new CssLayout(info);
+        infoBar.setWidth(100, Unit.PERCENTAGE);
+        infoBar.addStyleName("cjs-info-bar");
+        vl.addComponent(infoBar);
 
         HorizontalSplitPanel splitContentCode = new HorizontalSplitPanel();
         splitContentCode.setSizeFull();
@@ -96,6 +118,8 @@ public class ChartJsDemoUI extends UI {
         splitMenuContent.setFirstComponent(buildMenu());
         splitMenuContent.setSecondComponent(splitContentCode);
         splitMenuContent.setSplitPosition(10);
+        vl.addComponent(splitMenuContent);
+        vl.setExpandRatio(splitMenuContent, 1);
 
         navigator.addViewChangeListener(new ViewChangeListener() {
             @Override
@@ -111,7 +135,7 @@ public class ChartJsDemoUI extends UI {
 
             }
         });
-        setContent(splitMenuContent);
+        setContent(vl);
 
         String fragment = Page.getCurrent().getUriFragment();
         if (fragment == null || fragment.equals("")) {

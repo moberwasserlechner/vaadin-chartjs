@@ -6,15 +6,13 @@ import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.ScatterDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
-import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.options.Hover.Mode;
+import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.Notification.Type;
 
 @UIScope
 @SpringView
@@ -64,7 +62,7 @@ public class ScatterLineChartView extends AbstractChartView {
         
         chart.addClickListener((a,b) -> {
             ScatterDataset dataset = (ScatterDataset) config.data().getDatasets().get(a);
-            Notification.show("ScatterDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
+            ChartUtils.notification(a, b, dataset);
         });
         return chart; 
     }

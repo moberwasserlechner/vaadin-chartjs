@@ -9,8 +9,6 @@ import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.Notification.Type;
 
 @UIScope
 @SpringView
@@ -38,7 +36,7 @@ public class SimpleBubbleChartView extends AbstractChartView {
         for (Dataset<?, ?> ds : config.data().getDatasets()) {
             BubbleDataset lds = (BubbleDataset) ds;
             lds.backgroundColor(ChartUtils.randomColor(.7));
-            for (int i = 0; i < 7; i++) {
+            for (int i = 0; i < 15; i++) {
                 lds.addData(ChartUtils.randomScalingFactor(), ChartUtils.randomScalingFactor(), Math.abs(ChartUtils.randomScalingFactor()) / 5);
             }
         }
@@ -47,7 +45,7 @@ public class SimpleBubbleChartView extends AbstractChartView {
         chart.setJsLoggingEnabled(true);
         chart.addClickListener((a,b) -> {
             BubbleDataset dataset = (BubbleDataset) config.data().getDatasets().get(a);
-            Notification.show("BubbleDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
+            ChartUtils.notification(a, b, dataset);
         });
         return chart; 
     }

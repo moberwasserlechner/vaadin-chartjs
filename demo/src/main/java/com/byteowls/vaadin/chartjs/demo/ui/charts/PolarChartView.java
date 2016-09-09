@@ -8,12 +8,11 @@ import com.byteowls.vaadin.chartjs.config.PolarAreaChartConfig;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.PolarAreaDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
 import com.byteowls.vaadin.chartjs.options.scale.RadialLinearScale;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.Notification.Type;
 
 @UIScope
 @SpringView
@@ -59,7 +58,7 @@ public class PolarChartView extends AbstractChartView {
         
         chart.addClickListener((a,b) -> {
             PolarAreaDataset dataset = (PolarAreaDataset) config.data().getDatasets().get(a);
-            Notification.show("PolarAreaDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
+            ChartUtils.notification(a, b, dataset);
         });
         return chart; 
     }

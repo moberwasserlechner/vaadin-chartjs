@@ -18,11 +18,18 @@
   }
   
   .valo-menu-item [class*="caption"] {
-    font-size: 15px !important;
+    font-size: 16px !important;
+  }
+  
+  .cjs-info-bar {
+    padding: 5px;
+    background-color: white;
+    border-bottom: 1px solid darken($v-background-color, 50%);
   }
   
   .cjs-menu-parent {
     font-weight: bold !important;
+    text-align: left !important;
   }
   
   .cjs-menu-child {

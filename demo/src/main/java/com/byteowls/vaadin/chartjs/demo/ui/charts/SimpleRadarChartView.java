@@ -8,13 +8,12 @@ import com.byteowls.vaadin.chartjs.config.RadarChartConfig;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.RadarDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
 import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.options.scale.RadialLinearScale;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.Notification.Type;
 
 @UIScope
 @SpringView
@@ -60,7 +59,7 @@ public class SimpleRadarChartView extends AbstractChartView {
         
         chart.addClickListener((a,b) -> {
             RadarDataset dataset = (RadarDataset) config.data().getDatasets().get(a);
-            Notification.show("RadarDataset at idx:" + a + "; Data: idx=" + b + "; Value=" + dataset.getData().get(b), Type.TRAY_NOTIFICATION);
+            ChartUtils.notification(a, b, dataset);
         });
         return chart; 
     }
