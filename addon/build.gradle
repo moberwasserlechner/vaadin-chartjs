@@ -3,6 +3,7 @@ plugins {
     id "com.jfrog.bintray" version "1.5"
 }
 apply plugin: 'maven-publish'
+apply plugin: 'maven'
 apply plugin: 'osgi'
 
 sourceCompatibility = 1.7
@@ -32,8 +33,13 @@ dependencies {
     testCompile "junit:junit:4.12"
 }
 
+ task createAddonPom {
+    pom { artifactId = project.artifactId }.writeTo("${sourceSets.main.output.resourcesDir}/META-INF/maven/com.byteowls/vaadin-chartjs/pom.xml")
+  }
+
 jar {
     baseName = project.artifactId
+    createAddonPom
     // Include sources
     sourceSets.main.java.srcDirs.each {
         from it

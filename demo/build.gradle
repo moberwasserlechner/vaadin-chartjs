@@ -74,7 +74,7 @@ war {
 
     // Include widgetset
     //dependsOn 'vaadinCompile'
-    //dependsOn 'test' 
+    //dependsOn 'test'
     
     // Add sources
     webInf {
