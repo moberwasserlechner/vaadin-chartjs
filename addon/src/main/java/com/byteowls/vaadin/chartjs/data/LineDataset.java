@@ -13,6 +13,10 @@ import elemental.json.JsonObject;
  *
  */
 public class LineDataset extends DoubleDataset<LineDataset> {
+    
+    public enum CubicInterpolationMode {
+        DEFAULT, MONOTONE
+    }
 
     private String type;
     private Boolean hidden;
@@ -20,6 +24,7 @@ public class LineDataset extends DoubleDataset<LineDataset> {
     private String xAxisID;
     private String yAxisID;
     private Boolean fill;
+    private CubicInterpolationMode cubicInterpolationMode;
     private Double lineTension;
     private String backgroundColor;
     private Integer borderWidth;
@@ -79,6 +84,18 @@ public class LineDataset extends DoubleDataset<LineDataset> {
      */
     public LineDataset fill(boolean fill) {
         this.fill = fill;
+        return this;
+    }
+    
+    /**
+     * Algorithm used to interpolate a smooth curve from the discrete data points. 
+     * 
+     * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of datasets. 
+     * 
+     * The 'monotone' algorithm is more suited to y = f(x) datasets. It preserves monotonicity (or piecewise monotonicity) of the dataset being interpolated, and ensures local extremums (if any) stay at input data points. 
+     */
+    public LineDataset cubicInterpolationMode(CubicInterpolationMode cubicInterpolationMode) {
+        this.cubicInterpolationMode = cubicInterpolationMode;
         return this;
     }
 
@@ -269,6 +286,9 @@ public class LineDataset extends DoubleDataset<LineDataset> {
         JUtils.putNotNull(map, "xAxisID", xAxisID);
         JUtils.putNotNull(map, "yAxisID", yAxisID);
         JUtils.putNotNull(map, "fill", fill);
+        if (cubicInterpolationMode != null) {
+            JUtils.putNotNull(map, "cubicInterpolationMode", cubicInterpolationMode.toString().toLowerCase());
+        }
         JUtils.putNotNull(map, "hidden", hidden);
         JUtils.putNotNull(map, "lineTension", lineTension);
         JUtils.putNotNull(map, "backgroundColor", backgroundColor);
