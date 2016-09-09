@@ -52,7 +52,7 @@ Dependency
       <dependency>
         <groupId>com.byteowls</groupId>
         <artifactId>vaadin-chartjs</artifactId>
-        <version>0.1.0</version>
+        <version>0.2.0</version>
       </dependency>
     </dependencies>
 
@@ -74,11 +74,13 @@ Repository
 Dependency
 
     dependencies {
-      compile ("com.byteowls:vaadin-chartjs:0.1.0")
+      compile ("com.byteowls:vaadin-chartjs:0.2.0")
     }
 ## Usage
 
 The basic usage is always the same. You need to create a new ChartJs() and configure it with a chart type specific config.
+
+For more examples please see the demo app at moberwasserlechner.jelastic.servint.net/vaadin-chartjs/
 
 ```
         ChartJs myChart = new ChartJs(barConfig);
@@ -91,18 +93,6 @@ The basic usage is always the same. You need to create a new ChartJs() and confi
             Notification.show("BarDataset at idx:" + datasetIdx + "; Data: idx=" + dataIdx + "; Value=" + dataset.getData().get(dataIdx), Type.WARNING_MESSAGE);
         });
 ```
-
-Right now there these chart configuration types:
-
-* BarChartConfig ... Vertical and horizontal
-* BubbleChartConfig
-* ChartConfig
-* DonutChartConfig
-* LineChartConfig
-* PieChartConfig
-* PolarAreaChartConfig
-* RadarChartConfig
-* ScatterChartConfig
 
 ### Bar chart configuration
 
@@ -161,8 +151,8 @@ http://www.chartjs.org/docs/#chart-configuration-creating-a-chart-with-options
 * Vaadin 7.4 or higher
 
 ### Demo
-* JDK 8 (because of Lambdas)
-* Vaadin 7.6.8
+* JDK 8
+* Vaadin 7.7.0
 
 ## Usage
 

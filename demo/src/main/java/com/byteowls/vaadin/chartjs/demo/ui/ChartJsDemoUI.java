@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
 import com.byteowls.vaadin.chartjs.demo.ui.charts.BarLineComboChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.CubicInterpolationLineChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.HorizontalBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiAxisBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiDonutChartView;
@@ -19,8 +20,12 @@ import com.byteowls.vaadin.chartjs.demo.ui.charts.ScatterLineChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.SimpleBubbleChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.SimpleLineChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.SimpleRadarChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.SinglePieChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.SkipDataRadarChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.SkipPointsLineChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.StackedBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.StackedLineChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.SteppedLineChartView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.navigator.Navigator;
@@ -61,16 +66,21 @@ public class ChartJsDemoUI extends UI {
         menuItems.add(new MenuItem(ChartType.BAR, "Vertical", MultiAxisBarChartView.class));
         menuItems.add(new MenuItem(ChartType.BAR, "Horizontal", HorizontalBarChartView.class));
         menuItems.add(new MenuItem(ChartType.BAR, "Combo", BarLineComboChartView.class));
+        menuItems.add(new MenuItem(ChartType.BAR, "Stacked", StackedBarChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Simple", SimpleLineChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Stacked", StackedLineChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Combo", BarLineComboChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "PointSize", PointSizeLineChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Scatter", ScatterLineChartView.class));
+        menuItems.add(new MenuItem(ChartType.LINE, "SkipPoints", SkipPointsLineChartView.class));
+        menuItems.add(new MenuItem(ChartType.LINE, "Stepped", SteppedLineChartView.class));
+        menuItems.add(new MenuItem(ChartType.LINE, "CubicInterpolation", CubicInterpolationLineChartView.class));
+        menuItems.add(new MenuItem(ChartType.PIE, "Pie", SinglePieChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Donut", MultiDonutChartView.class));
         menuItems.add(new MenuItem(ChartType.BUBBLE, "Simple", SimpleBubbleChartView.class));
         menuItems.add(new MenuItem(ChartType.POLAR, "Simple", PolarChartView.class));
         menuItems.add(new MenuItem(ChartType.RADAR, "Simple", SimpleRadarChartView.class));
-        menuItems.add(new MenuItem(ChartType.RADAR, "Skipping", SkipDataRadarChartView.class));
+        menuItems.add(new MenuItem(ChartType.RADAR, "SkipPoints", SkipDataRadarChartView.class));
     }
 
     @Autowired
@@ -100,7 +110,8 @@ public class ChartJsDemoUI extends UI {
                 + "| Version: <strong>" + env.getProperty("versions.vaadin-chartjs-addon") + "</strong> "
                 + "| Chart.js: <strong>" + env.getProperty("versions.chartjs") + "</strong> "
                 + "| Vaadin: <strong>" + env.getProperty("versions.vaadin") + "</strong> "
-                + "| Created by: <strong>Michael Oberwasserlechner (https://github.com/moberwasserlechner)</strong>");
+                + "| Created by: <strong>Michael Oberwasserlechner</strong> "
+                + "| Github: https://github.com/moberwasserlechner/vaadin-chartjs");
         info.setContentMode(ContentMode.HTML);
         
         CssLayout infoBar = new CssLayout(info);
