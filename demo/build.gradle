@@ -33,13 +33,10 @@ targetCompatibility = 1.8
 /*
 vaadin {
   vaadin.version = "${vaadinVersion}"
-  // vaadin.logToConsole = true
   
   vaadinCompile.widgetset = 'ChartJsWidgetset'
   vaadinCompile.manageWidgetset = true
   vaadinCompile.gwtSdkFirstInClasspath = true
-
-  //vaadin.manageDependencies = true
 }
 */
 
@@ -50,7 +47,11 @@ repositories {
 
 dependencies {
   compile project(":addon")
-  //compile ("de.fatalix:codmirror-addon:1.2.2")
+  
+  compile ("com.vaadin:vaadin-server:${vaadinVersion}")
+  compile ("com.vaadin:vaadin-client-compiled:${vaadinVersion}")
+  compile ("com.vaadin:vaadin-themes:${vaadinVersion}")
+  
   compile ("com.vaadin:vaadin-spring-boot:${vaadinSpringVersion}")
   compile ("com.vaadin:vaadin-spring:${vaadinSpringVersion}")
   //compile ("org.vaadin.spring.addons:vaadin-spring-addon-eventbus:${vaadin4SpringVersion}")
@@ -60,12 +61,6 @@ dependencies {
   testCompile('org.springframework.boot:spring-boot-starter-test')
   runtime("javax.servlet:jsp-api:2.0"){
     transitive = false;
-  }
-}
-
-dependencyManagement {
-  imports {
-    mavenBom "com.vaadin:vaadin-bom:7.7.0"
   }
 }
 

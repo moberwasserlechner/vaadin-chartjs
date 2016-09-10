@@ -27,7 +27,8 @@ public class CubicInterpolationLineChartView extends AbstractChartView {
         LineChartConfig lineConfig = new LineChartConfig();
         lineConfig.data()
             .labels("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
-            .addDataset(new LineDataset().label("Cubic interpolation (monotone)").borderColor("rgba(255, 0, 0, 0.7)").backgroundColor("rgba(0, 0, 0, 0)").cubicInterpolationMode(CubicInterpolationMode.MONOTONE))
+            .addDataset(new LineDataset().label("Cubic interpolation (monotone)").borderColor("rgba(255, 0, 0, 0.7)")
+                    .backgroundColor("rgba(0, 0, 0, 0)").cubicInterpolationMode(CubicInterpolationMode.MONOTONE))
             .addDataset(new LineDataset().label("Cubic interpolation (default)").borderColor("rgba(0, 0, 255, 0.3)").backgroundColor("rgba(0, 0, 0, 0)"))
             .addDataset(new LineDataset().label("Linear interpolation").borderColor("rgba(0, 0, 0, 0.10)").backgroundColor("rgba(0, 0, 0, 0)").lineTension(0))
             .and()

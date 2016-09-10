@@ -27,9 +27,11 @@ public class SimpleRadarChartView extends AbstractChartView {
         config
             .data()
                 .labels("Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running")
-                .addDataset(new RadarDataset().label("My First dataset").backgroundColor("rgba(220,220,220,0.2)").pointBackgroundColor("rgba(220,220,220,1)"))
+                .addDataset(new RadarDataset().label("My First dataset").backgroundColor("rgba(220,220,220,0.2)")
+                        .pointBackgroundColor("rgba(220,220,220,1)"))
                 .addDataset(new RadarDataset().label("Hidden dataset").hidden(true))
-                .addDataset(new RadarDataset().label("My Second  dataset").backgroundColor("rgba(151,187,205,0.2)").pointBackgroundColor("rgba(151,187,205,1)").pointHoverBackgroundColor("#fff"))
+                .addDataset(new RadarDataset().label("My Second  dataset").backgroundColor("rgba(151,187,205,0.2)")
+                        .pointBackgroundColor("rgba(151,187,205,1)").pointHoverBackgroundColor("#fff"))
                 .and();
         
         config.

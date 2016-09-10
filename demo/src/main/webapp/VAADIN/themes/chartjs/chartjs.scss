@@ -27,6 +27,11 @@
     border-bottom: 1px solid darken($v-background-color, 50%);
   }
   
+  .cjs-code {
+    //overflow: auto;
+    background-color: white;
+  }
+  
   .cjs-menu-parent {
     font-weight: bold !important;
     font-size: 16px !important;

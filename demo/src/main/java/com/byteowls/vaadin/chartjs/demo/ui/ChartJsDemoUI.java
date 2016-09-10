@@ -9,8 +9,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
+import com.byteowls.vaadin.chartjs.demo.ui.charts.AngledPieChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.BarLineComboChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.CubicInterpolationLineChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.GaugeDonutChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.HorizontalBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiAxisBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiDonutChartView;
@@ -28,21 +30,23 @@ import com.byteowls.vaadin.chartjs.demo.ui.charts.StackedLineChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.SteppedLineChartView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
+import com.vaadin.data.Item;
+import com.vaadin.data.util.HierarchicalContainer;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
+import com.vaadin.server.Resource;
 import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringViewProvider;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.Tree;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
@@ -59,6 +63,9 @@ import de.java2html.util.IllegalConfigurationException;
 public class ChartJsDemoUI extends UI {
 
     private static final long serialVersionUID = -33887281222947647L;
+    
+    private static final String CAPTION_PROPERTY = "caption";
+    private static final String ICON_PROPERTY = "icon";
 
     private static List<MenuItem> menuItems;
     static {
@@ -77,10 +84,12 @@ public class ChartJsDemoUI extends UI {
         menuItems.add(new MenuItem(ChartType.LINE, "CubicInterpolation", CubicInterpolationLineChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Pie", SinglePieChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Donut", MultiDonutChartView.class));
-        menuItems.add(new MenuItem(ChartType.BUBBLE, "Simple", SimpleBubbleChartView.class));
-        menuItems.add(new MenuItem(ChartType.POLAR, "Simple", PolarChartView.class));
-        menuItems.add(new MenuItem(ChartType.RADAR, "Simple", SimpleRadarChartView.class));
-        menuItems.add(new MenuItem(ChartType.RADAR, "SkipPoints", SkipDataRadarChartView.class));
+        menuItems.add(new MenuItem(ChartType.PIE, "Angled pie", AngledPieChartView.class));
+        menuItems.add(new MenuItem(ChartType.PIE, "Gauge donut", GaugeDonutChartView.class));
+        menuItems.add(new MenuItem(ChartType.AREA, "Bubble", SimpleBubbleChartView.class));
+        menuItems.add(new MenuItem(ChartType.AREA, "Polar", PolarChartView.class));
+        menuItems.add(new MenuItem(ChartType.AREA, "Radar", SimpleRadarChartView.class));
+        menuItems.add(new MenuItem(ChartType.AREA, "Radar skipped point", SkipDataRadarChartView.class));
     }
 
     @Autowired
@@ -88,7 +97,7 @@ public class ChartJsDemoUI extends UI {
     @Autowired
     private Environment env;
 
-    private Label codeLabel = new Label("", ContentMode.HTML);
+    private Label codeLabel;
 
     @SuppressWarnings("serial")
     @Override
@@ -110,8 +119,8 @@ public class ChartJsDemoUI extends UI {
                 + "| Version: <strong>" + env.getProperty("versions.vaadin-chartjs-addon") + "</strong> "
                 + "| Chart.js: <strong>" + env.getProperty("versions.chartjs") + "</strong> "
                 + "| Vaadin: <strong>" + env.getProperty("versions.vaadin") + "</strong> "
-                //+ "| Created by: <strong>Michael Oberwasserlechner</strong> "
-                + "| Fork on github: <strong>https://github.com/moberwasserlechner/vaadin-chartjs</strong>");
+                + "| Created by: <strong>Michael Oberwasserlechner</strong> "
+                + "| <a href=\"https://github.com/moberwasserlechner/vaadin-chartjs\">Checkout on Github</a>");
         info.setContentMode(ContentMode.HTML);
         
         CssLayout infoBar = new CssLayout(info);
@@ -123,15 +132,16 @@ public class ChartJsDemoUI extends UI {
         splitContentCode.setSizeFull();
         splitContentCode.setFirstComponent(content);
         splitContentCode.setSecondComponent(buildCode());
+        splitContentCode.setSplitPosition(50);
 
         HorizontalSplitPanel splitMenuContent = new HorizontalSplitPanel();
         splitMenuContent.setSizeFull();
-        splitMenuContent.setFirstComponent(buildMenu());
+        splitMenuContent.setFirstComponent(buildMenuTree());
         splitMenuContent.setSecondComponent(splitContentCode);
-        splitMenuContent.setSplitPosition(10);
+        splitMenuContent.setSplitPosition(15);
         vl.addComponent(splitMenuContent);
         vl.setExpandRatio(splitMenuContent, 1);
-
+        
         navigator.addViewChangeListener(new ViewChangeListener() {
             @Override
             public boolean beforeViewChange(ViewChangeEvent event) {
@@ -161,17 +171,36 @@ public class ChartJsDemoUI extends UI {
         chartPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
         return chartPanel;
     }
-
-    private Component buildMenu() {
-        CssLayout rootMenu = new CssLayout();
-        rootMenu.setSizeFull();
-        rootMenu.setPrimaryStyleName(ValoTheme.MENU_ROOT);
+    
+    private Component buildCode() {
+        codeLabel = new Label();
+        codeLabel.setContentMode(ContentMode.HTML);
+//        codeLabel.setSizeFull();
         
-        CssLayout menuContent = new CssLayout();
-        menuContent.addStyleName(ValoTheme.MENU_PART);
-        menuContent.addStyleName(ValoTheme.MENU_PART_LARGE_ICONS);
-        menuContent.addStyleName("cjs-menu-part");
-        menuContent.setSizeFull();
+        Panel codePanel = new Panel(codeLabel);
+        codePanel.setSizeFull();
+        codePanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
+        codePanel.addStyleName("cjs-code");
+        return codePanel;
+    }
+
+    @SuppressWarnings("unchecked")
+    private Component buildMenuTree() {
+        Panel treePanel = new Panel();
+        treePanel.setSizeFull();
+        treePanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
+        treePanel.addStyleName("cjs-menu");
+        
+        Tree tree = new Tree();
+        tree.setSelectable(true);
+
+        HierarchicalContainer treeContainer = new HierarchicalContainer();
+        treeContainer.addContainerProperty(CAPTION_PROPERTY, String.class, null); // label
+        treeContainer.addContainerProperty(ICON_PROPERTY, Resource.class, null); // icon
+
+        tree.setContainerDataSource(treeContainer);
+        tree.setItemCaptionPropertyId(CAPTION_PROPERTY);
+        tree.setItemIconPropertyId(ICON_PROPERTY);
 
         for (ChartType chartType : ChartType.values()) {
             List<MenuItem> children = new ArrayList<>();
@@ -180,41 +209,38 @@ public class ChartJsDemoUI extends UI {
                     children.add(i);
                 }
             }
-            
-            Button b = new Button(chartType.toString() + " Charts", FontAwesome.BAR_CHART_O);
-            b.setPrimaryStyleName(ValoTheme.MENU_ITEM);
-            b.addStyleName("cjs-menu-parent");
-            b.setWidth(100, Unit.PERCENTAGE);
-            
-            b.addClickListener(e -> {
-                if (!children.isEmpty()) {
-                    getUI().getNavigator().navigateTo(children.get(0).getViewName());
-                }
-            });
-            menuContent.addComponent(b);
+
+            Item item = treeContainer.addItem(chartType);
+            item.getItemProperty(CAPTION_PROPERTY).setValue(chartType.toString() + " Charts");
+            item.getItemProperty(ICON_PROPERTY).setValue(chartType.getIcon());
+            treeContainer.setChildrenAllowed(chartType, !children.isEmpty());
 
             for (MenuItem i : children) {
-                Button sub = new Button();
-                sub.setCaption(i.getLabel());
-                sub.setPrimaryStyleName(ValoTheme.MENU_ITEM);
-                sub.addStyleName("cjs-menu-child");
-                sub.setWidth(100, Unit.PERCENTAGE);
-                sub.addClickListener(e -> {
-                    getUI().getNavigator().navigateTo(i.getViewName());
-                });
-                menuContent.addComponent(sub);
+                Item childItem = treeContainer.addItem(i);
+                childItem.getItemProperty(CAPTION_PROPERTY).setValue(i.getLabel());
+                //childItem.getItemProperty(ICON_PROPERTY).setValue(null);
+                treeContainer.setParent(i, chartType);
+                treeContainer.setChildrenAllowed(i, false);
             }
         }
-        rootMenu.addComponent(menuContent);
-        return rootMenu;
-    }
 
-    private Component buildCode() {
-        Panel codePanel = new Panel(codeLabel);
-        codePanel.setSizeFull();
-        codePanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        codePanel.addStyleName("cjs-menu");
-        return codePanel;
+        // Expand whole tree
+        for (final Object id : tree.rootItemIds()) {
+            tree.expandItem(id);
+        }
+
+        tree.addItemClickListener(e -> {
+            Object itemId = e.getItemId();
+            if (itemId instanceof MenuItem) {
+                MenuItem menuItem = (MenuItem) itemId;
+                if (menuItem.getViewName() != null) {
+                    getUI().getNavigator().navigateTo(menuItem.getViewName());
+                }
+
+            }
+        });
+        treePanel.setContent(tree);
+        return treePanel;
     }
 
     public String getFormattedSourceCode(String sourceCode) {

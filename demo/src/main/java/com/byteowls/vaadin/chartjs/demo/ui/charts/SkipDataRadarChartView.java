@@ -26,9 +26,12 @@ public class SkipDataRadarChartView extends AbstractChartView {
         config
             .data()
                 .labels("Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running")
-                .addDataset(new RadarDataset().label("Skip first dataset").borderColor("rgb(255, 0, 0)").backgroundColor("rgba(255,255,0,0.5)").pointBackgroundColor("rgba(220,220,220,1)"))
-                .addDataset(new RadarDataset().label("Skip mid dataset").borderColor("rgb(255, 0, 255)").backgroundColor("rgba(0, 255, 0, 0.5)").pointBackgroundColor("rgba(151,187,205,1)").pointHoverBackgroundColor("#fff"))
-                .addDataset(new RadarDataset().label("Skip last dataset").borderColor("rgb(0, 255, 255)").backgroundColor("rgba(0, 0, 255, 0.5)").pointBackgroundColor("rgba(151,187,205,1)").pointHoverBackgroundColor("#fff"))
+                .addDataset(new RadarDataset().label("Skip first dataset").borderColor("rgb(255, 0, 0)")
+                        .backgroundColor("rgba(255,255,0,0.5)").pointBackgroundColor("rgba(220,220,220,1)"))
+                .addDataset(new RadarDataset().label("Skip mid dataset").borderColor("rgb(255, 0, 255)")
+                        .backgroundColor("rgba(0, 255, 0, 0.5)").pointBackgroundColor("rgba(151,187,205,1)").pointHoverBackgroundColor("#fff"))
+                .addDataset(new RadarDataset().label("Skip last dataset").borderColor("rgb(0, 255, 255)")
+                        .backgroundColor("rgba(0, 0, 255, 0.5)").pointBackgroundColor("rgba(151,187,205,1)").pointHoverBackgroundColor("#fff"))
                 .and();
         
         config.

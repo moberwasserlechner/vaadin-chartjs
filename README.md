@@ -6,7 +6,8 @@ Vaadin 7 wrapper for the Chart.js charting library. https://github.com/chartjs/C
 
 * Fluent api to configure the charts
 * Supported chart types are
- * Horizontal and vertical Bar chart
+ * Horizontal bar chart
+ * Vertical bar chart
  * Line chart
  * Donut chart
  * Pie chart
@@ -80,7 +81,7 @@ Dependency
 
 The basic usage is always the same. You need to create a new ChartJs() and configure it with a chart type specific config.
 
-For more examples please see the demo app at moberwasserlechner.jelastic.servint.net/vaadin-chartjs/
+For more examples please see the demo app at http://moberwasserlechner.jelastic.servint.net/vaadin-chartjs/
 
 ```
         ChartJs myChart = new ChartJs(barConfig);
@@ -96,7 +97,7 @@ For more examples please see the demo app at moberwasserlechner.jelastic.servint
 
 ### Bar chart configuration
 
-In this example we would like to configure a horizontal bar chart with 3 dataset and add some random numbers to each of them.
+In this example we configure a horizontal bar chart with 3 dataset and add some random numbers to each of them.
 
 ```java
         
@@ -140,9 +141,11 @@ In this example we would like to configure a horizontal bar chart with 3 dataset
             }
 ```
 
-For the options please see the great documentation at ChartJs. (http://www.chartjs.org/) 
+### Chart Options
 
-http://www.chartjs.org/docs/#chart-configuration-creating-a-chart-with-options
+Please have a look at the great documentation at ChartJs. (http://www.chartjs.org/docs)
+
+You will see that every fluent api method under `config.options()` has a counterpart in the javascript json config.  
 
 ## Prerequisite
 
@@ -168,7 +171,7 @@ In all other cases please create a issue at https://github.com/moberwasserlechne
 1. Fork it
 2. Create your feature branch (`git checkout -b my-feature-or-bug`)
 3. Test your changes to the best of your ability.
-5. Commit your changes (`git commit -am 'Describe feature or bug'`)
+5. Commit your changes (`git commit -m 'Describe feature or bug'`)
 6. Push to the branch (`git push origin my-feature-or-bug`)
 7. Create new Pull Request
 
@@ -198,7 +201,7 @@ Afaik there are no online examples yet but you can download them along with the 
 2. Build eclipse project configs for addon and demo with `./gradlew cleanEclipse eclipse`
 3. In Eclipse open File->Import... and choose General->Existing Projects into Workspace for the root folder
 4. Create a run or debug configuration as a Java Application and use this "com.byteowls.vaadin.chartjs.demo.ChartJsDemoApplication" main class
-3. It starts at `http://localhost:8080/chartjs/`
+3. It starts at `http://localhost:8080/`
 
 **Live Demo**
 
