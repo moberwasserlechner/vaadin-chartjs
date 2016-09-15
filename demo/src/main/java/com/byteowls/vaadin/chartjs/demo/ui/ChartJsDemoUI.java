@@ -120,7 +120,7 @@ public class ChartJsDemoUI extends UI {
                 + "| Chart.js: <strong>" + env.getProperty("versions.chartjs") + "</strong> "
                 + "| Vaadin: <strong>" + env.getProperty("versions.vaadin") + "</strong> "
                 + "| Created by: <strong>Michael Oberwasserlechner</strong> "
-                + "| <a href=\"https://github.com/moberwasserlechner/vaadin-chartjs\">Checkout on Github</a>");
+                + "| <a href=\"https://github.com/moberwasserlechner/vaadin-chartjs\">Check it out on Github</a>");
         info.setContentMode(ContentMode.HTML);
         
         CssLayout infoBar = new CssLayout(info);
