@@ -21,10 +21,10 @@ public class Hover<T> extends And<T> implements JsonBuilder {
     }
 
     /**
-     * Sets which elements hover.
-     * <li>single highlights the closest element
-     * <li>label highlights elements in all datasets at the same X value.
-     * <li>dataset highlights the closest dataset
+     * <p>Sets which elements hover.</p>
+     * single highlights the closest element
+     * label highlights elements in all datasets at the same X value.
+     * dataset highlights the closest dataset
      */
     public Hover<T> mode(Mode mode) {
         this.mode = mode;

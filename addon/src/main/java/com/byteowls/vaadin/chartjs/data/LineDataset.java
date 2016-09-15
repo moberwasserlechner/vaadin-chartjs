@@ -281,7 +281,7 @@ public class LineDataset extends DoubleDataset<LineDataset> {
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "type", type);
-        JUtils.putNotNullNumbers(map, "data", data);
+        JUtils.putNotNullNumbers(map, "data", getData());
         JUtils.putNotNull(map, "label", label);
         JUtils.putNotNull(map, "xAxisID", xAxisID);
         JUtils.putNotNull(map, "yAxisID", yAxisID);

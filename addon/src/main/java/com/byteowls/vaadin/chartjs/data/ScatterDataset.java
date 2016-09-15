@@ -2,7 +2,9 @@ package com.byteowls.vaadin.chartjs.data;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
@@ -21,6 +23,8 @@ public class ScatterDataset implements Dataset<ScatterDataset, ScatterData> {
 
     private String type;
     private List<ScatterData> data;
+    private List<String> labels;
+    private Map<String, ScatterData> dataMap;
     private Boolean hidden;
     private String label;
     private String xAxisID;
@@ -83,7 +87,35 @@ public class ScatterDataset implements Dataset<ScatterDataset, ScatterData> {
 
     @Override
     public List<ScatterData> getData() {
+        if (dataMap != null) {
+            return new ArrayList<>(dataMap.values());
+        }
         return data;
+    }
+    
+
+    @Override
+    public ScatterDataset addLabeledData(String label, ScatterData data) {
+        if (label != null && data != null) {
+            if (labels == null) {
+                labels = new ArrayList<>();
+            }
+            if (!labels.contains(label)) {
+                labels.add(label);
+            }
+            
+            if (dataMap == null) {
+                dataMap = new LinkedHashMap<>();
+            }
+            dataMap.put(label, data);
+        }
+        
+        return this;
+    }
+
+    @Override
+    public List<String> getDataLabels() {
+        return labels;
     }
 
     /**
@@ -295,6 +327,8 @@ public class ScatterDataset implements Dataset<ScatterDataset, ScatterData> {
         this.steppedLine = steppedLine;
         return this;
     }
+    
+    
 
     @Override
     public JsonObject buildJson() {

@@ -2,7 +2,9 @@ package com.byteowls.vaadin.chartjs.data;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
@@ -22,6 +24,8 @@ public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
     
     private String type;
     private List<BubbleData> data;
+    private List<String> labels;
+    private Map<String, BubbleData> dataMap;
     private Boolean hidden;
     private String label;
     private List<String> backgroundColor;
@@ -74,7 +78,34 @@ public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
     
     @Override
     public List<BubbleData> getData() {
+        if (dataMap != null) {
+            return new ArrayList<>(dataMap.values());
+        }
         return data;
+    }
+    
+    @Override
+    public BubbleDataset addLabeledData(String label, BubbleData data) {
+        if (label != null && data != null) {
+            if (labels == null) {
+                labels = new ArrayList<>();
+            }
+            if (!labels.contains(label)) {
+                labels.add(label);
+            }
+            
+            if (dataMap == null) {
+                dataMap = new LinkedHashMap<>();
+            }
+            dataMap.put(label, data);
+        }
+        
+        return this;
+    }
+
+    @Override
+    public List<String> getDataLabels() {
+        return labels;
     }
 
     /**
@@ -165,4 +196,5 @@ public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
         JUtils.putNotNullIntListOrSingle(map, "hoverRadius", hoverRadius);
         return map;
     }
+
 }

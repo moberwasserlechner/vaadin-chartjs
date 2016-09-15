@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.byteowls.vaadin.chartjs.utils.ColorUtils;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
 import elemental.json.Json;
@@ -31,6 +32,8 @@ public class BarDataset extends DoubleDataset<BarDataset> {
     private List<String> hoverBackgroundColor;
     private List<String> hoverBorderColor;
     private List<Integer> hoverBorderWidth;
+    
+    private boolean randomBackgroundColors;
 
     /**
      * Used if the type of a dataset is needed. e.g. combo chart type charts
@@ -95,6 +98,14 @@ public class BarDataset extends DoubleDataset<BarDataset> {
         this.backgroundColor = Arrays.asList(backgroundColor);
         return this;
     }
+    
+    /**
+     * Set random background colors for every data
+     */
+    public BarDataset randomBackgroundColors(boolean randomBackgroundColors) {
+        this.randomBackgroundColors = randomBackgroundColors;
+        return this;
+    }
 
     /**
      * Bar border color.
@@ -148,12 +159,20 @@ public class BarDataset extends DoubleDataset<BarDataset> {
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "type", type);
+        List<Double> data = getData();
         JUtils.putNotNullNumbers(map, "data", data);
         JUtils.putNotNull(map, "label", label);
         JUtils.putNotNull(map, "xAxisID", xAxisID);
         JUtils.putNotNull(map, "yAxisID", yAxisID);
         JUtils.putNotNull(map, "fill", fill);
         JUtils.putNotNull(map, "hidden", hidden);
+        if (randomBackgroundColors) {
+            List<String> bgColors = new ArrayList<>();
+            for (int i = 0; i < data.size(); i++) {
+                bgColors.add(ColorUtils.randomColor(0.7));
+            }
+            backgroundColor = bgColors;
+        }
         JUtils.putNotNullStringListOrSingle(map, "backgroundColor", backgroundColor);
         JUtils.putNotNullStringListOrSingle(map, "borderColor", borderColor);
         JUtils.putNotNullIntListOrSingle(map, "borderWidth", borderWidth);
