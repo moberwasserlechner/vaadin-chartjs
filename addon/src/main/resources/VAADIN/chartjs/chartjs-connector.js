@@ -28,15 +28,18 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 				console.log("chartjs: canvas already exists");
 			}
 		}
-//		if (state.width > 0) {
-//			canvas.setAttribute('width', state.width);
-//		}
-//		if (state.height > 0) {
-//			canvas.setAttribute('height', state.height);
-//		}
-		
-		canvas.setAttribute('width', "100%");
-		canvas.setAttribute('height', "100%");
+		if (state.width > 0) {
+			if (loggingEnabled) {
+				console.log("chartjs: canvas width " + state.width);
+			}
+			canvas.setAttribute('width', state.width);
+		}
+		if (state.height > 0) {
+			if (loggingEnabled) {
+				console.log("chartjs: canvas height " + state.height);
+			}
+			canvas.setAttribute('height', state.height);
+		}
 
 		if (typeof chartjs === 'undefined' && state.configurationJson !== 'undefined') {
 			if (loggingEnabled) {
