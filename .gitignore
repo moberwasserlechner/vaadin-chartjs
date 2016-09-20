@@ -8,3 +8,5 @@ vaadin-chartjs.iml
 /build/
 /.project
 /.settings
+.classpath
+/bin/
