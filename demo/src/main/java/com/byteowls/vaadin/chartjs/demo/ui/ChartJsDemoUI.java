@@ -6,28 +6,10 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.byteowls.vaadin.chartjs.demo.ui.charts.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
-import com.byteowls.vaadin.chartjs.demo.ui.charts.AngledPieChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.BarLineComboChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.CubicInterpolationLineChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.GaugeDonutChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.HorizontalBarChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiAxisBarChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiDonutChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.PointSizeLineChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.PolarChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.ScatterLineChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.SimpleBubbleChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.SimpleLineChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.SimpleRadarChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.SinglePieChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.SkipDataRadarChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.SkipPointsLineChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.StackedBarChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.StackedLineChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.charts.SteppedLineChartView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.data.Item;
@@ -86,6 +68,7 @@ public class ChartJsDemoUI extends UI {
         menuItems.add(new MenuItem(ChartType.PIE, "Donut", MultiDonutChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Angled pie", AngledPieChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Gauge donut", GaugeDonutChartView.class));
+        menuItems.add(new MenuItem(ChartType.PIE, "Pie with data refresh", PieChartRefreshDataView.class));
         menuItems.add(new MenuItem(ChartType.AREA, "Bubble", SimpleBubbleChartView.class));
         menuItems.add(new MenuItem(ChartType.AREA, "Polar", PolarChartView.class));
         menuItems.add(new MenuItem(ChartType.AREA, "Radar", SimpleRadarChartView.class));

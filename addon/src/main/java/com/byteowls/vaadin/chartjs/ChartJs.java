@@ -57,6 +57,23 @@ public class ChartJs extends AbstractJavaScriptComponent {
     }
 
     /**
+     * @return Chart configuration. Useful for update the data after chart drawing
+     */
+    public ChartConfig getConfig() {
+        return this.chartConfig;
+    }
+
+    /**
+     * Update the chart data. Before calling this method, new data must be supplied.
+     */
+    public void refreshData() {
+        if (chartConfig != null) {
+            getState().configurationJson = chartConfig.buildJson();
+        }
+        callFunction("updateData");
+    }
+
+    /**
      * @return True if the connector's logs defined messages to "console.log" else logging is disabled.
      */
     public boolean isJsLoggingEnabled() {
