@@ -74,6 +74,10 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 
 	};
 
+	this.updateData = function() {
+        chartjs.config.data = this.getState().configurationJson.data;
+        chartjs.update();
+    }
 	// TODO get data from server push and pull
 
 };
