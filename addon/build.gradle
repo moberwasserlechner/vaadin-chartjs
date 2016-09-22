@@ -105,8 +105,8 @@ publishing {
 // ##########################
 
 bintray {
-    user = BINTRAY_USER //this usually comes from gradle.properties file in ~/.gradle
-    key = BINTRAY_API_KEY //this usually comes from gradle.properties file in ~/.gradle
+    user = hasProperty('BINTRAY_USER') ? BINTRAY_USER : '' //this usually comes from gradle.properties file in ~/.gradle
+    key = hasProperty('BINTRAY_API_KEY') ? BINTRAY_API_KEY: '' //this usually comes from gradle.properties file in ~/.gradle
 
     // configurations = ['archives'] //When uploading configuration files
     // - OR -
