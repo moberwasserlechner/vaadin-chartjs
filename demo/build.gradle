@@ -1,8 +1,6 @@
 buildscript {
-    ext {
-        springBootVersion = '1.4.0.RELEASE'
-    }
     repositories {
+        jcenter()
         mavenCentral()
         maven { url = "http://maven.vaadin.com/vaadin-addons"}
     }
@@ -11,34 +9,38 @@ buildscript {
     }
 }
 
-/*
-plugins {
-  id "fi.jasoft.plugin.vaadin" version "0.11.4"
-}
-*/
-
-apply plugin: 'eclipse-wtp'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
 
-eclipse {
-  project {
-    name = 'vaadin-chartjs-demo'
-  }
+war {
+    baseName = project.ext.artifactId
+
+    // Include widgetset
+    // dependsOn 'vaadinCompile'
+    // dependsOn 'test'
+    // Add sources
+    webInf{
+        into('classes'){
+            from sourceSets.main.allJava
+        }
+    }
+}
+
+bootRun {
+    addResources = true
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-/*
-vaadin {
-  vaadin.version = "${vaadinVersion}"
-  
-  vaadinCompile.widgetset = 'ChartJsWidgetset'
-  vaadinCompile.manageWidgetset = true
-  vaadinCompile.gwtSdkFirstInClasspath = true
+dependencyManagement {
+    imports {
+        mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
+    }
 }
-*/
 
 repositories {
     mavenCentral()
@@ -46,35 +48,10 @@ repositories {
 }
 
 dependencies {
-  compile project(":addon")
-  
-  compile ("com.vaadin:vaadin-server:${vaadinVersion}")
-  compile ("com.vaadin:vaadin-client-compiled:${vaadinVersion}")
-  compile ("com.vaadin:vaadin-themes:${vaadinVersion}")
-  
-  compile ("com.vaadin:vaadin-spring-boot:${vaadinSpringVersion}")
-  compile ("com.vaadin:vaadin-spring:${vaadinSpringVersion}")
-  //compile ("org.vaadin.spring.addons:vaadin-spring-addon-eventbus:${vaadin4SpringVersion}")
-  compile ("org.vaadin.spring.extensions:vaadin-spring-ext-boot:${vaadin4SpringVersion}")
-  compile ("de.java2html:java2html:5.0")
-  providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-  testCompile('org.springframework.boot:spring-boot-starter-test')
-  runtime("javax.servlet:jsp-api:2.0"){
-    transitive = false;
-  }
-}
+    compile("com.vaadin:vaadin-spring-boot-starter:1.0.0")
+    compile project(":addon")
+    compile ("de.java2html:java2html:5.0")
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 
-war {
-    baseName = project.ext.artifactId
-
-    // Include widgetset
-    //dependsOn 'vaadinCompile'
-    //dependsOn 'test'
-    
-    // Add sources
-    webInf {
-      into('classes'){
-        from sourceSets.main.allJava
-       }
-    }
 }
