@@ -33,9 +33,9 @@ dependencies {
     testCompile "junit:junit:4.12"
 }
 
- task createAddonPom {
+task createAddonPom {
     pom { artifactId = project.artifactId }.writeTo("${sourceSets.main.output.resourcesDir}/META-INF/maven/com.byteowls/vaadin-chartjs/pom.xml")
-  }
+}
 
 jar {
     baseName = project.artifactId
@@ -105,8 +105,8 @@ publishing {
 // ##########################
 
 bintray {
-    user = BINTRAY_USER //this usually comes from gradle.properties file in ~/.gradle
-    key = BINTRAY_API_KEY //this usually comes from gradle.properties file in ~/.gradle
+    user = hasProperty('BINTRAY_USER') ? BINTRAY_USER : '' //this usually comes from gradle.properties file in ~/.gradle
+    key = hasProperty('BINTRAY_API_KEY') ? BINTRAY_API_KEY: '' //this usually comes from gradle.properties file in ~/.gradle
 
     // configurations = ['archives'] //When uploading configuration files
     // - OR -
