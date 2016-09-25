@@ -1,46 +1,30 @@
 @import "../valo/valo.scss";
 
+$v-app-loading-text: "Vaadin Chart.js Addon";
+
 @mixin chartjs {
   @include valo;
 
   /* Add your theme selectors here */
   .v-app-loading:before {
     background: none !important;
-    @include valo-spinner(30);
+    @include valo-spinner(50px, 2px, $v-focus-color, 1000ms);
   }
   
-  .cjs-menu {
+  
+  .addon-menu {
     background-color: white;
   }
   
-  .valo-menu-part.large-icons {
-    max-width: 100% !important;
-  }
-  
-  .valo-menu-item [class*="caption"] {
-    font-size: 14px !important;
-  }
-  
-  .cjs-info-bar {
+  .addon-info-bar {
     padding: 5px;
     background-color: white;
     border-bottom: 1px solid darken($v-background-color, 50%);
   }
   
-  .cjs-code {
+  .addon-code {
     //overflow: auto;
     background-color: white;
   }
   
-  .cjs-menu-parent {
-    font-weight: bold !important;
-    font-size: 16px !important;
-    text-align: left !important;
-  }
-  
-  .cjs-menu-child {
-    text-align: left !important;
-  }
-  
-
 }

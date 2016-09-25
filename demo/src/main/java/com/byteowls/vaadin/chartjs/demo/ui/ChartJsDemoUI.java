@@ -6,12 +6,30 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.byteowls.vaadin.chartjs.demo.ui.charts.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
+import com.byteowls.vaadin.chartjs.demo.ui.charts.AngledPieChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.BarLineComboChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.CubicInterpolationLineChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.GaugeDonutChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.HorizontalBarChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiAxisBarChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiDonutChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.PieChartRefreshDataView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.PointSizeLineChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.PolarChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.ScatterLineChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.SimpleBubbleChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.SimpleLineChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.SimpleRadarChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.SinglePieChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.SkipDataRadarChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.SkipPointsLineChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.StackedBarChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.StackedLineChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.SteppedLineChartView;
 import com.vaadin.annotations.Theme;
-import com.vaadin.annotations.Widgetset;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.HierarchicalContainer;
 import com.vaadin.navigator.Navigator;
@@ -41,7 +59,6 @@ import de.java2html.util.IllegalConfigurationException;
 
 @Theme("chartjs")
 @SpringUI
-@Widgetset("ChartJsWidgetset")
 public class ChartJsDemoUI extends UI {
 
     private static final long serialVersionUID = -33887281222947647L;
@@ -85,7 +102,7 @@ public class ChartJsDemoUI extends UI {
     @SuppressWarnings("serial")
     @Override
     protected void init(VaadinRequest request) {
-        String title = "Vaadin ChartJs Addon";
+        String title = env.getProperty("addon.title");
         getPage().setTitle(title);
         Responsive.makeResponsive(this);
 
@@ -99,16 +116,15 @@ public class ChartJsDemoUI extends UI {
         vl.setSizeFull();
         
         Label info = new Label("<strong>" + title + "</strong> "
-                + "| Version: <strong>" + env.getProperty("versions.vaadin-chartjs-addon") + "</strong> "
-                + "| Chart.js: <strong>" + env.getProperty("versions.chartjs") + "</strong> "
-                + "| Vaadin: <strong>" + env.getProperty("versions.vaadin") + "</strong> "
-                + "| Created by: <strong>Michael Oberwasserlechner</strong> "
-                + "| <a href=\"https://github.com/moberwasserlechner/vaadin-chartjs\">Check it out on Github</a>");
+                + "| Version: <strong>" + env.getProperty("addon.version") + "</strong> "
+                + "| "+env.getProperty("addon.jslib.title")+": <strong>" + env.getProperty("addon.jslib.version") + "</strong> "
+                + "| Vaadin: <strong>" + env.getProperty("addon.vaadin.version") + "</strong> "
+                + "| <a href=\""+env.getProperty("addon.github")+"\">Check it out on Github</a>");
         info.setContentMode(ContentMode.HTML);
         
         CssLayout infoBar = new CssLayout(info);
         infoBar.setWidth(100, Unit.PERCENTAGE);
-        infoBar.addStyleName("cjs-info-bar");
+        infoBar.addStyleName("addon-info-bar");
         vl.addComponent(infoBar);
 
         HorizontalSplitPanel splitContentCode = new HorizontalSplitPanel();
@@ -163,7 +179,7 @@ public class ChartJsDemoUI extends UI {
         Panel codePanel = new Panel(codeLabel);
         codePanel.setSizeFull();
         codePanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        codePanel.addStyleName("cjs-code");
+        codePanel.addStyleName("addon-code");
         return codePanel;
     }
 
@@ -172,7 +188,7 @@ public class ChartJsDemoUI extends UI {
         Panel treePanel = new Panel();
         treePanel.setSizeFull();
         treePanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
-        treePanel.addStyleName("cjs-menu");
+        treePanel.addStyleName("addon-menu");
         
         Tree tree = new Tree();
         tree.setSelectable(true);

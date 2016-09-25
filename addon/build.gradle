@@ -1,5 +1,4 @@
 plugins {
-    id "fi.jasoft.plugin.vaadin" version "0.11.4"
     id "com.jfrog.bintray" version "1.5"
 }
 apply plugin: 'maven-publish'
@@ -15,31 +14,32 @@ eclipse {
     }
 }
 
-vaadin {
-    vaadin.version = "${vaadinVersion}"
-    vaadin.logToConsole = true
-
-    vaadinCompile.manageWidgetset = true
-    vaadinCompile.gwtSdkFirstInClasspath = true
-
-    addon {
-        author 'Michael Oberwasserlechner'
-        license 'MIT'
-        title 'Chart.js Add-on'
-    }
-}
-
 dependencies {
+    compile ("com.vaadin:vaadin-server:${vaadinVersion}")
+
     testCompile "junit:junit:4.12"
 }
 
+if (JavaVersion.current().isJava8Compatible()) {
+  allprojects {
+    tasks.withType(Javadoc) {
+      options.addStringOption('Xdoclint:none', '-quiet')
+    }
+  }
+}
+
+javadoc {
+    // this fixes a javadoc issue with vaadin packaging which is quite uncommon
+    options.addStringOption("sourcepath", "")
+}
+
 task createAddonPom {
-    pom { artifactId = project.artifactId }.writeTo("${sourceSets.main.output.resourcesDir}/META-INF/maven/com.byteowls/vaadin-chartjs/pom.xml")
+    pom { artifactId = project.artifactId }.writeTo("${sourceSets.main.output.resourcesDir}/META-INF/maven/${project.group}/${project.artifactId}/pom.xml")
 }
 
 jar {
-    baseName = project.artifactId
     createAddonPom
+    baseName = project.artifactId
     // Include sources
     sourceSets.main.java.srcDirs.each {
         from it
@@ -47,24 +47,15 @@ jar {
 
     manifest {
         // the manifest of the default jar is of type OsgiManifest
-        name = 'vaadin-chartjs'
+        name = project.artifactId
+        attributes "Vaadin-Package-Version": "1"
+        attributes "Implementation-Title": "Chart js Add-on"
+        attributes "Implementation-Version": project.version
         instruction 'Import-Package', '!com.google.gwt.*', '!com.vaadin.client.*', '*'
         instruction 'Bundle-Vendor', 'Michael Oberwasserlechner'
         instruction 'Bundle-Description', 'Chart.js Add-on'
         instruction 'Bundle-DocURL', 'https://github.com/moberwasserlechner/vaadin-chartjs'
     }
-}
-
-vaadinAddonZip {
-    baseName = project.artifactId
-}
-
-vaadinJavadocJar {
-    baseName = project.artifactId
-}
-
-vaadinSourcesJar {
-    baseName = project.artifactId
 }
 
 // custom tasks for creating source/javadoc jars
@@ -105,8 +96,8 @@ publishing {
 // ##########################
 
 bintray {
-    user = hasProperty('BINTRAY_USER') ? BINTRAY_USER : '' //this usually comes from gradle.properties file in ~/.gradle
-    key = hasProperty('BINTRAY_API_KEY') ? BINTRAY_API_KEY: '' //this usually comes from gradle.properties file in ~/.gradle
+    user = project.hasProperty('BINTRAY_USER') ? BINTRAY_USER : null //this usually comes from gradle.properties file in ~/.gradle
+    key = project.hasProperty('BINTRAY_API_KEY') ? BINTRAY_API_KEY : null //this usually comes from gradle.properties file in ~/.gradle
 
     // configurations = ['archives'] //When uploading configuration files
     // - OR -

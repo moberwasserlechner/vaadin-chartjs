@@ -17,6 +17,20 @@ Vaadin 7 wrapper for the Chart.js charting library. https://github.com/chartjs/C
  * Scatter line chart
 * Data point click listener
 
+## Demo
+
+### Vaadin Addon
+
+* http://moberwasserlechner.jelastic.servint.net/vaadin-chartjs/
+
+If you want to run the demo application locally, see the [Contribution Section](#run-the-demo-local)
+
+### Chart.js
+
+Afaik there are no online examples yet but you can download them along with the release distribution
+
+* https://github.com/chartjs/Chart.js/releases/latest
+
 ## Installation
 
 ### Download
@@ -35,7 +49,6 @@ You can download the addon there as well, but you will need to create a free vaa
 Repository
 
     <repositories>
-      <!-- ... other repository elements ... -->
       <repository>
         <snapshots>
           <enabled>false</enabled>
@@ -49,11 +62,10 @@ Repository
 Dependency
 
     <dependencies>
-      <!-- ... other dependency elements ... -->
       <dependency>
         <groupId>com.byteowls</groupId>
         <artifactId>vaadin-chartjs</artifactId>
-        <version>0.2.0</version>
+        <version>0.3.0</version>
       </dependency>
     </dependencies>
 
@@ -65,17 +77,11 @@ Repository
     repositories {
       jcenter()
     }
-    // or 
-    repositories {
-      maven {
-        url  "http://jcenter.bintray.com" 
-      }
-    }
      
 Dependency
 
     dependencies {
-      compile ("com.byteowls:vaadin-chartjs:0.2.0")
+      compile ("com.byteowls:vaadin-chartjs:0.3.0")
     }
 ## Usage
 
@@ -154,10 +160,8 @@ You will see that every fluent api method under `config.options()` has a counter
 * Vaadin 7.4 or higher
 
 ### Demo
-* JDK 8
-* Vaadin 7.7.0
-
-## Usage
+* JDK 8 (because of Lambdas)
+* Vaadin 7.7.0+
 
 
 ## Missing something?
@@ -168,44 +172,47 @@ In all other cases please create a issue at https://github.com/moberwasserlechne
 
 ## Contribute
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-feature-or-bug`)
+### Setup Eclipse
+
+1. Fork repo
+2. Open command line
+3. Clone your fork `git@github.com:USERNAME/vaadin-chartjs.git`
+4. `cd vaadin-chartjs`
+5. Build eclipse meta data `./gradlew cleanEclipse eclipse`
+6. Open Eclipse
+7. File -> Import... -> General -> Existing Projects into Workspace
+8. Browse to your git repository
+9. Check the option "Search for nested projects"
+10. Check all 3 projects
+11. Press finish
+
+This should take not more than 1-2 minutes. You does not need to use any gradle eclipse plugins. 
+
+### Fix a bug or create a new feature
+
+Please do not mix more than one issue in a feature branch. Each feature/bugfix should have its own branch and its own Pull Request (PR).
+
+1. Create a issue and describe what you want to do at [Issue Tracker](https://github.com/moberwasserlechner/vaadin-chartjs/issues)
+2. Create your feature branch (`git checkout -b feature/my-feature` or `git checkout -b bugfix/my-bugfix`)
 3. Test your changes to the best of your ability.
+4. Add a demo view to the demo application 
 5. Commit your changes (`git commit -m 'Describe feature or bug'`)
-6. Push to the branch (`git push origin my-feature-or-bug`)
-7. Create new Pull Request
+6. Push to the branch (`git push origin feature/my-feature`)
+7. Create a Github Pull Request
 
+### Run the demo local
 
-### Eclipse
+The demo application is based on Spring Boot. So its possible to run the Demo as Java Application right out of Eclipse, there is not servlet container needed as Spring Boot has a embedded Tomcat 8 included.
 
-1. Build eclipse project configs for addon and demo with `./gradlew cleanEclipse eclipse`
-2. In Eclipse open File->Import... and choose General->Existing Projects into Workspace for the root folder
+1. Open "Debug Configurations..." dialog
+2. Create a new "Java Application"
+3. Choose the "vaadin-chartjs-demo" project
+4. Use "com.byteowls.vaadin.chartjs.demo.ChartJsDemoApplication" as Main class
+5. Set `-Dprofile=dev` as VM argument. This ensures that source code panel in the demo is correctly filled while developing.
 
 ### Code Style
 
 Please use the sun coding convention. Please do not use tabs at all!
-
-## Demo
-
-### Chart.js
-
-Afaik there are no online examples yet but you can download them along with the release distribution
-
-* https://github.com/chartjs/Chart.js/releases/latest
-
-### Vaadin Chart.js
-
-**Run it yourself**
-
-1. Clone the repository
-2. Build eclipse project configs for addon and demo with `./gradlew cleanEclipse eclipse`
-3. In Eclipse open File->Import... and choose General->Existing Projects into Workspace for the root folder
-4. Create a run or debug configuration as a Java Application and use this "com.byteowls.vaadin.chartjs.demo.ChartJsDemoApplication" main class
-3. It starts at `http://localhost:8080/`
-
-**Live Demo**
-
-http://moberwasserlechner.jelastic.servint.net/vaadin-chartjs/
 
 ## License
 
@@ -213,4 +220,4 @@ MIT. Please see [LICENSE](https://github.com/moberwasserlechner/vaadin-chartjs/b
 
 ## Change Log
 
-Please see [CHANGELOG](https://github.com/moberwasserlechner/vaadin-chartjs/blob/master/CHANGELOG.md).
+Please see [Releases](https://github.com/moberwasserlechner/vaadin-chartjs/releases).

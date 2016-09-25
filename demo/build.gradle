@@ -1,8 +1,6 @@
 buildscript {
     repositories {
-        jcenter()
         mavenCentral()
-        maven { url = "http://maven.vaadin.com/vaadin-addons"}
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -12,36 +10,18 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'eclipse-wtp'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
 
-war {
-    baseName = project.ext.artifactId
-
-    // Include widgetset
-    // dependsOn 'vaadinCompile'
-    // dependsOn 'test'
-    // Add sources
-    webInf{
-        into('classes'){
-            from sourceSets.main.allJava
-        }
-    }
-}
-
-bootRun {
-    addResources = true
-    systemProperties System.properties
+eclipse {
+  project {
+    name = 'vaadin-chartjs-demo'
+  }
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-dependencyManagement {
-    imports {
-        mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
-    }
-}
 
 repositories {
     mavenCentral()
@@ -49,10 +29,58 @@ repositories {
 }
 
 dependencies {
-    compile("com.vaadin:vaadin-spring-boot-starter:1.0.0")
+    compile("com.vaadin:vaadin-spring-boot-starter:${vaadinSpringVersion}")
     compile project(":addon")
     compile ("de.java2html:java2html:5.0")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
+    compile ("com.vaadin:vaadin-server:${vaadinVersion}")
+    compile ("com.vaadin:vaadin-client-compiled:${vaadinVersion}")
+    compile ("com.vaadin:vaadin-themes:${vaadinVersion}")
+}
+
+project.ext.vaadinThemeDir = "VAADIN/themes/${vaadinTheme}"
+project.ext.vaadinCssDir = "${project.buildDir}/tmp/styles";
+
+task compileVaadinScss(type: JavaExec) {
+    def styleDir = new File("${vaadinCssDir}")
+    if (!styleDir.exists()) {
+        styleDir.mkdirs()
+    }
+    classpath = sourceSets.main.compileClasspath
+    main = 'com.vaadin.sass.SassCompiler'
+    args = [
+        "src/main/webapp/${project.vaadinThemeDir}/styles.scss",
+        "${vaadinCssDir}/styles.css",
+        "-minify:true",
+        "-compress:true"
+    ]
+
+}
+
+war {
+    dependsOn compileVaadinScss
+    baseName = project.ext.artifactId
+
+    from ("${vaadinCssDir}") {
+        into vaadinThemeDir
+    }
+
+    excludes = [
+        "${vaadinThemeDir}/*.scss",
+        "${vaadinThemeDir}/*.cache"
+    ]
+
+    // Add sources
+    webInf {
+      into('classes'){
+        from sourceSets.main.allJava
+       }
+    }
+}
+
+bootRun {
+    addResources = true
+    systemProperties System.properties
 }
