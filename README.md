@@ -131,7 +131,7 @@ In this example we configure a horizontal bar chart with 3 dataset and add some 
             
             // add random data
             List<String> labels = barConfig.data().getLabels();
-            for (Dataset<?, ?> ds : barConfig.data().getDatasets()) {
+            for (Dataset<?> ds : barConfig.data().getDatasets()) {
                 BarDataset lds = (BarDataset) ds;
                 List<Double> data = new ArrayList<>();
                 for (int i = 0; i < labels.size(); i++) {
