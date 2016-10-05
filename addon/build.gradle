@@ -49,7 +49,7 @@ jar {
         // the manifest of the default jar is of type OsgiManifest
         name = project.artifactId
         attributes "Vaadin-Package-Version": "1"
-        attributes "Implementation-Title": "Chart js Add-on"
+        attributes "Implementation-Title": "Chart.js Add-on"
         attributes "Implementation-Version": project.version
         instruction 'Import-Package', '!com.google.gwt.*', '!com.vaadin.client.*', '*'
         instruction 'Bundle-Vendor', 'Michael Oberwasserlechner'

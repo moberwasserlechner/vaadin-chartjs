@@ -166,7 +166,7 @@ public class BarDataset extends DoubleDataset<BarDataset> {
         JUtils.putNotNull(map, "yAxisID", yAxisID);
         JUtils.putNotNull(map, "fill", fill);
         JUtils.putNotNull(map, "hidden", hidden);
-        if (randomBackgroundColors) {
+        if (randomBackgroundColors && data != null) {
             List<String> bgColors = new ArrayList<>();
             for (int i = 0; i < data.size(); i++) {
                 bgColors.add(ColorUtils.randomColor(0.7));

@@ -19,7 +19,7 @@ public class Data<T> extends And<T> implements JsonBuilder {
     private List<String> labels;
     private List<Dataset<?, ?>> datasets;
     private boolean extractLabelsFromDataset;
-    
+
     public Data(T chartConfig) {
         super(chartConfig);
     }
@@ -28,12 +28,16 @@ public class Data<T> extends And<T> implements JsonBuilder {
         this.labels = Arrays.asList(labels);
         return this;
     }
-    
+
     public Data<T> labelsAsList(List<String> labels) {
         this.labels = labels;
         return this;
     }
 
+    /**
+     * Add a dataset.
+     * @param dataset the dataset
+     */
     public Data<T> addDataset(Dataset<?, ?> dataset) {
         if (this.datasets == null) {
             this.datasets = new ArrayList<>();
@@ -42,10 +46,33 @@ public class Data<T> extends And<T> implements JsonBuilder {
         return this;
     }
 
+    /**
+     * @return A {@link List} of datasets.
+     */
     public List<Dataset<?, ?>> getDatasets() {
         return datasets;
     }
-    
+
+    /**
+     * Gets the dataset at the given index.
+     * @param index the dataset index
+     * @return The dataset at the given index and null if the index does not exist.
+     */
+    public Dataset<?, ?> getDatasetAtIndex(int index) {
+        if (this.datasets != null && index >= 0 && index < this.datasets.size()) {
+            return this.datasets.get(index);
+        }
+        return null;
+    }
+
+    /**
+     * Gets the first dataset.
+     * @return The first dataset or null if there is none.
+     */
+    public Dataset<?, ?> getFirstDataset() {
+        return getDatasetAtIndex(0);
+    }
+
     /**
      * If true the data labels are extracted from the dataset.
      */
@@ -54,6 +81,9 @@ public class Data<T> extends And<T> implements JsonBuilder {
         return this;
     }
 
+    /**
+     * Clear the dataset list.
+     */
     public Data<T> clear() {
         if (datasets != null) {
             datasets.clear();
@@ -68,7 +98,7 @@ public class Data<T> extends And<T> implements JsonBuilder {
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
-        if (extractLabelsFromDataset) {
+        if (extractLabelsFromDataset && datasets != null) {
             for (Dataset<?, ?> dataset : datasets) {
                 labels = dataset.getDataLabels();
                 break;
