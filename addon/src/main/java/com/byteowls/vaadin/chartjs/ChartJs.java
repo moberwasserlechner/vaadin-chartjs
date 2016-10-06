@@ -72,6 +72,30 @@ public class ChartJs extends AbstractJavaScriptComponent {
         }
         callFunction("updateData");
     }
+    
+    /**
+     * Push a new label into the chart.
+     * @param label new label to add into chart.
+     */
+    public void pushLabel(String label) {
+        callFunction("pushLabel", label);
+    }    
+    
+    /**
+     * Push new data into the chart.
+     * @param datasetIndex index number of dataset where to add new data.
+     * @param data number to add into dataset.
+     */    
+    public void pushData(int datasetIndex, Number data) {
+        callFunction("pushData", datasetIndex, data);
+    }    
+
+    /**
+     * Call the ChartJS update function.
+     */        
+    public void update() {
+        callFunction("update");
+    }    
 
     /**
      * @return True if the connector's logs defined messages to "console.log" else logging is disabled.
