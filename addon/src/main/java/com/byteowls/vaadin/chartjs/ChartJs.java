@@ -1,6 +1,7 @@
 package com.byteowls.vaadin.chartjs;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
@@ -15,11 +16,21 @@ public class ChartJs extends AbstractJavaScriptComponent {
 
     private static final long serialVersionUID = 2999562112373836140L;
 
+    public enum ImageType {
+        PNG;
+    }
+
     public interface DataPointClickListener {
         void onDataPointClick(int datasetIndex, int dataIndex);
     }
 
+    public interface DownloadListener {
+        void onDownload(byte[] imageData);
+    }
+
     private List<ChartJs.DataPointClickListener> dataPointClickListeners = new ArrayList<>();
+    private List<ChartJs.DownloadListener> downloadListeners = new ArrayList<>();
+
     private ChartConfig chartConfig;
 
     /**
@@ -102,6 +113,18 @@ public class ChartJs extends AbstractJavaScriptComponent {
         checkListenerState();
     }
 
+    /**
+     * Adds a listener serving the downloaded image.
+     * @param listener the download listener.
+     */
+    public void addDownloadListener(ChartJs.DownloadListener listener) {
+        downloadListeners.add(listener);
+    }
+
+    public void removeDownloadListener(ChartJs.DownloadListener listener) {
+        downloadListeners.remove(listener);
+    }
+
     private void checkListenerState() {
         getState().dataPointClickListenerFound = !this.dataPointClickListeners.isEmpty();
     }
@@ -120,6 +143,40 @@ public class ChartJs extends AbstractJavaScriptComponent {
                 }
             }
         });
+
+        addFunction("sendImageDataUrl",  new JavaScriptFunction() {
+            private static final long serialVersionUID = -6280339244713509848L;
+
+            @Override
+            public void call(JsonArray arguments) {
+                String dataUrl = arguments.getString(0);
+                String encodingPrefix = "base64,";
+                int contentStartIndex = dataUrl.indexOf(encodingPrefix) + encodingPrefix.length();
+                byte[] imageData = Base64.getDecoder().decode(dataUrl.substring(contentStartIndex));
+                for (DownloadListener l : downloadListeners) {
+                    l.onDownload(imageData);
+                }
+            }
+        });
+    }
+
+    public void download() {
+        download(ImageType.PNG);
+    }
+
+    public void download(ImageType imageType) {
+        download(ImageType.PNG, null);
+    }
+
+    public void download(ImageType imageType, Double imageQuality) {
+        if (imageType == null) {
+            imageType = ImageType.PNG;
+        }
+        // assert that a download listener is added
+        if (this.downloadListeners == null || this.downloadListeners.isEmpty()) {
+            throw new IllegalArgumentException("No download listener found! Make sure use addDownloadListener before calling download");
+        }
+        callFunction("getImageDataUrl", imageType.toString().toLowerCase(), imageQuality);
     }
 
     @Override

@@ -16,6 +16,7 @@ import com.byteowls.vaadin.chartjs.demo.ui.charts.GaugeDonutChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.HorizontalBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiAxisBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiDonutChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.PieChartDownloadView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.PieChartRefreshDataView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.PointSizeLineChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.PolarChartView;
@@ -86,6 +87,7 @@ public class ChartJsDemoUI extends UI {
         menuItems.add(new MenuItem(ChartType.PIE, "Angled pie", AngledPieChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Gauge donut", GaugeDonutChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Pie with data refresh", PieChartRefreshDataView.class));
+        menuItems.add(new MenuItem(ChartType.PIE, "Download pie", PieChartDownloadView.class));
         menuItems.add(new MenuItem(ChartType.AREA, "Bubble", SimpleBubbleChartView.class));
         menuItems.add(new MenuItem(ChartType.AREA, "Polar", PolarChartView.class));
         menuItems.add(new MenuItem(ChartType.AREA, "Radar", SimpleRadarChartView.class));

@@ -159,12 +159,12 @@ You will see that every fluent api method under `config.options()` has a counter
 ## Prerequisite
 
 ### Addon
-* JDK 7 or higher
+* JDK 8
 * Vaadin 7.4 or higher
 
 ### Demo
-* JDK 8 (because of Lambdas)
-* Vaadin 7.7.0+
+* JDK 8
+* Vaadin 7.7.+
 
 
 ## Missing something?

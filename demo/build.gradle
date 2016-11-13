@@ -11,7 +11,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'eclipse-wtp'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
 
 eclipse {
@@ -27,17 +27,22 @@ repositories {
     mavenCentral()
     maven { url = "http://maven.vaadin.com/vaadin-addons"}
 }
+configurations.compile.exclude module: "spring-boot-starter-tomcat"
 
 dependencies {
     compile("com.vaadin:vaadin-spring-boot-starter:${vaadinSpringVersion}")
+
+    compile("org.springframework.boot:spring-boot-starter-undertow:${springBootVersion}")
+
     compile project(":addon")
     compile ("de.java2html:java2html:5.0")
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
     compile ("com.vaadin:vaadin-server:${vaadinVersion}")
     compile ("com.vaadin:vaadin-client-compiled:${vaadinVersion}")
     compile ("com.vaadin:vaadin-themes:${vaadinVersion}")
+    compile ("com.yahoo.platform.yui:yuicompressor:2.4.8")
 }
 
 project.ext.vaadinThemeDir = "VAADIN/themes/${vaadinTheme}"
