@@ -21,7 +21,7 @@ Vaadin 7 wrapper for the Chart.js charting library. https://github.com/chartjs/C
 
 ### Vaadin Addon
 
-* http://moberwasserlechner.jelastic.servint.net/vaadin-chartjs/
+* http://vaadin-demos.qqjtxeeuih.eu-central-1.elasticbeanstalk.com/chartjs/
 
 If you want to run the demo application locally, see the [Contribution Section](#run-the-demo-local)
 
@@ -87,7 +87,7 @@ Dependency
 
 The basic usage is always the same. You need to create a new ChartJs() and configure it with a chart type specific config.
 
-For more examples please see the demo app at http://moberwasserlechner.jelastic.servint.net/vaadin-chartjs/
+For more examples please see the [demo app](#vaadin-addon)
 
 ```
         ChartJs myChart = new ChartJs(config);
