@@ -21,7 +21,7 @@ Vaadin 7 wrapper for the Chart.js charting library. https://github.com/chartjs/C
 
 ### Vaadin Addon
 
-* http://vaadin-demos.qqjtxeeuih.eu-central-1.elasticbeanstalk.com/chartjs/
+* http://vaadin-demos.qqjtxeeuih.eu-central-1.elasticbeanstalk.com:5600
 
 If you want to run the demo application locally, see the [Contribution Section](#run-the-demo-local)
 
@@ -212,7 +212,7 @@ The demo application is based on Spring Boot. So its possible to run the Demo as
 3. Choose the "vaadin-chartjs-demo" project
 4. Use "com.byteowls.vaadin.chartjs.demo.ChartJsDemoApplication" as Main class
 5. Set `-Dprofile=dev` as VM argument. This ensures that source code panel in the demo is correctly filled while developing.
-6. Browse to `http://localhost:5100/chartjs/`
+6. Browse to `http://localhost:8080/`
 
 ### Code Style
 
