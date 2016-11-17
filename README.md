@@ -212,6 +212,7 @@ The demo application is based on Spring Boot. So its possible to run the Demo as
 3. Choose the "vaadin-chartjs-demo" project
 4. Use "com.byteowls.vaadin.chartjs.demo.ChartJsDemoApplication" as Main class
 5. Set `-Dprofile=dev` as VM argument. This ensures that source code panel in the demo is correctly filled while developing.
+6. Browse to `http://localhost:5100/chartjs/`
 
 ### Code Style
 
