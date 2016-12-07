@@ -1,7 +1,6 @@
 package com.byteowls.vaadin.chartjs;
 
 import com.vaadin.shared.ui.JavaScriptComponentState;
-import elemental.json.JsonValue;
 
 public class ChartJsState extends JavaScriptComponentState {
 
@@ -9,6 +8,6 @@ public class ChartJsState extends JavaScriptComponentState {
     
     public boolean loggingEnabled;
     public boolean dataPointClickListenerFound;
-    public JsonValue configurationJson;
+    public String configurationJson;
 
 }

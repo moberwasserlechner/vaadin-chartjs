@@ -1,156 +1,92 @@
 package com.byteowls.vaadin.chartjs.utils;
 
-import elemental.json.Json;
-import elemental.json.JsonArray;
-import elemental.json.JsonObject;
-import elemental.json.JsonValue;
-import elemental.json.impl.JreJsonNull;
-
+import elemental.json.impl.JsonUtil;
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class JUtils {
 
-    public static void putNotNull(JsonObject obj, String key, Map<String, String> map) {
-        if (map != null) {
-            JsonObject mapObj = Json.createObject();
-            for (Map.Entry<String, String> entry : map.entrySet()) {
-                mapObj.put(entry.getKey(), entry.getValue());
-            }
-            obj.put(key, mapObj);
-        }
-    }
-
-    public static void putNotNull(JsonObject obj, String key, List<String> list) {
-        if (list != null) {
-            JsonArray arr = Json.createArray();
-            for (String entry : list) {
-                arr.set(arr.length(), entry);
-            }
-            obj.put(key, arr);
-        }
-    }
-
-    public static void putNotNull(JsonObject obj, String key, Boolean value) {
+    public static void putNotNull(Map obj, String key, Object value) {
         if (value != null) {
             obj.put(key, value);
         }
     }
 
-    public static void putNotNull(JsonObject obj, String key, String value) {
-        if (value != null) {
-            obj.put(key, value);
-        }
-    }
-
-
-    public static void putNotNull(JsonObject obj, String key, JsonValue value) {
-        if (value != null) {
-            obj.put(key, value);
-        }
-    }
-
-    public static void putNotNull(JsonObject obj, String key, Double value) {
-        if (value != null) {
-            obj.put(key, value);
-        }
-    }
-    
-    public static void putNotNull(JsonObject obj, String key, Integer value) {
-        if (value != null) {
-            obj.put(key, value.doubleValue());
-        }
-    }
-
-    public static void putNotNull(JsonObject obj, String key, JsonBuilder builder) {
-        if (builder != null) {
-            obj.put(key, builder.buildJson());
-        }
-    }
-
-    public static void putNotNullBuilders(JsonObject obj, String key, List<? extends JsonBuilder> listOfBuilder) {
-        if (listOfBuilder != null) {
-            JsonArray arr = Json.createArray();
-            for (JsonBuilder tbb : listOfBuilder) {
-                arr.set(arr.length(), tbb.buildJson());
-            }
-            obj.put(key, arr);
-        }
-    }
-    
-    public static void putNotNullList(JsonObject obj, String key, List<String> list) {
-        if (list != null) {
-            JsonArray arr = Json.createArray();
-            for (String entry : list) {
-                arr.set(arr.length(), entry);
-            }
-            obj.put(key, arr);
-        }
-    }
-
-    public static void putNotNullNumbers(JsonObject obj, String key, List<Double> listOfNumbers) {
-        if (listOfNumbers != null) {
-            JsonArray arr = Json.createArray();
-            for (Double n : listOfNumbers) {
-                if (n == null) {
-                    arr.set(arr.length(), new JreJsonNull());
-                } else {
-                    arr.set(arr.length(), n);
-                }
-            }
-            obj.put(key, arr);
-        }
-    }
-    
-    public static void putNotNullIntList(JsonObject obj, String key, List<Integer> listOfNumbers) {
-        if (listOfNumbers != null) {
-            JsonArray arr = Json.createArray();
-            for (Integer n : listOfNumbers) {
-                arr.set(arr.length(), n.doubleValue());
-            }
-            obj.put(key, arr);
-        }
-    }
-    
-    public static void putNotNullStringListOrSingle(JsonObject obj, String key, List<String> list) {
+    public static void putNotNullListOrSingle(Map obj, String key, List list) {
         if (list != null) {
             if (list.size() == 1) {
                 putNotNull(obj, key, list.get(0));
             } else {
-                JsonArray arr = Json.createArray();
-                for (String entry : list) {
-                    arr.set(arr.length(), entry);
-                }
-                obj.put(key, arr);
+                obj.put(key, list);
             }
         }
     }
 
-    public static void putNotNullNumberListOrSingle(JsonObject obj, String key, List<Double> listOfNumbers) {
-        if (listOfNumbers != null) {
-            if (listOfNumbers.size() == 1) {
-                putNotNull(obj, key, listOfNumbers.get(0));
-            } else {
-                JsonArray arr = Json.createArray();
-                for (Double n : listOfNumbers) {
-                    arr.set(arr.length(), n);
-                }
-                obj.put(key, arr);
-            }
+    public static String toJson(Map<String, ?> obj) {
+        if (obj == null) {
+            return null;
         }
+        StringBuilder builder = new StringBuilder("{");
+        AtomicBoolean emptyObject = new AtomicBoolean(true);
+
+        obj.entrySet().stream().forEach((entry) -> {
+            emptyObject.set(false);
+            builder.append('"').append(entry.getKey()).append("\":");
+
+            valueToJson(builder, entry.getValue());
+
+            builder.append(',');
+        });
+
+        if (!emptyObject.get()) {
+            builder.deleteCharAt(builder.length() - 1);
+        }
+        builder.append('}');
+
+        return builder.toString();
     }
-    
-    public static void putNotNullIntListOrSingle(JsonObject obj, String key, List<Integer> listOfNumbers) {
-        if (listOfNumbers != null) {
-            if (listOfNumbers.size() == 1) {
-                putNotNull(obj, key, listOfNumbers.get(0));
-            } else {
-                JsonArray arr = Json.createArray();
-                for (Integer n : listOfNumbers) {
-                    arr.set(arr.length(), n.doubleValue());
-                }
-                obj.put(key, arr);
+
+    private static void valueToJson(StringBuilder builder, Object value) {
+        if (value == null) {
+            builder.append("null");
+        } else if (value instanceof String) {
+            builder.append(JsonUtil.quote((String) value));
+        } else if (value instanceof JsonBuilder) {
+            builder.append(toJson(((JsonBuilder) value).buildJson()));
+        } else if (value instanceof Map) {
+            builder.append(toJson((Map) value));
+        } else if (value instanceof Iterable) {
+            Iterable iterable = (Iterable) value;
+            AtomicBoolean emptyIterable = new AtomicBoolean(true);
+            builder.append("[");
+
+            iterable.forEach((item) -> {
+                emptyIterable.set(false);
+                valueToJson(builder, item);
+                builder.append(',');
+            });
+
+            if (!emptyIterable.get()) {
+                builder.deleteCharAt(builder.length() - 1);
             }
+            builder.append("]");
+        } else if (value.getClass().isArray()) {
+            int length = Array.getLength(value);
+            builder.append("[");
+            
+            for (int i = 0; i < length; i++) {
+                valueToJson(builder, Array.get(value, i));
+                builder.append(',');
+            }
+            
+            if (length > 0) {
+                builder.deleteCharAt(builder.length() - 1);
+            }
+            builder.append("]");
+        } else {
+            builder.append(value);
         }
     }
 }

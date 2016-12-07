@@ -3,8 +3,8 @@ package com.byteowls.vaadin.chartjs.options;
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Tooltips<T> extends And<T> implements JsonBuilder {
 
@@ -40,7 +40,6 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
     private String multiKeyBackground;
     // TODO private String callbacks;
 
-
     public Tooltips(T parent) {
         super(parent);
     }
@@ -54,16 +53,15 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
     }
 
     /**
-     * Sets which elements appear in the tooltip.
-     * single highlights the closest element.
-     * label highlights elements in all datasets at the same X value.
+     * Sets which elements appear in the tooltip. single highlights the closest
+     * element. label highlights elements in all datasets at the same X value.
      * defaults to {@link Mode#SINGLE}
      */
     public Tooltips<T> mode(Mode mode) {
         this.mode = mode;
         return this;
     }
-    
+
     /**
      * Background color of the tooltip. Defaults to 'rgba(0,0,0,0.8)'
      */
@@ -71,7 +69,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.backgroundColor = backgroundColor;
         return this;
     }
-    
+
     /**
      * Font family for tooltip title inherited from global font family.
      */
@@ -79,7 +77,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.titleFontFamily = titleFontFamily;
         return this;
     }
-    
+
     /**
      * Font size for tooltip title inherited from global font size. Default: 12
      */
@@ -87,7 +85,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.titleFontSize = titleFontSize;
         return this;
     }
-    
+
     /**
      * Default: bold
      */
@@ -95,7 +93,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.titleFontStyle = titleFontStyle;
         return this;
     }
-    
+
     /**
      * Font color for tooltip title. Default: #fff
      */
@@ -103,7 +101,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.titleFontColor = titleFontColor;
         return this;
     }
-    
+
     /**
      * Spacing to add to top and bottom of each title line. Default: 2
      */
@@ -111,7 +109,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.titleSpacing = titleSpacing;
         return this;
     }
-    
+
     /**
      * Margin to add on bottom of title section. Default: 12
      */
@@ -119,7 +117,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.titleMarginBottom = titleMarginBottom;
         return this;
     }
-    
+
     /**
      * Font family for tooltip items inherited from global font family
      */
@@ -127,7 +125,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.bodyFontFamily = bodyFontFamily;
         return this;
     }
-    
+
     /**
      * Font size for tooltip items inherited from global font size. Default: 12
      */
@@ -135,15 +133,15 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.bodyFontSize = bodyFontSize;
         return this;
     }
-    
+
     /**
-     * Default: normal 
+     * Default: normal
      */
     public Tooltips<T> bodyFontStyle(String bodyFontStyle) {
         this.bodyFontStyle = bodyFontStyle;
         return this;
     }
-    
+
     /**
      * Font color for tooltip items. Default: #fff
      */
@@ -151,7 +149,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.bodyFontColor = bodyFontColor;
         return this;
     }
-    
+
     /**
      * Spacing to add to top and bottom of each tooltip item. Default: 2
      */
@@ -159,7 +157,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.bodySpacing = bodySpacing;
         return this;
     }
-    
+
     /**
      * Font family for tooltip footer inherited from global font family.
      */
@@ -167,7 +165,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.footerFontFamily = footerFontFamily;
         return this;
     }
-    
+
     /**
      * Font size for tooltip footer inherited from global font size.
      */
@@ -175,7 +173,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.footerFontSize = footerFontSize;
         return this;
     }
-    
+
     /**
      * Font style for tooltip footer. Default: bold
      */
@@ -183,7 +181,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.footerFontStyle = footerFontStyle;
         return this;
     }
-    
+
     /**
      * Font color for tooltip footer. Default: #fff
      */
@@ -191,7 +189,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.footerFontColor = footerFontColor;
         return this;
     }
-    
+
     /**
      * Spacing to add to top and bottom of each footer line. Default: 2
      */
@@ -199,7 +197,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.footerSpacing = footerSpacing;
         return this;
     }
-    
+
     /**
      * Margin to add before drawing the footer. Default: 6
      */
@@ -207,15 +205,15 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.footerMarginTop = footerMarginTop;
         return this;
     }
-    
+
     /**
      * Padding to add on left and right of tooltip. Default: 6
      */
     public Tooltips<T> xPadding(int xPadding) {
         this.xPadding = xPadding;
         return this;
-    }    
-    
+    }
+
     /**
      * Padding to add on top and bottom of tooltip. Default: 6
      */
@@ -223,7 +221,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.yPadding = yPadding;
         return this;
     }
-    
+
     /**
      * Size, in px, of the tooltip arrow. Default: 5
      */
@@ -231,7 +229,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.caretSize = caretSize;
         return this;
     }
-    
+
     /**
      * Radius of tooltip corner curves. Default: 6
      */
@@ -239,7 +237,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.cornerRadius = cornerRadius;
         return this;
     }
-    
+
     /**
      * Color to draw behind the colored boxes when multiple items are in the tooltip. Default: #fff
      */
@@ -247,10 +245,10 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         this.multiKeyBackground = multiKeyBackground;
         return this;
     }
-    
+
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "enabled", enabled);
         if (mode != null) {
             JUtils.putNotNull(map, "mode", mode.name().toLowerCase());

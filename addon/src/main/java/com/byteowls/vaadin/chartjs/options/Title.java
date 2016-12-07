@@ -3,8 +3,8 @@ package com.byteowls.vaadin.chartjs.options;
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Title<T> extends And<T> implements JsonBuilder {
 
@@ -96,8 +96,8 @@ public class Title<T> extends And<T> implements JsonBuilder {
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "display", display);
         if (position != null) {
             JUtils.putNotNull(map, "position", position.name().toLowerCase());

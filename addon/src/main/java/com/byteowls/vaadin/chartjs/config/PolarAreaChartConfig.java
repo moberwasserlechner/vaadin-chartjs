@@ -4,8 +4,8 @@ import com.byteowls.vaadin.chartjs.data.Data;
 import com.byteowls.vaadin.chartjs.options.types.PolarAreaChartOptions;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.
@@ -34,8 +34,8 @@ public class PolarAreaChartConfig implements ChartConfig {
     }
     
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "type", "polarArea");
         // data
         if (data != null) {

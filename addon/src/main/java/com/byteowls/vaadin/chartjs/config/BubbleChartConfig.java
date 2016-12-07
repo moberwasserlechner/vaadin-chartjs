@@ -4,8 +4,8 @@ import com.byteowls.vaadin.chartjs.data.Data;
 import com.byteowls.vaadin.chartjs.options.types.BubbleChartOptions;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A bubble chart is used to display three dimensions of data at the same time. 
@@ -42,8 +42,8 @@ public class BubbleChartConfig implements ChartConfig {
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "type", type);
         // data
         if (data != null) {

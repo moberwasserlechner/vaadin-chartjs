@@ -4,8 +4,8 @@ import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Point elements are used to represent the points in a line chart or a bubble chart.
@@ -95,8 +95,8 @@ public class Point<T> extends And<Element<T>> implements JsonBuilder {
 
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "radius", radius);
         JUtils.putNotNull(map, "pointStyle", pointStyle);
         JUtils.putNotNull(map, "backgroundColor", backgroundColor);

@@ -7,8 +7,8 @@ import java.util.List;
 import com.byteowls.vaadin.chartjs.utils.ColorUtils;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author michael@byteowls.com
@@ -156,11 +156,11 @@ public class BarDataset extends DoubleDataset<BarDataset> {
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "type", type);
         List<Double> data = getData();
-        JUtils.putNotNullNumbers(map, "data", data);
+        JUtils.putNotNull(map, "data", data);
         JUtils.putNotNull(map, "label", label);
         JUtils.putNotNull(map, "xAxisID", xAxisID);
         JUtils.putNotNull(map, "yAxisID", yAxisID);
@@ -173,9 +173,9 @@ public class BarDataset extends DoubleDataset<BarDataset> {
             }
             backgroundColor = bgColors;
         }
-        JUtils.putNotNullStringListOrSingle(map, "backgroundColor", backgroundColor);
-        JUtils.putNotNullStringListOrSingle(map, "borderColor", borderColor);
-        JUtils.putNotNullIntListOrSingle(map, "borderWidth", borderWidth);
+        JUtils.putNotNullListOrSingle(map, "backgroundColor", backgroundColor);
+        JUtils.putNotNullListOrSingle(map, "borderColor", borderColor);
+        JUtils.putNotNullListOrSingle(map, "borderWidth", borderWidth);
         if (borderSkipped != null) {
             List<String> list = new ArrayList<>();
             for (Edge e : borderSkipped) {
@@ -183,9 +183,9 @@ public class BarDataset extends DoubleDataset<BarDataset> {
             }
             JUtils.putNotNull(map, "borderSkipped", list);
         }
-        JUtils.putNotNullStringListOrSingle(map, "hoverBackgroundColor", hoverBackgroundColor);
-        JUtils.putNotNullStringListOrSingle(map, "hoverBorderColor", hoverBorderColor);
-        JUtils.putNotNullIntListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);
+        JUtils.putNotNullListOrSingle(map, "hoverBackgroundColor", hoverBackgroundColor);
+        JUtils.putNotNullListOrSingle(map, "hoverBorderColor", hoverBorderColor);
+        JUtils.putNotNullListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);
         return map;
     }
 

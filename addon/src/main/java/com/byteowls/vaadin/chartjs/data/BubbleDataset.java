@@ -8,8 +8,8 @@ import java.util.Map;
 
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A bubble chart is used to display three dimensions of data at the same time. 
@@ -181,19 +181,19 @@ public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "type", type);
-        JUtils.putNotNullBuilders(map, "data", data);
+        JUtils.putNotNull(map, "data", data);
         JUtils.putNotNull(map, "label", label);
         JUtils.putNotNull(map, "hidden", hidden);
-        JUtils.putNotNullStringListOrSingle(map, "backgroundColor", backgroundColor);
-        JUtils.putNotNullStringListOrSingle(map, "borderColor", borderColor);
-        JUtils.putNotNullIntListOrSingle(map, "borderWidth", borderWidth);
-        JUtils.putNotNullStringListOrSingle(map, "hoverBackgroundColor", hoverBackgroundColor);
-        JUtils.putNotNullStringListOrSingle(map, "hoverBorderColor", hoverBorderColor);
-        JUtils.putNotNullIntListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);
-        JUtils.putNotNullIntListOrSingle(map, "hoverRadius", hoverRadius);
+        JUtils.putNotNullListOrSingle(map, "backgroundColor", backgroundColor);
+        JUtils.putNotNullListOrSingle(map, "borderColor", borderColor);
+        JUtils.putNotNullListOrSingle(map, "borderWidth", borderWidth);
+        JUtils.putNotNullListOrSingle(map, "hoverBackgroundColor", hoverBackgroundColor);
+        JUtils.putNotNullListOrSingle(map, "hoverBorderColor", hoverBorderColor);
+        JUtils.putNotNullListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);
+        JUtils.putNotNullListOrSingle(map, "hoverRadius", hoverRadius);
         return map;
     }
 

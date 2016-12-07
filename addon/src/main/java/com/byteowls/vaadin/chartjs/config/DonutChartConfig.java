@@ -4,8 +4,8 @@ import com.byteowls.vaadin.chartjs.data.Data;
 import com.byteowls.vaadin.chartjs.options.types.PieChartOptions;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Pie and doughnut charts are probably the most commonly used chart there are. 
@@ -41,8 +41,8 @@ public class DonutChartConfig implements ChartConfig {
     }
     
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "type", "doughnut");
         // data
         if (data != null) {

@@ -51,7 +51,7 @@ public class MultiAxisBarChartView extends AbstractChartView {
                     .text("Chart.js Bar Chart - Multi Axis")
                     .and()
                 .scales()
-                    .add(Axis.Y, new LinearScale().display(true).position(Position.LEFT).id("y-axis-1"))
+                    .add(Axis.Y, new LinearScale().display(true).position(Position.LEFT).id("y-axis-1").ticks().userCallback("function(value, index, values) {return '->' + value;}").and())
                     .add(Axis.Y, new LinearScale().display(true).position(Position.RIGHT).id("y-axis-2").gridLines().drawOnChartArea(false).and())
                     .and()
                .done();

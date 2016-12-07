@@ -3,8 +3,8 @@ package com.byteowls.vaadin.chartjs.data;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Data for the scatter line chart is passed in the form of an object. 
@@ -35,8 +35,8 @@ public class ScatterData implements JsonBuilder {
 
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject obj = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> obj = new HashMap();
         JUtils.putNotNull(obj, "x", x);
         JUtils.putNotNull(obj, "y", y);
         return obj;

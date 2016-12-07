@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Polar area charts are similar to pie charts, but each segment has the same angle - the radius of the segment differs depending on the value.
@@ -101,18 +101,18 @@ public class PolarAreaDataset extends DoubleDataset<PolarAreaDataset> {
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "type", type);
-        JUtils.putNotNullNumbers(map, "data", getData());
+        JUtils.putNotNull(map, "data", getData());
         JUtils.putNotNull(map, "label", label);
         JUtils.putNotNull(map, "hidden", hidden);
-        JUtils.putNotNullStringListOrSingle(map, "backgroundColor", backgroundColor);
-        JUtils.putNotNullStringListOrSingle(map, "borderColor", borderColor);
-        JUtils.putNotNullIntListOrSingle(map, "borderWidth", borderWidth);
-        JUtils.putNotNullStringListOrSingle(map, "hoverBackgroundColor", hoverBackgroundColor);
-        JUtils.putNotNullStringListOrSingle(map, "hoverBorderColor", hoverBorderColor);
-        JUtils.putNotNullIntListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);
+        JUtils.putNotNullListOrSingle(map, "backgroundColor", backgroundColor);
+        JUtils.putNotNullListOrSingle(map, "borderColor", borderColor);
+        JUtils.putNotNullListOrSingle(map, "borderWidth", borderWidth);
+        JUtils.putNotNullListOrSingle(map, "hoverBackgroundColor", hoverBackgroundColor);
+        JUtils.putNotNullListOrSingle(map, "hoverBorderColor", hoverBorderColor);
+        JUtils.putNotNullListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);
         return map;
     }
 

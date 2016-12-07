@@ -2,8 +2,8 @@ package com.byteowls.vaadin.chartjs.options;
 
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PieAnimation<T> extends Animation<T> {
     
@@ -52,15 +52,15 @@ public class PieAnimation<T> extends Animation<T> {
     }
     
     @Override
-    public JsonObject buildJson() {
-        JsonObject obj = Json.createObject();
-        JUtils.putNotNull(obj, "duration", duration);
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
+        JUtils.putNotNull(map, "duration", duration);
         if (easing != null) {
-            JUtils.putNotNull(obj, "easing", easing.name());
+            JUtils.putNotNull(map, "easing", easing.name());
         }
-        JUtils.putNotNull(obj, "animateRotate", animateRotate);
-        JUtils.putNotNull(obj, "animateScale", animateScale);
-        return obj;
+        JUtils.putNotNull(map, "animateRotate", animateRotate);
+        JUtils.putNotNull(map, "animateScale", animateScale);
+        return map;
     }
 
 }

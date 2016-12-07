@@ -7,8 +7,8 @@ import java.util.List;
 import com.byteowls.vaadin.chartjs.utils.ColorUtils;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * For a pie chart, datasets need to contain an array of data points. 
@@ -141,11 +141,11 @@ public class PieDataset extends DoubleDataset<PieDataset> {
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "type", type);
         List<Double> data = getData();
-        JUtils.putNotNullNumbers(map, "data", data);
+        JUtils.putNotNull(map, "data", data);
         JUtils.putNotNull(map, "label", label);
         JUtils.putNotNull(map, "fill", fill);
         JUtils.putNotNull(map, "hidden", hidden);
@@ -156,12 +156,12 @@ public class PieDataset extends DoubleDataset<PieDataset> {
             }
             backgroundColor = bgColors;
         }
-        JUtils.putNotNullStringListOrSingle(map, "backgroundColor", backgroundColor);
-        JUtils.putNotNullStringListOrSingle(map, "borderColor", borderColor);
-        JUtils.putNotNullIntListOrSingle(map, "borderWidth", borderWidth);
-        JUtils.putNotNullStringListOrSingle(map, "hoverBackgroundColor", hoverBackgroundColor);
-        JUtils.putNotNullStringListOrSingle(map, "hoverBorderColor", hoverBorderColor);
-        JUtils.putNotNullIntListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);
+        JUtils.putNotNullListOrSingle(map, "backgroundColor", backgroundColor);
+        JUtils.putNotNullListOrSingle(map, "borderColor", borderColor);
+        JUtils.putNotNullListOrSingle(map, "borderWidth", borderWidth);
+        JUtils.putNotNullListOrSingle(map, "hoverBackgroundColor", hoverBackgroundColor);
+        JUtils.putNotNullListOrSingle(map, "hoverBorderColor", hoverBorderColor);
+        JUtils.putNotNullListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);
         return map;
     }
 

@@ -8,8 +8,8 @@ import java.util.Map;
 
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Scatter line charts can be created by changing the X axis to a linear axis. 
@@ -331,10 +331,10 @@ public class ScatterDataset implements Dataset<ScatterDataset, ScatterData> {
     
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "type", type);
-        JUtils.putNotNullBuilders(map, "data", data);
+        JUtils.putNotNull(map, "data", data);
         JUtils.putNotNull(map, "label", label);
         JUtils.putNotNull(map, "xAxisID", xAxisID);
         JUtils.putNotNull(map, "yAxisID", yAxisID);
@@ -345,18 +345,18 @@ public class ScatterDataset implements Dataset<ScatterDataset, ScatterData> {
         JUtils.putNotNull(map, "borderWidth", borderWidth);
         JUtils.putNotNull(map, "borderColor", borderColor);
         JUtils.putNotNull(map, "borderCapStyle", borderCapStyle);
-        JUtils.putNotNullIntList(map, "borderDash", borderDash);
+        JUtils.putNotNull(map, "borderDash", borderDash);
         JUtils.putNotNull(map, "borderDashOffset", borderDashOffset);
         JUtils.putNotNull(map, "borderJoinStyle", borderJoinStyle);
-        JUtils.putNotNullStringListOrSingle(map, "pointBorderColor", pointBorderColor);
-        JUtils.putNotNullStringListOrSingle(map, "pointBackgroundColor", pointBackgroundColor);
-        JUtils.putNotNullIntListOrSingle(map, "pointBorderWidth", pointBorderWidth);
-        JUtils.putNotNullIntListOrSingle(map, "pointRadius", pointRadius);
-        JUtils.putNotNullIntListOrSingle(map, "pointHoverRadius", pointHoverRadius);
-        JUtils.putNotNullIntListOrSingle(map, "pointHitRadius", pointHitRadius);
-        JUtils.putNotNullStringListOrSingle(map, "pointHoverBackgroundColor", pointHoverBackgroundColor);
-        JUtils.putNotNullStringListOrSingle(map, "pointHoverBorderColor", pointHoverBorderColor);
-        JUtils.putNotNullIntListOrSingle(map, "pointHoverBorderWidth", pointHoverBorderWidth);
+        JUtils.putNotNullListOrSingle(map, "pointBorderColor", pointBorderColor);
+        JUtils.putNotNullListOrSingle(map, "pointBackgroundColor", pointBackgroundColor);
+        JUtils.putNotNullListOrSingle(map, "pointBorderWidth", pointBorderWidth);
+        JUtils.putNotNullListOrSingle(map, "pointRadius", pointRadius);
+        JUtils.putNotNullListOrSingle(map, "pointHoverRadius", pointHoverRadius);
+        JUtils.putNotNullListOrSingle(map, "pointHitRadius", pointHitRadius);
+        JUtils.putNotNullListOrSingle(map, "pointHoverBackgroundColor", pointHoverBackgroundColor);
+        JUtils.putNotNullListOrSingle(map, "pointHoverBorderColor", pointHoverBorderColor);
+        JUtils.putNotNullListOrSingle(map, "pointHoverBorderWidth", pointHoverBorderWidth);
         if (pointStyle != null) {
             JUtils.putNotNull(map, "pointStyle", pointStyle.name());
         }

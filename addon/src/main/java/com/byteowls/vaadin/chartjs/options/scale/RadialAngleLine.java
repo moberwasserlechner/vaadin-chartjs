@@ -4,8 +4,8 @@ import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Used to configure angled lines that radiate from the center of the chart to the point labels. 
@@ -48,8 +48,8 @@ public class RadialAngleLine<T> extends And<T> implements JsonBuilder {
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "display", display);
         JUtils.putNotNull(map, "color", color);
         JUtils.putNotNull(map, "lineWidth", lineWidth);
