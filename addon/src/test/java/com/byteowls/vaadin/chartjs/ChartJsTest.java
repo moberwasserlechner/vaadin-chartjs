@@ -64,7 +64,7 @@ public class ChartJsTest {
                     .and()
                 .and()
             .scales()
-                .add(Axis.X, new LinearScale().position(Position.TOP).ticks().userCallback("function(value, index, values) {return '->' + values;}").and())
+                .add(Axis.X, new LinearScale().position(Position.TOP).ticks().callback("function(value, index, values) {return '->' + values;}").and())
                 .add(Axis.Y, new LogarithmicScale().position(Position.LEFT))
                 .and()
            .legend()

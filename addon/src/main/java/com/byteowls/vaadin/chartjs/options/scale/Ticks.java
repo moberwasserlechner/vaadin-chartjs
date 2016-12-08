@@ -26,7 +26,7 @@ public class Ticks<T> extends And<T> implements JsonBuilder {
     private Boolean mirror;
     private Integer padding;
     private Boolean reverse;
-    private AtomicReference<String> userCallback;
+    private AtomicReference<String> callback;
 
     public Ticks(T parent) {
         super(parent);
@@ -134,8 +134,8 @@ public class Ticks<T> extends And<T> implements JsonBuilder {
     /**
      * A custom callback javascript function to customize tick values.
      */
-    public Ticks<T> userCallback(String userCallback) {
-        this.userCallback = new AtomicReference(userCallback);
+    public Ticks<T> callback(String callback) {
+        this.callback = new AtomicReference(callback);
         return this;
     }
 
@@ -154,7 +154,7 @@ public class Ticks<T> extends And<T> implements JsonBuilder {
         JUtils.putNotNull(map, "mirror", mirror);
         JUtils.putNotNull(map, "padding", padding);
         JUtils.putNotNull(map, "reverse", reverse);
-        JUtils.putNotNull(map, "userCallback", userCallback);
+        JUtils.putNotNull(map, "callback", callback);
         return map;
     }
 }
