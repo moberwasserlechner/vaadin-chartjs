@@ -10,3 +10,4 @@ vaadin-chartjs.iml
 /.settings
 .classpath
 /bin/
+/.nb-gradle/

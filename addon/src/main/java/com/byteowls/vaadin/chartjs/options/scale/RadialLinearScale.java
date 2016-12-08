@@ -2,7 +2,7 @@ package com.byteowls.vaadin.chartjs.options.scale;
 
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.JsonObject;
+import java.util.Map;
 
 /**
  * The radial linear scale is used specifically for the radar and polar are chart types. 
@@ -75,8 +75,8 @@ public class RadialLinearScale extends BaseScale<RadialLinearScale> {
     }
     
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = super.buildJson();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = super.buildJson();
         JUtils.putNotNull(map, "reverse", reverse);
         JUtils.putNotNull(map, "lineArc", lineArc);
         JUtils.putNotNull(map, "angleLines", angleLines);

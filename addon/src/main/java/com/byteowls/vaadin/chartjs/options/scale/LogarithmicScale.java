@@ -2,7 +2,7 @@ package com.byteowls.vaadin.chartjs.options.scale;
 
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.JsonObject;
+import java.util.Map;
 
 /**
  * The logarithmic scale is use to chart numerical data. It can be placed on either the x or y axis.
@@ -35,8 +35,8 @@ public class LogarithmicScale extends BaseScale<LogarithmicScale> {
     }
     
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = super.buildJson();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = super.buildJson();
         JUtils.putNotNull(map, "ticks", logarithmicTicks);
         return map;
     }

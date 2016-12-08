@@ -49,7 +49,7 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 			if (loggingEnabled) {
 				console.log("chartjs: configuration is\n", JSON.stringify(state.configurationJson, null, 2));
 			}
-			chartjs = new Chart(canvas, state.configurationJson);
+			chartjs = new Chart(canvas, eval('(' + state.configurationJson + ')'));
 
 			// only enable if there is a listener
 			if (state.dataPointClickListenerFound) {

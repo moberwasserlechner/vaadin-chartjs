@@ -7,8 +7,8 @@ import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Line elements are used to represent the line in a line chart.
@@ -114,8 +114,8 @@ public class Line<T> extends And<Element<T>> implements JsonBuilder {
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "tension", tension);
         JUtils.putNotNull(map, "backgroundColor", backgroundColor);
         JUtils.putNotNull(map, "borderColor", borderColor);
@@ -123,7 +123,7 @@ public class Line<T> extends And<Element<T>> implements JsonBuilder {
         if (borderCapStyle != null) {
             JUtils.putNotNull(map, "borderCapStyle", borderCapStyle.name().toLowerCase());
         }
-        JUtils.putNotNullIntList(map, "borderDash", borderDash);
+        JUtils.putNotNull(map, "borderDash", borderDash);
         JUtils.putNotNull(map, "borderDashOffset", borderDashOffset);
         if (borderJoinStyle != null) {
             JUtils.putNotNull(map, "borderJoinStyle", borderJoinStyle.name().toLowerCase());

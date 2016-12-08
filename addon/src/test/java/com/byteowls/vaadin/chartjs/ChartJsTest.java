@@ -13,8 +13,8 @@ import com.byteowls.vaadin.chartjs.options.elements.Rectangle.RectangleEdge;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
 import com.byteowls.vaadin.chartjs.options.scale.LogarithmicScale;
+import java.util.Map;
 
-import elemental.json.JsonValue;
 
 /**
  * @author michael@byteowls.com
@@ -64,7 +64,7 @@ public class ChartJsTest {
                     .and()
                 .and()
             .scales()
-                .add(Axis.X, new LinearScale().position(Position.TOP))
+                .add(Axis.X, new LinearScale().position(Position.TOP).ticks().callback("function(value, index, values) {return '->' + values;}").and())
                 .add(Axis.Y, new LogarithmicScale().position(Position.LEFT))
                 .and()
            .legend()
@@ -80,7 +80,7 @@ public class ChartJsTest {
                 
             .done();
 
-        JsonValue jsonValue = config.buildJson();
+        Map<String,?> jsonValue = config.buildJson();
         Assert.assertNotNull(jsonValue);
     }
 

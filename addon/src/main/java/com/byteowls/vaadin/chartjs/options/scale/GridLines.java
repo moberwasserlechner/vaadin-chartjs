@@ -6,8 +6,8 @@ import java.util.List;
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author michael@byteowls.com
@@ -108,10 +108,10 @@ public class GridLines<T> extends And<T> implements JsonBuilder {
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "display", display);
-        JUtils.putNotNullStringListOrSingle(map, "color", color);
+        JUtils.putNotNullListOrSingle(map, "color", color);
         JUtils.putNotNull(map, "lineWidth", lineWidth);
         JUtils.putNotNull(map, "drawBorder", drawBorder);
         JUtils.putNotNull(map, "drawOnChartArea", drawOnChartArea);

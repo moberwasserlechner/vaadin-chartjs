@@ -2,7 +2,7 @@ package com.byteowls.vaadin.chartjs.options.scale;
 
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.JsonObject;
+import java.util.Map;
 
 /**
  * The category scale will be familiar to those who have used v1.0.
@@ -35,8 +35,8 @@ public class CategoryScale extends BaseScale<CategoryScale> {
     }
     
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = super.buildJson();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = super.buildJson();
         JUtils.putNotNull(map, "ticks", categoryTicks);
         return map;
     }

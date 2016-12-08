@@ -5,7 +5,7 @@ import com.byteowls.vaadin.chartjs.options.AbstractOptions;
 import com.byteowls.vaadin.chartjs.options.PieAnimation;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.JsonObject;
+import java.util.Map;
 
 public class PieChartOptions extends AbstractOptions<PieChartOptions> {
     
@@ -53,8 +53,8 @@ public class PieChartOptions extends AbstractOptions<PieChartOptions> {
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = super.buildJson();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = super.buildJson();
         JUtils.putNotNull(map, "animation", pieAnimation);
         JUtils.putNotNull(map, "cutoutPercentage", cutoutPercentage);
         JUtils.putNotNull(map, "rotation", rotation);

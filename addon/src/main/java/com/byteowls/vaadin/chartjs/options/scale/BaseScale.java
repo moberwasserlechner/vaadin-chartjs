@@ -3,8 +3,8 @@ package com.byteowls.vaadin.chartjs.options.scale;
 import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author michael@byteowls.com
@@ -122,8 +122,8 @@ public abstract class BaseScale<B extends BaseScale<?>> implements JsonBuilder {
 
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "type", type);
         JUtils.putNotNull(map, "display", display);
         JUtils.putNotNull(map, "id", id);

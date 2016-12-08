@@ -4,11 +4,11 @@ import com.byteowls.vaadin.chartjs.config.ChartConfig;
 import com.byteowls.vaadin.chartjs.options.elements.Element;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
-import elemental.json.Json;
-import elemental.json.JsonObject;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractOptions<T> implements JsonBuilder {
 
@@ -124,8 +124,8 @@ public abstract class AbstractOptions<T> implements JsonBuilder {
     public abstract T getThis();
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "responsive", responsive);
         JUtils.putNotNull(map, "maintainAspectRatio", maintainAspectRatio);
         JUtils.putNotNull(map, "responsiveAnimationDuration", responsiveAnimationDuration);

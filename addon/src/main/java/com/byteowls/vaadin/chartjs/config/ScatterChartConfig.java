@@ -3,8 +3,8 @@ package com.byteowls.vaadin.chartjs.config;
 import com.byteowls.vaadin.chartjs.data.Data;
 import com.byteowls.vaadin.chartjs.options.types.LineChartOptions;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A line chart is a way of plotting data points on a line.
@@ -33,8 +33,8 @@ public class ScatterChartConfig implements ChartConfig {
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
         JUtils.putNotNull(map, "type", "scatter");
         // data
         if (data != null) {

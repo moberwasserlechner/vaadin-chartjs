@@ -4,8 +4,8 @@ import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Element<T> extends And<T> implements JsonBuilder {
     
@@ -59,8 +59,8 @@ public class Element<T> extends And<T> implements JsonBuilder {
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject obj = Json.createObject();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> obj = new HashMap();
         JUtils.putNotNull(obj, "arc", arc);
         JUtils.putNotNull(obj, "line", line);
         JUtils.putNotNull(obj, "point", point);

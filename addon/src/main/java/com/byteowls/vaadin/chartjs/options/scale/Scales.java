@@ -7,8 +7,8 @@ import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 
-import elemental.json.Json;
-import elemental.json.JsonObject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author michael@byteowls.com
@@ -49,10 +49,10 @@ public class Scales<P> extends And<P> implements JsonBuilder {
 
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = Json.createObject();
-        JUtils.putNotNullBuilders(map, "xAxes", xAxes);
-        JUtils.putNotNullBuilders(map, "yAxes", yAxes);
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = new HashMap();
+        JUtils.putNotNull(map, "xAxes", xAxes);
+        JUtils.putNotNull(map, "yAxes", yAxes);
         return map;
     }
 }

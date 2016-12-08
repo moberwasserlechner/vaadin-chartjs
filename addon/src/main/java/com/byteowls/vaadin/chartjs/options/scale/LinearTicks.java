@@ -2,7 +2,7 @@ package com.byteowls.vaadin.chartjs.options.scale;
 
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
-import elemental.json.JsonObject;
+import java.util.Map;
 
 /**
  * @author michael@byteowls.com
@@ -89,8 +89,8 @@ public class LinearTicks<T> extends Ticks<T> implements JsonBuilder {
 
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = super.buildJson();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = super.buildJson();
         JUtils.putNotNull(map, "beginAtZero", beginAtZero);
         JUtils.putNotNull(map, "min", min);
         JUtils.putNotNull(map, "max", max);

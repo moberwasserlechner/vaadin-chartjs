@@ -5,11 +5,12 @@ import java.util.Base64;
 import java.util.List;
 
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
+import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 import com.vaadin.ui.JavaScriptFunction;
-
 import elemental.json.JsonArray;
+import elemental.json.impl.JsonUtil;
 
 @JavaScript({"vaadin://chartjs/Chart.min.js", "vaadin://chartjs/chartjs-connector.js"})
 public class ChartJs extends AbstractJavaScriptComponent {
@@ -62,7 +63,7 @@ public class ChartJs extends AbstractJavaScriptComponent {
     @Override
     public void attach() {
         if (chartConfig != null) {
-            getState().configurationJson = chartConfig.buildJson();
+            getState().configurationJson = JUtils.toJson(chartConfig.buildJson());
         }
         super.attach();
     }
@@ -79,7 +80,7 @@ public class ChartJs extends AbstractJavaScriptComponent {
      */
     public void refreshData() {
         if (chartConfig != null) {
-            getState().configurationJson = chartConfig.buildJson();
+            getState().configurationJson = JUtils.toJson(chartConfig.buildJson());
         }
         callFunction("updateData");
     }

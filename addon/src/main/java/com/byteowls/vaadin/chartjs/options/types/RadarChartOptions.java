@@ -5,7 +5,8 @@ import com.byteowls.vaadin.chartjs.options.AbstractOptions;
 import com.byteowls.vaadin.chartjs.options.scale.RadialLinearScale;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 
-import elemental.json.JsonObject;
+import java.util.Map;
+import java.util.Map;
 
 public class RadarChartOptions extends AbstractOptions<RadarChartOptions> {
 
@@ -27,8 +28,8 @@ public class RadarChartOptions extends AbstractOptions<RadarChartOptions> {
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = super.buildJson();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = super.buildJson();
         JUtils.putNotNull(map, "scale", scale);
         JUtils.putNotNull(map, "offsetAngle", offsetAngle);
         return map;

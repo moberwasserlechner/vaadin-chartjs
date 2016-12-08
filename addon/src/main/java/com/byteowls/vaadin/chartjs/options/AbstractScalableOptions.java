@@ -3,7 +3,7 @@ package com.byteowls.vaadin.chartjs.options;
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
 import com.byteowls.vaadin.chartjs.options.scale.Scales;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
-import elemental.json.JsonObject;
+import java.util.Map;
 
 /**
  * @author michael@byteowls.com
@@ -27,8 +27,8 @@ public abstract class AbstractScalableOptions<T extends AbstractScalableOptions<
     }
 
     @Override
-    public JsonObject buildJson() {
-        JsonObject map = super.buildJson();
+    public Map<String, ?> buildJson() {
+        Map<String, ?> map = super.buildJson();
         JUtils.putNotNull(map, "scales", scales);
         return map;
     }
