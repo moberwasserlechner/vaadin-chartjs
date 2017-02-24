@@ -16,15 +16,19 @@ import elemental.json.JsonObject;
  * @author michael@byteowls.com
  */
 public class Line<T> extends And<Element<T>> implements JsonBuilder {
-    
+
     public enum CapStyle {
         BUTT, ROUND, SQUARE
     }
-    
+
     public enum JoinStyle {
         BEVEL, ROUND, MITER
     }
-    
+
+    public enum FillMode {
+        ZERO, TOP, BOTTOM
+    }
+
     private Double tension;
     private String backgroundColor;
     private Integer borderWidth;
@@ -33,13 +37,16 @@ public class Line<T> extends And<Element<T>> implements JsonBuilder {
     private List<Integer> borderDash;
     private Double borderDashOffset;
     private JoinStyle borderJoinStyle;
+    private Boolean capBezierPoints;
     private Boolean fill;
+    private FillMode fillMode;
+
 
     public Line(Element<T> parent) {
         super(parent);
     }
-    
-    
+
+
     /**
      * Default bezier curve tension. Set to 0 for no bezier curves. Default: 0.4
      */
@@ -47,7 +54,7 @@ public class Line<T> extends And<Element<T>> implements JsonBuilder {
         this.tension = tension;
         return this;
     }
-    
+
     /**
      * Default line fill color. Default: 'rgba(0,0,0,0.1)'
      */
@@ -55,7 +62,7 @@ public class Line<T> extends And<Element<T>> implements JsonBuilder {
         this.backgroundColor = backgroundColor;
         return this;
     }
-    
+
     /**
      * Default line stroke width. Default: 3
      */
@@ -71,7 +78,7 @@ public class Line<T> extends And<Element<T>> implements JsonBuilder {
         this.borderColor = borderColor;
         return this;
     }
-    
+
     /**
      * Default line cap style. Default: {@link CapStyle#BUTT}
      */
@@ -79,7 +86,7 @@ public class Line<T> extends And<Element<T>> implements JsonBuilder {
         this.borderCapStyle = borderCapStyle;
         return this;
     }
-    
+
     /**
      * Length and spacing of dashes.
      */
@@ -87,7 +94,7 @@ public class Line<T> extends And<Element<T>> implements JsonBuilder {
         this.borderDash = Arrays.asList(borderDash);
         return this;
     }
-    
+
 
     /**
      * Default line dash offset. Default: 0.0
@@ -96,7 +103,7 @@ public class Line<T> extends And<Element<T>> implements JsonBuilder {
         this.borderDashOffset = borderDashOffset;
         return this;
     }
-    
+
     /**
      * Default join cap style. Default: {@link JoinStyle#MITER}
      */
@@ -104,12 +111,28 @@ public class Line<T> extends And<Element<T>> implements JsonBuilder {
         this.borderJoinStyle = borderJoinStyle;
         return this;
     }
-    
+
+    /**
+     * If true, bezier control points are kept inside the chart. If false, no restriction is enforced. Default: true
+     */
+    public Line<T> capBezierPoints(boolean capBezierPoints) {
+        this.capBezierPoints = capBezierPoints;
+        return this;
+    }
+
     /**
      * If true, the line is filled. Default: true
      */
     public Line<T> fill(boolean fill) {
         this.fill = fill;
+        return this;
+    }
+
+    /**
+     * Use the modes to fill different locations.
+     */
+    public Line<T> fill(FillMode fillMode) {
+        this.fillMode = fillMode;
         return this;
     }
 
@@ -128,7 +151,12 @@ public class Line<T> extends And<Element<T>> implements JsonBuilder {
         if (borderJoinStyle != null) {
             JUtils.putNotNull(map, "borderJoinStyle", borderJoinStyle.name().toLowerCase());
         }
-        JUtils.putNotNull(map, "fill", fill);
+        JUtils.putNotNull(map, "capBezierPoints", capBezierPoints);
+        if (this.fillMode == null) {
+            JUtils.putNotNull(map, "fill", fill);
+        } else {
+            JUtils.putNotNull(map, "fill", fillMode.name().toLowerCase());
+        }
         return map;
     }
 

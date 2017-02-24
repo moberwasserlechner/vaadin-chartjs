@@ -12,6 +12,7 @@ import org.springframework.core.env.Environment;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.AngledPieChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.BarLineComboChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.CubicInterpolationLineChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.ElementLineFillModeChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.GaugeDonutChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.HorizontalBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiAxisBarChartView;
@@ -85,6 +86,7 @@ public class ChartJsDemoUI extends UI {
         menuItems.add(new MenuItem(ChartType.LINE, "CubicInterpolation", CubicInterpolationLineChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Tooltip Interactions", TooltipInteractionModesChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Tooltip Positions", TooltipPositionModesChartView.class));
+        menuItems.add(new MenuItem(ChartType.LINE, "Elements.Line FillMode", ElementLineFillModeChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Pie", SinglePieChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Donut", MultiDonutChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Angled pie", AngledPieChartView.class));
