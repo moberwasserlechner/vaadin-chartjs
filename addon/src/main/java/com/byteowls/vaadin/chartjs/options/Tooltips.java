@@ -3,6 +3,7 @@ package com.byteowls.vaadin.chartjs.options;
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
+
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
@@ -52,6 +53,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
     private Integer caretSize;
     private Integer cornerRadius;
     private String multiKeyBackground;
+    private Boolean displayColors;
     // TODO private String callbacks;
 
 
@@ -290,6 +292,14 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         return this;
     }
 
+    /**
+     * If true, color boxes are shown in the tooltip. Default: true.
+     */
+    public Tooltips<T> displayColors(boolean displayColors) {
+        this.displayColors = displayColors;
+        return this;
+    }
+
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
@@ -321,6 +331,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         JUtils.putNotNull(map, "caretSize", caretSize);
         JUtils.putNotNull(map, "cornerRadius", cornerRadius);
         JUtils.putNotNull(map, "multiKeyBackground", multiKeyBackground);
+        JUtils.putNotNull(map, "displayColors", displayColors);
         return map;
     }
 }
