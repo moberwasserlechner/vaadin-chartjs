@@ -9,9 +9,8 @@ import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
-import com.byteowls.vaadin.chartjs.options.Hover;
+import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.Position;
-import com.byteowls.vaadin.chartjs.options.Tooltips;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.CategoryScale;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
@@ -41,10 +40,12 @@ public class SimpleLineChartView extends AbstractChartView {
             .text("Chart.js Line Chart")
             .and()
         .tooltips()
-            .mode(Tooltips.Mode.LABEL)
+            .mode(InteractionMode.INDEX)
+            .intersect(false)
             .and()
         .hover()
-            .mode(Hover.Mode.DATASET)
+            .mode(InteractionMode.NEAREST)
+            .intersect(true)
             .and()
         .scales()
         .add(Axis.X, new CategoryScale()

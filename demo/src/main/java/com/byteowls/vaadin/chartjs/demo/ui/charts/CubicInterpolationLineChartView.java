@@ -7,8 +7,7 @@ import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset.CubicInterpolationMode;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
-import com.byteowls.vaadin.chartjs.options.Hover;
-import com.byteowls.vaadin.chartjs.options.Tooltips.Mode;
+import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.CategoryScale;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
@@ -27,10 +26,23 @@ public class CubicInterpolationLineChartView extends AbstractChartView {
         LineChartConfig lineConfig = new LineChartConfig();
         lineConfig.data()
             .labels("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
-            .addDataset(new LineDataset().label("Cubic interpolation (monotone)").borderColor("rgba(255, 0, 0, 0.7)")
-                    .backgroundColor("rgba(0, 0, 0, 0)").cubicInterpolationMode(CubicInterpolationMode.MONOTONE))
-            .addDataset(new LineDataset().label("Cubic interpolation (default)").borderColor("rgba(0, 0, 255, 0.3)").backgroundColor("rgba(0, 0, 0, 0)"))
-            .addDataset(new LineDataset().label("Linear interpolation").borderColor("rgba(0, 0, 0, 0.10)").backgroundColor("rgba(0, 0, 0, 0)").lineTension(0))
+            .addDataset(new LineDataset()
+                    .label("Cubic interpolation (monotone)")
+                    .borderColor(ChartUtils.RGB_RED)
+                    .backgroundColor("rgba(0, 0, 0, 0)")
+                    .cubicInterpolationMode(CubicInterpolationMode.MONOTONE)
+                    .fill(false))
+            .addDataset(new LineDataset()
+                    .label("Cubic interpolation (default)")
+                    .borderColor(ChartUtils.RGB_BLUE)
+                    .backgroundColor("rgba(0, 0, 0, 0)")
+                    .fill(false))
+            .addDataset(new LineDataset()
+                    .label("Linear interpolation")
+                    .borderColor(ChartUtils.RGB_GREEN)
+                    .backgroundColor("rgba(0, 0, 0, 0)")
+                    .fill(false)
+                    .lineTension(0))
             .and()
         .options()
             .responsive(true)
@@ -39,10 +51,7 @@ public class CubicInterpolationLineChartView extends AbstractChartView {
                 .text("Chart.js Line Chart - Cubic interpolation mode")
                 .and()
             .tooltips()
-                .mode(Mode.LABEL)
-                .and()
-            .hover()
-                .mode(Hover.Mode.DATASET)
+                .mode(InteractionMode.INDEX)
                 .and()
             .scales()
             .add(Axis.X, new CategoryScale()

@@ -9,8 +9,7 @@ import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
-import com.byteowls.vaadin.chartjs.options.Hover;
-import com.byteowls.vaadin.chartjs.options.Tooltips;
+import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.CategoryScale;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
@@ -29,10 +28,10 @@ public class StackedLineChartView extends AbstractChartView {
         LineChartConfig lineConfig = new LineChartConfig();
         lineConfig.data()
             .labels("January", "February", "March", "April", "May", "June", "July")
-            .addDataset(new LineDataset().label("My First dataset"))
-            .addDataset(new LineDataset().label("My Second dataset"))
-            .addDataset(new LineDataset().label("My Third dataset"))
-            .addDataset(new LineDataset().label("My Third dataset"))
+            .addDataset(new LineDataset().label("My First dataset").borderColor(ChartUtils.RGB_RED).backgroundColor(ChartUtils.RGB_RED))
+            .addDataset(new LineDataset().label("My Second dataset").borderColor(ChartUtils.RGB_BLUE).backgroundColor(ChartUtils.RGB_BLUE))
+            .addDataset(new LineDataset().label("My Third dataset").borderColor(ChartUtils.RGB_GREEN).backgroundColor(ChartUtils.RGB_GREEN))
+            .addDataset(new LineDataset().label("My Third dataset").borderColor(ChartUtils.RGB_YELLOW).backgroundColor(ChartUtils.RGB_YELLOW))
             .and()
         .options()
             .responsive(true)
@@ -41,10 +40,10 @@ public class StackedLineChartView extends AbstractChartView {
                 .text("Chart.js Line Chart - Stacked Line")
                 .and()
             .tooltips()
-                .mode(Tooltips.Mode.LABEL)
+                .mode(InteractionMode.INDEX)
                 .and()
             .hover()
-                .mode(Hover.Mode.LABEL)
+                .mode(InteractionMode.INDEX)
                 .and()
             .scales()
             .add(Axis.X, new CategoryScale()
@@ -67,15 +66,9 @@ public class StackedLineChartView extends AbstractChartView {
             LineDataset lds = (LineDataset) ds;
             List<Double> data = new ArrayList<>();
             for (int i = 0; i < labels.size(); i++) {
-                data.add((double) Math.round(Math.random() * 100));
+                data.add(ChartUtils.randomScalingFactor());
             }
             lds.dataAsList(data);
-            String color = ChartUtils.randomColor(1);
-            lds.borderColor(color);
-            lds.backgroundColor(color);
-            lds.pointBorderColor(color);
-            lds.pointBackgroundColor(color);
-            lds.pointBorderWidth(1);
         }
 
         ChartJs chart = new ChartJs(lineConfig);

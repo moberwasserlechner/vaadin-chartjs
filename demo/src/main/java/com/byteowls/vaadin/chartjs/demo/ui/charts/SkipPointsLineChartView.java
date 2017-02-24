@@ -9,8 +9,7 @@ import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
-import com.byteowls.vaadin.chartjs.options.Hover;
-import com.byteowls.vaadin.chartjs.options.Tooltips.Mode;
+import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.CategoryScale;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
@@ -39,10 +38,10 @@ public class SkipPointsLineChartView extends AbstractChartView {
                 .text("Chart.js Line Chart - Skip Points")
                 .and()
             .tooltips()
-                .mode(Mode.LABEL)
+                .mode(InteractionMode.INDEX)
                 .and()
             .hover()
-                .mode(Hover.Mode.LABEL)
+                .mode(InteractionMode.INDEX)
                 .and()
             .scales()
             .add(Axis.X, new CategoryScale()

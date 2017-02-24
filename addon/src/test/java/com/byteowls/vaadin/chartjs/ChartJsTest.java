@@ -6,9 +6,8 @@ import org.junit.Test;
 import com.byteowls.vaadin.chartjs.config.LineChartConfig;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.options.AnimationEasing;
-import com.byteowls.vaadin.chartjs.options.Hover;
+import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.Position;
-import com.byteowls.vaadin.chartjs.options.Tooltips;
 import com.byteowls.vaadin.chartjs.options.elements.Rectangle.RectangleEdge;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
@@ -35,9 +34,6 @@ public class ChartJsTest {
                 .events("test", "test1")
                 .showLines(true)
                 .responsive(true)
-                .hover()
-                .mode(Hover.Mode.SINGLE)
-                .and()
             .title()
                 .display(true)
                 .position(Position.LEFT)
@@ -46,8 +42,11 @@ public class ChartJsTest {
             .animation()
                 .easing(AnimationEasing.easeOutQuart)
                 .and()
+            .hover()
+                .mode(InteractionMode.INDEX)
+                .and()
             .tooltips()
-                .mode(Tooltips.Mode.LABEL)
+                .mode(InteractionMode.INDEX)
                 .and()
             .elements()
                 .arc()
@@ -73,9 +72,6 @@ public class ChartJsTest {
                     .boxWidth(20)
                     .and()
                 .position(Position.BOTTOM)
-                .and()
-            .tooltips()
-                .mode(Tooltips.Mode.LABEL)
                 .and()
                 
             .done();

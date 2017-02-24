@@ -9,7 +9,7 @@ import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
-import com.byteowls.vaadin.chartjs.options.Hover;
+import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.CategoryScale;
@@ -44,7 +44,7 @@ public class PointSizeLineChartView extends AbstractChartView {
                 .position(Position.BOTTOM)
                 .and()
             .hover()
-                .mode(Hover.Mode.LABEL)
+                .mode(InteractionMode.INDEX)
                 .and()
             .scales()
             .add(Axis.X, new CategoryScale()

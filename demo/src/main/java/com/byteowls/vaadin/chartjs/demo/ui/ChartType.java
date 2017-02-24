@@ -8,7 +8,8 @@ public enum ChartType {
     BAR(FontAwesome.BAR_CHART_O), 
     LINE(FontAwesome.LINE_CHART), 
     PIE(FontAwesome.PIE_CHART), 
-    AREA(FontAwesome.AREA_CHART); 
+    AREA(FontAwesome.AREA_CHART);
+    
     
     FontIcon icon;
     

@@ -6,7 +6,7 @@ import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.ScatterDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
-import com.byteowls.vaadin.chartjs.options.Hover.Mode;
+import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
@@ -32,7 +32,8 @@ public class ScatterLineChartView extends AbstractChartView {
             options()
                 .responsive(true)
                 .hover()
-                    .mode(Mode.SINGLE)
+                    .mode(InteractionMode.NEAREST)
+                    .intersect(false)
                     .and()
                 .title()
                     .display(true)

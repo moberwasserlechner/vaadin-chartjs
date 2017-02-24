@@ -9,7 +9,7 @@ import com.byteowls.vaadin.chartjs.data.BarDataset;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
-import com.byteowls.vaadin.chartjs.options.Hover.Mode;
+import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
@@ -43,7 +43,8 @@ public class MultiAxisBarChartView extends AbstractChartView {
             options()
                 .responsive(true)
                 .hover()
-                    .mode(Mode.LABEL)
+                    .mode(InteractionMode.INDEX)
+                    .intersect(true)
                     .animationDuration(400)
                     .and()
                 .title()

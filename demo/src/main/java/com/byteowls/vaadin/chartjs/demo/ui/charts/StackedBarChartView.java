@@ -9,7 +9,7 @@ import com.byteowls.vaadin.chartjs.data.BarDataset;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
-import com.byteowls.vaadin.chartjs.options.Tooltips.Mode;
+import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.DefaultScale;
 import com.vaadin.spring.annotation.SpringView;
@@ -38,7 +38,8 @@ public class StackedBarChartView extends AbstractChartView {
                 .text("Chart.js Bar Chart - Stacked")
                 .and()
             .tooltips()
-                .mode(Mode.LABEL)
+                .mode(InteractionMode.INDEX)
+                .intersect(false)
                 .and()
             .scales()
             .add(Axis.X, new DefaultScale()
