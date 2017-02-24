@@ -30,6 +30,7 @@ import com.byteowls.vaadin.chartjs.demo.ui.charts.StackedBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.StackedLineChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.SteppedLineChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.TooltipInteractionModesChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.TooltipPositionModesChartView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.data.Item;
 import com.vaadin.data.util.HierarchicalContainer;
@@ -83,6 +84,7 @@ public class ChartJsDemoUI extends UI {
         menuItems.add(new MenuItem(ChartType.LINE, "Stepped", SteppedLineChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "CubicInterpolation", CubicInterpolationLineChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Tooltip Interactions", TooltipInteractionModesChartView.class));
+        menuItems.add(new MenuItem(ChartType.LINE, "Tooltip Positions", TooltipPositionModesChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Pie", SinglePieChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Donut", MultiDonutChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Angled pie", AngledPieChartView.class));

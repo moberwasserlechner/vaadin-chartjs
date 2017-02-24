@@ -26,10 +26,22 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         LABEL
     }
 
+    public enum PositionMode {
+        /**
+         * Places the tooltip at the average position of the items displayed in the tooltip.
+         */
+        AVERAGE,
+        /**
+         * Places the tooltip at the position of the element closest to the event position.
+         */
+        NEAREST
+    }
+
     private Boolean enabled;
     // TODO custom call
     private InteractionMode mode;
     private Boolean intersect;
+    private PositionMode position;
     private String backgroundColor;
     private String titleFontFamily;
     private Integer titleFontSize;
@@ -105,6 +117,14 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
      */
     public Tooltips<T> intersect(boolean intersect) {
         this.intersect = intersect;
+        return this;
+    }
+
+    /**
+     * The mode for positioning the tooltip.
+     */
+    public Tooltips<T> position(PositionMode position) {
+        this.position = position;
         return this;
     }
 
@@ -308,6 +328,9 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
             JUtils.putNotNull(map, "mode", mode.name().toLowerCase());
         }
         JUtils.putNotNull(map, "intersect", intersect);
+        if (position != null) {
+            JUtils.putNotNull(map, "position", position.name().toLowerCase());
+        }
         JUtils.putNotNull(map, "backgroundColor", backgroundColor);
         JUtils.putNotNull(map, "titleFontFamily", titleFontFamily);
         JUtils.putNotNull(map, "titleFontSize", titleFontSize);
