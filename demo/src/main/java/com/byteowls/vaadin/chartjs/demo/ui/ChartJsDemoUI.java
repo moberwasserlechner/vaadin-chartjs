@@ -14,6 +14,7 @@ import com.byteowls.vaadin.chartjs.demo.ui.charts.BarLineComboChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.CubicInterpolationLineChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.ElementLineFillModeChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.GaugeDonutChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.GroupedStackedBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.HorizontalBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiAxisBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiDonutChartView;
@@ -76,6 +77,7 @@ public class ChartJsDemoUI extends UI {
         menuItems.add(new MenuItem(ChartType.BAR, "Horizontal", HorizontalBarChartView.class));
         menuItems.add(new MenuItem(ChartType.BAR, "Combo", BarLineComboChartView.class));
         menuItems.add(new MenuItem(ChartType.BAR, "Stacked", StackedBarChartView.class));
+        menuItems.add(new MenuItem(ChartType.BAR, "Grouped Stacks", GroupedStackedBarChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Simple", SimpleLineChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Stacked", StackedLineChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Combo", BarLineComboChartView.class));

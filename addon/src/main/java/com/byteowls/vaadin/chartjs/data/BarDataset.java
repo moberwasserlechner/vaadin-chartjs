@@ -32,7 +32,8 @@ public class BarDataset extends DoubleDataset<BarDataset> {
     private List<String> hoverBackgroundColor;
     private List<String> hoverBorderColor;
     private List<Integer> hoverBorderWidth;
-    
+    private String stack;
+
     private boolean randomBackgroundColors;
 
     /**
@@ -98,7 +99,7 @@ public class BarDataset extends DoubleDataset<BarDataset> {
         this.backgroundColor = Arrays.asList(backgroundColor);
         return this;
     }
-    
+
     /**
      * Set random background colors for every data
      */
@@ -155,6 +156,15 @@ public class BarDataset extends DoubleDataset<BarDataset> {
         return this;
     }
 
+    /**
+     * The ID of the group to which this dataset belongs to (when stacked, each group will be a separate stack)
+     */
+    public BarDataset stack(String stack) {
+        this.stack = stack;
+        return this;
+    }
+
+
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
@@ -186,6 +196,7 @@ public class BarDataset extends DoubleDataset<BarDataset> {
         JUtils.putNotNullStringListOrSingle(map, "hoverBackgroundColor", hoverBackgroundColor);
         JUtils.putNotNullStringListOrSingle(map, "hoverBorderColor", hoverBorderColor);
         JUtils.putNotNullIntListOrSingle(map, "hoverBorderWidth", hoverBorderWidth);
+        JUtils.putNotNull(map, "stack", stack);
         return map;
     }
 
