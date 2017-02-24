@@ -13,13 +13,14 @@ import elemental.json.JsonObject;
  * Note that these options only apply if lineArc is false.
  */
 public class RadialPointLabel<T> extends And<T> implements JsonBuilder {
-    
+
+    private static final long serialVersionUID = 3782246450705674195L;
+
     // TODO callback Callback function to transform data label to axis label
     private String fontColor;
     private String fontFamily;
     private Integer fontSize;
     private String fontStyle;
-    
 
     /**
      * Font color. Default: #666
@@ -36,7 +37,7 @@ public class RadialPointLabel<T> extends And<T> implements JsonBuilder {
         this.fontFamily = fontFamily;
         return this;
     }
-    
+
     /**
      * Font size in pixels. Default: 10
      */
@@ -44,7 +45,7 @@ public class RadialPointLabel<T> extends And<T> implements JsonBuilder {
         this.fontSize = fontSize;
         return this;
     }
-    
+
     /**
      * Font Style to use. Default: normal
      */
@@ -52,7 +53,7 @@ public class RadialPointLabel<T> extends And<T> implements JsonBuilder {
         this.fontStyle = fontStyle;
         return this;
     }
-    
+
 
     public RadialPointLabel(T parent) {
         super(parent);

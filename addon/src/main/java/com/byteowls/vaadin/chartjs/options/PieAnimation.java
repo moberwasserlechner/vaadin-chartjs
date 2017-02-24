@@ -6,7 +6,9 @@ import elemental.json.Json;
 import elemental.json.JsonObject;
 
 public class PieAnimation<T> extends Animation<T> {
-    
+
+    private static final long serialVersionUID = 5928748231789002901L;
+
     private Integer duration;
     private AnimationEasing easing;
     // TODO callback functions http://www.chartjs.org/docs/#chart-configuration-animation-configuration
@@ -18,7 +20,7 @@ public class PieAnimation<T> extends Animation<T> {
     public PieAnimation(T parent) {
         super(parent);
     }
-    
+
     /**
      * If true, will animate the rotation of the chart.
      */
@@ -26,7 +28,7 @@ public class PieAnimation<T> extends Animation<T> {
         this.animateRotate = animateRotate;
         return this;
     }
-    
+
     /**
      * If true, will animate scaling the Doughnut from the centre.
      */
@@ -34,7 +36,7 @@ public class PieAnimation<T> extends Animation<T> {
         this.animateScale = animateScale;
         return this;
     }
-    
+
     /**
      * The number of milliseconds an animation takes.
      */
@@ -50,7 +52,7 @@ public class PieAnimation<T> extends Animation<T> {
         this.easing = easing;
         return this;
     }
-    
+
     @Override
     public JsonObject buildJson() {
         JsonObject obj = Json.createObject();

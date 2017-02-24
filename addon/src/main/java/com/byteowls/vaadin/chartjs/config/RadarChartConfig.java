@@ -16,6 +16,8 @@ import elemental.json.JsonObject;
  */
 public class RadarChartConfig implements ChartConfig {
 
+    private static final long serialVersionUID = -6327042538315582431L;
+
     private Data<RadarChartConfig> data;
     private RadarChartOptions options;
 

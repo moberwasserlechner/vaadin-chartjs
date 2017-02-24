@@ -9,6 +9,8 @@ import elemental.json.JsonObject;
  */
 public class CategoryTicks<T> extends Ticks<T> implements JsonBuilder {
 
+    private static final long serialVersionUID = 266502561665391111L;
+
     private String min;
     private String max;
 

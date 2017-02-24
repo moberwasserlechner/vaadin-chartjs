@@ -18,6 +18,8 @@ import elemental.json.JsonObject;
  */
 public class PolarAreaDataset extends DoubleDataset<PolarAreaDataset> {
 
+    private static final long serialVersionUID = -6105056250800849038L;
+
     private String type = "polarArea";
     private Boolean hidden;
     private String label;

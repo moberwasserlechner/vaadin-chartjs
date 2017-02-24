@@ -9,6 +9,8 @@ import elemental.json.JsonObject;
  */
 public class RadialLinearTicks<T> extends Ticks<T> implements JsonBuilder {
 
+    private static final long serialVersionUID = -2707404179907977841L;
+
     private Boolean beginAtZero;
     private String backdropColor;
     private Integer backdropPaddingX;
@@ -19,7 +21,7 @@ public class RadialLinearTicks<T> extends Ticks<T> implements JsonBuilder {
     public RadialLinearTicks(T parent) {
         super(parent);
     }
-    
+
     /**
      * if true, scale will include 0 if it is not already included.
      */

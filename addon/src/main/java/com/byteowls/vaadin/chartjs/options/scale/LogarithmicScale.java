@@ -12,6 +12,8 @@ import elemental.json.JsonObject;
  */
 public class LogarithmicScale extends BaseScale<LogarithmicScale> {
 
+    private static final long serialVersionUID = -1631504938871606532L;
+
     private LogarithmicTicks<LogarithmicScale> logarithmicTicks;
 
     public LogarithmicScale() {
@@ -33,7 +35,7 @@ public class LogarithmicScale extends BaseScale<LogarithmicScale> {
     public LogarithmicScale getThis() {
         return this;
     }
-    
+
     @Override
     public JsonObject buildJson() {
         JsonObject map = super.buildJson();

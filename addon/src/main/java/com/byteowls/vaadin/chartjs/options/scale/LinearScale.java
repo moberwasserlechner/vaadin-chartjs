@@ -13,6 +13,8 @@ import elemental.json.JsonObject;
  */
 public class LinearScale extends BaseScale<LinearScale> {
 
+    private static final long serialVersionUID = 1723253099555272809L;
+
     private LinearTicks<LinearScale> linearTicks;
 
     public LinearScale() {
@@ -34,7 +36,7 @@ public class LinearScale extends BaseScale<LinearScale> {
     public LinearScale getThis() {
         return this;
     }
-    
+
     @Override
     public JsonObject buildJson() {
         JsonObject map = super.buildJson();

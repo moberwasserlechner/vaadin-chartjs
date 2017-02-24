@@ -7,10 +7,13 @@ import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class AbstractOptions<T> implements JsonBuilder {
+public abstract class AbstractOptions<T> implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = 2220469604021816291L;
 
     private ChartConfig chartConfig;
 

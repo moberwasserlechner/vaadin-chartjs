@@ -15,6 +15,8 @@ import elemental.json.JsonObject;
  */
 public class Scales<P> extends And<P> implements JsonBuilder {
 
+    private static final long serialVersionUID = -187367367922131753L;
+
     private List<BaseScale<?>> xAxes;
     private List<BaseScale<?>> yAxes;
 
@@ -46,7 +48,6 @@ public class Scales<P> extends And<P> implements JsonBuilder {
             yAxes.add(scale);
         }
     }
-
 
     @Override
     public JsonObject buildJson() {

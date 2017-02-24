@@ -21,7 +21,9 @@ import elemental.json.JsonObject;
  * @author michael@byteowls.com
  */
 public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
-    
+
+    private static final long serialVersionUID = -1367482243614060700L;
+
     private String type;
     private List<BubbleData> data;
     private List<String> labels;
@@ -35,7 +37,7 @@ public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
     private List<String> hoverBorderColor;
     private List<Integer> hoverBorderWidth;
     private List<Integer> hoverRadius;
-    
+
     /**
      * Used if the type of a dataset is needed. e.g. combo chart type charts
      */
@@ -43,7 +45,7 @@ public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
         this.type = "bubble";
         return this;
     }
-    
+
     /**
      * A single data object to plot as bubbles
      * @param x X Value
@@ -75,7 +77,7 @@ public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
         this.data = data;
         return this;
     }
-    
+
     @Override
     public List<BubbleData> getData() {
         if (dataMap != null) {
@@ -83,7 +85,7 @@ public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
         }
         return data;
     }
-    
+
     @Override
     public BubbleDataset addLabeledData(String label, BubbleData data) {
         if (label != null && data != null) {
@@ -93,13 +95,13 @@ public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
             if (!labels.contains(label)) {
                 labels.add(label);
             }
-            
+
             if (dataMap == null) {
                 dataMap = new LinkedHashMap<>();
             }
             dataMap.put(label, data);
         }
-        
+
         return this;
     }
 
@@ -131,7 +133,7 @@ public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
         this.backgroundColor = Arrays.asList(backgroundColor);
         return this;
     }
-    
+
     /**
      * The stroke color of the bubbles.
      */
@@ -155,7 +157,7 @@ public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
         this.hoverBackgroundColor = Arrays.asList(hoverBackgroundColor);
         return this;
     }
-    
+
     /**
      * The stroke color of the bubbles when hovered.
      */
@@ -171,7 +173,7 @@ public class BubbleDataset implements Dataset<BubbleDataset, BubbleData> {
         this.hoverBorderWidth = Arrays.asList(hoverBorderWidth);
         return this;
     }
-    
+
     /**
      * Additional radius to add to data radius on hover.
      */

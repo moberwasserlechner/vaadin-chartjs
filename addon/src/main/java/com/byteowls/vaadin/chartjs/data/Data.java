@@ -16,6 +16,8 @@ import elemental.json.JsonObject;
  */
 public class Data<T> extends And<T> implements JsonBuilder {
 
+    private static final long serialVersionUID = 8683322928360358252L;
+
     private List<String> labels;
     private List<Dataset<?, ?>> datasets;
     private boolean extractLabelsFromDataset;

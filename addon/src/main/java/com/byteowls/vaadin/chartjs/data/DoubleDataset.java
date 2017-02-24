@@ -11,6 +11,8 @@ import java.util.Map;
  */
 public abstract class DoubleDataset<T> implements Dataset<T, Double> {
 
+    private static final long serialVersionUID = -1161268515260316334L;
+
     private List<Double> data;
     private List<String> labels;
     private Map<String, Double> dataMap;

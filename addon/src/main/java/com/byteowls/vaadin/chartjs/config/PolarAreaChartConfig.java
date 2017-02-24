@@ -16,6 +16,8 @@ import elemental.json.JsonObject;
  */
 public class PolarAreaChartConfig implements ChartConfig {
 
+    private static final long serialVersionUID = -850318331296132418L;
+
     private Data<PolarAreaChartConfig> data;
     private PolarAreaChartOptions options;
 
@@ -32,16 +34,14 @@ public class PolarAreaChartConfig implements ChartConfig {
         }
         return options;
     }
-    
+
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "type", "polarArea");
-        // data
         if (data != null) {
             JUtils.putNotNull(map, "data", data.buildJson());
         }
-        // options
         if (options != null) {
             JUtils.putNotNull(map, "options", options.buildJson());
         }

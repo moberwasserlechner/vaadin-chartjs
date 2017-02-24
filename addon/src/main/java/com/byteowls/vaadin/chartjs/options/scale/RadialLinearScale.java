@@ -11,7 +11,9 @@ import elemental.json.JsonObject;
  * @author michael@byteowls.com
  */
 public class RadialLinearScale extends BaseScale<RadialLinearScale> {
-    
+
+    private static final long serialVersionUID = 2261466873004709837L;
+
     private Boolean lineArc;
     private Boolean reverse;
     private RadialLinearTicks<RadialLinearScale> radialLinearTicks;
@@ -21,7 +23,7 @@ public class RadialLinearScale extends BaseScale<RadialLinearScale> {
     public RadialLinearScale() {
         type(null);
     }
-    
+
     /**
      * If true, circular arcs are used else straight lines are used. The former is used by the polar area chart and the latter by the radar chart
      */
@@ -29,7 +31,7 @@ public class RadialLinearScale extends BaseScale<RadialLinearScale> {
         this.lineArc = lineArc;
         return this;
     }
-    
+
     /**
      * 
      */
@@ -37,7 +39,7 @@ public class RadialLinearScale extends BaseScale<RadialLinearScale> {
         this.reverse = reverse;
         return this;
     }
-    
+
     /**
      * Used to configure angled lines that radiate from the center of the chart to the point labels. Note that these options only apply if lineArc is false.
      */
@@ -47,7 +49,7 @@ public class RadialLinearScale extends BaseScale<RadialLinearScale> {
         }
         return this.angleLines;
     }
-    
+
     /**
      * Used to configure angled lines that radiate from the center of the chart to the point labels. Note that these options only apply if lineArc is false.
      */
@@ -73,7 +75,7 @@ public class RadialLinearScale extends BaseScale<RadialLinearScale> {
     public RadialLinearScale getThis() {
         return this;
     }
-    
+
     @Override
     public JsonObject buildJson() {
         JsonObject map = super.buildJson();

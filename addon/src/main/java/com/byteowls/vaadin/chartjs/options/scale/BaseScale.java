@@ -1,5 +1,7 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
+import java.io.Serializable;
+
 import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
@@ -9,7 +11,9 @@ import elemental.json.JsonObject;
 /**
  * @author michael@byteowls.com
  */
-public abstract class BaseScale<B extends BaseScale<?>> implements JsonBuilder {
+public abstract class BaseScale<B extends BaseScale<?>> implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = -2382244938070735956L;
 
     private String id;
     protected String type;

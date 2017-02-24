@@ -14,6 +14,8 @@ import elemental.json.JsonObject;
  */
 public class GridLines<T> extends And<T> implements JsonBuilder {
 
+    private static final long serialVersionUID = 8138642242241971120L;
+
     private Boolean display;
     private List<String> color;
     private Integer lineWidth;

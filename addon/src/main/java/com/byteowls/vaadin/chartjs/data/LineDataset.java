@@ -13,7 +13,9 @@ import elemental.json.JsonObject;
  *
  */
 public class LineDataset extends DoubleDataset<LineDataset> {
-    
+
+    private static final long serialVersionUID = -2084714266214798266L;
+
     public enum CubicInterpolationMode {
         DEFAULT, MONOTONE
     }
@@ -86,7 +88,7 @@ public class LineDataset extends DoubleDataset<LineDataset> {
         this.fill = fill;
         return this;
     }
-    
+
     /**
      * Algorithm used to interpolate a smooth curve from the discrete data points. 
      * 

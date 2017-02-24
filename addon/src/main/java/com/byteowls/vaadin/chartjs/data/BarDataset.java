@@ -15,6 +15,8 @@ import elemental.json.JsonObject;
  */
 public class BarDataset extends DoubleDataset<BarDataset> {
 
+    private static final long serialVersionUID = -5049884704390777087L;
+
     public enum Edge {
         BOTTOM, LEFT, TOP, RIGHT
     }

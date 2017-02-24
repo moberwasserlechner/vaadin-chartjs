@@ -14,17 +14,19 @@ import elemental.json.JsonObject;
  */
 public class BubbleChartConfig implements ChartConfig {
 
+    private static final long serialVersionUID = -5108239251413089851L;
+
     private String type = "bubble";
     private Data<BubbleChartConfig> data;
     private BubbleChartOptions options;
-    
+
     public Data<BubbleChartConfig> data() {
         if (this.data == null) {
             this.data = new Data<>(this);
         }
         return this.data;
     }
-    
+
     /**
      * Switch to horizonal bar chart
      * @return
@@ -45,11 +47,9 @@ public class BubbleChartConfig implements ChartConfig {
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "type", type);
-        // data
         if (data != null) {
             JUtils.putNotNull(map, "data", data.buildJson());
         }
-        // options
         if (options != null) {
             JUtils.putNotNull(map, "options", options.buildJson());
         }

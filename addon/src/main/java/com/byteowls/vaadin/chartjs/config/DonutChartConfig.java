@@ -23,6 +23,8 @@ import elemental.json.JsonObject;
  */
 public class DonutChartConfig implements ChartConfig {
 
+    private static final long serialVersionUID = 8942176191780485298L;
+
     private Data<DonutChartConfig> data;
     private PieChartOptions options;
 
@@ -39,16 +41,14 @@ public class DonutChartConfig implements ChartConfig {
         }
         return options;
     }
-    
+
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "type", "doughnut");
-        // data
         if (data != null) {
             JUtils.putNotNull(map, "data", data.buildJson());
         }
-        // options
         if (options != null) {
             JUtils.putNotNull(map, "options", options.buildJson());
         }

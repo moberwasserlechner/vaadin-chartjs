@@ -7,6 +7,8 @@ package com.byteowls.vaadin.chartjs.options.scale;
  */
 public class DefaultScale extends BaseScale<DefaultScale> {
 
+    private static final long serialVersionUID = -5902029885008495859L;
+
     public DefaultScale() {
     }
 
@@ -14,5 +16,5 @@ public class DefaultScale extends BaseScale<DefaultScale> {
     public DefaultScale getThis() {
         return this;
     }
-    
+
 }

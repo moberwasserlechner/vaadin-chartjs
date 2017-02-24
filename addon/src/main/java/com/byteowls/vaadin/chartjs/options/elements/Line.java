@@ -1,5 +1,6 @@
 package com.byteowls.vaadin.chartjs.options.elements;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +16,9 @@ import elemental.json.JsonObject;
  * 
  * @author michael@byteowls.com
  */
-public class Line<T> extends And<Element<T>> implements JsonBuilder {
+public class Line<T> extends And<Element<T>> implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = 7489460081517158968L;
 
     public enum CapStyle {
         BUTT, ROUND, SQUARE

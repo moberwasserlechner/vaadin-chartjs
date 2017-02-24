@@ -9,6 +9,8 @@ import elemental.json.JsonObject;
 
 public class RadarChartOptions extends AbstractOptions<RadarChartOptions> {
 
+    private static final long serialVersionUID = -4046074534117345099L;
+
     private RadialLinearScale scale;
     private Double offsetAngle;
 
@@ -20,7 +22,7 @@ public class RadarChartOptions extends AbstractOptions<RadarChartOptions> {
         this.scale = scale;
         return this;
     }
-    
+
     public RadarChartOptions offsetAngle(double offsetAngle) {
         this.offsetAngle = offsetAngle;
         return this;

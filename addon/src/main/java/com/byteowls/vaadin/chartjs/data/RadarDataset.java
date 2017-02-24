@@ -14,6 +14,8 @@ import elemental.json.JsonObject;
  */
 public class RadarDataset extends DoubleDataset<RadarDataset> {
 
+    private static final long serialVersionUID = -3708453908890787373L;
+
     private String type;
     private Boolean hidden;
     private String label;

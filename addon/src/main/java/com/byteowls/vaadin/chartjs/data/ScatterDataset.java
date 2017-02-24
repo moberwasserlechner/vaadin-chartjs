@@ -21,6 +21,8 @@ import elemental.json.JsonObject;
  */
 public class ScatterDataset implements Dataset<ScatterDataset, ScatterData> {
 
+    private static final long serialVersionUID = 8872594003015987324L;
+
     private String type;
     private List<ScatterData> data;
     private List<String> labels;
@@ -92,7 +94,7 @@ public class ScatterDataset implements Dataset<ScatterDataset, ScatterData> {
         }
         return data;
     }
-    
+
 
     @Override
     public ScatterDataset addLabeledData(String label, ScatterData data) {
@@ -103,13 +105,13 @@ public class ScatterDataset implements Dataset<ScatterDataset, ScatterData> {
             if (!labels.contains(label)) {
                 labels.add(label);
             }
-            
+
             if (dataMap == null) {
                 dataMap = new LinkedHashMap<>();
             }
             dataMap.put(label, data);
         }
-        
+
         return this;
     }
 
@@ -327,8 +329,8 @@ public class ScatterDataset implements Dataset<ScatterDataset, ScatterData> {
         this.steppedLine = steppedLine;
         return this;
     }
-    
-    
+
+
 
     @Override
     public JsonObject buildJson() {

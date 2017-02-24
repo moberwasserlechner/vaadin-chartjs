@@ -7,6 +7,8 @@ import elemental.json.JsonObject;
 
 public class LineChartOptions extends AbstractScalableOptions<LineChartOptions> {
 
+    private static final long serialVersionUID = -5830320660361399534L;
+
     private Boolean showLines;
 
     public LineChartOptions(ChartConfig chartConfig) {

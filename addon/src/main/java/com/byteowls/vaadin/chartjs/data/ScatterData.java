@@ -1,5 +1,7 @@
 package com.byteowls.vaadin.chartjs.data;
 
+import java.io.Serializable;
+
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 
@@ -12,7 +14,9 @@ import elemental.json.JsonObject;
  * @author michael@byteowls.com
  *
  */
-public class ScatterData implements JsonBuilder {
+public class ScatterData implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = 680613867864908619L;
 
     private Double x;
     private Double y;

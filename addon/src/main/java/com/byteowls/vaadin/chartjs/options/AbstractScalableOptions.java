@@ -10,6 +10,8 @@ import elemental.json.JsonObject;
  */
 public abstract class AbstractScalableOptions<T extends AbstractScalableOptions<?>> extends AbstractOptions<T> {
 
+    private static final long serialVersionUID = -585276899801295042L;
+
     private Scales<T> scales;
 
     public AbstractScalableOptions(ChartConfig chartConfig) {

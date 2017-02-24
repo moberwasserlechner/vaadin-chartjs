@@ -8,7 +8,9 @@ import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.JsonObject;
 
 public class PieChartOptions extends AbstractOptions<PieChartOptions> {
-    
+
+    private static final long serialVersionUID = -2362447185857298842L;
+
     private Double cutoutPercentage;
     private Double rotation;
     private Double circumference;
@@ -17,7 +19,7 @@ public class PieChartOptions extends AbstractOptions<PieChartOptions> {
     public PieChartOptions(ChartConfig chartConfig) {
         super(chartConfig);
     }
-    
+
     /**
      * The percentage of the chart that is cut out of the middle.
      */
@@ -25,7 +27,7 @@ public class PieChartOptions extends AbstractOptions<PieChartOptions> {
         this.cutoutPercentage = cutoutPercentage;
         return this;
     }
-    
+
     /**
      * Starting angle to draw arcs from
      */
@@ -33,7 +35,7 @@ public class PieChartOptions extends AbstractOptions<PieChartOptions> {
         this.rotation = rotation;
         return this;
     }
-    
+
     /**
      * Step into the charts animation configuration
      */
@@ -43,7 +45,7 @@ public class PieChartOptions extends AbstractOptions<PieChartOptions> {
         }
         return pieAnimation;
     }
-    
+
     /**
      * Sweep to allow arcs to cover
      */

@@ -1,5 +1,7 @@
 package com.byteowls.vaadin.chartjs.options.elements;
 
+import java.io.Serializable;
+
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
@@ -12,12 +14,14 @@ import elemental.json.JsonObject;
  * 
  * @author michael@byteowls.com
  */
-public class Rectangle<T> extends And<Element<T>> implements JsonBuilder {
-    
+public class Rectangle<T> extends And<Element<T>> implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = -7110880763985894909L;
+
     public enum RectangleEdge {
         BOTTOM, LEFT, TOP, RIGHT
     }
-    
+
     private String backgroundColor;
     private String borderColor;
     private Integer borderWidth;
@@ -26,7 +30,7 @@ public class Rectangle<T> extends And<Element<T>> implements JsonBuilder {
     public Rectangle(Element<T> parent) {
         super(parent);
     }
-    
+
     /**
      * Default bar fill color. Default: 'rgba(0,0,0,0.1)'
      */
@@ -34,7 +38,7 @@ public class Rectangle<T> extends And<Element<T>> implements JsonBuilder {
         this.backgroundColor = backgroundColor;
         return this;
     }
-    
+
     /**
      * Default bar stroke color. Default: 'rgba(0,0,0,0.1)'
      */
@@ -50,7 +54,7 @@ public class Rectangle<T> extends And<Element<T>> implements JsonBuilder {
         this.borderWidth = borderWidth;
         return this;
     }
-    
+
     /**
      * Default skipped (excluded) border for rectangle. Can be one of bottom, left, top, right. Default: bottom
      */

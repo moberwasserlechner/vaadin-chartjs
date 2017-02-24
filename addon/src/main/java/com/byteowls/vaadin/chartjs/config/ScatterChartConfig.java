@@ -15,6 +15,8 @@ import elemental.json.JsonObject;
  */
 public class ScatterChartConfig implements ChartConfig {
 
+    private static final long serialVersionUID = 1912287250650988200L;
+
     private Data<ScatterChartConfig> data;
     private LineChartOptions options;
 
@@ -36,11 +38,9 @@ public class ScatterChartConfig implements ChartConfig {
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "type", "scatter");
-        // data
         if (data != null) {
             JUtils.putNotNull(map, "data", data.buildJson());
         }
-        // options
         if (options != null) {
             JUtils.putNotNull(map, "options", options.buildJson());
         }

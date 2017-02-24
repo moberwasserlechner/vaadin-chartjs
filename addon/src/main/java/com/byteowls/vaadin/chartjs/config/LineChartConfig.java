@@ -15,6 +15,8 @@ import elemental.json.JsonObject;
  */
 public class LineChartConfig implements ChartConfig {
 
+    private static final long serialVersionUID = 4896118079157690609L;
+
     private Data<LineChartConfig> data;
     private LineChartOptions options;
 
@@ -36,11 +38,9 @@ public class LineChartConfig implements ChartConfig {
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "type", "line");
-        // data
         if (data != null) {
             JUtils.putNotNull(map, "data", data.buildJson());
         }
-        // options
         if (options != null) {
             JUtils.putNotNull(map, "options", options.buildJson());
         }

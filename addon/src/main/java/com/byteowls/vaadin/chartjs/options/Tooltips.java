@@ -9,6 +9,7 @@ import elemental.json.JsonObject;
 
 public class Tooltips<T> extends And<T> implements JsonBuilder {
 
+    private static final long serialVersionUID = -528926154599828794L;
 
     /**
      * @deprecated Use {@link InteractionMode} instead

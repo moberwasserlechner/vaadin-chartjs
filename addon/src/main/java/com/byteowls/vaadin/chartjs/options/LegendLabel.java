@@ -1,5 +1,7 @@
 package com.byteowls.vaadin.chartjs.options;
 
+import java.io.Serializable;
+
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
@@ -7,8 +9,10 @@ import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
-public class LegendLabel<T> extends And<Legend<T>> implements JsonBuilder {
-    
+public class LegendLabel<T> extends And<Legend<T>> implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = -7792493411933479339L;
+
     private Integer boxWidth;
     private Integer fontSize;
     private String fontStyle;
@@ -17,7 +21,7 @@ public class LegendLabel<T> extends And<Legend<T>> implements JsonBuilder {
     private Integer padding;
     // TODO callback generateLabels
     private Boolean usePointStyle;
-    
+
     /**
      * Width of coloured box. Default: 40
      */
@@ -25,7 +29,7 @@ public class LegendLabel<T> extends And<Legend<T>> implements JsonBuilder {
         this.boxWidth = boxWidth;
         return this;
     }
-    
+
     /**
      * Font size. Default: 12
      */
@@ -33,7 +37,7 @@ public class LegendLabel<T> extends And<Legend<T>> implements JsonBuilder {
         this.fontSize = fontSize;
         return this;
     }
-    
+
     /**
      * Font style. Default: normal
      */
@@ -41,7 +45,7 @@ public class LegendLabel<T> extends And<Legend<T>> implements JsonBuilder {
         this.fontStyle = fontStyle;
         return this;
     }
-    
+
     /**
      * Font color. Default: #666
      */
@@ -49,7 +53,7 @@ public class LegendLabel<T> extends And<Legend<T>> implements JsonBuilder {
         this.fontColor = fontColor;
         return this;
     }
-    
+
     /**
      * Font family. Default: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
      */
@@ -57,8 +61,8 @@ public class LegendLabel<T> extends And<Legend<T>> implements JsonBuilder {
         this.fontFamily = fontFamily;
         return this;
     }
-    
-    
+
+
     /**
      * Padding between rows of colored boxes. Default: 10
      */
@@ -66,7 +70,7 @@ public class LegendLabel<T> extends And<Legend<T>> implements JsonBuilder {
         this.padding = padding;
         return this;
     }
-    
+
 
     public LegendLabel(Legend<T> parent) {
         super(parent);
@@ -84,6 +88,6 @@ public class LegendLabel<T> extends And<Legend<T>> implements JsonBuilder {
         JUtils.putNotNull(map, "usePointStyle", usePointStyle);
         return map;
     }
-    
+
 
 }

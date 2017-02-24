@@ -13,6 +13,8 @@ import elemental.json.JsonObject;
  */
 public class Ticks<T> extends And<T> implements JsonBuilder {
 
+    private static final long serialVersionUID = -4740687096401461147L;
+
     private Boolean autoSkip;
     private Boolean display;
     private String fontColor;

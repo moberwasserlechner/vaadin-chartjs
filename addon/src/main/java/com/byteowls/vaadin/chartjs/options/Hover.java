@@ -1,12 +1,16 @@
 package com.byteowls.vaadin.chartjs.options;
 
+import java.io.Serializable;
+
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
-public class Hover<T> extends And<T> implements JsonBuilder {
+public class Hover<T> extends And<T> implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = 1317225903701999027L;
 
     /**
      * @deprecated Use {@link InteractionMode} instead

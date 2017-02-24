@@ -11,6 +11,8 @@ import elemental.json.JsonObject;
  */
 public class ScaleLabel<T extends BaseScale<?>> extends And<T> implements JsonBuilder {
 
+    private static final long serialVersionUID = 8461399369816928176L;
+
     private Boolean display;
     private String labelString;
     private String fontColor;

@@ -10,6 +10,8 @@ import elemental.json.JsonObject;
 
 public class PolarAreaChartOptions extends AbstractOptions<PolarAreaChartOptions> {
 
+    private static final long serialVersionUID = -8062416164912751507L;
+
     private Double startAngle;
     private PieAnimation<PolarAreaChartOptions> pieAnimation;
     private RadialLinearScale scale;

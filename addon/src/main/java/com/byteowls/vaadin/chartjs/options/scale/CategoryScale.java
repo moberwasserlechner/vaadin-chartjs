@@ -12,6 +12,8 @@ import elemental.json.JsonObject;
  */
 public class CategoryScale extends BaseScale<CategoryScale> {
 
+    private static final long serialVersionUID = 5698788408274123785L;
+
     private CategoryTicks<CategoryScale> categoryTicks;
 
     public CategoryScale() {

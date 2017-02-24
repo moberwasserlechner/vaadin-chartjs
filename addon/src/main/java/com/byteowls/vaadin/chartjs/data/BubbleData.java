@@ -1,5 +1,7 @@
 package com.byteowls.vaadin.chartjs.data;
 
+import java.io.Serializable;
+
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 
@@ -14,12 +16,14 @@ import elemental.json.JsonObject;
  * @author michael@byteowls.com
  *
  */
-public class BubbleData implements JsonBuilder {
-    
+public class BubbleData implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = -579013867118626066L;
+
     private Double x;
     private Double y;
     private Double r;
-    
+
     /**
      * X Value
      */
@@ -27,7 +31,7 @@ public class BubbleData implements JsonBuilder {
         this.x = x;
         return this;
     }
-    
+
     /**
      * Y Value
      */
@@ -52,7 +56,7 @@ public class BubbleData implements JsonBuilder {
         JUtils.putNotNull(obj, "r", r);
         return obj;
     }
-    
+
     @Override
     public String toString() {
         return "[x=" + x + ", y=" + y + ", r=" + r + "]";

@@ -1,5 +1,7 @@
 package com.byteowls.vaadin.chartjs.options;
 
+import java.io.Serializable;
+
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
@@ -9,7 +11,9 @@ import elemental.json.JsonObject;
 /**
  * @author michael@byteowls.com
  */
-public class Animation<T> extends And<T> implements JsonBuilder {
+public class Animation<T> extends And<T> implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = 153634423791436905L;
 
     public Animation(T parent) {
         super(parent);

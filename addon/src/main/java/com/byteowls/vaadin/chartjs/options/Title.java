@@ -1,12 +1,16 @@
 package com.byteowls.vaadin.chartjs.options;
 
+import java.io.Serializable;
+
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
-public class Title<T> extends And<T> implements JsonBuilder {
+public class Title<T> extends And<T> implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = 6746540710106258245L;
 
     private Boolean display;
     private Position position;
@@ -17,7 +21,6 @@ public class Title<T> extends And<T> implements JsonBuilder {
     private String fontColor; //
     private String fontStyle;
     private Integer padding;
-
 
     public Title(T parent) {
         super(parent);

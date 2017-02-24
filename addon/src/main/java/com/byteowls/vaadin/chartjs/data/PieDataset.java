@@ -24,6 +24,8 @@ import elemental.json.JsonObject;
  */
 public class PieDataset extends DoubleDataset<PieDataset> {
 
+    private static final long serialVersionUID = -8380757524860222004L;
+
     private String type;
     private Boolean hidden;
     private String label;
@@ -91,7 +93,7 @@ public class PieDataset extends DoubleDataset<PieDataset> {
         this.backgroundColor = Arrays.asList(backgroundColor);
         return this;
     }
-    
+
     /**
      * Set random background colors for every data
      */

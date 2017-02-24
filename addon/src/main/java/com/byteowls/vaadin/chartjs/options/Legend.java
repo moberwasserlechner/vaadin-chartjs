@@ -1,5 +1,7 @@
 package com.byteowls.vaadin.chartjs.options;
 
+import java.io.Serializable;
+
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
@@ -7,8 +9,10 @@ import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
-public class Legend<T> extends And<T> implements JsonBuilder {
-    
+public class Legend<T> extends And<T> implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = 6555390015983393957L;
+
     private Boolean display;
     private Position position;
     private Boolean fullWidth;
@@ -17,7 +21,7 @@ public class Legend<T> extends And<T> implements JsonBuilder {
     public Legend(T parent) {
         super(parent);
     }
-    
+
     /**
      * Is the legend displayed. Default: true
      */
@@ -25,7 +29,7 @@ public class Legend<T> extends And<T> implements JsonBuilder {
         this.display = display;
         return this;
     }
-    
+
     /**
      * Position of the legend. Options are 'top' or 'bottom'. Default: top
      */
@@ -33,7 +37,7 @@ public class Legend<T> extends And<T> implements JsonBuilder {
         this.position = position;
         return this;
     }
-    
+
     /**
      * Marks that this box should take the full width of the canvas (pushing down other boxes). Default: true
      */
@@ -41,7 +45,7 @@ public class Legend<T> extends And<T> implements JsonBuilder {
         this.fullWidth = fullWidth;
         return this;
     }
-    
+
     public LegendLabel<T> labels() {
         if (labels == null) {
             labels = new LegendLabel<>(this);

@@ -1,5 +1,7 @@
 package com.byteowls.vaadin.chartjs.options.elements;
 
+import java.io.Serializable;
+
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
@@ -12,8 +14,10 @@ import elemental.json.JsonObject;
  * 
  * @author michael@byteowls.com
  */
-public class Arc<T> extends And<Element<T>> implements JsonBuilder {
-    
+public class Arc<T> extends And<Element<T>> implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = -7524478219337461874L;
+
     private String backgroundColor;
     private String borderColor;
     private Integer borderWidth;
@@ -21,7 +25,7 @@ public class Arc<T> extends And<Element<T>> implements JsonBuilder {
     public Arc(Element<T> parent) {
         super(parent);
     }
-    
+
     /**
      * Default fill color for arcs. Default: 'rgba(0,0,0,0.1)'
      */
@@ -29,7 +33,7 @@ public class Arc<T> extends And<Element<T>> implements JsonBuilder {
         this.backgroundColor = backgroundColor;
         return this;
     }
-    
+
     /**
      * Default stroke color for arcs. Default: #fff 
      */

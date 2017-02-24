@@ -13,7 +13,9 @@ import elemental.json.JsonObject;
  * Note that these options only apply if lineArc is false.
  */
 public class RadialAngleLine<T> extends And<T> implements JsonBuilder {
-    
+
+    private static final long serialVersionUID = -2453923201883558083L;
+
     private Boolean display;
     private String color;
     private Integer lineWidth;
@@ -25,7 +27,7 @@ public class RadialAngleLine<T> extends And<T> implements JsonBuilder {
         this.display = display;
         return this;
     }
-    
+
     /**
      * Color of angled lines. Default: rgba(0, 0, 0, 0.1)
      */
@@ -41,7 +43,7 @@ public class RadialAngleLine<T> extends And<T> implements JsonBuilder {
         this.lineWidth = lineWidth;
         return this;
     }
-    
+
 
     public RadialAngleLine(T parent) {
         super(parent);

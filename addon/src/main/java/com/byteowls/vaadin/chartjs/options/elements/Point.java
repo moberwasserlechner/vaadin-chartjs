@@ -1,5 +1,7 @@
 package com.byteowls.vaadin.chartjs.options.elements;
 
+import java.io.Serializable;
+
 import com.byteowls.vaadin.chartjs.data.PointStyle;
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
@@ -13,7 +15,9 @@ import elemental.json.JsonObject;
  * 
  * @author michael@byteowls.com
  */
-public class Point<T> extends And<Element<T>> implements JsonBuilder {
+public class Point<T> extends And<Element<T>> implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = -2070842646780416509L;
 
     private Integer radius;
     private PointStyle pointStyle;
@@ -48,7 +52,7 @@ public class Point<T> extends And<Element<T>> implements JsonBuilder {
         }
         return this;
     }
-    
+
     public Point<T> pointStyle(PointStyle pointStyle) {
         this.pointStyle = pointStyle;
         return this;

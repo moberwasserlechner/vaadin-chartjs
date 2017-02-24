@@ -9,6 +9,8 @@ import elemental.json.JsonObject;
  */
 public class LinearTicks<T> extends Ticks<T> implements JsonBuilder {
 
+    private static final long serialVersionUID = -7751881366365153424L;
+
     private Boolean beginAtZero;
     private Integer min;
     private Integer max;
