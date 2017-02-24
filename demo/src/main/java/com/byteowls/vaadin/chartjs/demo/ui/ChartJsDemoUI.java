@@ -16,6 +16,7 @@ import com.byteowls.vaadin.chartjs.demo.ui.charts.ElementLineFillModeChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.GaugeDonutChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.GroupedStackedBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.HorizontalBarChartView;
+import com.byteowls.vaadin.chartjs.demo.ui.charts.LinePointSytesChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiAxisBarChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.MultiDonutChartView;
 import com.byteowls.vaadin.chartjs.demo.ui.charts.PieChartRefreshDataView;
@@ -82,6 +83,7 @@ public class ChartJsDemoUI extends UI {
         menuItems.add(new MenuItem(ChartType.LINE, "Stacked", StackedLineChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Combo", BarLineComboChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "PointSize", PointSizeLineChartView.class));
+        menuItems.add(new MenuItem(ChartType.LINE, "Point Styles", LinePointSytesChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Scatter", ScatterLineChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "SkipPoints", SkipPointsLineChartView.class));
         menuItems.add(new MenuItem(ChartType.LINE, "Stepped", SteppedLineChartView.class));

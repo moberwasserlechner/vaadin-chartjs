@@ -1,5 +1,6 @@
 package com.byteowls.vaadin.chartjs.options.elements;
 
+import com.byteowls.vaadin.chartjs.data.PointStyle;
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
@@ -13,9 +14,9 @@ import elemental.json.JsonObject;
  * @author michael@byteowls.com
  */
 public class Point<T> extends And<Element<T>> implements JsonBuilder {
-    
+
     private Integer radius;
-    private String pointStyle;
+    private PointStyle pointStyle;
     private String backgroundColor;
     private Integer borderWidth;
     private String borderColor;
@@ -26,8 +27,8 @@ public class Point<T> extends And<Element<T>> implements JsonBuilder {
     public Point(Element<T> parent) {
         super(parent);
     }
-    
-    
+
+
     /**
      * Default point radius. Default: 3 
      */
@@ -35,15 +36,24 @@ public class Point<T> extends And<Element<T>> implements JsonBuilder {
         this.radius = radius;
         return this;
     }
-    
+
     /**
      * Default point style. Default: circle
      */
     public Point<T> pointStyle(String pointStyle) {
-        this.pointStyle = pointStyle;
+        try {
+            pointStyle(PointStyle.valueOf(pointStyle));
+        } catch (Exception ignore) {
+
+        }
         return this;
     }
     
+    public Point<T> pointStyle(PointStyle pointStyle) {
+        this.pointStyle = pointStyle;
+        return this;
+    }
+
     /**
      * Default point fill color. Default: 'rgba(0,0,0,0.1)'
      */
@@ -51,7 +61,7 @@ public class Point<T> extends And<Element<T>> implements JsonBuilder {
         this.backgroundColor = backgroundColor;
         return this;
     }
-    
+
     /**
      * Default point stroke width. Default: 1
      */
@@ -67,7 +77,7 @@ public class Point<T> extends And<Element<T>> implements JsonBuilder {
         this.borderColor = borderColor;
         return this;
     }
-    
+
     /**
      * Extra radius added to point radius for hit detection. Default: 1
      */
@@ -75,7 +85,7 @@ public class Point<T> extends And<Element<T>> implements JsonBuilder {
         this.hitRadius = hitRadius;
         return this;
     }
-    
+
     /**
      * Default point radius when hovered. Default: 4
      */
@@ -83,7 +93,7 @@ public class Point<T> extends And<Element<T>> implements JsonBuilder {
         this.hoverRadius = hoverRadius;
         return this;
     }
-    
+
     /**
      * Default stroke width when hovered. Default: 1
      */
@@ -98,7 +108,9 @@ public class Point<T> extends And<Element<T>> implements JsonBuilder {
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "radius", radius);
-        JUtils.putNotNull(map, "pointStyle", pointStyle);
+        if (pointStyle != null) {
+            JUtils.putNotNull(map, "pointStyle", pointStyle.name());
+        }
         JUtils.putNotNull(map, "backgroundColor", backgroundColor);
         JUtils.putNotNull(map, "borderColor", borderColor);
         JUtils.putNotNull(map, "borderWidth", borderWidth);
