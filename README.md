@@ -65,7 +65,7 @@ Dependency
       <dependency>
         <groupId>com.byteowls</groupId>
         <artifactId>vaadin-chartjs</artifactId>
-        <version>0.3.0</version>
+        <version>0.4.0</version>
       </dependency>
     </dependencies>
 
@@ -81,7 +81,7 @@ Repository
 Dependency
 
     dependencies {
-      compile ("com.byteowls:vaadin-chartjs:0.3.0")
+      compile ("com.byteowls:vaadin-chartjs:0.4.0")
     }
 ## Usage
 
