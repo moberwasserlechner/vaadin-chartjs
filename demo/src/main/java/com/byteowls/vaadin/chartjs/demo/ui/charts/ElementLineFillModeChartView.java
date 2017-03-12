@@ -4,7 +4,7 @@ import com.byteowls.vaadin.chartjs.ChartJs;
 import com.byteowls.vaadin.chartjs.config.LineChartConfig;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
 import com.byteowls.vaadin.chartjs.options.elements.Line.FillMode;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
@@ -26,8 +26,8 @@ public class ElementLineFillModeChartView extends AbstractChartView {
             config.data()
                 .labels("January", "February", "March", "April", "May", "June", "July")
                 .addDataset(new LineDataset().label("My First dataset")
-                        .borderColor(ChartUtils.RGB_BLUE)
-                        .backgroundColor(ChartUtils.RGB_GREY)
+                        .borderColor(DemoUtils.RGB_BLUE)
+                        .backgroundColor(DemoUtils.RGB_GREY)
                         .data(10d, 30d, 46d, 2d, 8d, 50d, 0d)
                 )
                 .and()

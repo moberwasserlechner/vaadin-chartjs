@@ -8,7 +8,7 @@ import com.byteowls.vaadin.chartjs.config.LineChartConfig;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.data.PointStyle;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
@@ -33,8 +33,8 @@ public class LinePointSytesChartView extends AbstractChartView {
             config.data()
                 .labels("January", "February", "March", "April", "May", "June", "July")
                 .addDataset(new LineDataset().label("My First dataset")
-                        .borderColor(ChartUtils.RGB_RED)
-                        .backgroundColor(ChartUtils.RGB_RED)
+                        .borderColor(DemoUtils.RGB_RED)
+                        .backgroundColor(DemoUtils.RGB_RED)
                         .data(10d, 23d, 5d, 99d, 67d, 43d, 0d)
                         .fill(false)
                         .pointRadius(10)

@@ -8,11 +8,12 @@ import com.byteowls.vaadin.chartjs.config.BarChartConfig;
 import com.byteowls.vaadin.chartjs.data.BarDataset;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
 import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
+import com.byteowls.vaadin.chartjs.utils.ColorUtils;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
@@ -35,9 +36,9 @@ public class MultiAxisBarChartView extends AbstractChartView {
                         new BarDataset().backgroundColor("rgba(151,187,205,0.5)").label("Dataset 2").yAxisID("y-axis-2").hidden(true))
                 .addDataset(
                         new BarDataset().backgroundColor(
-                        ChartUtils.randomColor(0.7), ChartUtils.randomColor(0.7), ChartUtils.randomColor(0.7), 
-                        ChartUtils.randomColor(0.7), ChartUtils.randomColor(0.7), ChartUtils.randomColor(0.7), 
-                        ChartUtils.randomColor(0.7)).label("Dataset 3").yAxisID("y-axis-1"))
+                        		ColorUtils.randomColor(0.7), ColorUtils.randomColor(0.7), ColorUtils.randomColor(0.7), 
+                        		ColorUtils.randomColor(0.7), ColorUtils.randomColor(0.7), ColorUtils.randomColor(0.7), 
+                        		ColorUtils.randomColor(0.7)).label("Dataset 3").yAxisID("y-axis-1"))
                 .and();
         barConfig.
             options()
@@ -71,7 +72,7 @@ public class MultiAxisBarChartView extends AbstractChartView {
         chart.setJsLoggingEnabled(true);
         chart.addClickListener((a,b) -> {
             BarDataset dataset = (BarDataset) barConfig.data().getDatasets().get(a);
-            ChartUtils.notification(a, b, dataset);
+            DemoUtils.notification(a, b, dataset);
         });
         return chart; 
     }

@@ -8,7 +8,7 @@ import com.byteowls.vaadin.chartjs.config.BarChartConfig;
 import com.byteowls.vaadin.chartjs.data.BarDataset;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
 import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.options.elements.Rectangle.RectangleEdge;
 import com.vaadin.spring.annotation.SpringView;
@@ -65,7 +65,7 @@ public class HorizontalBarChartView extends AbstractChartView {
         chart.setJsLoggingEnabled(true);
         chart.addClickListener((a,b) -> {
             BarDataset dataset = (BarDataset) barConfig.data().getDatasets().get(a);
-            ChartUtils.notification(a, b, dataset);
+            DemoUtils.notification(a, b, dataset);
         });
         return chart; 
     }

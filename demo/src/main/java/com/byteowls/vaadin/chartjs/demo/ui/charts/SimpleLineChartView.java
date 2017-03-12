@@ -8,12 +8,13 @@ import com.byteowls.vaadin.chartjs.config.LineChartConfig;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
 import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.CategoryScale;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
+import com.byteowls.vaadin.chartjs.utils.ColorUtils;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
@@ -78,14 +79,14 @@ public class SimpleLineChartView extends AbstractChartView {
                 data.add((double) Math.round(Math.random() * 100));
             }
             lds.dataAsList(data);
-            lds.borderColor(ChartUtils.randomColor(0.3));
-            lds.backgroundColor(ChartUtils.randomColor(0.5));
+            lds.borderColor(ColorUtils.randomColor(0.3));
+            lds.backgroundColor(ColorUtils.randomColor(0.5));
         }
 
         ChartJs chart = new ChartJs(lineConfig);
         chart.addClickListener((a,b) -> {
             LineDataset dataset = (LineDataset) lineConfig.data().getDatasets().get(a);
-            ChartUtils.notification(a, b, dataset);
+            DemoUtils.notification(a, b, dataset);
         });
         chart.setJsLoggingEnabled(true);
         return chart;

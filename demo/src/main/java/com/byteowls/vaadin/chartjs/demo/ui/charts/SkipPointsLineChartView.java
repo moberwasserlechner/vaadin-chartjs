@@ -8,11 +8,12 @@ import com.byteowls.vaadin.chartjs.config.LineChartConfig;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
 import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.CategoryScale;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
+import com.byteowls.vaadin.chartjs.utils.ColorUtils;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
@@ -73,10 +74,10 @@ public class SkipPointsLineChartView extends AbstractChartView {
                 }
             }
             lds.dataAsList(data);
-            lds.borderColor(ChartUtils.randomColor(0.4));
-            lds.backgroundColor(ChartUtils.randomColor(0.5));
-            lds.pointBorderColor(ChartUtils.randomColor(0.7));
-            lds.pointBackgroundColor(ChartUtils.randomColor(0.5));
+            lds.borderColor(ColorUtils.randomColor(0.4));
+            lds.backgroundColor(ColorUtils.randomColor(0.5));
+            lds.pointBorderColor(ColorUtils.randomColor(0.7));
+            lds.pointBackgroundColor(ColorUtils.randomColor(0.5));
             lds.pointBorderWidth(1);
             cnt++;
         }
@@ -84,7 +85,7 @@ public class SkipPointsLineChartView extends AbstractChartView {
         ChartJs chart = new ChartJs(lineConfig);
         chart.addClickListener((a,b) -> {
             LineDataset dataset = (LineDataset) lineConfig.data().getDatasets().get(a);
-            ChartUtils.notification(a, b, dataset);
+            DemoUtils.notification(a, b, dataset);
         });
         chart.setJsLoggingEnabled(true);
         return chart;

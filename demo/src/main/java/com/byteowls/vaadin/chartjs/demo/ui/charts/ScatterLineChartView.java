@@ -5,11 +5,12 @@ import com.byteowls.vaadin.chartjs.config.ScatterChartConfig;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.ScatterDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
 import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.Position;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.LinearScale;
+import com.byteowls.vaadin.chartjs.utils.ColorUtils;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
@@ -48,13 +49,13 @@ public class ScatterLineChartView extends AbstractChartView {
         
         for (Dataset<?, ?> ds : config.data().getDatasets()) {
             ScatterDataset lds = (ScatterDataset) ds;
-            lds.borderColor(ChartUtils.randomColor(.4));
-            lds.backgroundColor(ChartUtils.randomColor(.1));
-            lds.pointBorderColor(ChartUtils.randomColor(.7));
-            lds.pointBackgroundColor(ChartUtils.randomColor(.5));
+            lds.borderColor(ColorUtils.randomColor(.4));
+            lds.backgroundColor(ColorUtils.randomColor(.1));
+            lds.pointBorderColor(ColorUtils.randomColor(.7));
+            lds.pointBackgroundColor(ColorUtils.randomColor(.5));
             lds.pointBorderWidth(1);
             for (int i = 0; i < 7; i++) {
-                lds.addData(ChartUtils.randomScalingFactor(), ChartUtils.randomScalingFactor());
+                lds.addData(DemoUtils.randomScalingFactor(), DemoUtils.randomScalingFactor());
             }
         }
         
@@ -63,7 +64,7 @@ public class ScatterLineChartView extends AbstractChartView {
         
         chart.addClickListener((a,b) -> {
             ScatterDataset dataset = (ScatterDataset) config.data().getDatasets().get(a);
-            ChartUtils.notification(a, b, dataset);
+            DemoUtils.notification(a, b, dataset);
         });
         return chart; 
     }

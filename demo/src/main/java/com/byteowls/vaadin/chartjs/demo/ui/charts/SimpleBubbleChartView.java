@@ -5,7 +5,8 @@ import com.byteowls.vaadin.chartjs.config.BubbleChartConfig;
 import com.byteowls.vaadin.chartjs.data.BubbleDataset;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
+import com.byteowls.vaadin.chartjs.utils.ColorUtils;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
@@ -35,9 +36,9 @@ public class SimpleBubbleChartView extends AbstractChartView {
         
         for (Dataset<?, ?> ds : config.data().getDatasets()) {
             BubbleDataset lds = (BubbleDataset) ds;
-            lds.backgroundColor(ChartUtils.randomColor(.7));
+            lds.backgroundColor(ColorUtils.randomColor(.7));
             for (int i = 0; i < 15; i++) {
-                lds.addData(ChartUtils.randomScalingFactor(), ChartUtils.randomScalingFactor(), Math.abs(ChartUtils.randomScalingFactor()) / 5);
+                lds.addData(DemoUtils.randomScalingFactor(), DemoUtils.randomScalingFactor(), Math.abs(DemoUtils.randomScalingFactor()) / 5);
             }
         }
         
@@ -45,7 +46,7 @@ public class SimpleBubbleChartView extends AbstractChartView {
         chart.setJsLoggingEnabled(true);
         chart.addClickListener((a,b) -> {
             BubbleDataset dataset = (BubbleDataset) config.data().getDatasets().get(a);
-            ChartUtils.notification(a, b, dataset);
+            DemoUtils.notification(a, b, dataset);
         });
         return chart; 
     }

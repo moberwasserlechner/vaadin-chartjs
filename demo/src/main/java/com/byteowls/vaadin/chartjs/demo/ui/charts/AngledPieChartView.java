@@ -8,7 +8,8 @@ import com.byteowls.vaadin.chartjs.config.PieChartConfig;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.PieDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
+import com.byteowls.vaadin.chartjs.utils.ColorUtils;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
@@ -50,7 +51,7 @@ public class AngledPieChartView extends AbstractChartView {
             List<String> colors = new ArrayList<>();
             for (int i = 0; i < labels.size(); i++) {
                 data.add((double) (Math.round(Math.random() * 100)));
-                colors.add(ChartUtils.randomColor(0.7));
+                colors.add(ColorUtils.randomColor(0.7));
             }
             lds.backgroundColor(colors.toArray(new String[colors.size()]));
             lds.dataAsList(data);
@@ -60,7 +61,7 @@ public class AngledPieChartView extends AbstractChartView {
         chart.setJsLoggingEnabled(true);
         chart.addClickListener((a,b) -> {
             PieDataset dataset = (PieDataset) config.data().getDatasets().get(a);
-            ChartUtils.notification(a, b, dataset);
+            DemoUtils.notification(a, b, dataset);
         });
         return chart; 
     }

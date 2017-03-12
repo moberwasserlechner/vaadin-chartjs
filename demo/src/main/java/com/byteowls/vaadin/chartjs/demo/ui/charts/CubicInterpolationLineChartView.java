@@ -6,7 +6,7 @@ import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset.CubicInterpolationMode;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
 import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.CategoryScale;
@@ -28,18 +28,18 @@ public class CubicInterpolationLineChartView extends AbstractChartView {
             .labels("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")
             .addDataset(new LineDataset()
                     .label("Cubic interpolation (monotone)")
-                    .borderColor(ChartUtils.RGB_RED)
+                    .borderColor(DemoUtils.RGB_RED)
                     .backgroundColor("rgba(0, 0, 0, 0)")
                     .cubicInterpolationMode(CubicInterpolationMode.MONOTONE)
                     .fill(false))
             .addDataset(new LineDataset()
                     .label("Cubic interpolation (default)")
-                    .borderColor(ChartUtils.RGB_BLUE)
+                    .borderColor(DemoUtils.RGB_BLUE)
                     .backgroundColor("rgba(0, 0, 0, 0)")
                     .fill(false))
             .addDataset(new LineDataset()
                     .label("Linear interpolation")
-                    .borderColor(ChartUtils.RGB_GREEN)
+                    .borderColor(DemoUtils.RGB_GREEN)
                     .backgroundColor("rgba(0, 0, 0, 0)")
                     .fill(false)
                     .lineTension(0))
@@ -81,7 +81,7 @@ public class CubicInterpolationLineChartView extends AbstractChartView {
         ChartJs chart = new ChartJs(lineConfig);
         chart.addClickListener((a,b) -> {
             LineDataset dataset = (LineDataset) lineConfig.data().getDatasets().get(a);
-            ChartUtils.notification(a, b, dataset);
+            DemoUtils.notification(a, b, dataset);
         });
         chart.setJsLoggingEnabled(true);
         return chart;

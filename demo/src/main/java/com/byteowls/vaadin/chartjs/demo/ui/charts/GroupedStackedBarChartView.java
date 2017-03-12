@@ -8,7 +8,7 @@ import com.byteowls.vaadin.chartjs.config.BarChartConfig;
 import com.byteowls.vaadin.chartjs.data.BarDataset;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
 import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.DefaultScale;
@@ -29,15 +29,15 @@ public class GroupedStackedBarChartView extends AbstractChartView {
             .labels("January", "February", "March", "April", "May", "June", "July")
             .addDataset(new BarDataset()
                     .label("Dataset 1")
-                    .backgroundColor(ChartUtils.RGB_RED)
+                    .backgroundColor(DemoUtils.RGB_RED)
                     .stack("Stack 0"))
             .addDataset(new BarDataset()
                     .label("Dataset 2")
-                    .backgroundColor(ChartUtils.RGB_BLUE)
+                    .backgroundColor(DemoUtils.RGB_BLUE)
                     .stack("Stack 0"))
             .addDataset(new BarDataset()
                     .label("Dataset 3")
-                    .backgroundColor(ChartUtils.RGB_GREEN)
+                    .backgroundColor(DemoUtils.RGB_GREEN)
                     .stack("Stack 1"))
             .and()
         .options()
@@ -64,7 +64,7 @@ public class GroupedStackedBarChartView extends AbstractChartView {
             BarDataset lds = (BarDataset) ds;
             List<Double> data = new ArrayList<>();
             for (int i = 0; i < labels.size(); i++) {
-                data.add(ChartUtils.randomScalingFactor());
+                data.add((double) (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100));
             }
             lds.dataAsList(data);
         }
@@ -72,7 +72,7 @@ public class GroupedStackedBarChartView extends AbstractChartView {
         ChartJs chart = new ChartJs(config);
         chart.addClickListener((a, b) -> {
             BarDataset dataset = (BarDataset) config.data().getDatasets().get(a);
-            ChartUtils.notification(a, b, dataset);
+            DemoUtils.notification(a, b, dataset);
         });
         chart.setJsLoggingEnabled(true);
         return chart;

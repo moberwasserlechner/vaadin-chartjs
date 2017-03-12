@@ -8,7 +8,7 @@ import com.byteowls.vaadin.chartjs.config.LineChartConfig;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
 import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.scale.Axis;
 import com.byteowls.vaadin.chartjs.options.scale.CategoryScale;
@@ -28,10 +28,10 @@ public class StackedLineChartView extends AbstractChartView {
         LineChartConfig lineConfig = new LineChartConfig();
         lineConfig.data()
             .labels("January", "February", "March", "April", "May", "June", "July")
-            .addDataset(new LineDataset().label("My First dataset").borderColor(ChartUtils.RGB_RED).backgroundColor(ChartUtils.RGB_RED))
-            .addDataset(new LineDataset().label("My Second dataset").borderColor(ChartUtils.RGB_BLUE).backgroundColor(ChartUtils.RGB_BLUE))
-            .addDataset(new LineDataset().label("My Third dataset").borderColor(ChartUtils.RGB_GREEN).backgroundColor(ChartUtils.RGB_GREEN))
-            .addDataset(new LineDataset().label("My Third dataset").borderColor(ChartUtils.RGB_YELLOW).backgroundColor(ChartUtils.RGB_YELLOW))
+            .addDataset(new LineDataset().label("My First dataset").borderColor(DemoUtils.RGB_RED).backgroundColor(DemoUtils.RGB_RED))
+            .addDataset(new LineDataset().label("My Second dataset").borderColor(DemoUtils.RGB_BLUE).backgroundColor(DemoUtils.RGB_BLUE))
+            .addDataset(new LineDataset().label("My Third dataset").borderColor(DemoUtils.RGB_GREEN).backgroundColor(DemoUtils.RGB_GREEN))
+            .addDataset(new LineDataset().label("My Third dataset").borderColor(DemoUtils.RGB_YELLOW).backgroundColor(DemoUtils.RGB_YELLOW))
             .and()
         .options()
             .responsive(true)
@@ -66,7 +66,7 @@ public class StackedLineChartView extends AbstractChartView {
             LineDataset lds = (LineDataset) ds;
             List<Double> data = new ArrayList<>();
             for (int i = 0; i < labels.size(); i++) {
-                data.add(ChartUtils.randomScalingFactor());
+                data.add((double) (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100));
             }
             lds.dataAsList(data);
         }
@@ -75,7 +75,7 @@ public class StackedLineChartView extends AbstractChartView {
         chart.setJsLoggingEnabled(true);
         chart.addClickListener((a,b) -> {
             LineDataset dataset = (LineDataset) lineConfig.data().getDatasets().get(a);
-            ChartUtils.notification(a, b, dataset);
+            DemoUtils.notification(a, b, dataset);
         });
         return chart;
     }

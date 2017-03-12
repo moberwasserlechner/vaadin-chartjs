@@ -8,7 +8,7 @@ import com.byteowls.vaadin.chartjs.config.RadarChartConfig;
 import com.byteowls.vaadin.chartjs.data.Dataset;
 import com.byteowls.vaadin.chartjs.data.RadarDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
 import com.byteowls.vaadin.chartjs.options.scale.RadialLinearScale;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
@@ -69,7 +69,7 @@ public class SkipDataRadarChartView extends AbstractChartView {
         
         chart.addClickListener((a,b) -> {
             RadarDataset dataset = (RadarDataset) config.data().getDatasets().get(a);
-            ChartUtils.notification(a, b, dataset);
+            DemoUtils.notification(a, b, dataset);
         });
         return chart;    
     }

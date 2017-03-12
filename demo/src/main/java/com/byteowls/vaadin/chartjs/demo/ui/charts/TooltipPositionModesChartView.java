@@ -7,7 +7,7 @@ import com.byteowls.vaadin.chartjs.ChartJs;
 import com.byteowls.vaadin.chartjs.config.LineChartConfig;
 import com.byteowls.vaadin.chartjs.data.LineDataset;
 import com.byteowls.vaadin.chartjs.demo.ui.AbstractChartView;
-import com.byteowls.vaadin.chartjs.demo.ui.ChartUtils;
+import com.byteowls.vaadin.chartjs.demo.ui.DemoUtils;
 import com.byteowls.vaadin.chartjs.options.InteractionMode;
 import com.byteowls.vaadin.chartjs.options.Tooltips.PositionMode;
 import com.vaadin.spring.annotation.SpringView;
@@ -34,13 +34,13 @@ public class TooltipPositionModesChartView extends AbstractChartView {
             config.data()
                 .labels("January", "February", "March", "April", "May", "June", "July")
                 .addDataset(new LineDataset().label("My First dataset")
-                        .borderColor(ChartUtils.RGB_RED)
-                        .backgroundColor(ChartUtils.RGB_RED)
+                        .borderColor(DemoUtils.RGB_RED)
+                        .backgroundColor(DemoUtils.RGB_RED)
                         .data(10d, 30d, 46d, 2d, 8d, 50d, 0d)
                         .fill(false))
                 .addDataset(new LineDataset().label("My Second dataset")
-                        .borderColor(ChartUtils.RGB_BLUE)
-                        .backgroundColor(ChartUtils.RGB_BLUE)
+                        .borderColor(DemoUtils.RGB_BLUE)
+                        .backgroundColor(DemoUtils.RGB_BLUE)
                         .data(7d, 49d, 46d, 13d, 25d, 30d, 22d)
                         .fill(false))
                 .and()
