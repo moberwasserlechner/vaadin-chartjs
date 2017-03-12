@@ -39,6 +39,7 @@ import com.vaadin.data.Item;
 import com.vaadin.data.util.HierarchicalContainer;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.ExternalResource;
 import com.vaadin.server.Page;
 import com.vaadin.server.Resource;
 import com.vaadin.server.Responsive;
@@ -46,10 +47,12 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringViewProvider;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Link;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.UI;
@@ -67,7 +70,7 @@ import de.java2html.util.IllegalConfigurationException;
 public class ChartJsDemoUI extends UI {
 
     private static final long serialVersionUID = -33887281222947647L;
-    
+
     private static final String CAPTION_PROPERTY = "caption";
     private static final String ICON_PROPERTY = "icon";
 
@@ -96,7 +99,7 @@ public class ChartJsDemoUI extends UI {
         menuItems.add(new MenuItem(ChartType.PIE, "Angled pie", AngledPieChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Gauge donut", GaugeDonutChartView.class));
         menuItems.add(new MenuItem(ChartType.PIE, "Pie with data refresh", PieChartRefreshDataView.class));
-//        menuItems.add(new MenuItem(ChartType.PIE, "Download pie", PieChartDownloadView.class));
+        //        menuItems.add(new MenuItem(ChartType.PIE, "Download pie", PieChartDownloadView.class));
         menuItems.add(new MenuItem(ChartType.AREA, "Bubble", SimpleBubbleChartView.class));
         menuItems.add(new MenuItem(ChartType.AREA, "Polar", PolarChartView.class));
         menuItems.add(new MenuItem(ChartType.AREA, "Radar", SimpleRadarChartView.class));
@@ -110,6 +113,8 @@ public class ChartJsDemoUI extends UI {
 
     private Label codeLabel;
 
+    private Link codeLink;
+
     @SuppressWarnings("serial")
     @Override
     protected void init(VaadinRequest request) {
@@ -122,17 +127,17 @@ public class ChartJsDemoUI extends UI {
         Navigator navigator = new Navigator(this, content);
         navigator.addProvider(viewProvider);
         navigator.setErrorProvider(viewProvider);
-        
+
         VerticalLayout vl = new VerticalLayout();
         vl.setSizeFull();
-        
+
         Label info = new Label("<strong>" + title + "</strong> "
                 + "| Version: <strong>" + env.getProperty("addon.version") + "</strong> "
                 + "| "+env.getProperty("addon.jslib.title")+": <strong>" + env.getProperty("addon.jslib.version") + "</strong> "
                 + "| Vaadin: <strong>" + env.getProperty("addon.vaadin.version") + "</strong> "
                 + "| <a href=\""+env.getProperty("addon.github")+"\">Check it out on Github</a>");
         info.setContentMode(ContentMode.HTML);
-        
+
         CssLayout infoBar = new CssLayout(info);
         infoBar.setWidth(100, Unit.PERCENTAGE);
         infoBar.addStyleName("addon-info-bar");
@@ -151,11 +156,14 @@ public class ChartJsDemoUI extends UI {
         splitMenuContent.setSplitPosition(15);
         vl.addComponent(splitMenuContent);
         vl.setExpandRatio(splitMenuContent, 1);
-        
+
         navigator.addViewChangeListener(new ViewChangeListener() {
             @Override
             public boolean beforeViewChange(ViewChangeEvent event) {
                 ChartView view = (ChartView) event.getNewView();
+                codeLink.setResource(new ExternalResource(DemoUtils.getGithubPath(view.getClass())));
+                codeLink.setTargetName("_blank");
+
                 String formattedSourceCode = getFormattedSourceCode(view.getSource());
                 codeLabel.setValue(formattedSourceCode);
                 return true;
@@ -181,17 +189,24 @@ public class ChartJsDemoUI extends UI {
         chartPanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
         return chartPanel;
     }
-    
+
     private Component buildCode() {
+        codeLink = new Link();
+        codeLink.setCaption("see the full class on Github");
+
         codeLabel = new Label();
         codeLabel.setContentMode(ContentMode.HTML);
-//        codeLabel.setSizeFull();
-        
+
         Panel codePanel = new Panel(codeLabel);
         codePanel.setSizeFull();
         codePanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
         codePanel.addStyleName("addon-code");
-        return codePanel;
+
+        VerticalLayout codeVl = new VerticalLayout(codePanel, codeLink);
+        codeVl.setSizeFull();
+        codeVl.setExpandRatio(codePanel, 1);
+        codeVl.setComponentAlignment(codeLink, Alignment.MIDDLE_CENTER);
+        return codeVl;
     }
 
     @SuppressWarnings("unchecked")
@@ -200,7 +215,7 @@ public class ChartJsDemoUI extends UI {
         treePanel.setSizeFull();
         treePanel.addStyleName(ValoTheme.PANEL_BORDERLESS);
         treePanel.addStyleName("addon-menu");
-        
+
         Tree tree = new Tree();
         tree.setSelectable(true);
 

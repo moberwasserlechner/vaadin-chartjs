@@ -86,6 +86,4 @@ public abstract class AbstractChartView extends VerticalLayout implements ChartV
         return realBeanClass.getSimpleName();
     }
 
-
-
 }
