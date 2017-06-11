@@ -8,15 +8,15 @@ Follow me on [![Twitter Follow](https://img.shields.io/twitter/follow/michaelowl
 
 * Fluent api to configure the charts
 * Supported chart types are
- * Horizontal bar chart
- * Vertical bar chart
- * Line chart
- * Donut chart
- * Pie chart
- * Polar area chart
- * Bubble chart
- * Radar chart
- * Scatter line chart
+  * Horizontal bar chart
+  * Vertical bar chart
+  * Line chart
+  * Donut chart
+  * Pie chart
+  * Polar area chart
+  * Bubble chart
+  * Radar chart
+  * Scatter line chart
 * Data point click listener
 
 ## Demo
@@ -160,7 +160,7 @@ You will see that every fluent api method under `config.options()` has a counter
 
 ### Addon
 * JDK 8
-* Vaadin 7.4 or higher
+* Vaadin 8 or higher
 
 ## Missing something?
 
