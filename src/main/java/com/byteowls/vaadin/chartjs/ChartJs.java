@@ -1,23 +1,22 @@
 package com.byteowls.vaadin.chartjs;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 import com.vaadin.ui.JavaScriptFunction;
-
 import elemental.json.JsonArray;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @JavaScript({"vaadin://chartjs/Chart.min.js", "vaadin://chartjs/chartjs-connector.js"})
 public class ChartJs extends AbstractJavaScriptComponent {
 
     private static final long serialVersionUID = 2999562112373836140L;
 
-    public enum ImageType {
-        PNG;
-    }
+//    public enum ImageType {
+//        PNG
+//    }
 
     public interface DataPointClickListener {
         void onDataPointClick(int datasetIndex, int dataIndex);

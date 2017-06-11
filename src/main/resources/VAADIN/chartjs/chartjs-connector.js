@@ -77,9 +77,9 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 	this.updateData = function() {
 		chartjs.config.data = this.getState().configurationJson.data;
 		chartjs.update();
-	}
+	};
 
-	this.getImageDataUrl= function(type, quality) {
+	this.getImageDataUrl = function(type, quality) {
 		if (typeof quality !== 'undefined') {
 			console.log("chartjs: download image quality: " + quality);
 		}

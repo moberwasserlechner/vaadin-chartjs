@@ -3,10 +3,9 @@
 /.gradle/
 /.DS_Store
 vaadin-chartjs.iml
-/demo/build/
-/demo/src/main/webapp/VAADIN/widgetsets/ChartJsWidgetset/compilation-mappings.txt
 /build/
 /.project
 /.settings
 .classpath
 /bin/
+classes/

@@ -1,6 +1,8 @@
-# Vaadin Chart.js [![Bintray](https://img.shields.io/bintray/v/moberwasserlechner/maven/vaadin-chartjs.svg)](https://bintray.com/moberwasserlechner/maven/vaadin-chartjs/_latestVersion) [![PayPal](https://img.shields.io/badge/%24-donate-0CB3EB.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N8VS2P9233NJQ) [![License](https://img.shields.io/badge/license-MIT-B34ED4.svg)](https://github.com/moberwasserlechner/vaadin-chartjs/blob/master/LICENSE)
+# Vaadin Chart.js [![Download](https://img.shields.io/bintray/v/moberwasserlechner/maven/vaadin-chartjs.svg)](https://bintray.com/moberwasserlechner/maven/vaadin-chartjs/_latestVersion) [![Travis](https://img.shields.io/travis/moberwasserlechner/vaadin-chartjs/develop.svg?maxAge=2592000)](https://travis-ci.org/moberwasserlechner/vaadin-chartjs) [![Twitter Follow](https://img.shields.io/twitter/follow/michaelowl_web.svg?style=social&label=Follow&style=flat-square)](https://twitter.com/michaelowl_web)
 
-Vaadin 7 wrapper for the Chart.js charting library. https://github.com/chartjs/Chart.js
+Vaadin 8 wrapper for the Chart.js charting library. https://github.com/chartjs/Chart.js
+
+Follow me on [![Twitter Follow](https://img.shields.io/twitter/follow/michaelowl_web.svg?style=social&label=Twitter&style=flat-square)](https://twitter.com/michaelowl_web) to be notified about new releases.
 
 ## Features
 
@@ -23,12 +25,11 @@ Vaadin 7 wrapper for the Chart.js charting library. https://github.com/chartjs/C
 
 * http://vaadin-demos.qqjtxeeuih.eu-central-1.elasticbeanstalk.com:5600
 
-If you want to run the demo application locally, see the [Contribution Section](#run-the-demo-local)
+If you want to run the demo application locally, see the [demo repository](https://github.com/moberwasserlechner/vaadin-chartjs-demo)
 
 ### Chart.js
 
-Afaik there are no online examples yet but you can download them along with the release distribution
-
+* http://www.chartjs.org/samples/latest/
 * https://github.com/chartjs/Chart.js/releases/latest
 
 ## Installation
@@ -39,8 +40,7 @@ Afaik there are no online examples yet but you can download them along with the 
 
 ### Vaadin Directory
 
-Get the addon from 
-https://vaadin.com/directory#!addon/chartjs-add-on.
+Get the addon from https://vaadin.com/directory#!addon/chartjs-add-on.
 
 You can download the addon there as well, but you will need to create a free vaadin account first. For Maven style dependencies please use below settings.
 
@@ -65,7 +65,7 @@ Dependency
       <dependency>
         <groupId>com.byteowls</groupId>
         <artifactId>vaadin-chartjs</artifactId>
-        <version>0.4.0</version>
+        <version>use.lastest.version</version>
       </dependency>
     </dependencies>
 
@@ -81,7 +81,7 @@ Repository
 Dependency
 
     dependencies {
-      compile ("com.byteowls:vaadin-chartjs:0.4.0")
+      compile ("com.byteowls:vaadin-chartjs:use.lastest.version")
     }
 ## Usage
 
@@ -162,11 +162,6 @@ You will see that every fluent api method under `config.options()` has a counter
 * JDK 8
 * Vaadin 7.4 or higher
 
-### Demo
-* JDK 8
-* Vaadin 7.7.+
-
-
 ## Missing something?
 
 The Vaadin-Chartjs is only a wrapper. So if you have any feature requests or found any bugs in the javascript lib please use Chart.js's issue tracker https://github.com/chartjs/Chart.js/issues
@@ -174,22 +169,6 @@ The Vaadin-Chartjs is only a wrapper. So if you have any feature requests or fou
 In all other cases please create a issue at https://github.com/moberwasserlechner/vaadin-chartjs/issues or contribute to the project yourself. For contribution see the next section.
 
 ## Contribute
-
-### Setup Eclipse
-
-1. Fork repo
-2. Open command line
-3. Clone your fork `git@github.com:USERNAME/vaadin-chartjs.git`
-4. `cd vaadin-chartjs`
-5. Build eclipse meta data `./gradlew cleanEclipse eclipse`
-6. Open Eclipse
-7. File -> Import... -> General -> Existing Projects into Workspace
-8. Browse to your git repository
-9. Check the option "Search for nested projects"
-10. Check all 3 projects
-11. Press finish
-
-This should take not more than 1-2 minutes. You does not need to use any gradle eclipse plugins. 
 
 ### Fix a bug or create a new feature
 
@@ -221,7 +200,3 @@ Please use the sun coding convention. Please do not use tabs at all!
 ## License
 
 MIT. Please see [LICENSE](https://github.com/moberwasserlechner/vaadin-chartjs/blob/master/LICENSE).
-
-## Change Log
-
-Please see [Releases](https://github.com/moberwasserlechner/vaadin-chartjs/releases).
