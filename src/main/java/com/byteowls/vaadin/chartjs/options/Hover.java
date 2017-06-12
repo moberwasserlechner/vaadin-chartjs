@@ -12,27 +12,6 @@ public class Hover<T> extends And<T> implements JsonBuilder, Serializable {
 
     private static final long serialVersionUID = 1317225903701999027L;
 
-    /**
-     * @deprecated Use {@link InteractionMode} instead
-     */
-    public enum Mode {
-        /**
-         * Finds the first item that intersects the point and returns it.
-         *
-         * @deprecated Behaves like {@link InteractionMode#NEAREST} mode with {@link Hover#intersect(true)}.
-         */
-        SINGLE,
-        /**
-         * @deprecated Use {@link InteractionMode#INDEX} instead.
-         */
-        LABEL,
-        /**
-         * Finds items in the same dataset. If the intersect setting is true, the first intersecting item is used to determine the index in the data.
-         * If intersect false the nearest item is used to determine the index.
-         */
-        DATASET
-    }
-
     private InteractionMode mode;
     private Boolean intersect;
     private Integer animationDuration;
@@ -40,31 +19,6 @@ public class Hover<T> extends And<T> implements JsonBuilder, Serializable {
 
     public Hover(T parent) {
         super(parent);
-    }
-
-    /**
-     * <p>Sets which elements hover.</p>
-     * single highlights the closest element
-     * label highlights elements in all datasets at the same X value.
-     * dataset highlights the closest dataset
-     * @deprecated use {@link #mode(InteractionMode)} instead
-     */
-    public Hover<T> mode(Mode mode) {
-        switch (mode) {
-        case DATASET:
-            mode(InteractionMode.DATASET);
-            break;
-        case LABEL:
-            mode(InteractionMode.INDEX);
-            break;
-        case SINGLE:
-            mode(InteractionMode.NEAREST);
-            intersect(true);
-            break;
-        default:
-            break;
-        }
-        return this;
     }
 
     /**

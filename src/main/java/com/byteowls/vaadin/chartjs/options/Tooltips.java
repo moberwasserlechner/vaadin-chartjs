@@ -11,22 +11,6 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
 
     private static final long serialVersionUID = -528926154599828794L;
 
-    /**
-     * @deprecated Use {@link InteractionMode} instead
-     */
-    public enum Mode {
-        /**
-         * Finds the first item that intersects the point and returns it.
-         *
-         * @deprecated Behaves like {@link InteractionMode#NEAREST} mode with {@link Hover#intersect(true)}}.
-         */
-        SINGLE,
-        /**
-         * @deprecated Use {@link InteractionMode#INDEX} instead.
-         */
-        LABEL
-    }
-
     public enum PositionMode {
         /**
          * Places the tooltip at the average position of the items displayed in the tooltip.
@@ -82,28 +66,6 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
      */
     public Tooltips<T> enabled(boolean enabled) {
         this.enabled = enabled;
-        return this;
-    }
-
-    /**
-     * Sets which elements appear in the tooltip.
-     * single highlights the closest element.
-     * label highlights elements in all datasets at the same X value.
-     * defaults to {@link Mode#SINGLE}
-     * @deprecated use {@link #mode(InteractionMode)} instead
-     */
-    public Tooltips<T> mode(Mode mode) {
-        switch (mode) {
-        case LABEL:
-            mode(InteractionMode.INDEX);
-            break;
-        case SINGLE:
-            mode(InteractionMode.NEAREST);
-            intersect(true);
-            break;
-        default:
-            break;
-        }
         return this;
     }
 
