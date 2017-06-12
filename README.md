@@ -182,20 +182,13 @@ Please do not mix more than one issue in a feature branch. Each feature/bugfix s
 6. Push to the branch (`git push origin feature/my-feature`)
 7. Create a Github Pull Request
 
-### Run the demo local
-
-The demo application is based on Spring Boot. So its possible to run the Demo as Java Application right out of Eclipse, there is not servlet container needed as Spring Boot has a embedded Tomcat 8 included.
-
-1. Open "Debug Configurations..." dialog
-2. Create a new "Java Application"
-3. Choose the "vaadin-chartjs-demo" project
-4. Use "com.byteowls.vaadin.chartjs.demo.ChartJsDemoApplication" as Main class
-5. Set `-Dprofile=dev` as VM argument. This ensures that source code panel in the demo is correctly filled while developing.
-6. Browse to `http://localhost:8080/`
-
 ### Code Style
 
-Please use the sun coding convention. Please do not use tabs at all!
+This repo includes a .editorconfig file, which your IDE should pickup automatically.
+
+If not please use the sun coding convention. Please do not use tabs at all!
+
+Try to change only parts your feature or bugfix requires.
 
 ## License
 
