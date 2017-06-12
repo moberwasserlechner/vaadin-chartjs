@@ -18,7 +18,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         /**
          * Finds the first item that intersects the point and returns it.
          *
-         * @deprecated Behaves like {@link InteractionMode#NEAREST} mode with {@link Hover#intersect(true)}.
+         * @deprecated Behaves like {@link InteractionMode#NEAREST} mode with {@link Hover#intersect(true)}}.
          */
         SINGLE,
         /**
@@ -63,6 +63,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
     private Integer footerMarginTop;
     private Integer xPadding;
     private Integer yPadding;
+    private Integer caretPadding;
     private Integer caretSize;
     private Integer cornerRadius;
     private String multiKeyBackground;
@@ -113,7 +114,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
     }
 
     /**
-     * If true, the tooltip mode applies only when the mouse position intersects with an element else 
+     * If true, the tooltip mode applies only when the mouse position intersects with an element else
      * the mode will be applied at all times. Defaults to true.
      */
     public Tooltips<T> intersect(boolean intersect) {
@@ -202,7 +203,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
     }
 
     /**
-     * Default: normal 
+     * Default: normal
      */
     public Tooltips<T> bodyFontStyle(String bodyFontStyle) {
         this.bodyFontStyle = bodyFontStyle;
@@ -279,13 +280,21 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
     public Tooltips<T> xPadding(int xPadding) {
         this.xPadding = xPadding;
         return this;
-    }    
+    }
 
     /**
      * Padding to add on top and bottom of tooltip. Default: 6
      */
     public Tooltips<T> yPadding(int yPadding) {
         this.yPadding = yPadding;
+        return this;
+    }
+
+    /**
+     *  Extra distance to move the end of the tooltip arrow away from the tooltip point. Default: 2
+     */
+    public Tooltips<T> caretPadding(int caretPadding) {
+        this.caretPadding = caretPadding;
         return this;
     }
 
@@ -352,6 +361,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         JUtils.putNotNull(map, "footerMarginTop", footerMarginTop);
         JUtils.putNotNull(map, "xPadding", xPadding);
         JUtils.putNotNull(map, "yPadding", yPadding);
+        JUtils.putNotNull(map, "caretPadding", caretPadding);
         JUtils.putNotNull(map, "caretSize", caretSize);
         JUtils.putNotNull(map, "cornerRadius", cornerRadius);
         JUtils.putNotNull(map, "multiKeyBackground", multiKeyBackground);
