@@ -21,6 +21,7 @@ public abstract class BaseScale<B extends BaseScale<?>> implements JsonBuilder, 
     protected Position position;
     protected Boolean stacked;
     protected Integer barThickness;
+    protected Integer maxBarThickness;
     protected Double categoryPercentage;
     protected Double barPercentage;
     protected GridLines<B> gridLines;
@@ -68,6 +69,14 @@ public abstract class BaseScale<B extends BaseScale<?>> implements JsonBuilder, 
     }
 
     /**
+     * Set this to ensure that the automatically sized bars are not sized thicker than this. Only works if barThickness is not set (automatic sizing is enabled).
+     */
+    public BaseScale<B> maxBarThickness(int maxBarThickness) {
+        this.maxBarThickness = maxBarThickness;
+        return this;
+    }
+
+    /**
      * Percent (0-1) of the available width (the space between the gridlines for small datasets) for each data-point to use for the bars.
      */
     public BaseScale<B> categoryPercentage(double categoryPercentage) {
@@ -76,7 +85,7 @@ public abstract class BaseScale<B extends BaseScale<?>> implements JsonBuilder, 
     }
 
     /**
-     * Percent (0-1) of the available width each bar should be within the category percentage. 1.0 will take the whole category width and put the bars right next to each other. 
+     * Percent (0-1) of the available width each bar should be within the category percentage. 1.0 will take the whole category width and put the bars right next to each other.
      */
     public BaseScale<B> barPercentage(double barPercentage) {
         this.barPercentage = barPercentage;
@@ -133,6 +142,7 @@ public abstract class BaseScale<B extends BaseScale<?>> implements JsonBuilder, 
         JUtils.putNotNull(map, "id", id);
         JUtils.putNotNull(map, "stacked", stacked);
         JUtils.putNotNull(map, "barThickness", barThickness);
+        JUtils.putNotNull(map, "maxBarThickness", maxBarThickness);
         JUtils.putNotNull(map, "categoryPercentage", categoryPercentage);
         JUtils.putNotNull(map, "barPercentage", barPercentage);
         if (position != null) {
