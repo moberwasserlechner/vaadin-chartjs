@@ -8,9 +8,9 @@ import elemental.json.Json;
 import elemental.json.JsonObject;
 
 /**
- * Used to configure angled lines that radiate from the center of the chart to the point labels. 
- * 
- * Note that these options only apply if lineArc is false.
+ * Used to configure angled lines that radiate from the center of the chart to the point labels.
+ *
+ * Note that these options only apply if `display` is true.
  */
 public class RadialAngleLine<T> extends And<T> implements JsonBuilder {
 

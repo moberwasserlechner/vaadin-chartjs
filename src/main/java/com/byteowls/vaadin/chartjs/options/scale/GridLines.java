@@ -26,6 +26,7 @@ public class GridLines<T> extends And<T> implements JsonBuilder {
     private Integer zeroLineWidth;
     private String zeroLineColor;
     private Boolean offsetGridLines;
+    private Boolean circular;
 
     public GridLines(T parent) {
         super(parent);
@@ -109,6 +110,14 @@ public class GridLines<T> extends And<T> implements JsonBuilder {
         return this;
     }
 
+    /**
+     * If true, radial lines are circular. If false, they are straight lines connecting the the different angle line locations. Default: false
+     */
+    public GridLines<T> circular(boolean circular) {
+        this.circular = circular;
+        return this;
+    }
+
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
@@ -122,6 +131,7 @@ public class GridLines<T> extends And<T> implements JsonBuilder {
         JUtils.putNotNull(map, "zeroLineWidth", zeroLineWidth);
         JUtils.putNotNull(map, "zeroLineColor", zeroLineColor);
         JUtils.putNotNull(map, "offsetGridLines", offsetGridLines);
+        JUtils.putNotNull(map, "circular", circular);
         return map;
     }
 }
