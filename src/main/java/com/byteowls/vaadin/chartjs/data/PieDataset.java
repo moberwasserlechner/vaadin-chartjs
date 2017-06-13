@@ -11,14 +11,14 @@ import elemental.json.Json;
 import elemental.json.JsonObject;
 
 /**
- * For a pie chart, datasets need to contain an array of data points. 
- * 
- * The data points should be a number, Chart.js will total all of the numbers and calculate the relative proportion of each. 
- * 
- * You can also add an array of background colors. 
- * 
+ * For a pie chart, datasets need to contain an array of data points.
+ *
+ * The data points should be a number, Chart.js will total all of the numbers and calculate the relative proportion of each.
+ *
+ * You can also add an array of background colors.
+ *
  * The color attributes should be a string. Similar to CSS, for this string you can use HEX notation, RGB, RGBA or HSL.
- * 
+ *
  * @author michael@byteowls.com
  *
  */
@@ -29,7 +29,6 @@ public class PieDataset extends DoubleDataset<PieDataset> {
     private String type;
     private Boolean hidden;
     private String label;
-    private Boolean fill;
     private List<String> backgroundColor;
     private List<String> borderColor;
     private List<Integer> borderWidth;
@@ -67,14 +66,6 @@ public class PieDataset extends DoubleDataset<PieDataset> {
      */
     public PieDataset label(String label) {
         this.label = label;
-        return this;
-    }
-
-    /**
-     * If true, fill the area under the line
-     */
-    public PieDataset fill(boolean fill) {
-        this.fill = fill;
         return this;
     }
 
@@ -149,7 +140,6 @@ public class PieDataset extends DoubleDataset<PieDataset> {
         List<Double> data = getData();
         JUtils.putNotNullNumbers(map, "data", data);
         JUtils.putNotNull(map, "label", label);
-        JUtils.putNotNull(map, "fill", fill);
         JUtils.putNotNull(map, "hidden", hidden);
         if (randomBackgroundColors && data != null) {
             List<String> bgColors = new ArrayList<>();

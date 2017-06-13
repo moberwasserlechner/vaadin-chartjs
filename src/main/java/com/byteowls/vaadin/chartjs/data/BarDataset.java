@@ -26,7 +26,6 @@ public class BarDataset extends DoubleDataset<BarDataset> {
     private String label;
     private String xAxisID;
     private String yAxisID;
-    private Boolean fill;
     private List<String> backgroundColor;
     private List<String> borderColor;
     private List<Integer> borderWidth;
@@ -75,14 +74,6 @@ public class BarDataset extends DoubleDataset<BarDataset> {
      */
     public BarDataset yAxisID(String yAxisID) {
         this.yAxisID = yAxisID;
-        return this;
-    }
-
-    /**
-     * If true, fill the area under the line
-     */
-    public BarDataset fill(boolean fill) {
-        this.fill = fill;
         return this;
     }
 
@@ -176,7 +167,6 @@ public class BarDataset extends DoubleDataset<BarDataset> {
         JUtils.putNotNull(map, "label", label);
         JUtils.putNotNull(map, "xAxisID", xAxisID);
         JUtils.putNotNull(map, "yAxisID", yAxisID);
-        JUtils.putNotNull(map, "fill", fill);
         JUtils.putNotNull(map, "hidden", hidden);
         if (randomBackgroundColors && data != null) {
             List<String> bgColors = new ArrayList<>();
