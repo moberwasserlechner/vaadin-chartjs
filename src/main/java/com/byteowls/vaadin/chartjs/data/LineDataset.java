@@ -1,12 +1,13 @@
 package com.byteowls.vaadin.chartjs.data;
 
-import java.util.Arrays;
-import java.util.List;
-
+import com.byteowls.vaadin.chartjs.options.elements.Line;
+import com.byteowls.vaadin.chartjs.utils.ColorUtils;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
-
 import elemental.json.Json;
 import elemental.json.JsonObject;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author michael@byteowls.com
@@ -26,6 +27,9 @@ public class LineDataset extends DoubleDataset<LineDataset> {
     private String xAxisID;
     private String yAxisID;
     private Boolean fill;
+    private Boolean fillToPlus;
+    private Integer fillToDatasetIndex;
+    private Line.FillMode fillMode;
     private CubicInterpolationMode cubicInterpolationMode;
     private Double lineTension;
     private String backgroundColor;
@@ -90,11 +94,33 @@ public class LineDataset extends DoubleDataset<LineDataset> {
     }
 
     /**
-     * Algorithm used to interpolate a smooth curve from the discrete data points. 
-     * 
-     * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of datasets. 
-     * 
-     * The 'monotone' algorithm is more suited to y = f(x) datasets. It preserves monotonicity (or piecewise monotonicity) of the dataset being interpolated, and ensures local extremums (if any) stay at input data points. 
+     * Use the modes to fill different locations.
+     */
+    public LineDataset fill(Line.FillMode fillMode) {
+        this.fillMode = fillMode;
+        return this;
+    }
+
+    /**
+     * Sets the index of the target dataset till which it will be filled.
+     */
+    public LineDataset fillTo(int datasetIndex) {
+        this.fillToDatasetIndex = datasetIndex;
+        return this;
+    }
+
+    public LineDataset fillTo(boolean plus, int datasetIndex) {
+        this.fillToPlus = plus;
+        this.fillToDatasetIndex = datasetIndex;
+        return this;
+    }
+
+    /**
+     * Algorithm used to interpolate a smooth curve from the discrete data points.
+     *
+     * The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of datasets.
+     *
+     * The 'monotone' algorithm is more suited to y = f(x) datasets. It preserves monotonicity (or piecewise monotonicity) of the dataset being interpolated, and ensures local extremums (if any) stay at input data points.
      */
     public LineDataset cubicInterpolationMode(CubicInterpolationMode cubicInterpolationMode) {
         this.cubicInterpolationMode = cubicInterpolationMode;
@@ -118,10 +144,26 @@ public class LineDataset extends DoubleDataset<LineDataset> {
     }
 
     /**
-     * The fill color under the line.
+     * The fill color.
      */
     public LineDataset backgroundColor(String backgroundColor) {
         this.backgroundColor = backgroundColor;
+        return this;
+    }
+
+    /**
+     * The fill color as rgb array.
+     */
+    public LineDataset backgroundColor(int[] rgb) {
+        this.backgroundColor(ColorUtils.toRgb(rgb));
+        return this;
+    }
+
+    /**
+     * The fill color as rgb array and a additional parameter for the alpha channel.
+     */
+    public LineDataset backgroundColor(int[] rgb, double alpha) {
+        this.backgroundColor(ColorUtils.toRgba(rgb, alpha));
         return this;
     }
 
@@ -138,6 +180,22 @@ public class LineDataset extends DoubleDataset<LineDataset> {
      */
     public LineDataset borderColor(String borderColor) {
         this.borderColor = borderColor;
+        return this;
+    }
+
+    /**
+     * The color of the line as rgb array.
+     */
+    public LineDataset borderColor(int[] rgb) {
+        this.borderColor(ColorUtils.toRgb(rgb));
+        return this;
+    }
+
+    /**
+     * The color of the line as rgb array and a additional parameter for the alpha channel.
+     */
+    public LineDataset borderColor(int[] rgb, double alpha) {
+        this.borderColor(ColorUtils.toRgba(rgb, alpha));
         return this;
     }
 
@@ -248,7 +306,7 @@ public class LineDataset extends DoubleDataset<LineDataset> {
 
 
     /**
-     * The style of point. Options are 'circle', 'triangle', 'rect', 'rectRot', 'cross', 'crossRot', 'star', 'line', and 'dash'. 
+     * The style of point. Options are 'circle', 'triangle', 'rect', 'rectRot', 'cross', 'crossRot', 'star', 'line', and 'dash'.
      */
     public LineDataset pointStyle(PointStyle pointStyle) {
         this.pointStyle = pointStyle;
@@ -287,7 +345,17 @@ public class LineDataset extends DoubleDataset<LineDataset> {
         JUtils.putNotNull(map, "label", label);
         JUtils.putNotNull(map, "xAxisID", xAxisID);
         JUtils.putNotNull(map, "yAxisID", yAxisID);
-        JUtils.putNotNull(map, "fill", fill);
+
+        if (this.fillToPlus != null && this.fillToDatasetIndex != null) {
+            JUtils.putNotNull(map, "fill", (this.fillToPlus ? "+":"-") + this.fillToDatasetIndex);
+        } else if (this.fillToPlus == null && this.fillToDatasetIndex != null) {
+            JUtils.putNotNull(map, "fill", this.fillToDatasetIndex);
+        } else if (this.fillMode != null) {
+            JUtils.putNotNull(map, "fill", fillMode.name().toLowerCase());
+        } else {
+            JUtils.putNotNull(map, "fill", fill);
+        }
+
         if (cubicInterpolationMode != null) {
             JUtils.putNotNull(map, "cubicInterpolationMode", cubicInterpolationMode.toString().toLowerCase());
         }

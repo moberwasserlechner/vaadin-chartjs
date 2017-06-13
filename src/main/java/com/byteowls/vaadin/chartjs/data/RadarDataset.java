@@ -1,12 +1,13 @@
 package com.byteowls.vaadin.chartjs.data;
 
-import java.util.Arrays;
-import java.util.List;
-
+import com.byteowls.vaadin.chartjs.options.elements.Line;
+import com.byteowls.vaadin.chartjs.utils.ColorUtils;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
-
 import elemental.json.Json;
 import elemental.json.JsonObject;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author michael@byteowls.com
@@ -20,6 +21,9 @@ public class RadarDataset extends DoubleDataset<RadarDataset> {
     private Boolean hidden;
     private String label;
     private Boolean fill;
+    private Boolean fillToPlus;
+    private Integer fillToDatasetIndex;
+    private Line.FillMode fillMode;
     private Double lineTension;
     private String backgroundColor;
     private Integer borderWidth;
@@ -64,6 +68,28 @@ public class RadarDataset extends DoubleDataset<RadarDataset> {
     }
 
     /**
+     * Use the modes to fill different locations.
+     */
+    public RadarDataset fill(Line.FillMode fillMode) {
+        this.fillMode = fillMode;
+        return this;
+    }
+
+    /**
+     * Sets the index of the target dataset till which it will be filled.
+     */
+    public RadarDataset fillTo(int datasetIndex) {
+        this.fillToDatasetIndex = datasetIndex;
+        return this;
+    }
+
+    public RadarDataset fillTo(boolean plus, int datasetIndex) {
+        this.fillToPlus = plus;
+        this.fillToDatasetIndex = datasetIndex;
+        return this;
+    }
+
+    /**
      * If true, the dataset is hidden
      */
     public RadarDataset hidden(boolean hidden) {
@@ -80,10 +106,26 @@ public class RadarDataset extends DoubleDataset<RadarDataset> {
     }
 
     /**
-     * The fill color under the line.
+     * The fill color.
      */
     public RadarDataset backgroundColor(String backgroundColor) {
         this.backgroundColor = backgroundColor;
+        return this;
+    }
+
+    /**
+     * The fill color as rgb array.
+     */
+    public RadarDataset backgroundColor(int[] rgb) {
+        this.backgroundColor(ColorUtils.toRgb(rgb));
+        return this;
+    }
+
+    /**
+     * The fill color as rgb array and a additional parameter for the alpha channel.
+     */
+    public RadarDataset backgroundColor(int[] rgb, double alpha) {
+        this.backgroundColor(ColorUtils.toRgba(rgb, alpha));
         return this;
     }
 
@@ -100,6 +142,22 @@ public class RadarDataset extends DoubleDataset<RadarDataset> {
      */
     public RadarDataset borderColor(String borderColor) {
         this.borderColor = borderColor;
+        return this;
+    }
+
+    /**
+     * The color of the line as rgb array.
+     */
+    public RadarDataset borderColor(int[] rgb) {
+        this.borderColor(ColorUtils.toRgb(rgb));
+        return this;
+    }
+
+    /**
+     * The color of the line as rgb array and a additional parameter for the alpha channel.
+     */
+    public RadarDataset borderColor(int[] rgb, double alpha) {
+        this.borderColor(ColorUtils.toRgba(rgb, alpha));
         return this;
     }
 
@@ -210,7 +268,7 @@ public class RadarDataset extends DoubleDataset<RadarDataset> {
 
 
     /**
-     * The style of point. Options are 'circle', 'triangle', 'rect', 'rectRot', 'cross', 'crossRot', 'star', 'line', and 'dash'. 
+     * The style of point. Options are 'circle', 'triangle', 'rect', 'rectRot', 'cross', 'crossRot', 'star', 'line', and 'dash'.
      */
     public RadarDataset pointStyle(PointStyle pointStyle) {
         this.pointStyle = pointStyle;
@@ -223,7 +281,17 @@ public class RadarDataset extends DoubleDataset<RadarDataset> {
         JUtils.putNotNull(map, "type", type);
         JUtils.putNotNullNumbers(map, "data", getData());
         JUtils.putNotNull(map, "label", label);
-        JUtils.putNotNull(map, "fill", fill);
+
+        if (this.fillToPlus != null && this.fillToDatasetIndex != null) {
+            JUtils.putNotNull(map, "fill", (this.fillToPlus ? "+":"-") + this.fillToDatasetIndex);
+        } else if (this.fillToPlus == null && this.fillToDatasetIndex != null) {
+            JUtils.putNotNull(map, "fill", this.fillToDatasetIndex);
+        } else if (this.fillMode != null) {
+            JUtils.putNotNull(map, "fill", fillMode.name().toLowerCase());
+        } else {
+            JUtils.putNotNull(map, "fill", fill);
+        }
+
         JUtils.putNotNull(map, "hidden", hidden);
         JUtils.putNotNull(map, "lineTension", lineTension);
         JUtils.putNotNull(map, "backgroundColor", backgroundColor);

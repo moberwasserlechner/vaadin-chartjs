@@ -13,7 +13,7 @@ import elemental.json.JsonObject;
 
 /**
  * Line elements are used to represent the line in a line chart.
- * 
+ *
  * @author michael@byteowls.com
  */
 public class Line<T> extends And<Element<T>> implements JsonBuilder, Serializable {
@@ -29,7 +29,7 @@ public class Line<T> extends And<Element<T>> implements JsonBuilder, Serializabl
     }
 
     public enum FillMode {
-        ZERO, TOP, BOTTOM
+        ORIGIN, START, END
     }
 
     private Double tension;
