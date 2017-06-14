@@ -1,7 +1,6 @@
 package com.byteowls.vaadin.chartjs.data;
 
 import com.byteowls.vaadin.chartjs.options.elements.Line;
-import com.byteowls.vaadin.chartjs.utils.ColorUtils;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.Json;
 import elemental.json.JsonObject;
@@ -104,13 +103,16 @@ public class LineDataset extends DoubleDataset<LineDataset> {
     /**
      * Sets the index of the target dataset till which it will be filled.
      */
-    public LineDataset fillTo(int datasetIndex) {
+    public LineDataset fill(int datasetIndex) {
         this.fillToDatasetIndex = datasetIndex;
         return this;
     }
 
-    public LineDataset fillTo(boolean plus, int datasetIndex) {
-        this.fillToPlus = plus;
+    /**
+     * Fills the area between the current dataset and next or previous with the given index.
+     */
+    public LineDataset fill(boolean next, int datasetIndex) {
+        this.fillToPlus = next;
         this.fillToDatasetIndex = datasetIndex;
         return this;
     }
@@ -152,22 +154,6 @@ public class LineDataset extends DoubleDataset<LineDataset> {
     }
 
     /**
-     * The fill color as rgb array.
-     */
-    public LineDataset backgroundColor(int[] rgb) {
-        this.backgroundColor(ColorUtils.toRgb(rgb));
-        return this;
-    }
-
-    /**
-     * The fill color as rgb array and a additional parameter for the alpha channel.
-     */
-    public LineDataset backgroundColor(int[] rgb, double alpha) {
-        this.backgroundColor(ColorUtils.toRgba(rgb, alpha));
-        return this;
-    }
-
-    /**
      * The width of the line in pixels
      */
     public LineDataset borderWidth(int borderWidth) {
@@ -180,22 +166,6 @@ public class LineDataset extends DoubleDataset<LineDataset> {
      */
     public LineDataset borderColor(String borderColor) {
         this.borderColor = borderColor;
-        return this;
-    }
-
-    /**
-     * The color of the line as rgb array.
-     */
-    public LineDataset borderColor(int[] rgb) {
-        this.borderColor(ColorUtils.toRgb(rgb));
-        return this;
-    }
-
-    /**
-     * The color of the line as rgb array and a additional parameter for the alpha channel.
-     */
-    public LineDataset borderColor(int[] rgb, double alpha) {
-        this.borderColor(ColorUtils.toRgba(rgb, alpha));
         return this;
     }
 

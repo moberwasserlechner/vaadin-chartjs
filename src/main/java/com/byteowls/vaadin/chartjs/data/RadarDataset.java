@@ -1,7 +1,6 @@
 package com.byteowls.vaadin.chartjs.data;
 
 import com.byteowls.vaadin.chartjs.options.elements.Line;
-import com.byteowls.vaadin.chartjs.utils.ColorUtils;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.Json;
 import elemental.json.JsonObject;
@@ -78,13 +77,16 @@ public class RadarDataset extends DoubleDataset<RadarDataset> {
     /**
      * Sets the index of the target dataset till which it will be filled.
      */
-    public RadarDataset fillTo(int datasetIndex) {
+    public RadarDataset fill(int datasetIndex) {
         this.fillToDatasetIndex = datasetIndex;
         return this;
     }
 
-    public RadarDataset fillTo(boolean plus, int datasetIndex) {
-        this.fillToPlus = plus;
+    /**
+     * Fills the area between the current dataset and next or previous with the given index.
+     */
+    public RadarDataset fill(boolean next, int datasetIndex) {
+        this.fillToPlus = next;
         this.fillToDatasetIndex = datasetIndex;
         return this;
     }
@@ -114,22 +116,6 @@ public class RadarDataset extends DoubleDataset<RadarDataset> {
     }
 
     /**
-     * The fill color as rgb array.
-     */
-    public RadarDataset backgroundColor(int[] rgb) {
-        this.backgroundColor(ColorUtils.toRgb(rgb));
-        return this;
-    }
-
-    /**
-     * The fill color as rgb array and a additional parameter for the alpha channel.
-     */
-    public RadarDataset backgroundColor(int[] rgb, double alpha) {
-        this.backgroundColor(ColorUtils.toRgba(rgb, alpha));
-        return this;
-    }
-
-    /**
      * The width of the line in pixels
      */
     public RadarDataset borderWidth(int borderWidth) {
@@ -142,22 +128,6 @@ public class RadarDataset extends DoubleDataset<RadarDataset> {
      */
     public RadarDataset borderColor(String borderColor) {
         this.borderColor = borderColor;
-        return this;
-    }
-
-    /**
-     * The color of the line as rgb array.
-     */
-    public RadarDataset borderColor(int[] rgb) {
-        this.borderColor(ColorUtils.toRgb(rgb));
-        return this;
-    }
-
-    /**
-     * The color of the line as rgb array and a additional parameter for the alpha channel.
-     */
-    public RadarDataset borderColor(int[] rgb, double alpha) {
-        this.borderColor(ColorUtils.toRgba(rgb, alpha));
         return this;
     }
 
