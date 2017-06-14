@@ -1,4 +1,4 @@
-# Vaadin Chart.js [![Download](https://img.shields.io/bintray/v/moberwasserlechner/maven/vaadin-chartjs.svg)](https://bintray.com/moberwasserlechner/maven/vaadin-chartjs/_latestVersion) [![Travis](https://img.shields.io/travis/moberwasserlechner/vaadin-chartjs/develop.svg?maxAge=2592000)](https://travis-ci.org/moberwasserlechner/vaadin-chartjs) [![Twitter Follow](https://img.shields.io/twitter/follow/michaelowl_web.svg?style=social&label=Follow&style=flat-square)](https://twitter.com/michaelowl_web)
+# Vaadin Chart.js [![Download](https://img.shields.io/bintray/v/moberwasserlechner/maven/vaadin-chartjs.svg)](https://bintray.com/moberwasserlechner/maven/vaadin-chartjs/_latestVersion) [![Travis](https://img.shields.io/travis/moberwasserlechner/vaadin-chartjs/master.svg?maxAge=2592000)](https://travis-ci.org/moberwasserlechner/vaadin-chartjs) [![Twitter Follow](https://img.shields.io/twitter/follow/michaelowl_web.svg?style=social&label=Follow&style=flat-square)](https://twitter.com/michaelowl_web)
 
 Vaadin 8 wrapper for the Chart.js charting library. https://github.com/chartjs/Chart.js
 
