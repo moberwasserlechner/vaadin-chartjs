@@ -22,23 +22,23 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 				console.log("chartjs: create canvas");
 			}
 			canvas = document.createElement('canvas');
+            if (state.width && state.width.length > 0) {
+                if (loggingEnabled) {
+                    console.log("chartjs: canvas width " + state.width);
+                }
+                canvas.setAttribute('width', state.width);
+            }
+            if (state.height && state.height.length > 0) {
+                if (loggingEnabled) {
+                    console.log("chartjs: canvas height " + state.height);
+                }
+                canvas.setAttribute('height', state.height);
+            }
 			e.appendChild(canvas)
 		} else {
 			if (loggingEnabled) {
 				console.log("chartjs: canvas already exists");
 			}
-		}
-		if (state.width != null && state.width.length > 0) {
-			if (loggingEnabled) {
-				console.log("chartjs: canvas width " + state.width);
-			}
-			canvas.setAttribute('width', state.width);
-		}
-		if (state.height != null && state.height.length > 0) {
-			if (loggingEnabled) {
-				console.log("chartjs: canvas height " + state.height);
-			}
-			canvas.setAttribute('height', state.height);
 		}
 
 		if (typeof chartjs === 'undefined' && state.configurationJson !== 'undefined') {
@@ -58,7 +58,7 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 				}
 				canvas.onclick = function(e) {
 					var elementArr = chartjs.getElementAtEvent(e);
-					if (elementArr != null && elementArr.length > 0) {
+					if (elementArr && elementArr.length > 0) {
 						if (loggingEnabled) {
 							console.log("chartjs: onclick elements at:");
 							console.log(elementArr[0]);
