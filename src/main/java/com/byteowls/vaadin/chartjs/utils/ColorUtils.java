@@ -28,7 +28,13 @@ public abstract class ColorUtils {
             String joined = Arrays.stream(rgb)
                 .mapToObj(String::valueOf)
                 .collect(Collectors.joining(","));
-            return "rgba(" + joined + ", " +alpha+ ")";
+
+            if (alpha > 1) {
+                alpha = 1;
+            } else if (alpha < 0) {
+                alpha = 0;
+            }
+            return "rgba(" + joined + "," +alpha+ ")";
         }
         return null;
     }
