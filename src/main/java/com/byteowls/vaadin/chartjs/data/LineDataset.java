@@ -1,6 +1,6 @@
 package com.byteowls.vaadin.chartjs.data;
 
-import com.byteowls.vaadin.chartjs.options.elements.Line;
+import com.byteowls.vaadin.chartjs.options.FillMode;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.Json;
 import elemental.json.JsonObject;
@@ -28,7 +28,7 @@ public class LineDataset extends DoubleDataset<LineDataset> {
     private Boolean fill;
     private Boolean fillToPlus;
     private Integer fillToDatasetIndex;
-    private Line.FillMode fillMode;
+    private FillMode fillMode;
     private CubicInterpolationMode cubicInterpolationMode;
     private Double lineTension;
     private String backgroundColor;
@@ -95,7 +95,7 @@ public class LineDataset extends DoubleDataset<LineDataset> {
     /**
      * Use the modes to fill different locations.
      */
-    public LineDataset fill(Line.FillMode fillMode) {
+    public LineDataset fill(FillMode fillMode) {
         this.fillMode = fillMode;
         return this;
     }

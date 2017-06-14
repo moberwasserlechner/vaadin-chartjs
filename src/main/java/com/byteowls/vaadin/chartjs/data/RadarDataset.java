@@ -1,6 +1,6 @@
 package com.byteowls.vaadin.chartjs.data;
 
-import com.byteowls.vaadin.chartjs.options.elements.Line;
+import com.byteowls.vaadin.chartjs.options.FillMode;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.Json;
 import elemental.json.JsonObject;
@@ -22,7 +22,7 @@ public class RadarDataset extends DoubleDataset<RadarDataset> {
     private Boolean fill;
     private Boolean fillToPlus;
     private Integer fillToDatasetIndex;
-    private Line.FillMode fillMode;
+    private FillMode fillMode;
     private Double lineTension;
     private String backgroundColor;
     private Integer borderWidth;
@@ -69,7 +69,7 @@ public class RadarDataset extends DoubleDataset<RadarDataset> {
     /**
      * Use the modes to fill different locations.
      */
-    public RadarDataset fill(Line.FillMode fillMode) {
+    public RadarDataset fill(FillMode fillMode) {
         this.fillMode = fillMode;
         return this;
     }

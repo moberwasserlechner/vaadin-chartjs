@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+import com.byteowls.vaadin.chartjs.options.FillMode;
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
@@ -26,10 +27,6 @@ public class Line<T> extends And<Element<T>> implements JsonBuilder, Serializabl
 
     public enum JoinStyle {
         BEVEL, ROUND, MITER
-    }
-
-    public enum FillMode {
-        ORIGIN, START, END
     }
 
     private Double tension;
