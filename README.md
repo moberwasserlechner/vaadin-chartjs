@@ -4,6 +4,12 @@ Vaadin 8 wrapper for the Chart.js charting library. https://github.com/chartjs/C
 
 Follow me on [![Twitter Follow](https://img.shields.io/twitter/follow/michaelowl_web.svg?style=social&label=Twitter&style=flat-square)](https://twitter.com/michaelowl_web) to be notified about new releases.
 
+## Sponsorship
+
+Thanks to these [people and organisations](SPONSORS.md) I'm able to keep developing this project. If you appreciate what I do, please consider becoming my [patron](https://patreon.com/moberwasserlechner). Thanks.
+
+_Placeholder for a head sponsor (name and logo)_
+
 ## Features
 
 * Fluent api to configure the charts
