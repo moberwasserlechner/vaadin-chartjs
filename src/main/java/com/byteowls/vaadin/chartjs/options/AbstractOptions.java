@@ -27,6 +27,8 @@ public abstract class AbstractOptions<T> implements JsonBuilder, Serializable {
     private Animation<T> animation;
     private Legend<T> legend;
     private Element<T> elements;
+    private Pan<T> pan;
+    private Zoom<T> zoom;
 
     public AbstractOptions(ChartConfig chartConfig) {
         this.chartConfig = chartConfig;
@@ -113,7 +115,7 @@ public abstract class AbstractOptions<T> implements JsonBuilder, Serializable {
         }
         return legend;
     }
-    
+
     /**
      * Step into the charts elements configuration
      */
@@ -122,6 +124,27 @@ public abstract class AbstractOptions<T> implements JsonBuilder, Serializable {
             elements = new Element<>(getThis());
         }
         return elements;
+    }
+
+
+    /**
+     * Step into the pan configuration.
+     */
+    public Pan<T> pan() {
+        if (pan == null) {
+            pan = new Pan<>(getThis());
+        }
+        return pan;
+    }
+
+    /**
+     * Step into the zoom configuration
+     */
+    public Zoom<T> zoom() {
+        if (zoom == null) {
+            zoom = new Zoom<>(getThis());
+        }
+        return zoom;
     }
 
     public abstract T getThis();
@@ -139,6 +162,8 @@ public abstract class AbstractOptions<T> implements JsonBuilder, Serializable {
         JUtils.putNotNull(map, "animation", animation);
         JUtils.putNotNull(map, "legend", legend);
         JUtils.putNotNull(map, "elements", elements);
+        JUtils.putNotNull(map, "pan", pan);
+        JUtils.putNotNull(map, "zoom", zoom);
         return map;
     }
 

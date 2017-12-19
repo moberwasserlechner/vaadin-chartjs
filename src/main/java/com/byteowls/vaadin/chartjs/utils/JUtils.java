@@ -55,7 +55,7 @@ public abstract class JUtils {
             obj.put(key, value);
         }
     }
-    
+
     public static void putNotNull(JsonObject obj, String key, Integer value) {
         if (value != null) {
             obj.put(key, value.doubleValue());
@@ -77,7 +77,7 @@ public abstract class JUtils {
             obj.put(key, arr);
         }
     }
-    
+
     public static void putNotNullList(JsonObject obj, String key, List<String> list) {
         if (list != null) {
             JsonArray arr = Json.createArray();
@@ -101,7 +101,7 @@ public abstract class JUtils {
             obj.put(key, arr);
         }
     }
-    
+
     public static void putNotNullIntList(JsonObject obj, String key, List<Integer> listOfNumbers) {
         if (listOfNumbers != null) {
             JsonArray arr = Json.createArray();
@@ -111,7 +111,7 @@ public abstract class JUtils {
             obj.put(key, arr);
         }
     }
-    
+
     public static void putNotNullStringListOrSingle(JsonObject obj, String key, List<String> list) {
         if (list != null) {
             if (list.size() == 1) {
@@ -139,7 +139,7 @@ public abstract class JUtils {
             }
         }
     }
-    
+
     public static void putNotNullIntListOrSingle(JsonObject obj, String key, List<Integer> listOfNumbers) {
         if (listOfNumbers != null) {
             if (listOfNumbers.size() == 1) {

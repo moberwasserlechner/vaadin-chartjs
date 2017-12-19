@@ -9,7 +9,7 @@ import elemental.json.JsonArray;
 import java.util.ArrayList;
 import java.util.List;
 
-@JavaScript({"vaadin://chartjs/Chart.min.js", "vaadin://chartjs/chartjs-connector.js"})
+@JavaScript({"vaadin://chartjs/Chart.min.js", "vaadin://chartjs/hammer.min.js", "vaadin://chartjs/chartjs-plugin-zoom.min.js", "vaadin://chartjs/chartjs-connector.js"})
 public class ChartJs extends AbstractJavaScriptComponent {
 
     private static final long serialVersionUID = 2999562112373836140L;
@@ -91,14 +91,14 @@ public class ChartJs extends AbstractJavaScriptComponent {
 
     /**
      * Enable or disables the connector's logging to "console.log"
-     * @param jsLoggingEnabled If true the connector script will log defined messages to "console.log". Defaults to false. 
+     * @param jsLoggingEnabled If true the connector script will log defined messages to "console.log". Defaults to false.
      */
     public void setJsLoggingEnabled(boolean jsLoggingEnabled) {
         getState().loggingEnabled = jsLoggingEnabled;
     }
 
     /**
-     * Adds a listener handling clicks on charts data points. 
+     * Adds a listener handling clicks on charts data points.
      * @param listener the click listener.
      */
     public void addClickListener(ChartJs.DataPointClickListener listener) {
