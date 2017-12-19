@@ -1,13 +1,13 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
 import elemental.json.JsonObject;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author michael@byteowls.com
@@ -25,6 +25,8 @@ public class GridLines<T> extends And<T> implements JsonBuilder {
     private Integer tickMarkLength;
     private Integer zeroLineWidth;
     private String zeroLineColor;
+    private List<Integer> zeroLineBorderDash;
+    private Double zeroLineBorderDashOffset;
     private Boolean offsetGridLines;
     private Boolean circular;
 
@@ -103,6 +105,22 @@ public class GridLines<T> extends And<T> implements JsonBuilder {
     }
 
     /**
+     * Length and spacing of dashes of the grid line for the first index (index 0). See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash)
+     */
+    public  GridLines<T> zeroLineBorderDash(Integer... zeroLineBorderDash) {
+        this.zeroLineBorderDash = Arrays.asList(zeroLineBorderDash);
+        return this;
+    }
+
+    /**
+     * Offset for line dashes of the grid line for the first index (index 0). See [MDN](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)
+     */
+    public GridLines<T> zeroLineBorderDashOffset(double zeroLineBorderDashOffset) {
+        this.zeroLineBorderDashOffset = zeroLineBorderDashOffset;
+        return this;
+    }
+
+    /**
      * If true, offset labels from grid lines.
      */
     public GridLines<T> offsetGridLines(boolean offsetGridLines) {
@@ -130,6 +148,8 @@ public class GridLines<T> extends And<T> implements JsonBuilder {
         JUtils.putNotNull(map, "tickMarkLength", tickMarkLength);
         JUtils.putNotNull(map, "zeroLineWidth", zeroLineWidth);
         JUtils.putNotNull(map, "zeroLineColor", zeroLineColor);
+        JUtils.putNotNullIntListOrSingle(map, "zeroLineBorderDash", zeroLineBorderDash);
+        JUtils.putNotNull(map, "zeroLineBorderDashOffset", zeroLineBorderDashOffset);
         JUtils.putNotNull(map, "offsetGridLines", offsetGridLines);
         JUtils.putNotNull(map, "circular", circular);
         return map;
