@@ -15,44 +15,6 @@ import java.io.Serializable;
  */
 public class Pan<T> extends And<T> implements JsonBuilder, Serializable {
 
-//    /**
-//     * Embedded class to make future changes easier
-//     * @param <R>
-//     */
-//    public class Range<R> extends And<Pan<R>> implements JsonBuilder, Serializable {
-//
-//        private Double x;
-//        private Double y;
-//
-//        public Range(Pan<R> parent) {
-//            super(parent);
-//        }
-//
-//        /**
-//         * X Value
-//         */
-//        public Range x(double x) {
-//            this.x = x;
-//            return this;
-//        }
-//
-//        /**
-//         * Y Value
-//         */
-//        public Range y(double y) {
-//            this.y = y;
-//            return this;
-//        }
-//
-//        @Override
-//        public JsonObject buildJson() {
-//            JsonObject obj = Json.createObject();
-//            JUtils.putNotNull(obj, "x", x);
-//            JUtils.putNotNull(obj, "y", y);
-//            return obj;
-//        }
-//    }
-
     private boolean enabled = true;
     private Double speed;
     private Double threshold;
@@ -83,11 +45,18 @@ public class Pan<T> extends And<T> implements JsonBuilder, Serializable {
         return this;
     }
 
+    /**
+     * Axes on which pan is enabled.
+     */
     public Pan<T> mode(XYMode mode) {
         this.mode = mode;
         return this;
     }
 
+    /**
+     * Minimum range limits for pan.
+     * Range currently supports Double and String values. Usage depends on the datatypes in your scales.
+     */
     public PanRange<T> rangeMin() {
         if (rangeMin == null) {
             rangeMin = new PanRange<>(this);
@@ -95,6 +64,10 @@ public class Pan<T> extends And<T> implements JsonBuilder, Serializable {
         return rangeMin;
     }
 
+    /**
+     * Maximum range limits for pan.
+     * Range currently supports Double and String values. Usage depends on the datatypes in your scales.
+     */
     public PanRange<T> rangeMax() {
         if (rangeMax == null) {
             rangeMax = new PanRange<>(this);
