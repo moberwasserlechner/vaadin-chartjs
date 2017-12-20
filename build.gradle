@@ -43,9 +43,9 @@ jar {
     createAddonPom
     baseName = project.artifactId
     // Include sources
-    sourceSets.main.java.srcDirs.each {
-        from it
-    }
+//    sourceSets.main.java.srcDirs.each {
+//        from it
+//    }
 
     manifest {
         // the manifest of the default jar is of type OsgiManifest
@@ -53,11 +53,35 @@ jar {
         attributes "Vaadin-Package-Version": "1"
         attributes "Implementation-Title": "Chart.js Add-on"
         attributes "Implementation-Version": project.version
+        attributes "Implementation-Vendor": 'Michael Oberwasserlechner'
         instruction 'Import-Package', '!com.google.gwt.*', '!com.vaadin.client.*', '*'
         instruction 'Bundle-Vendor', 'Michael Oberwasserlechner'
         instruction 'Bundle-Description', 'Chart.js Add-on'
         instruction 'Bundle-DocURL', 'https://github.com/moberwasserlechner/vaadin-chartjs'
     }
+}
+
+
+task vaadinDirectory(type: Zip) {
+
+    dependsOn 'jar'
+    dependsOn 'sourcesJar'
+    dependsOn 'javadocJar'
+    // create manifest
+    mkdir 'build/libs/META-INF'
+    new File("build/libs/META-INF/MANIFEST.MF").text =
+"""Manifest-Version: 1.0
+Vaadin-Package-Version: 1
+Vaadin-Addon: """+project.artifactId+"""-"""+project.version+""".jar
+Vaadin-License-Title: MIT
+Implementation-Vendor: Michael Oberwasserlechner
+Implementation-Title: Chart.js Add-on
+Implementation-Version: """+project.version+"""
+"""
+    from 'build/libs'
+    include '*.jar'
+    include '*/*'
+    destinationDir(file('build/libs/'))
 }
 
 // custom tasks for creating source/javadoc jars
