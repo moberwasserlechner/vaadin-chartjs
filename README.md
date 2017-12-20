@@ -25,6 +25,7 @@ If you want to buy me a beer :), here is my [paypal link](https://www.paypal.me/
   * Bubble chart
   * Radar chart
   * Scatter line chart
+* Zoom/Pan support
 * Data point click listener
 
 ## Demo
