@@ -73,13 +73,22 @@ public class ChartJs extends AbstractJavaScriptComponent {
     }
 
     /**
-     * Update the chart data. Before calling this method, new data must be supplied.
+     * Update the chart. Before calling this method, options must be changed and new data must be supplied.
      */
-    public void refreshData() {
+    public void update() {
         if (chartConfig != null) {
             getState().configurationJson = chartConfig.buildJson();
         }
-        callFunction("updateData");
+    }
+
+    /**
+     * Update the chart. Before calling this method, options must be changed and new data must be supplied.
+     *
+     * @deprecated because this method updates not only data but also chart options. Use update() instead.
+     */
+    @Deprecated
+    public void refreshData() {
+        update();
     }
 
     /**
