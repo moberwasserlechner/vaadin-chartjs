@@ -25,7 +25,7 @@ public class TimeScaleTests {
         TimeScale scale = new TimeScale()
         	.position(Position.TOP)
         	.time()
-        	.displayFormat()
+        	.displayFormats()
         		.hour("'DD.MM hh:mm'")
         		.day("MMM DD")
         		.and()

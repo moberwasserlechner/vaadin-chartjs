@@ -24,7 +24,7 @@ public class TimeScaleOptions extends And<TimeScale> implements JsonBuilder {
     }
     
     private String format;
-    private TimeDisplayFormat displayFormat;
+    private TimeDisplayFormats displayFormats;
     private Boolean isoWeekday;
     private Date max;
     private Date min;
@@ -50,9 +50,9 @@ public class TimeScaleOptions extends And<TimeScale> implements JsonBuilder {
     /**
      * The following display formats are used to configure how different time units are formed into strings for the axis tick marks. 
      */
-    public TimeDisplayFormat displayFormat() {
-        this.displayFormat = new TimeDisplayFormat(this);
-        return this.displayFormat;
+    public TimeDisplayFormats displayFormats() {
+        this.displayFormats = new TimeDisplayFormats(this);
+        return this.displayFormats;
     }
      
     
@@ -126,7 +126,7 @@ public class TimeScaleOptions extends And<TimeScale> implements JsonBuilder {
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "format", format);
-        JUtils.putNotNull(map, "displayFormat", displayFormat);
+        JUtils.putNotNull(map, "displayFormats", displayFormats);
         JUtils.putNotNull(map, "isoWeekday", isoWeekday);
         if (min != null) {
             

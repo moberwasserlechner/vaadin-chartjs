@@ -12,7 +12,7 @@ import elemental.json.JsonObject;
  * The following display formats are used to configure how different time units are formed into strings for the axis tick marks.
  *  
  */
-public class TimeDisplayFormat extends And<TimeScaleOptions> implements JsonBuilder {
+public class TimeDisplayFormats extends And<TimeScaleOptions> implements JsonBuilder {
     
     private String millisecond;
     private String second;
@@ -24,14 +24,14 @@ public class TimeDisplayFormat extends And<TimeScaleOptions> implements JsonBuil
     private String quarter; 
     private String year;
 
-    public TimeDisplayFormat(TimeScaleOptions parent) {
+    public TimeDisplayFormats(TimeScaleOptions parent) {
         super(parent);
     }
     
     /**
      * Defaults to 'SSS [ms]'
      */
-    public TimeDisplayFormat millisecond(String millisecond) {
+    public TimeDisplayFormats millisecond(String millisecond) {
         this.millisecond = millisecond;
         return this;
     }
@@ -39,7 +39,7 @@ public class TimeDisplayFormat extends And<TimeScaleOptions> implements JsonBuil
     /**
      * Defaults to 'h:mm:ss a'
      */
-    public TimeDisplayFormat second(String second) {
+    public TimeDisplayFormats second(String second) {
         this.second = second;
         return this;
     }
@@ -47,7 +47,7 @@ public class TimeDisplayFormat extends And<TimeScaleOptions> implements JsonBuil
     /**
      * Defaults to 'h:mm:ss a'
      */
-    public TimeDisplayFormat minute(String minute) {
+    public TimeDisplayFormats minute(String minute) {
         this.minute = minute;
         return this;
     }
@@ -55,7 +55,7 @@ public class TimeDisplayFormat extends And<TimeScaleOptions> implements JsonBuil
     /**
      * Defaults to 'MMM D, hA'
      */
-    public TimeDisplayFormat hour(String hour) {
+    public TimeDisplayFormats hour(String hour) {
         this.hour = hour;
         return this;
     }
@@ -63,7 +63,7 @@ public class TimeDisplayFormat extends And<TimeScaleOptions> implements JsonBuil
     /**
      * Defaults to 'll'
      */
-    public TimeDisplayFormat day(String day) {
+    public TimeDisplayFormats day(String day) {
         this.day = day;
         return this;
     }
@@ -71,7 +71,7 @@ public class TimeDisplayFormat extends And<TimeScaleOptions> implements JsonBuil
     /**
      * Defaults to 'll'
      */
-    public TimeDisplayFormat week(String week) {
+    public TimeDisplayFormats week(String week) {
         this.week = week;
         return this;
     }
@@ -79,7 +79,7 @@ public class TimeDisplayFormat extends And<TimeScaleOptions> implements JsonBuil
     /**
      * Defaults to 'MMM YYYY'
      */
-    public TimeDisplayFormat month(String month) {
+    public TimeDisplayFormats month(String month) {
         this.month = month;
         return this;
     }
@@ -87,7 +87,7 @@ public class TimeDisplayFormat extends And<TimeScaleOptions> implements JsonBuil
     /**
      * Defaults to '[Q]Q - YYYY'
      */
-    public TimeDisplayFormat quarter(String quarter) {
+    public TimeDisplayFormats quarter(String quarter) {
         this.quarter = quarter;
         return this;
     }
@@ -95,7 +95,7 @@ public class TimeDisplayFormat extends And<TimeScaleOptions> implements JsonBuil
     /**
      * Defaults to 'YYYY'
      */
-    public TimeDisplayFormat year(String year) {
+    public TimeDisplayFormats year(String year) {
         this.year = year;
         return this;
     }
