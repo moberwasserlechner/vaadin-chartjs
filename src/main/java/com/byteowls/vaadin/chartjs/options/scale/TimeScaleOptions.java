@@ -1,7 +1,6 @@
 package com.byteowls.vaadin.chartjs.options.scale;
 
-import java.util.Date;
-
+import java.time.LocalDateTime;
 import com.byteowls.vaadin.chartjs.utils.And;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
@@ -11,7 +10,9 @@ import elemental.json.JsonObject;
 
 public class TimeScaleOptions extends And<TimeScale> implements JsonBuilder {
     
-    public enum Unit {
+	private static final long serialVersionUID = -9154944512274347096L;
+
+	public enum Unit {
         MILLISECOND,
         SECOND,
         MINUTE,
@@ -26,12 +27,12 @@ public class TimeScaleOptions extends And<TimeScale> implements JsonBuilder {
     private String format;
     private TimeDisplayFormats displayFormats;
     private Boolean isoWeekday;
-    private Date max;
-    private Date min;
+    private LocalDateTime max;
+    private LocalDateTime min;
     private Unit round;
     private String tooltipFormat;
     private Unit unit;
-    private Integer unitStepSize;
+    private Integer stepSize;
     private Unit minUnit;
 
     public TimeScaleOptions(TimeScale parent) {
@@ -67,7 +68,7 @@ public class TimeScaleOptions extends And<TimeScale> implements JsonBuilder {
     /**
      * If defined, this will override the data minimum
      */
-    public TimeScaleOptions min(Date min) {
+    public TimeScaleOptions min(LocalDateTime min) {
         this.min = min;
         return this;
     }
@@ -75,7 +76,7 @@ public class TimeScaleOptions extends And<TimeScale> implements JsonBuilder {
     /**
      * If defined, this will override the data maximum
      */
-    public TimeScaleOptions max(Date max) {
+    public TimeScaleOptions max(LocalDateTime max) {
         this.max = max;
         return this;
     }
@@ -109,8 +110,8 @@ public class TimeScaleOptions extends And<TimeScale> implements JsonBuilder {
     /**
      * The number of units between grid lines.
      */
-    public TimeScaleOptions unitStepSize(int unitStepSize) {
-        this.unitStepSize = unitStepSize;
+    public TimeScaleOptions stepSize(int stepSize) {
+        this.stepSize = stepSize;
         return this;
     }
     
@@ -122,30 +123,25 @@ public class TimeScaleOptions extends And<TimeScale> implements JsonBuilder {
         return this;
     }
 
+    private static void putNotNullUnit(JsonObject obj, String key, Unit value) {
+        if (value != null) {
+            JUtils.putNotNull(obj, key, value.toString().toLowerCase());    
+        }
+    }
+    
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "format", format);
         JUtils.putNotNull(map, "displayFormats", displayFormats);
         JUtils.putNotNull(map, "isoWeekday", isoWeekday);
-        if (min != null) {
-            
-//            JUtils.putNotNull(map, "min", min);
-        }
-        if (max != null) {
-//            JUtils.putNotNull(map, "max", max);
-        }
-        if (this.round != null) {
-            JUtils.putNotNull(map, "round", round.toString().toLowerCase());    
-        }
+        JUtils.putNotNull(map, "min", min);
+        JUtils.putNotNull(map, "max", max);
+        putNotNullUnit(map, "round", round);    
         JUtils.putNotNull(map, "tooltipFormat", tooltipFormat);
-        if (this.unit != null) {
-            JUtils.putNotNull(map, "unit", unit.toString().toLowerCase());    
-        }
-        JUtils.putNotNull(map, "unitStepSize", unitStepSize);
-        if (this.minUnit != null) {
-            JUtils.putNotNull(map, "minUnit", minUnit.toString().toLowerCase());    
-        }
+        putNotNullUnit(map, "unit", unit);    
+        JUtils.putNotNull(map, "stepSize", stepSize);
+        putNotNullUnit(map, "minUnit", minUnit);    
         return map;
     }
     

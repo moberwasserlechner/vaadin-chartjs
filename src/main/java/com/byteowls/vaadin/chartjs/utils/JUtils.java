@@ -6,6 +6,7 @@ import elemental.json.JsonObject;
 import elemental.json.JsonValue;
 import elemental.json.impl.JreJsonNull;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +60,12 @@ public abstract class JUtils {
     public static void putNotNull(JsonObject obj, String key, Integer value) {
         if (value != null) {
             obj.put(key, value.doubleValue());
+        }
+    }
+
+    public static void putNotNull(JsonObject obj, String key, LocalDateTime value) {
+        if (value != null) {
+            obj.put(key, value.toString());
         }
     }
 
