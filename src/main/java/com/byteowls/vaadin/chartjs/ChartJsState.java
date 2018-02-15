@@ -9,6 +9,7 @@ public class ChartJsState extends JavaScriptComponentState {
     
     public boolean loggingEnabled;
     public boolean dataPointClickListenerFound;
+    public boolean legendClickListenerFound;
     public JsonValue configurationJson;
 
 }
