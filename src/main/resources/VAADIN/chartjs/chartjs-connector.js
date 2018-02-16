@@ -73,12 +73,13 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 					console.log("chartjs: add legend click callback");
 				}
 				chartjs.options.legend.onClick = function (t,e) {
-					var dataset=this.chart.getDatasetMeta(e.datasetIndex);
+					var datasets = this.chart.data.datasets;
+					var dataset = datasets[e.datasetIndex];
 					dataset.hidden= !dataset.hidden;
 					this.chart.update();
 					var ret = []
-					for (var i = 0; i < this.chart.data.datasets.length ; i++ ) { 
-						if (!this.chart.getDatasetMeta(i).hidden) {
+					for (var i = 0; i < datasets.length ; i++ ) { 
+						if (!datasets[i].hidden) {
 						   ret.push(i);
 						}
 					}
