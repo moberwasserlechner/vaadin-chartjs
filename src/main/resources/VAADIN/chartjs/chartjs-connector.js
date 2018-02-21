@@ -72,7 +72,7 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 				if (loggingEnabled) {
 					console.log("chartjs: add legend click callback");
 				}
-				chartjs.options.legend.onClick = function (t,e) {
+				chartjs.legend.options.onClick = chartjs.options.legend.onClick = function (t,e) {
 					var datasets = this.chart.data.datasets;
 					var dataset = datasets[e.datasetIndex];
 					dataset.hidden= !dataset.hidden;
