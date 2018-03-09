@@ -9,10 +9,9 @@ import elemental.json.JsonObject;
 
 import java.io.Serializable;
 
-/**
- *
- */
 public class PanRange<T> extends And<Pan<T>> implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = -1684615390757864843L;
 
     private Object x;
     private Object y;
