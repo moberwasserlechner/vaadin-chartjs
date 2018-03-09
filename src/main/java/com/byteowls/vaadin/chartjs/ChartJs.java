@@ -9,7 +9,8 @@ import elemental.json.JsonArray;
 import java.util.ArrayList;
 import java.util.List;
 
-@JavaScript({"vaadin://chartjs/Chart.min.js", "vaadin://chartjs/hammer.min.js", "vaadin://chartjs/chartjs-plugin-zoom.min.js", "vaadin://chartjs/chartjs-plugin-annotation.min.js", "vaadin://chartjs/chartjs-connector.js"})
+@JavaScript({"vaadin://chartjs/Chart.min.js", "vaadin://chartjs/hammer.min.js", "vaadin://chartjs/chartjs-plugin-zoom.min.js",
+    "vaadin://chartjs/chartjs-plugin-annotation.min.js", "vaadin://chartjs/chartjs-connector.js"})
 public class ChartJs extends AbstractJavaScriptComponent {
 
     private static final long serialVersionUID = 2999562112373836140L;
@@ -21,7 +22,7 @@ public class ChartJs extends AbstractJavaScriptComponent {
     public interface DataPointClickListener {
         void onDataPointClick(int datasetIndex, int dataIndex);
     }
-    
+
     public interface LegendClickListener {
         void onLegendClick(int who, boolean isVisible, int[] visibles);
     }
@@ -173,16 +174,16 @@ public class ChartJs extends AbstractJavaScriptComponent {
 			public void call(JsonArray arguments) {
                 int datasetIndex = (int) arguments.getNumber(0);
                 boolean visible = arguments.getBoolean(1);
-                JsonArray visblesJson = arguments.getArray(2); 
+                JsonArray visblesJson = arguments.getArray(2);
                 int[] visibles = new int[visblesJson.length()];
-                for (int i = 0 ; i < visblesJson.length(); i++) 
+                for (int i = 0 ; i < visblesJson.length(); i++)
                 	visibles[i] = (int)visblesJson.getNumber(i);
 
                 for (LegendClickListener l : legendClickListeners) {
                     l.onLegendClick(datasetIndex, visible, visibles);
-                }				
+                }
 			}
-        	
+
         });
 
 //        addFunction("sendImageDataUrl",  new JavaScriptFunction() {

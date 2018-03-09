@@ -29,7 +29,6 @@ public abstract class AbstractOptions<T> implements JsonBuilder, Serializable {
     private Element<T> elements;
     private Pan<T> pan;
     private Zoom<T> zoom;
-    private Annotation<T> annotation;
 
     public AbstractOptions(ChartConfig chartConfig) {
         this.chartConfig = chartConfig;
@@ -148,16 +147,6 @@ public abstract class AbstractOptions<T> implements JsonBuilder, Serializable {
         return zoom;
     }
 
-    /**
-     * Step into the annotation configuration
-     */
-    public Annotation<T> annotation() {
-        if (annotation == null) {
-            annotation = new Annotation<>(getThis());
-        }
-        return annotation;
-    }
-    
     public abstract T getThis();
 
     @Override
@@ -175,7 +164,6 @@ public abstract class AbstractOptions<T> implements JsonBuilder, Serializable {
         JUtils.putNotNull(map, "elements", elements);
         JUtils.putNotNull(map, "pan", pan);
         JUtils.putNotNull(map, "zoom", zoom);
-        JUtils.putNotNull(map, "annotation", annotation);
         return map;
     }
 
