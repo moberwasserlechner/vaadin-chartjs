@@ -87,14 +87,14 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 				}
 			}
 		} else {
-			// TODO update config
+			// update the data
+			chartjs.config.data = this.getState().configurationJson.data;
+			// update config: options must be copied separately, just copying the "options" object does not work
+			chartjs.config.options.legend = this.getState().configurationJson.options.legend;
+			chartjs.config.options.annotation = this.getState().configurationJson.options.annotation;
+			chartjs.update();
 		}
 
-	};
-
-	this.updateData = function() {
-		chartjs.config.data = this.getState().configurationJson.data;
-		chartjs.update();
 	};
 
 	this.getImageDataUrl = function(type, quality) {

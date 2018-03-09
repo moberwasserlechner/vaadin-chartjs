@@ -9,7 +9,7 @@ import elemental.json.JsonArray;
 import java.util.ArrayList;
 import java.util.List;
 
-@JavaScript({"vaadin://chartjs/Chart.min.js", "vaadin://chartjs/hammer.min.js", "vaadin://chartjs/chartjs-plugin-zoom.min.js", "vaadin://chartjs/chartjs-connector.js"})
+@JavaScript({"vaadin://chartjs/Chart.min.js", "vaadin://chartjs/hammer.min.js", "vaadin://chartjs/chartjs-plugin-zoom.min.js", "vaadin://chartjs/chartjs-plugin-annotation.min.js", "vaadin://chartjs/chartjs-connector.js"})
 public class ChartJs extends AbstractJavaScriptComponent {
 
     private static final long serialVersionUID = 2999562112373836140L;
@@ -78,13 +78,22 @@ public class ChartJs extends AbstractJavaScriptComponent {
     }
 
     /**
-     * Update the chart data. Before calling this method, new data must be supplied.
+     * Update the chart. Before calling this method, options must be changed and new data must be supplied.
      */
-    public void refreshData() {
+    public void update() {
         if (chartConfig != null) {
             getState().configurationJson = chartConfig.buildJson();
         }
-        callFunction("updateData");
+    }
+
+    /**
+     * Update the chart. Before calling this method, options must be changed and new data must be supplied.
+     *
+     * @deprecated because this method updates not only data but also chart options. Use update() instead.
+     */
+    @Deprecated
+    public void refreshData() {
+        update();
     }
 
     /**
