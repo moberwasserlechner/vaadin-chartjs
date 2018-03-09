@@ -68,6 +68,24 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
 					}
 				};
 			}
+			if (state.legendClickListenerFound) {
+				if (loggingEnabled) {
+					console.log("chartjs: add legend click callback");
+				}
+				chartjs.legend.options.onClick = chartjs.options.legend.onClick = function (t,e) {
+					var datasets = this.chart.data.datasets;
+					var dataset = datasets[e.datasetIndex];
+					dataset.hidden= !dataset.hidden;
+					this.chart.update();
+					var ret = []
+					for (var i = 0; i < datasets.length ; i++ ) { 
+						if (!datasets[i].hidden) {
+						   ret.push(i);
+						}
+					}
+					self.onLegendClick(e.datasetIndex,!dataset.hidden, ret);
+				}
+			}
 		} else {
 			// TODO update config
 		}
