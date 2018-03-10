@@ -22,6 +22,8 @@ public class LineAnnotation<T> extends AbstractAnnotation<LineAnnotation<T>, T> 
     private Boolean vertical;
     private String scaleID;
     private Object value;
+//    private Double doubleValue;
+//    private String stringValue;
     private Object endValue;
     private String borderColor;
     private Integer borderWidth;
@@ -71,9 +73,17 @@ public class LineAnnotation<T> extends AbstractAnnotation<LineAnnotation<T>, T> 
 
 
     /**
-     * Data value to draw the line at
+     * Double data value to draw the line at
      */
-    public LineAnnotation<T> value(Object value) {
+    public LineAnnotation<T> value(Double value) {
+        this.value = value;
+        return this;
+    }
+
+    /**
+     * String data value to draw the line at
+     */
+    public LineAnnotation<T> value(String value) {
         this.value = value;
         return this;
     }
@@ -81,7 +91,15 @@ public class LineAnnotation<T> extends AbstractAnnotation<LineAnnotation<T>, T> 
     /**
      * Optional value at which the line draw should end
      */
-    public LineAnnotation<T> endValue(Object endValue) {
+    public LineAnnotation<T> endValue(Double endValue) {
+        this.endValue = endValue;
+        return this;
+    }
+
+    /**
+     * Optional value at which the line draw should end
+     */
+    public LineAnnotation<T> endValue(String endValue) {
         this.endValue = endValue;
         return this;
     }
@@ -144,6 +162,8 @@ public class LineAnnotation<T> extends AbstractAnnotation<LineAnnotation<T>, T> 
         }
         JUtils.putNotNull(map, "scaleID", scaleID);
         JUtils.putNotNullObj(map, "value", value);
+//        JUtils.putNotNull(map, "value", stringValue);
+//        JUtils.putNotNull(map, "value", doubleValue);
         JUtils.putNotNullObj(map, "endValue", endValue);
         JUtils.putNotNull(map, "borderColor", borderColor);
         JUtils.putNotNull(map, "borderWidth", borderWidth);

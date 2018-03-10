@@ -59,7 +59,15 @@ public class BoxAnnotation<T> extends AbstractAnnotation<BoxAnnotation<T>, T> im
     /**
      * Left edge of the box. in units along the x axis
      */
-    public BoxAnnotation<T> xMin(Object xMin) {
+    public BoxAnnotation<T> xMin(Double xMin) {
+        this.xMin = xMin;
+        return this;
+    }
+
+    /**
+     * Left edge of the box. in units along the x axis
+     */
+    public BoxAnnotation<T> xMin(String xMin) {
         this.xMin = xMin;
         return this;
     }
@@ -67,7 +75,15 @@ public class BoxAnnotation<T> extends AbstractAnnotation<BoxAnnotation<T>, T> im
     /**
      *  Right edge of the box
      */
-    public BoxAnnotation<T> xMax(Object xMax) {
+    public BoxAnnotation<T> xMax(Double xMax) {
+        this.xMax = xMax;
+        return this;
+    }
+
+    /**
+     *  Right edge of the box
+     */
+    public BoxAnnotation<T> xMax(String xMax) {
         this.xMax = xMax;
         return this;
     }
@@ -75,7 +91,15 @@ public class BoxAnnotation<T> extends AbstractAnnotation<BoxAnnotation<T>, T> im
     /**
      * Top edge of the box in units along the y axis
      */
-    public BoxAnnotation<T> yMax(Object yMax) {
+    public BoxAnnotation<T> yMax(Double yMax) {
+        this.yMax = yMax;
+        return this;
+    }
+
+    /**
+     * Top edge of the box in units along the y axis
+     */
+    public BoxAnnotation<T> yMax(String yMax) {
         this.yMax = yMax;
         return this;
     }
@@ -83,7 +107,15 @@ public class BoxAnnotation<T> extends AbstractAnnotation<BoxAnnotation<T>, T> im
     /**
      * Bottom edge of the box
      */
-    public BoxAnnotation<T> yMin(Object yMin) {
+    public BoxAnnotation<T> yMin(Double yMin) {
+        this.yMin = yMin;
+        return this;
+    }
+
+    /**
+     * Bottom edge of the box
+     */
+    public BoxAnnotation<T> yMin(String yMin) {
         this.yMin = yMin;
         return this;
     }
