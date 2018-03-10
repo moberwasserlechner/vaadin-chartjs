@@ -88,6 +88,13 @@ public class ChartJs extends AbstractJavaScriptComponent {
     }
 
     /**
+     * Destroy the chart. This will call chartjs.destroy();
+     */
+    public void destroy() {
+        callFunction("destroyChart");
+    }
+
+    /**
      * Update the chart. Before calling this method, options must be changed and new data must be supplied.
      *
      * @deprecated because this method updates not only data but also chart options. Use update() instead.

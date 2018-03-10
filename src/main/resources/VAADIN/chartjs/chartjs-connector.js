@@ -108,11 +108,11 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
         // TODO create issue on chart.js to allow jpeg downloads
         // call on function registered by server side component
         self.sendImageDataUrl(chartjs.toBase64Image());
-    }
+    };
 
     this.destroyChart = function() {
-        if (this.chartjs) {
-            this.chartjs.destroy();
+        if (chartjs) {
+            chartjs.destroy();
         }
     }
 
