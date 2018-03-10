@@ -6,6 +6,9 @@ import elemental.json.JsonObject;
 
 import java.io.Serializable;
 
+/**
+ * Allows drawing a rectangle
+ */
 public class BoxAnnotation<T> extends AbstractAnnotation<BoxAnnotation<T>, T> implements Serializable {
 
     private static final long serialVersionUID = -2455507357025380823L;
@@ -41,6 +44,15 @@ public class BoxAnnotation<T> extends AbstractAnnotation<BoxAnnotation<T>, T> im
      */
     public BoxAnnotation<T> yScaleID(String yScaleID) {
         this.yScaleID = yScaleID;
+        return this;
+    }
+
+    /**
+     * Bind the annotation to x and y-axis-0 scale IDs
+     */
+    public BoxAnnotation<T> xyAxisScaleID() {
+        this.xScaleID = "x-axis-0";
+        this.yScaleID = "y-axis-0";
         return this;
     }
 
