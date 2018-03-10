@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Allows drawing a horizontal or vertical line
+ */
 public class LineAnnotation<T> extends AbstractAnnotation<LineAnnotation<T>, T> implements Serializable {
 
     private static final long serialVersionUID = -2455507357025380823L;
@@ -18,8 +21,8 @@ public class LineAnnotation<T> extends AbstractAnnotation<LineAnnotation<T>, T> 
 
     private Boolean vertical;
     private String scaleID;
-    private Double value;
-    private Double endValue;
+    private Object value;
+    private Object endValue;
     private String borderColor;
     private Integer borderWidth;
     private List<Integer> borderDash;
@@ -51,9 +54,26 @@ public class LineAnnotation<T> extends AbstractAnnotation<LineAnnotation<T>, T> 
     }
 
     /**
+     * Binds the annotation to the x-axis-0 scale
+     */
+    public LineAnnotation<T> xAxis0ScaleID() {
+        this.scaleID = "x-axis-0";
+        return this;
+    }
+
+    /**
+     * Binds the annotation to the y-axis-0 scale
+     */
+    public LineAnnotation<T> yAxis0ScaleID() {
+        this.scaleID = "y-axis-0";
+        return this;
+    }
+
+
+    /**
      * Data value to draw the line at
      */
-    public LineAnnotation<T> value(double value) {
+    public LineAnnotation<T> value(Object value) {
         this.value = value;
         return this;
     }
@@ -61,7 +81,7 @@ public class LineAnnotation<T> extends AbstractAnnotation<LineAnnotation<T>, T> 
     /**
      * Optional value at which the line draw should end
      */
-    public LineAnnotation<T> endValue(double endValue) {
+    public LineAnnotation<T> endValue(Object endValue) {
         this.endValue = endValue;
         return this;
     }
@@ -123,8 +143,8 @@ public class LineAnnotation<T> extends AbstractAnnotation<LineAnnotation<T>, T> 
             JUtils.putNotNull(map, "mode", this.vertical ? "vertical" : "horizontal");
         }
         JUtils.putNotNull(map, "scaleID", scaleID);
-        JUtils.putNotNull(map, "value", value);
-        JUtils.putNotNull(map, "endValue", endValue);
+        JUtils.putNotNullObj(map, "value", value);
+        JUtils.putNotNullObj(map, "endValue", endValue);
         JUtils.putNotNull(map, "borderColor", borderColor);
         JUtils.putNotNull(map, "borderWidth", borderWidth);
         JUtils.putNotNullIntList(map, "borderDash", borderDash);
