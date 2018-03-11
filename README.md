@@ -26,6 +26,7 @@ If you want to buy me a beer :), here is my [paypal link](https://www.paypal.me/
   * Radar chart
   * Scatter line chart
 * Zoom/Pan support
+* Line and box annotations
 * Data point click listener
 
 ## Demo
