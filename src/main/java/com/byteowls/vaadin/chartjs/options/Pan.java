@@ -15,6 +15,8 @@ import java.io.Serializable;
  */
 public class Pan<T> extends And<T> implements JsonBuilder, Serializable {
 
+    private static final long serialVersionUID = 809245656623461157L;
+
     private boolean enabled = true;
     private Double speed;
     private Double threshold;
