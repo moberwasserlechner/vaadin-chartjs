@@ -5,14 +5,12 @@ import com.byteowls.vaadin.chartjs.options.scale.Scales;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.JsonObject;
 
-/**
- * @author michael@byteowls.com
- */
 public abstract class AbstractScalableOptions<T extends AbstractScalableOptions<?>> extends AbstractOptions<T> {
 
     private static final long serialVersionUID = -585276899801295042L;
 
     private Scales<T> scales;
+    private AnnotationOptions<T> annotation;
 
     public AbstractScalableOptions(ChartConfig chartConfig) {
         super(chartConfig);
@@ -28,10 +26,22 @@ public abstract class AbstractScalableOptions<T extends AbstractScalableOptions<
         return scales;
     }
 
+    /**
+     * Step into the annotation configuration
+     */
+    public AnnotationOptions<T> annotation() {
+        if (annotation == null) {
+            annotation = new AnnotationOptions<>(getThis());
+        }
+        return annotation;
+    }
+
+
     @Override
     public JsonObject buildJson() {
         JsonObject map = super.buildJson();
         JUtils.putNotNull(map, "scales", scales);
+        JUtils.putNotNull(map, "annotation", annotation);
         return map;
     }
 

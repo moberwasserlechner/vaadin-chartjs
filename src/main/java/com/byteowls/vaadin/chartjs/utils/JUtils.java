@@ -56,6 +56,22 @@ public abstract class JUtils {
         }
     }
 
+    public static void putNotNullObj(JsonObject obj, String key, Object value) {
+        if (value != null) {
+            if (value instanceof String) {
+                obj.put(key, (String) value);
+            } else if (value instanceof Double) {
+                obj.put(key, (Double) value);
+            } else if (value instanceof Boolean) {
+                obj.put(key, (Boolean) value);
+            } else if (value instanceof JsonValue) {
+                obj.put(key, (JsonValue) value);
+            } else if (value instanceof Integer) {
+                obj.put(key, (Integer) value);
+            }
+        }
+    }
+
     public static void putNotNull(JsonObject obj, String key, Integer value) {
         if (value != null) {
             obj.put(key, value.doubleValue());

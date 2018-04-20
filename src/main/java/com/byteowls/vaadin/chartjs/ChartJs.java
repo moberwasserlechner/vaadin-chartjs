@@ -9,7 +9,8 @@ import elemental.json.JsonArray;
 import java.util.ArrayList;
 import java.util.List;
 
-@JavaScript({"vaadin://chartjs/Moment.js", "vaadin://chartjs/Chart.min.js", "vaadin://chartjs/hammer.min.js", "vaadin://chartjs/chartjs-plugin-zoom.min.js", "vaadin://chartjs/chartjs-connector.js"})
+@JavaScript({"vaadin://chartjs/Moment.js", "vaadin://chartjs/Chart.min.js", "vaadin://chartjs/hammer.min.js", "vaadin://chartjs/chartjs-plugin-zoom.min.js",
+    "vaadin://chartjs/chartjs-plugin-annotation.min.js", "vaadin://chartjs/chartjs-connector.js"})
 public class ChartJs extends AbstractJavaScriptComponent {
 
     private static final long serialVersionUID = 2999562112373836140L;
@@ -22,11 +23,16 @@ public class ChartJs extends AbstractJavaScriptComponent {
         void onDataPointClick(int datasetIndex, int dataIndex);
     }
 
+    public interface LegendClickListener {
+        void onLegendClick(int who, boolean isVisible, int[] visibles);
+    }
+
 //    public interface DownloadListener {
 //        void onDownload(byte[] imageData);
 //    }
 
     private List<ChartJs.DataPointClickListener> dataPointClickListeners = new ArrayList<>();
+    private List<ChartJs.LegendClickListener> legendClickListeners = new ArrayList<>();
 //    private List<ChartJs.DownloadListener> downloadListeners = new ArrayList<>();
 
     private ChartConfig chartConfig;
@@ -73,13 +79,29 @@ public class ChartJs extends AbstractJavaScriptComponent {
     }
 
     /**
-     * Update the chart data. Before calling this method, new data must be supplied.
+     * Update the chart. Before calling this method, options must be changed and new data must be supplied.
      */
-    public void refreshData() {
+    public void update() {
         if (chartConfig != null) {
             getState().configurationJson = chartConfig.buildJson();
         }
-        callFunction("updateData");
+    }
+
+    /**
+     * Destroy the chart. This will call chartjs.destroy();
+     */
+    public void destroy() {
+        callFunction("destroyChart");
+    }
+
+    /**
+     * Update the chart. Before calling this method, options must be changed and new data must be supplied.
+     *
+     * @deprecated because this method updates not only data but also chart options. Use update() instead.
+     */
+    @Deprecated
+    public void refreshData() {
+        update();
     }
 
     /**
@@ -110,6 +132,15 @@ public class ChartJs extends AbstractJavaScriptComponent {
         dataPointClickListeners.remove(listener);
         checkListenerState();
     }
+    public void addLegendClickListener(ChartJs.LegendClickListener listener) {
+    	legendClickListeners.add(listener);
+        checkListenerState();
+    }
+
+    public void removeLegendClickListener(ChartJs.LegendClickListener listener) {
+    	legendClickListeners.remove(listener);
+        checkListenerState();
+    }
 
 //    /**
 //     * Adds a listener serving the downloaded image.
@@ -125,6 +156,7 @@ public class ChartJs extends AbstractJavaScriptComponent {
 
     private void checkListenerState() {
         getState().dataPointClickListenerFound = !this.dataPointClickListeners.isEmpty();
+        getState().legendClickListenerFound = !this.legendClickListeners.isEmpty();
     }
 
     private void addJsFunctions() {
@@ -140,6 +172,25 @@ public class ChartJs extends AbstractJavaScriptComponent {
                     l.onDataPointClick(datasetIndex, dataIndex);
                 }
             }
+        });
+        addFunction("onLegendClick", new JavaScriptFunction() {
+
+			private static final long serialVersionUID = 2949833327369862993L;
+
+			@Override
+			public void call(JsonArray arguments) {
+                int datasetIndex = (int) arguments.getNumber(0);
+                boolean visible = arguments.getBoolean(1);
+                JsonArray visblesJson = arguments.getArray(2);
+                int[] visibles = new int[visblesJson.length()];
+                for (int i = 0 ; i < visblesJson.length(); i++)
+                	visibles[i] = (int)visblesJson.getNumber(i);
+
+                for (LegendClickListener l : legendClickListeners) {
+                    l.onLegendClick(datasetIndex, visible, visibles);
+                }
+			}
+
         });
 
 //        addFunction("sendImageDataUrl",  new JavaScriptFunction() {

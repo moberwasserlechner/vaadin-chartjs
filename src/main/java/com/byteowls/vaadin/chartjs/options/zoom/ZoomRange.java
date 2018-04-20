@@ -9,10 +9,9 @@ import elemental.json.JsonObject;
 
 import java.io.Serializable;
 
-/**
- *
- */
 public class ZoomRange<T> extends And<Zoom<T>> implements JsonBuilder, Serializable {
+
+    private static final long serialVersionUID = 5655614586948910546L;
 
     private Object x;
     private Object y;
