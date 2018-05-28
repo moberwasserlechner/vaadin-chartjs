@@ -50,7 +50,7 @@ public class LineDataset extends DoubleDataset<LineDataset> {
     private PointStyle pointStyle;
     private Boolean showLine;
     private Boolean spanGaps;
-    private Boolean steppedLine;
+    private String steppedLine;
 
     /**
      * Used if the type of a dataset is needed. e.g. combo chart type charts
@@ -303,6 +303,11 @@ public class LineDataset extends DoubleDataset<LineDataset> {
      * If true, the line is shown as a steeped line and 'lineTension' will be ignored
      */
     public LineDataset steppedLine(boolean steppedLine) {
+        this.steppedLine = Boolean.toString(steppedLine);
+        return this;
+    }
+
+    public LineDataset steppedLine(String steppedLine) {
         this.steppedLine = steppedLine;
         return this;
     }
