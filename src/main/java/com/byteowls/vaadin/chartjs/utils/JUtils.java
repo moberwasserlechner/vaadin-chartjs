@@ -5,7 +5,6 @@ import elemental.json.JsonArray;
 import elemental.json.JsonObject;
 import elemental.json.JsonValue;
 import elemental.json.impl.JreJsonNull;
-import javafx.util.Pair;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -134,8 +133,8 @@ public abstract class JUtils {
             for (Pair<LocalDateTime,Double> n : listOfPairs) {
                 if (n != null) {
                     JsonObject map = Json.createObject();
-                    JUtils.putNotNull(map, "t",	n.getKey());
-                    JUtils.putNotNull(map, "y", n.getValue());
+                    JUtils.putNotNull(map, "t",	n.getFirst());
+                    JUtils.putNotNull(map, "y", n.getSecond());
                     arr.set(arr.length(), map);
                 }
             }

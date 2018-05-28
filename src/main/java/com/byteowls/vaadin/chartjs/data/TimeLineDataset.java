@@ -2,9 +2,10 @@ package com.byteowls.vaadin.chartjs.data;
 
 import com.byteowls.vaadin.chartjs.options.FillMode;
 import com.byteowls.vaadin.chartjs.utils.JUtils;
+import com.byteowls.vaadin.chartjs.utils.Pair;
+
 import elemental.json.Json;
 import elemental.json.JsonObject;
-import javafx.util.Pair;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

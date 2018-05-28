@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javafx.util.Pair;
+import com.byteowls.vaadin.chartjs.utils.Pair;
 
 /**
  * @author slatequarry
@@ -43,7 +43,7 @@ public abstract class TimeDoubleDataset<T> implements Dataset<T, Pair<LocalDateT
     }
 
     public T addData(LocalDateTime time, Double value) {
-        addData(new Pair<>(time,value));
+        addData(Pair.of(time,value));
         return getThis();
     }
     
