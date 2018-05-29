@@ -6,6 +6,7 @@ import elemental.json.JsonObject;
 import elemental.json.JsonValue;
 import elemental.json.impl.JreJsonNull;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +57,12 @@ public abstract class JUtils {
         }
     }
 
+    public static void putNotNull(JsonObject obj, String key, LocalDateTime value) {
+        if (value != null) {
+            obj.put(key, value.toString());
+        }
+    }
+    
     public static void putNotNullObj(JsonObject obj, String key, Object value) {
         if (value != null) {
             if (value instanceof String) {
@@ -68,7 +75,9 @@ public abstract class JUtils {
                 obj.put(key, (JsonValue) value);
             } else if (value instanceof Integer) {
                 obj.put(key, (Integer) value);
-            }
+	        } else if (value instanceof LocalDateTime) {
+	            obj.put(key, (String) value.toString());
+	        }
         }
     }
 
@@ -112,6 +121,21 @@ public abstract class JUtils {
                     arr.set(arr.length(), new JreJsonNull());
                 } else {
                     arr.set(arr.length(), n);
+                }
+            }
+            obj.put(key, arr);
+        }
+    }
+    
+    public static void putNotNullTimeDoublePairs(JsonObject obj, String key, List<Pair<LocalDateTime,Double>> listOfPairs) {
+        if (listOfPairs != null) {
+            JsonArray arr = Json.createArray();
+            for (Pair<LocalDateTime,Double> n : listOfPairs) {
+                if (n != null) {
+                    JsonObject map = Json.createObject();
+                    JUtils.putNotNull(map, "t",	n.getFirst());
+                    JUtils.putNotNull(map, "y", n.getSecond());
+                    arr.set(arr.length(), map);
                 }
             }
             obj.put(key, arr);
