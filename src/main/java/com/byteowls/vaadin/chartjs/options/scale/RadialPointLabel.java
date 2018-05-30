@@ -7,6 +7,9 @@ import com.byteowls.vaadin.chartjs.utils.JsonBuilder;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Used to configure the point labels that are shown on the perimeter of the scale.
  *
@@ -18,7 +21,7 @@ public class RadialPointLabel<T> extends And<T> implements JsonBuilder {
 
     // TODO callback Callback function to transform data label to axis label
     private Boolean display;
-    private String fontColor;
+    private List<String> fontColor;
     private String fontFamily;
     private Integer fontSize;
     private String fontStyle;
@@ -34,8 +37,8 @@ public class RadialPointLabel<T> extends And<T> implements JsonBuilder {
     /**
      * Font color. Default: #666
      */
-    public RadialPointLabel<T> fontColor(String fontColor) {
-        this.fontColor = fontColor;
+    public RadialPointLabel<T> fontColor(String... fontColor) {
+        this.fontColor = Arrays.asList(fontColor);
         return this;
     }
 
@@ -72,7 +75,7 @@ public class RadialPointLabel<T> extends And<T> implements JsonBuilder {
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "display", display);
-        JUtils.putNotNull(map, "fontColor", fontColor);
+        JUtils.putNotNullList(map, "fontColor", fontColor);
         JUtils.putNotNull(map, "fontFamily", fontFamily);
         JUtils.putNotNull(map, "fontSize", fontSize);
         JUtils.putNotNull(map, "fontStyle", fontStyle);
