@@ -25,6 +25,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
     private Boolean enabled;
     // TODO custom call
     private InteractionMode mode;
+    private InteractionAxis axis;
     private Boolean intersect;
     private PositionMode position;
     private String backgroundColor;
@@ -74,6 +75,14 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
      */
     public Tooltips<T> mode(InteractionMode mode) {
         this.mode = mode;
+        return this;
+    }
+
+    /**
+     * Defines which directions are used in calculating distances. Defaults to {@link Axis#X} for index mode and {@link Axis#XY} in dataset and nearest modes.
+     */
+    public Tooltips<T> axis(InteractionAxis axis) {
+        this.axis = axis;
         return this;
     }
 
@@ -316,6 +325,9 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         JUtils.putNotNull(map, "enabled", enabled);
         if (mode != null) {
             JUtils.putNotNull(map, "mode", mode.name().toLowerCase());
+        }
+        if (axis != null) {
+            JUtils.putNotNull(map, "axis", axis.name().toLowerCase());
         }
         JUtils.putNotNull(map, "intersect", intersect);
         if (position != null) {

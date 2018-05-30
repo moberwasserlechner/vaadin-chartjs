@@ -13,6 +13,7 @@ public class Hover<T> extends And<T> implements JsonBuilder, Serializable {
     private static final long serialVersionUID = 1317225903701999027L;
 
     private InteractionMode mode;
+    private InteractionAxis axis;
     private Boolean intersect;
     private Integer animationDuration;
     // TODO Callback onhover Called when any of the events fire. Called in the context of the chart and passed an array of active elements (bars, points, etc)
@@ -26,6 +27,14 @@ public class Hover<T> extends And<T> implements JsonBuilder, Serializable {
      */
     public Hover<T> mode(InteractionMode mode) {
         this.mode = mode;
+        return this;
+    }
+
+    /**
+     * Defines which directions are used in calculating distances. Defaults to {@link Axis#X} for index mode and {@link Axis#XY} in dataset and nearest modes.
+     */
+    public Hover<T> axis(InteractionAxis axis) {
+        this.axis = axis;
         return this;
     }
 
@@ -50,6 +59,9 @@ public class Hover<T> extends And<T> implements JsonBuilder, Serializable {
         JsonObject map = Json.createObject();
         if (mode != null) {
             JUtils.putNotNull(map, "mode", mode.name().toLowerCase());
+        }
+        if (axis != null) {
+            JUtils.putNotNull(map, "axis", axis.name().toLowerCase());
         }
         JUtils.putNotNull(map, "intersect", intersect);
         JUtils.putNotNull(map, "animationDuration", animationDuration);
