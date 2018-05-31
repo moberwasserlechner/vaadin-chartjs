@@ -20,6 +20,7 @@ public abstract class AbstractOptions<T> implements JsonBuilder, Serializable {
     protected Boolean responsive;
     private Integer responsiveAnimationDuration;
     private Boolean maintainAspectRatio;
+    private Integer devicePixelRatio;
     private List<String> events;
     private Title<T> title;
     private Tooltips<T> tooltips;
@@ -43,7 +44,7 @@ public abstract class AbstractOptions<T> implements JsonBuilder, Serializable {
     }
 
     /**
-     * Maintain the original canvas aspect ratio (width / height) when resizing
+     * Maintain the original canvas aspect ratio (width / height) when resizing.
      */
     public T maintainAspectRatio(boolean maintainAspectRatio) {
         this.maintainAspectRatio = maintainAspectRatio;
@@ -55,6 +56,14 @@ public abstract class AbstractOptions<T> implements JsonBuilder, Serializable {
      */
     public T responsiveAnimationDuration(int responsiveAnimationDurationMs) {
         this.responsiveAnimationDuration = responsiveAnimationDurationMs;
+        return getThis();
+    }
+
+    /**
+     * Defines the ratio between display pixels and rendered pixels.
+     */
+    public T devicePixelRatio(int devicePixelRatio) {
+        this.devicePixelRatio = devicePixelRatio;
         return getThis();
     }
 
@@ -155,6 +164,7 @@ public abstract class AbstractOptions<T> implements JsonBuilder, Serializable {
         JUtils.putNotNull(map, "responsive", responsive);
         JUtils.putNotNull(map, "maintainAspectRatio", maintainAspectRatio);
         JUtils.putNotNull(map, "responsiveAnimationDuration", responsiveAnimationDuration);
+        JUtils.putNotNull(map, "devicePixelRatio", devicePixelRatio);
         JUtils.putNotNull(map, "events", events);
         JUtils.putNotNull(map, "title", title);
         JUtils.putNotNull(map, "hover", hover);
