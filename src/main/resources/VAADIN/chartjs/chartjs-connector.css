@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+.v-chartjs {
+  text-align: right;
+}
+
+.v-chartjs .v-menubar.v-widget {
+  position: relative;
+  top: 30px;
+}
+
+.v-chartjs .v-menubar.v-widget .v-menubar-menuitem .v-menubar-menuitem-caption.v-icon {
+  color: gray;
+}
+
+.v-chartjs .v-menubar.v-widget .v-menubar-menuitem .v-menubar-menuitem-caption.v-icon::before {
+  content: '\E7B3';
+}
+
+.v-chartjs.v-menubar-popup {
+  position: absolute;
+}

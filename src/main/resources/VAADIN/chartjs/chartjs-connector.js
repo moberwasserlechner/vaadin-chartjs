@@ -43,8 +43,10 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
                 canvas.setAttribute('height', state.height);
             }
             // build the menu
-            this.buildMenu();
-            e.appendChild(this.menuButton);
+            if (state.showDownloadAction) {
+                this.buildMenu();
+                e.appendChild(this.menuButton);
+            }
             e.appendChild(canvas)
         } else {
             if (loggingEnabled) {
@@ -217,12 +219,12 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
     this.buildMenu = function() {
         // create the menu button
         this.menuButton = this.createDiv('v-menubar v-widget');
-        this.menuButton.style.position = 'relative';
-        this.menuButton.style.top = '30px';
         this.menuTitle = this.createDiv('v-menubar-menuitem');
         this.menuButton.appendChild(this.menuTitle);
-        var menuTitleCaption = this.createDiv('v-menubar-menuitem-caption');
-        menuTitleCaption.textContent = 'Menu';
+        var menuTitleCaption = this.createDiv('v-menubar-menuitem-caption v-icon Vaadin-Icons');
+        // for a text menu remove the v-icon class above and set the text content to some string
+        // to be defined in the state
+        // menuTitleCaption.textContent = 'Menu';
         this.menuTitle.appendChild(menuTitleCaption);
         // toggle state on click on the button
         this.menuButton.onclick = function() {
@@ -232,30 +234,41 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
         document.addEventListener('click', this.documentClickListener);
 
         // build the popup / dropdown and its content
-        this.menuPopup = this.createDiv('v-menubar-popup');
+        this.menuPopup = this.createDiv('v-chartjs v-menubar-popup');
+        // needs to be set here explicitly, since it is also used for detecting the state
+        this.menuPopup.style.display = 'none';
         document.getElementsByClassName('v-overlay-container')[0].appendChild(this.menuPopup)
         // manual, absolute positioning on click
-        this.menuPopup.style.position = 'absolute';
-        this.menuPopup.style.display = 'none';
         var popupContent = this.createDiv('popupContent');
         this.menuPopup.appendChild(popupContent);
         var subMenu = this.createDiv('v-menubar-submenu v-widget');
         popupContent.appendChild(subMenu);
-        this.createMenuItem(subMenu, 'Download PNG', this.startImageDownload);
+        var state = this.getState();
+        if (state.showDownloadAction) {
+            var downloadActionText = 'Download PNG';
+            if (state.downloadActionText) {
+                downloadActionText = state.downloadActionText;
+            }
+            this.createMenuItem(subMenu, downloadActionText, this.startImageDownload);
+        }
     };
 
     /**
      * Starts the image download
      */
     this.startImageDownload = function(e) {
+        var filename = self.getState().downloadActionFilename;
+        if (!filename) {
+            filename = 'chart.png';
+        }
         if (canvas.msToBlob) {
             var blob = canvas.msToBlob();
-            window.navigator.msSaveBlob(blob, 'chart.png');
+            window.navigator.msSaveBlob(blob, filename);
         } else {
             var link = document.createElement('a');
             link.textContent = 'Download';
             link.href = canvas.toDataURL("image/png");
-            link.download = 'chart.png';
+            link.download = filename;
             self.menuPopup.appendChild(link);
             link.click();
             self.menuPopup.removeChild(link);

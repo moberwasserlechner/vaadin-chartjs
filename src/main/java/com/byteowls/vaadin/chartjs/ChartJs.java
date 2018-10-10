@@ -3,6 +3,7 @@ package com.byteowls.vaadin.chartjs;
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.annotations.StyleSheet;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 import com.vaadin.ui.JavaScriptFunction;
 import elemental.json.JsonArray;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @JavaScript({"vaadin://chartjs/Moment.js", "vaadin://chartjs/Chart.min.js", "vaadin://chartjs/hammer.min.js", "vaadin://chartjs/chartjs-plugin-zoom.min.js",
     "vaadin://chartjs/chartjs-plugin-annotation.min.js", "vaadin://chartjs/chartjs-connector.js"})
-@StyleSheet("chart-connector.css")
+@StyleSheet("vaadin://chartjs/chartjs-connector.css")
 public class ChartJs extends AbstractJavaScriptComponent {
 
     private static final long serialVersionUID = 2999562112373836140L;
@@ -234,5 +235,36 @@ public class ChartJs extends AbstractJavaScriptComponent {
     @Override
     protected ChartJsState getState() {
         return (ChartJsState) super.getState();
+    }
+
+    /**
+     * Show the download action in the menu.
+     *
+     * @param showDownloadAction
+     *            True, the download action in the menu should be displayed.
+     */
+    public void setShowDownloadAction(boolean showDownloadAction) {
+        getState().showDownloadAction = showDownloadAction;
+    }
+
+    /**
+     * Set the label for the download action to the given text.
+     *
+     * @param downloadActionText
+     *            The new text for the download action.
+     */
+    public void setDownloadActionText(String downloadActionText) {
+        getState().downloadActionText = downloadActionText;
+    }
+
+    /**
+     * Set the filename for the downloaded image.
+     *
+     * @param downloadActionFilename
+     *            The filename for the download including its extension,
+     *            defaults to chart.png.
+     */
+    public void setDownloadActionFilename(String downloadActionFilename) {
+        getState().downloadActionFilename = downloadActionFilename;
     }
 }
