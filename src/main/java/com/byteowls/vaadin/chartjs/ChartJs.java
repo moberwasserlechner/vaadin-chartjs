@@ -2,6 +2,7 @@ package com.byteowls.vaadin.chartjs;
 
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
 import com.vaadin.annotations.JavaScript;
+import com.vaadin.annotations.StyleSheet;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 import com.vaadin.ui.JavaScriptFunction;
 import elemental.json.JsonArray;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @JavaScript({"vaadin://chartjs/Moment.js", "vaadin://chartjs/Chart.min.js", "vaadin://chartjs/hammer.min.js", "vaadin://chartjs/chartjs-plugin-zoom.min.js",
     "vaadin://chartjs/chartjs-plugin-annotation.min.js", "vaadin://chartjs/chartjs-connector.js"})
+@StyleSheet("chart-connector.css")
 public class ChartJs extends AbstractJavaScriptComponent {
 
     private static final long serialVersionUID = 2999562112373836140L;
@@ -41,6 +43,7 @@ public class ChartJs extends AbstractJavaScriptComponent {
      * Construct a ChartJs. Be aware that you have to set a {@link ChartConfig} as well. Use {@link #configure(ChartConfig)} to do so.
      */
     public ChartJs() {
+        addStyleName("v-chartjs");
         addJsFunctions();
     }
 
@@ -49,8 +52,8 @@ public class ChartJs extends AbstractJavaScriptComponent {
      * @param chartConfig a chart configuration implementation
      */
     public ChartJs(ChartConfig chartConfig) {
+        this();
         configure(chartConfig);
-        addJsFunctions();
     }
 
     /**
