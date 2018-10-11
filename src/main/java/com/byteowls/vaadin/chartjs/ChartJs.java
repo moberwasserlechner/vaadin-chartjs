@@ -9,7 +9,9 @@ import com.vaadin.ui.JavaScriptFunction;
 import elemental.json.JsonArray;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @JavaScript({"vaadin://chartjs/Moment.js", "vaadin://chartjs/Chart.min.js", "vaadin://chartjs/hammer.min.js", "vaadin://chartjs/chartjs-plugin-zoom.min.js",
     "vaadin://chartjs/chartjs-plugin-annotation.min.js", "vaadin://chartjs/chartjs-connector.js"})
@@ -17,6 +19,11 @@ import java.util.List;
 public class ChartJs extends AbstractJavaScriptComponent {
 
     private static final long serialVersionUID = 2999562112373836140L;
+    /**
+     * Counter for the next menu action being added, used to create a unique
+     * property name.
+     */
+    private static final AtomicInteger nextMenuId = new AtomicInteger(0);
 
 //    public enum ImageType {
 //        PNG
@@ -266,5 +273,37 @@ public class ChartJs extends AbstractJavaScriptComponent {
      */
     public void setDownloadActionFilename(String downloadActionFilename) {
         getState().downloadActionFilename = downloadActionFilename;
+    }
+
+    /**
+     * Add a new item to the menu.
+     *
+     * @param menuTitle
+     *            The title to be displayed in the menu.
+     * @param action
+     *            The action to be run when the item is clicked.
+     */
+    public void addMenuEntry(String menuTitle, Runnable action) {
+        if (menuTitle == null || menuTitle.length() == 0) {
+            throw new IllegalArgumentException("menuTitle missing");
+        }
+        if (action == null) {
+            throw new IllegalArgumentException("action missing");
+        }
+
+        // callback ID will be used as key in ChartJsState.menuItems and also as JavaScript function name
+        String callbackId = "ChartJsMenuItem" + nextMenuId.incrementAndGet();
+        ChartJsState state = getState();
+        if (state.menuItems == null) {
+            state.menuItems = new HashMap<>();
+        }
+        state.menuItems.put(callbackId, menuTitle);
+
+        addFunction(callbackId, new JavaScriptFunction() {
+            @Override
+            public void call(JsonArray arguments) {
+                action.run();
+            }
+        });
     }
 }

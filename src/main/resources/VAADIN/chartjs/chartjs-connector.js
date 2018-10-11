@@ -43,7 +43,7 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
                 canvas.setAttribute('height', state.height);
             }
             // build the menu
-            if (state.showDownloadAction) {
+            if (state.showDownloadAction || state.menuItems && state.menuItems.length > 0) {
                 this.buildMenu();
                 e.appendChild(this.menuButton);
             }
@@ -244,6 +244,14 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
         var subMenu = this.createDiv('v-menubar-submenu v-widget');
         popupContent.appendChild(subMenu);
         var state = this.getState();
+        // add the user defined menu items
+        var menuItems = this.getState().menuItems;
+        if (menuItems) {
+            for (var action in menuItems) {
+                this.createMenuItem(subMenu, menuItems[action], this[action]);
+            }
+        }
+        // add the download action
         if (state.showDownloadAction) {
             var downloadActionText = 'Download PNG';
             if (state.downloadActionText) {
