@@ -15,6 +15,7 @@ public class ChartJsState extends JavaScriptComponentState {
     public boolean showDownloadAction;
     public String downloadActionText;
     public String downloadActionFilename;
+    public boolean downloadSetWhiteBackground;
     public Map<String, String> menuItems;
     public JsonValue configurationJson;
 

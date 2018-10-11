@@ -16,6 +16,8 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
     var menuPopup;
     // The the menu title element
     var menuTitle;
+    // Set to true while rendering the image for export
+    this.renderingExport = false;
 
     // called every time the state is changed
     this.onStateChange = function() {
@@ -64,6 +66,24 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
             }
             // parse callback functions
             this.parseCallbacks(state.configurationJson);
+
+            Chart.plugins.register({
+                beforeDraw: function(chartInstance) {
+                    if (loggingEnabled) {
+                        console.log("chartjs: rendering, for export: " + self.renderingExport);
+                    }
+                    // the image is re-rendered for export
+                    if (self.renderingExport) {
+                        // set a white background to the chart
+                        if (state.downloadSetWhiteBackground) {
+                            var ctx = chartInstance.chart.ctx;
+                            ctx.fillStyle = 'white';
+                            ctx.fillRect(0, 0, chartInstance.chart.width, chartInstance.chart.height);
+                        }
+                    }
+                }
+            });
+
             chartjs = new Chart(canvas, state.configurationJson);
             // #69 the zoom/plugin captures the wheel event so no vertical scrolling is enabled if mouse is on
             if (state.configurationJson && !state.configurationJson.options.zoom) {
@@ -265,6 +285,8 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
      * Starts the image download
      */
     this.startImageDownload = function(e) {
+        self.renderingExport = true;
+        chartjs.render({duration: 0});
         var filename = self.getState().downloadActionFilename;
         if (!filename) {
             filename = 'chart.png';
@@ -281,6 +303,8 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
             link.click();
             self.menuPopup.removeChild(link);
         }
+        self.renderingExport = false;
+        chartjs.render({duration: 0});
     }
 
     /**

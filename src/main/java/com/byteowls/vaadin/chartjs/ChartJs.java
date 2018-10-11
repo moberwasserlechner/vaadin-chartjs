@@ -276,6 +276,17 @@ public class ChartJs extends AbstractJavaScriptComponent {
     }
 
     /**
+     * If set to true, the downloaded image will receive a white background (instead of the default, which is
+     * transparent).
+     *
+     * @param downloadSetWhiteBackground
+     *            Set to true for downloading images with a white background.
+     */
+    public void setDownloadSetWhiteBackground(boolean downloadSetWhiteBackground) {
+        getState().downloadSetWhiteBackground = downloadSetWhiteBackground;
+    }
+
+    /**
      * Add a new item to the menu.
      *
      * @param menuTitle
