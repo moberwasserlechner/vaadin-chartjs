@@ -175,7 +175,7 @@ public class Ticks<T> extends And<T> implements JsonBuilder {
         JUtils.putNotNull(map, "mirror", mirror);
         JUtils.putNotNull(map, "padding", padding);
         JUtils.putNotNull(map, "reverse", reverse);
-        JUtils.putNotNull(map, CALLBACK_PREFIX + "callback", callback);
+        JUtils.putNotNullCallback(map, "callback", callback, "value", "index", "values");
         return map;
     }
 }

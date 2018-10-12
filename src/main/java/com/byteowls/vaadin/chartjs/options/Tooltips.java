@@ -53,7 +53,7 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
     private Integer cornerRadius;
     private String multiKeyBackground;
     private Boolean displayColors;
-    // TODO private String callbacks;
+    private TooltipsCallbacks<Tooltips<T>> callbacks;
     private String borderColor;
     private Integer borderWidth;
 
@@ -319,6 +319,16 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         return this;
     }
 
+    /**
+     * Callbacks for tooltip formatting.
+     */
+    public TooltipsCallbacks<Tooltips<T>> callbacks() {
+        if (callbacks == null) {
+            callbacks = new TooltipsCallbacks<>(this);
+        }
+        return callbacks;
+    }
+
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
@@ -360,6 +370,9 @@ public class Tooltips<T> extends And<T> implements JsonBuilder {
         JUtils.putNotNull(map, "displayColors", displayColors);
         JUtils.putNotNull(map, "borderColor", borderColor );
         JUtils.putNotNull(map, "borderWidth", borderWidth );
+        if (callbacks != null) {
+            JUtils.putNotNull(map, "callbacks", callbacks.buildJson());
+        }
         return map;
     }
 }

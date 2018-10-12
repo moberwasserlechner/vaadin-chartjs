@@ -7,10 +7,22 @@ import elemental.json.JsonValue;
 import elemental.json.impl.JreJsonNull;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 public abstract class JUtils {
+    /**
+     * Prefix for properties which are set to a callback, ie. the property value is a JavaScript statement or function
+     * which needs to be parsed at browser side and the result to be used on a property without prefix.
+     */
+    public static final String CALLBACK_PREFIX = "__cb_"; // A copy of the value is used in chartjs-connector.js.
+
+    /**
+     * Postfix for the arguments of a property which is set to a callback. The value of the property is an array of
+     * strings (the names of the arguments).
+     */
+    public static final String CALLBACK_ARGS_POSTFIX = "_args"; // A copy of the value is used in chartjs-connector.js.
 
     public static void putNotNull(JsonObject obj, String key, Map<String, String> map) {
         if (map != null) {
@@ -192,5 +204,28 @@ public abstract class JUtils {
                 obj.put(key, arr);
             }
         }
+    }
+
+    /**
+     * Creates JSON entries for callback functions, ie. key is a property name of a callback function and value is
+     * JavaScript code.
+     *
+     * @param obj
+     *            The JSON object to add the values for.
+     * @param key
+     *            The original property name.
+     * @param value
+     *            The JavaScript function.
+     * @param argumentNames
+     *            The names of the arguments which are going to be supplied to the JavaScript call.
+     */
+    public static void putNotNullCallback(JsonObject obj, String key, String value, String... argumentNames) {
+        if (value != null) {
+            // add the property with the call back prefix
+            obj.put(CALLBACK_PREFIX + key, value);
+            JUtils.putNotNullStringListOrSingle(obj, CALLBACK_PREFIX + key + CALLBACK_ARGS_POSTFIX,
+                    Arrays.asList(argumentNames));
+        }
+
     }
 }

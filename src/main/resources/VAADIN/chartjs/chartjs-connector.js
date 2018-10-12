@@ -8,7 +8,8 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
     var canvas;
     var chartjs;
     var stateChangedCnt = 0;
-    var cbPrefix = '__cb_'; // Also cf. JsonBuilder
+    var cbPrefix = '__cb_'; // Also cf. JUtils
+    var cbArgsPostfix = '_args'; // Also cf. JUtils
 
     // called every time the state is changed
     this.onStateChange = function() {
@@ -139,9 +140,11 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
             else if (typeof prop === 'string' && key.indexOf(cbPrefix) == 0) {
                 // strip the prefix from the property name
                 var newKey = key.substring(cbPrefix.length);
+                // find argument declaration
+                var args = obj[key + cbArgsPostfix];
                 // parse the function and set it as property to obj
                 try {
-                    obj[newKey] = this.parseCallback(prop);
+                    obj[newKey] = this.parseCallback(prop, args);
                 }
                 catch (err) {
                     // print property name and fail recursion
@@ -155,7 +158,7 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
     /**
      * Parses callback code and returns it as function.
      */
-    this.parseCallback = function(code) {
+    this.parseCallback = function(code, args) {
         var callback = code.trim();
         // declaration of the function or a return statement is not required to be provided for
         // a simple calculation, but required for parsing
@@ -163,7 +166,14 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
             if (callback.indexOf('return') != 0) {
                 callback = 'return ' + callback;
             }
-            callback = 'function(value, index, values){' + callback + '}';
+            if (!args) {
+                args = '';
+            }
+            else if (typeof args !== 'string') {
+                // multiple arguments, ie. args is an array
+                args = args.join(',');
+            }
+            callback = 'function(' + args + '){' + callback + '}';
         }
         try {
             return eval('(' + callback + ')');
