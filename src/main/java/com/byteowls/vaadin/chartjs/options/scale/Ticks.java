@@ -27,6 +27,7 @@ public class Ticks<T> extends And<T> implements JsonBuilder {
     private Boolean mirror;
     private Integer padding;
     private Boolean reverse;
+    private String callback;
 
     public Ticks(T parent) {
         super(parent);
@@ -131,6 +132,34 @@ public class Ticks<T> extends And<T> implements JsonBuilder {
         return this;
     }
 
+    /**
+     * Set a callback function for
+     *
+     * Cf. <a href= "https://www.chartjs.org/docs/latest/axes/labelling.html#creating-custom-tick-formats">Labelling</a>
+     *
+     * Example prepending a dollar sign to the value:
+     *
+     * <pre>
+     * scale.ticks().callback("function(value, index, values) { return '$' + value; }");
+     * </pre>
+     *
+     * Shorter, if only a return statement is required:
+     *
+     * <pre>
+     * scale.ticks().callback("return '$' + value;");
+     * </pre>
+     *
+     * Even shorter, omitting the return statement and simply calculating the value:
+     *
+     * <pre>
+     * scale.ticks().callback("'$' + value");
+     * </pre>
+     */
+    public Ticks<T> callback(String callback) {
+        this.callback = callback;
+        return this;
+    }
+
     @Override
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
@@ -146,6 +175,7 @@ public class Ticks<T> extends And<T> implements JsonBuilder {
         JUtils.putNotNull(map, "mirror", mirror);
         JUtils.putNotNull(map, "padding", padding);
         JUtils.putNotNull(map, "reverse", reverse);
+        JUtils.putNotNull(map, CALLBACK_PREFIX + "callback", callback);
         return map;
     }
 }
