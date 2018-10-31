@@ -8,6 +8,8 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
     var canvas;
     var chartjs;
     var stateChangedCnt = 0;
+    var cbPrefix = '__cb_'; // Also cf. JUtils
+    var cbArgsPostfix = '_args'; // Also cf. JUtils
 
     // called every time the state is changed
     this.onStateChange = function() {
@@ -49,6 +51,8 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
             if (loggingEnabled) {
                 console.log("chartjs: configuration is\n", JSON.stringify(state.configurationJson, null, 2));
             }
+            // parse callback functions
+            this.parseCallbacks(state.configurationJson);
             chartjs = new Chart(canvas, state.configurationJson);
             // #69 the zoom/plugin captures the wheel event so no vertical scrolling is enabled if mouse is on
             if (state.configurationJson && !state.configurationJson.options.zoom) {
@@ -100,6 +104,85 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
         }
 
     };
+
+    /**
+     * Recursively searches obj for string properties starting with this.cbPrefix and sets the
+     * property with the name without the prefix with a function based on the JavaScript code found
+     * in the property's value.
+     * If obj is not set, starts with the chartjs configuration.
+     */
+    this.parseCallbacks = function(obj) {
+        if (!obj) {
+            obj = chartjs.config;
+        }
+        // walk all properties
+        for (var key in obj) {
+            // skip inherited properties
+            if (!obj.hasOwnProperty(key)) {
+                continue;
+            }
+            var prop = obj[key];
+            // skip null values
+            if (prop == null) {
+                continue;
+            }
+            // recurse into objects (includes arrays)
+            else if (typeof prop === 'object') {
+                try {
+                    this.parseCallbacks(prop);
+                }
+                catch (err) {
+                    console.error('Error parsing script nested in property: ' + key);
+                    throw err;
+                }
+            }
+            // found a string property where the property name starts with the callback prefix
+            else if (typeof prop === 'string' && key.indexOf(cbPrefix) == 0) {
+                // strip the prefix from the property name
+                var newKey = key.substring(cbPrefix.length);
+                // find argument declaration
+                var args = obj[key + cbArgsPostfix];
+                // parse the function and set it as property to obj
+                try {
+                    obj[newKey] = this.parseCallback(prop, args);
+                }
+                catch (err) {
+                    // print property name and fail recursion
+                    console.error('Error parsing script in property: ' + key);
+                    throw err;
+                }
+            }
+        }
+    }
+
+    /**
+     * Parses callback code and returns it as function.
+     */
+    this.parseCallback = function(code, args) {
+        var callback = code.trim();
+        // declaration of the function or a return statement is not required to be provided for
+        // a simple calculation, but required for parsing
+        if (callback.indexOf('function') != 0) {
+            if (callback.indexOf('return') != 0) {
+                callback = 'return ' + callback;
+            }
+            if (!args) {
+                args = '';
+            }
+            else if (typeof args !== 'string') {
+                // multiple arguments, ie. args is an array
+                args = args.join(',');
+            }
+            callback = 'function(' + args + '){' + callback + '}';
+        }
+        try {
+            return eval('(' + callback + ')');
+        }
+        catch (err) {
+            console.error('Unable to parse script:', err, callback);
+            throw err;
+        }
+    }
 
     this.getImageDataUrl = function(type, quality) {
         if (typeof quality !== 'undefined') {
