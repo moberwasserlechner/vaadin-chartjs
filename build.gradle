@@ -1,5 +1,5 @@
 plugins {
-    id "com.jfrog.bintray" version "1.7.3"
+    id "com.jfrog.bintray" version "1.8.4"
 }
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -8,8 +8,8 @@ apply plugin: 'maven-publish'
 apply plugin: 'maven'
 apply plugin: 'osgi'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenLocal()
@@ -18,7 +18,6 @@ repositories {
 
 dependencies {
     compile ("com.vaadin:vaadin-server:${vaadinVersion}")
-
     testCompile "junit:junit:4.12"
 }
 
@@ -155,5 +154,5 @@ bintray {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.5'
+    gradleVersion = '4.6'
 }
