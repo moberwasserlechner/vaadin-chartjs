@@ -1,5 +1,7 @@
 package com.byteowls.vaadin.chartjs;
 
+import java.util.Map;
+
 import com.vaadin.shared.ui.JavaScriptComponentState;
 import elemental.json.JsonValue;
 
@@ -10,6 +12,11 @@ public class ChartJsState extends JavaScriptComponentState {
     public boolean loggingEnabled;
     public boolean dataPointClickListenerFound;
     public boolean legendClickListenerFound;
+    public boolean showDownloadAction;
+    public String downloadActionText;
+    public String downloadActionFilename;
+    public boolean downloadSetWhiteBackground;
+    public Map<String, String> menuItems;
     public JsonValue configurationJson;
 
 }

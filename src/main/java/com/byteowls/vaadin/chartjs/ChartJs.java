@@ -2,18 +2,28 @@ package com.byteowls.vaadin.chartjs;
 
 import com.byteowls.vaadin.chartjs.config.ChartConfig;
 import com.vaadin.annotations.JavaScript;
+import com.vaadin.annotations.StyleSheet;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.AbstractJavaScriptComponent;
 import com.vaadin.ui.JavaScriptFunction;
 import elemental.json.JsonArray;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @JavaScript({"vaadin://chartjs/Moment.js", "vaadin://chartjs/Chart.min.js", "vaadin://chartjs/hammer.min.js", "vaadin://chartjs/chartjs-plugin-zoom.min.js",
     "vaadin://chartjs/chartjs-plugin-annotation.min.js", "vaadin://chartjs/chartjs-connector.js"})
+@StyleSheet("vaadin://chartjs/chartjs-connector.css")
 public class ChartJs extends AbstractJavaScriptComponent {
 
     private static final long serialVersionUID = 2999562112373836140L;
+    /**
+     * Counter for the next menu action being added, used to create a unique
+     * property name.
+     */
+    private static final AtomicInteger nextMenuId = new AtomicInteger(0);
 
 //    public enum ImageType {
 //        PNG
@@ -41,6 +51,7 @@ public class ChartJs extends AbstractJavaScriptComponent {
      * Construct a ChartJs. Be aware that you have to set a {@link ChartConfig} as well. Use {@link #configure(ChartConfig)} to do so.
      */
     public ChartJs() {
+        addStyleName("v-chartjs");
         addJsFunctions();
     }
 
@@ -49,8 +60,8 @@ public class ChartJs extends AbstractJavaScriptComponent {
      * @param chartConfig a chart configuration implementation
      */
     public ChartJs(ChartConfig chartConfig) {
+        this();
         configure(chartConfig);
-        addJsFunctions();
     }
 
     /**
@@ -231,5 +242,79 @@ public class ChartJs extends AbstractJavaScriptComponent {
     @Override
     protected ChartJsState getState() {
         return (ChartJsState) super.getState();
+    }
+
+    /**
+     * Show the download action in the menu.
+     *
+     * @param showDownloadAction
+     *            True, the download action in the menu should be displayed.
+     */
+    public void setShowDownloadAction(boolean showDownloadAction) {
+        getState().showDownloadAction = showDownloadAction;
+    }
+
+    /**
+     * Set the label for the download action to the given text.
+     *
+     * @param downloadActionText
+     *            The new text for the download action.
+     */
+    public void setDownloadActionText(String downloadActionText) {
+        getState().downloadActionText = downloadActionText;
+    }
+
+    /**
+     * Set the filename for the downloaded image.
+     *
+     * @param downloadActionFilename
+     *            The filename for the download including its extension,
+     *            defaults to chart.png.
+     */
+    public void setDownloadActionFilename(String downloadActionFilename) {
+        getState().downloadActionFilename = downloadActionFilename;
+    }
+
+    /**
+     * If set to true, the downloaded image will receive a white background (instead of the default, which is
+     * transparent).
+     *
+     * @param downloadSetWhiteBackground
+     *            Set to true for downloading images with a white background.
+     */
+    public void setDownloadSetWhiteBackground(boolean downloadSetWhiteBackground) {
+        getState().downloadSetWhiteBackground = downloadSetWhiteBackground;
+    }
+
+    /**
+     * Add a new item to the menu.
+     *
+     * @param menuTitle
+     *            The title to be displayed in the menu.
+     * @param action
+     *            The action to be run when the item is clicked.
+     */
+    public void addMenuEntry(String menuTitle, Runnable action) {
+        if (menuTitle == null || menuTitle.length() == 0) {
+            throw new IllegalArgumentException("menuTitle missing");
+        }
+        if (action == null) {
+            throw new IllegalArgumentException("action missing");
+        }
+
+        // callback ID will be used as key in ChartJsState.menuItems and also as JavaScript function name
+        String callbackId = "ChartJsMenuItem" + nextMenuId.incrementAndGet();
+        ChartJsState state = getState();
+        if (state.menuItems == null) {
+            state.menuItems = new HashMap<>();
+        }
+        state.menuItems.put(callbackId, menuTitle);
+
+        addFunction(callbackId, new JavaScriptFunction() {
+            @Override
+            public void call(JsonArray arguments) {
+                action.run();
+            }
+        });
     }
 }

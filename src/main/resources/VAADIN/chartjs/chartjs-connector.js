@@ -10,6 +10,14 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
     var stateChangedCnt = 0;
     var cbPrefix = '__cb_'; // Also cf. JUtils
     var cbArgsPostfix = '_args'; // Also cf. JUtils
+    // The button HTML Element (div) opening the dropdown menu
+    var menuButton;
+    // The popup with the contents of the dropdown menu
+    var menuPopup;
+    // The the menu title element
+    var menuTitle;
+    // Set to true while rendering the image for export
+    this.renderingExport = false;
 
     // called every time the state is changed
     this.onStateChange = function() {
@@ -36,6 +44,11 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
                 }
                 canvas.setAttribute('height', state.height);
             }
+            // build the menu
+            if (state.showDownloadAction || state.menuItems && state.menuItems.length > 0) {
+                this.buildMenu();
+                e.appendChild(this.menuButton);
+            }
             e.appendChild(canvas)
         } else {
             if (loggingEnabled) {
@@ -53,6 +66,24 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
             }
             // parse callback functions
             this.parseCallbacks(state.configurationJson);
+
+            Chart.plugins.register({
+                beforeDraw: function(chartInstance) {
+                    if (loggingEnabled) {
+                        console.log("chartjs: rendering, for export: " + self.renderingExport);
+                    }
+                    // the image is re-rendered for export
+                    if (self.renderingExport) {
+                        // set a white background to the chart
+                        if (state.downloadSetWhiteBackground) {
+                            var ctx = chartInstance.chart.ctx;
+                            ctx.fillStyle = 'white';
+                            ctx.fillRect(0, 0, chartInstance.chart.width, chartInstance.chart.height);
+                        }
+                    }
+                }
+            });
+
             chartjs = new Chart(canvas, state.configurationJson);
             // #69 the zoom/plugin captures the wheel event so no vertical scrolling is enabled if mouse is on
             if (state.configurationJson && !state.configurationJson.options.zoom) {
@@ -197,6 +228,146 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
         if (chartjs) {
             chartjs.destroy();
         }
+        if (this.menuPopup) {
+            document.removeChild(this.menuPopup);
+            this.menuPopup = null;
+            document.removeEventListener('click', this.documentClickListener);
+        }
+    };
+
+    // #21 Build a menu 
+    this.buildMenu = function() {
+        // create the menu button
+        this.menuButton = this.createDiv('v-menubar v-widget');
+        this.menuTitle = this.createDiv('v-menubar-menuitem');
+        this.menuButton.appendChild(this.menuTitle);
+        var menuTitleCaption = this.createDiv('v-menubar-menuitem-caption v-icon Vaadin-Icons');
+        // for a text menu remove the v-icon class above and set the text content to some string
+        // to be defined in the state
+        // menuTitleCaption.textContent = 'Menu';
+        this.menuTitle.appendChild(menuTitleCaption);
+        // toggle state on click on the button
+        this.menuButton.onclick = function() {
+            self.setMenuOpenState(self.menuPopup.style.display == 'none');
+        }
+        // close the menu if the user clicked somewhere outside the menu
+        document.addEventListener('click', this.documentClickListener);
+
+        // build the popup / dropdown and its content
+        this.menuPopup = this.createDiv('v-chartjs v-menubar-popup');
+        // needs to be set here explicitly, since it is also used for detecting the state
+        this.menuPopup.style.display = 'none';
+        document.getElementsByClassName('v-overlay-container')[0].appendChild(this.menuPopup)
+        // manual, absolute positioning on click
+        var popupContent = this.createDiv('popupContent');
+        this.menuPopup.appendChild(popupContent);
+        var subMenu = this.createDiv('v-menubar-submenu v-widget');
+        popupContent.appendChild(subMenu);
+        var state = this.getState();
+        // add the user defined menu items
+        var menuItems = this.getState().menuItems;
+        if (menuItems) {
+            for (var action in menuItems) {
+                this.createMenuItem(subMenu, menuItems[action], this[action]);
+            }
+        }
+        // add the download action
+        if (state.showDownloadAction) {
+            var downloadActionText = 'Download PNG';
+            if (state.downloadActionText) {
+                downloadActionText = state.downloadActionText;
+            }
+            this.createMenuItem(subMenu, downloadActionText, this.startImageDownload);
+        }
+    };
+
+    /**
+     * Starts the image download
+     */
+    this.startImageDownload = function(e) {
+        self.renderingExport = true;
+        chartjs.render({duration: 0});
+        var filename = self.getState().downloadActionFilename;
+        if (!filename) {
+            filename = 'chart.png';
+        }
+        if (canvas.msToBlob) {
+            var blob = canvas.msToBlob();
+            window.navigator.msSaveBlob(blob, filename);
+        } else {
+            var link = document.createElement('a');
+            link.textContent = 'Download';
+            link.href = canvas.toDataURL("image/png");
+            link.download = filename;
+            self.menuPopup.appendChild(link);
+            link.click();
+            self.menuPopup.removeChild(link);
+        }
+        self.renderingExport = false;
+        chartjs.render({duration: 0});
     }
 
+    /**
+     * Creates and adds a new menu item
+     * @param subMenu The sub menu HTML element.
+     * @param title The menu entry title.
+     * @param listener Callback called if the item is clicked.
+     */
+    this.createMenuItem = function(subMenu, title, listener) {
+        var subMenuItem = document.createElement('span');
+        subMenuItem.className = 'v-menubar-menuitem';
+        subMenu.appendChild(subMenuItem);
+        var subMenuItemCaption = document.createElement('span');
+        subMenuItemCaption.className = 'v-menubar-menuitem-caption';
+        subMenuItemCaption.textContent = title;
+        subMenuItem.appendChild(subMenuItemCaption);
+        subMenuItem.onclick = function() {
+            listener();
+            self.setMenuOpenState(false);
+        }
+    }
+
+    /**
+     * Opens or closes the dropdown menu, pass true to open it.
+     */
+    this.setMenuOpenState = function(open) {
+        if (!open) {
+            this.menuTitle.className = 'v-menubar-menuitem';
+            this.menuPopup.style.display = 'none';
+        } else {
+            this.menuTitle.className = 'v-menubar-menuitem v-menubar-menuitem-selected';
+            this.menuPopup.style.display = 'block';
+            var clientRect = this.menuButton.getBoundingClientRect();
+            this.menuPopup.style.top = (clientRect.top + clientRect.height) + 'px';
+            // this.menuPopup.style.left = clientRect.left + 'px';
+            this.menuPopup.style.right = (window.innerWidth - clientRect.right) + 'px';
+        }
+    }
+
+    /**
+     * Creates and returns a new div element and sets the class attribute to the
+     * given css classes.
+     */
+    this.createDiv = function(className) {
+        var div = document.createElement('div');
+        if (className) {
+            div.className = className;
+        }
+        return div;
+    };
+
+    /**
+     * Document click listener used for detecting clicks outside of the menu, which should close
+     * the menu.
+     */
+    this.documentClickListener = function(event) {
+        var rect = self.menuPopup.getBoundingClientRect();
+        var clickedInside = (event.clientX > rect.left && event.clientX < rect.right
+                         && event.clientY > rect.top  && event.clientY < rect.bottom)
+                         || self.menuButton.contains(event.target)
+                         || self.menuPopup.contains(event.target);
+        if (!clickedInside) {
+          self.setMenuOpenState(false);
+        }
+    }
 };
