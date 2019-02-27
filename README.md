@@ -1,8 +1,8 @@
 # Vaadin Chart.js
 [![Download](https://img.shields.io/bintray/v/moberwasserlechner/maven/vaadin-chartjs.svg)](https://bintray.com/moberwasserlechner/maven/vaadin-chartjs/_latestVersion)
 [![Published on Vaadin Directory](https://img.shields.io/badge/Vaadin%20Directory-ChartJS-00b4f0.svg)](https://vaadin.com/directory/component/chartjs-add-on)
-[![Travis](https://img.shields.io/travis/moberwasserlechner/vaadin-chartjs/master.svg?maxAge=2592000)](https://travis-ci.org/moberwasserlechner/vaadin-chartjs)
 [![Stars on Vaadin Directory](https://img.shields.io/vaadin-directory/star/chartjs-add-on.svg)](https://vaadin.com/directory/component/chartjs-add-on)
+[![Travis](https://img.shields.io/travis/moberwasserlechner/vaadin-chartjs/master.svg?maxAge=2592000)](https://travis-ci.org/moberwasserlechner/vaadin-chartjs)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/moberwasserlechner)
 
 Vaadin 8 addon for the Chart.js charting library. https://github.com/chartjs/Chart.js
