@@ -248,8 +248,8 @@ window.com_byteowls_vaadin_chartjs_ChartJs = function() {
         this.menuTitle.appendChild(menuTitleCaption);
         // toggle state on click on the button
         this.menuButton.onclick = function() {
-            self.setMenuOpenState(self.menuPopup.style.display == 'none');
-        }
+            self.setMenuOpenState(self.menuPopup.style.display === 'none');
+        };
         // close the menu if the user clicked somewhere outside the menu
         document.addEventListener('click', this.documentClickListener);
 
