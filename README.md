@@ -51,50 +51,46 @@ You can download the addon there as well, but you will need to create a free vaa
 
 ### Maven
 
-Repository
+```xml
+<repositories>
+  <repository>
+    <snapshots>
+      <enabled>false</enabled>
+    </snapshots>
+    <id>central</id>
+    <name>bintray</name>
+    <url>https://jcenter.bintray.com</url>
+  </repository>
+</repositories>
 
-    <repositories>
-      <repository>
-        <snapshots>
-          <enabled>false</enabled>
-        </snapshots>
-        <id>central</id>
-        <name>bintray</name>
-        <url>http://jcenter.bintray.com</url>
-      </repository>
-    </repositories>
-    
-Dependency
-
-    <dependencies>
-      <dependency>
-        <groupId>com.byteowls</groupId>
-        <artifactId>vaadin-chartjs</artifactId>
-        <version>use.lastest.version</version>
-      </dependency>
-    </dependencies>
-
+<dependencies>
+  <dependency>
+    <groupId>com.byteowls</groupId>
+    <artifactId>vaadin-chartjs</artifactId>
+    <version>use.lastest.version</version>
+  </dependency>
+</dependencies>
+```
 
 ### Gradle
 
-Repository
+```gradle
+repositories {
+  jcenter()
+}
 
-    repositories {
-      jcenter()
-    }
-     
-Dependency
-
-    dependencies {
-      compile ("com.byteowls:vaadin-chartjs:use.lastest.version")
-    }
+dependencies {
+  compile ("com.byteowls:vaadin-chartjs:use.lastest.version")
+}
+```
+    
 ## Usage
 
 The basic usage is always the same. You need to create a new ChartJs() and configure it with a chart type specific config.
 
 For more examples please see the [demo app](#vaadin-addon)
 
-```
+```java
         ChartJs myChart = new ChartJs(config);
         // enable logging to the javascript console. You can see some interessenting things there ;). Please do not use this in production because it's only needed for debugging.
         myChart.setJsLoggingEnabled(true);
@@ -111,48 +107,48 @@ For more examples please see the [demo app](#vaadin-addon)
 In this example we configure a horizontal bar chart with 3 dataset and add some random numbers to each of them.
 
 ```java
-        
-        BarChartConfig config = new BarChartConfig();
-        config
-            .data()
-                .labels("January", "February", "March", "April", "May", "June", "July")
-                .addDataset(new BarDataset().type().label("Dataset 1").backgroundColor("rgba(151,187,205,0.5)").borderColor("white").borderWidth(2))
-                .addDataset(new LineDataset().type().label("Dataset 2").backgroundColor("rgba(151,187,205,0.5)").borderColor("white").borderWidth(2))
-                .addDataset(new BarDataset().type().label("Dataset 3").backgroundColor("rgba(220,220,220,0.5)"))
-                .and();
-        
-        config.
-            options()
-                .responsive(true)
-                .title()
-                    .display(true)
-                    .position(Position.LEFT)
-                    .text("Chart.js Combo Bar Line Chart")
-                    .and()
-               .done();
-        
-        List<String> labels = config.data().getLabels();
-        for (Dataset<?, ?> ds : config.data().getDatasets()) {
-            List<Double> data = new ArrayList<>();
-            for (int i = 0; i < labels.size(); i++) {
-                data.add((double) (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100));
-            }
-            
-            if (ds instanceof BarDataset) {
-                BarDataset bds = (BarDataset) ds;
-                bds.dataAsList(data);    
-            }
-                
-            if (ds instanceof LineDataset) {
-                LineDataset lds = (LineDataset) ds;
-                lds.dataAsList(data);    
-            }
-        }
-        
-        ChartJs chart = new ChartJs(config);
-        chart.setJsLoggingEnabled(true);
 
-        return chart; 
+BarChartConfig config = new BarChartConfig();
+config
+    .data()
+        .labels("January", "February", "March", "April", "May", "June", "July")
+        .addDataset(new BarDataset().type().label("Dataset 1").backgroundColor("rgba(151,187,205,0.5)").borderColor("white").borderWidth(2))
+        .addDataset(new LineDataset().type().label("Dataset 2").backgroundColor("rgba(151,187,205,0.5)").borderColor("white").borderWidth(2))
+        .addDataset(new BarDataset().type().label("Dataset 3").backgroundColor("rgba(220,220,220,0.5)"))
+        .and();
+
+config.
+    options()
+        .responsive(true)
+        .title()
+            .display(true)
+            .position(Position.LEFT)
+            .text("Chart.js Combo Bar Line Chart")
+            .and()
+       .done();
+
+List<String> labels = config.data().getLabels();
+for (Dataset<?, ?> ds : config.data().getDatasets()) {
+    List<Double> data = new ArrayList<>();
+    for (int i = 0; i < labels.size(); i++) {
+        data.add((double) (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100));
+    }
+
+    if (ds instanceof BarDataset) {
+        BarDataset bds = (BarDataset) ds;
+        bds.dataAsList(data);    
+    }
+
+    if (ds instanceof LineDataset) {
+        LineDataset lds = (LineDataset) ds;
+        lds.dataAsList(data);    
+    }
+}
+
+ChartJs chart = new ChartJs(config);
+chart.setJsLoggingEnabled(true);
+
+return chart; 
 ```
 
 ### Chart Options
